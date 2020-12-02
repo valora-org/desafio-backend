@@ -8,6 +8,8 @@ Initial Setup:
   
     docker-compose run web python manage.py createsuperuser
   
+Start Application:
+
   run:
   
     docker-compose up
