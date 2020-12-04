@@ -4,7 +4,7 @@ Initial Setup:
   
     docker-compose run web python manage.py migrate
   
-  (optional) run:
+  run:
   
     docker-compose run web python manage.py createsuperuser
   
