@@ -12,15 +12,19 @@ class CategoryViewSet(viewsets.ModelViewSet):
     queryset = Category.objects.all().order_by('title')
     serializer_class = CategorySerializer
 
+    permission_classes = [permissions.IsAuthenticated]
+
 class QuestionViewSet(viewsets.ModelViewSet):
     queryset = Question.objects.all().order_by('question')
     serializer_class = QuestionSerializer
+
+    permission_classes = [permissions.IsAuthenticated]
 
 class AnswerViewSet(viewsets.ModelViewSet):
     queryset = Answer.objects.all().order_by('answer')
     serializer_class = AnswerSerializer
 
-
+    permission_classes = [permissions.IsAuthenticated]
 
 
 class UserViewSet(viewsets.ModelViewSet):
