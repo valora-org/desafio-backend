@@ -13,14 +13,9 @@ from django.shortcuts import get_object_or_404
 # Create your views here.
 
 #class CategoryViewSet(viewsets.ModelViewSet):
-class CategoryViewSet(viewsets.ViewSet):
-
-    def list(self, request): 
-        #print("User " + str(request.user) + " belongs to Admin Group is: " + str(request.user.groups.filter(name="Admin").exists()))
-        queryset = Category.objects.all().order_by('category')
-            
-        serializer = CategorySerializer(queryset, many=True)
-        return Response(serializer.data)
+class CategoryViewSet(viewsets.ModelViewSet):
+    queryset = Category.objects.all().order_by('category')
+    serializer_class = CategorySerializer
     
     def create(self, request):
         print(request.user.groups.filter(name="Admin").exists())
@@ -34,20 +29,41 @@ class CategoryViewSet(viewsets.ViewSet):
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
          
-    
-    
-
     permission_classes = [permissions.IsAuthenticated]
 
 class QuestionViewSet(viewsets.ModelViewSet):
     queryset = Question.objects.all().order_by('question')
     serializer_class = QuestionSerializer
 
+    def create(self, request):
+        print(request.user.groups.filter(name="Admin").exists())
+        if((request.user.groups.filter(name="Admin").exists()) == False):
+            response = {'message': 'Create function is not offered in this path.'}
+            return Response(response, status=status.HTTP_403_FORBIDDEN)
+
+        serializer = QuestionSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
     permission_classes = [permissions.IsAuthenticated]
 
 class AnswerViewSet(viewsets.ModelViewSet):
     queryset = Answer.objects.all().order_by('question')
     serializer_class = AnswerSerializer
+
+    def create(self, request):
+        print(request.user.groups.filter(name="Admin").exists())
+        if((request.user.groups.filter(name="Admin").exists()) == False):
+            response = {'message': 'Create function is not offered in this path.'}
+            return Response(response, status=status.HTTP_403_FORBIDDEN)
+
+        serializer = AnswerSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
     permission_classes = [permissions.IsAuthenticated]
 
@@ -58,6 +74,19 @@ class UserViewSet(viewsets.ModelViewSet):
     """
     queryset = User.objects.all().order_by('-date_joined')
     serializer_class = UserSerializer
+
+    def create(self, request):
+        print(request.user.groups.filter(name="Admin").exists())
+        if((request.user.groups.filter(name="Admin").exists()) == False):
+            response = {'message': 'Create function is not offered in this path.'}
+            return Response(response, status=status.HTTP_403_FORBIDDEN)
+
+        serializer = UserSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
     permission_classes = [permissions.IsAuthenticated]
 
 class GroupViewSet(viewsets.ModelViewSet):
@@ -66,6 +95,19 @@ class GroupViewSet(viewsets.ModelViewSet):
     """
     queryset = Group.objects.all()
     serializer_class = GroupSerializer
+
+    def create(self, request):
+        print(request.user.groups.filter(name="Admin").exists())
+        if((request.user.groups.filter(name="Admin").exists()) == False):
+            response = {'message': 'Create function is not offered in this path.'}
+            return Response(response, status=status.HTTP_403_FORBIDDEN)
+
+        serializer = GroupSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
     permission_classes = [permissions.IsAuthenticated]
 
 
