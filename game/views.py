@@ -1,16 +1,41 @@
-from django.shortcuts import render
+#from django.shortcuts import render
 from rest_framework import viewsets
 from .serializers import CategorySerializer, QuestionSerializer, AnswerSerializer, UserSerializer, GroupSerializer
 from .models import Category, Question, Answer
 
 from django.contrib.auth.models import User, Group
 from rest_framework import permissions
+from rest_framework.response import Response
+from rest_framework import status
+
+from django.shortcuts import get_object_or_404
 
 # Create your views here.
 
-class CategoryViewSet(viewsets.ModelViewSet):
-    queryset = Category.objects.all().order_by('title')
-    serializer_class = CategorySerializer
+#class CategoryViewSet(viewsets.ModelViewSet):
+class CategoryViewSet(viewsets.ViewSet):
+
+    def list(self, request): 
+        #print("User " + str(request.user) + " belongs to Admin Group is: " + str(request.user.groups.filter(name="Admin").exists()))
+        queryset = Category.objects.all().order_by('category')
+            
+        serializer = CategorySerializer(queryset, many=True)
+        return Response(serializer.data)
+    
+    def create(self, request):
+        print(request.user.groups.filter(name="Admin").exists())
+        if((request.user.groups.filter(name="Admin").exists()) == False):
+            response = {'message': 'Create function is not offered in this path.'}
+            return Response(response, status=status.HTTP_403_FORBIDDEN)
+
+        serializer = CategorySerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+         
+    
+    
 
     permission_classes = [permissions.IsAuthenticated]
 
@@ -21,7 +46,7 @@ class QuestionViewSet(viewsets.ModelViewSet):
     permission_classes = [permissions.IsAuthenticated]
 
 class AnswerViewSet(viewsets.ModelViewSet):
-    queryset = Answer.objects.all().order_by('answer')
+    queryset = Answer.objects.all().order_by('question')
     serializer_class = AnswerSerializer
 
     permission_classes = [permissions.IsAuthenticated]
@@ -34,7 +59,6 @@ class UserViewSet(viewsets.ModelViewSet):
     queryset = User.objects.all().order_by('-date_joined')
     serializer_class = UserSerializer
     permission_classes = [permissions.IsAuthenticated]
-
 
 class GroupViewSet(viewsets.ModelViewSet):
     """
