@@ -1,7 +1,7 @@
 #from django.shortcuts import render
 from rest_framework import viewsets
-from .serializers import CategorySerializer, QuestionSerializer, AnswerSerializer, UserSerializer, GroupSerializer
-from .models import Category, Question, Answer
+from .serializers import CategorySerializer, QuestionSerializer, AnswerSerializer, UserSerializer, GroupSerializer, QuizPageSerializer
+from .models import Category, Question, Answer, QuizPage
 
 from django.contrib.auth.models import User, Group
 from rest_framework import permissions
@@ -10,9 +10,6 @@ from rest_framework import status
 
 from django.shortcuts import get_object_or_404
 
-# Create your views here.
-
-#class CategoryViewSet(viewsets.ModelViewSet):
 class CategoryViewSet(viewsets.ModelViewSet):
     queryset = Category.objects.all().order_by('category')
     serializer_class = CategorySerializer
@@ -109,5 +106,34 @@ class GroupViewSet(viewsets.ModelViewSet):
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
     permission_classes = [permissions.IsAuthenticated]
+
+class QuizPageViewSet(viewsets.ModelViewSet):
+    """
+    API endpoint that allows groups to be viewed or edited.
+    """
+    queryset = QuizPage.objects.all()
+    serializer_class = QuizPageSerializer
+
+    def list(self, request):
+        queryset = QuizPage.objects.all()
+
+        serializer = QuizPageSerializer(queryset, many=True)
+        return Response(serializer.data)
+
+    def create(self, request):
+        print(request.user.groups.filter(name="Admin").exists())
+        if((request.user.groups.filter(name="Admin").exists()) == False):
+            response = {'message': 'Create function is not offered in this path.'}
+            return Response(response, status=status.HTTP_403_FORBIDDEN)
+
+        serializer = QuizPageSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+    permission_classes = [permissions.IsAuthenticated]
+
+
 
 

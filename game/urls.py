@@ -8,6 +8,8 @@ router.register(r'categories', views.CategoryViewSet, basename='Category')
 router.register(r'questions',views.QuestionViewSet)
 router.register(r'answers', views.AnswerViewSet)
 
+router.register(r'quizpage', views.QuizPageViewSet)
+
 router.register(r'users', views.UserViewSet)
 router.register(r'groups', views.GroupViewSet)
 

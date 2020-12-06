@@ -24,3 +24,8 @@ class Answer(models.Model):
 
     def __str__(self):
         return self.answer
+
+class QuizPage(models.Model):
+    question = models.ForeignKey(Question, on_delete=models.CASCADE)
+    def __str__(self):
+        return self.question
