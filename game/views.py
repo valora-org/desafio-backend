@@ -29,7 +29,7 @@ class CategoryViewSet(viewsets.ModelViewSet):
     permission_classes = [permissions.IsAuthenticated]
 
 class QuestionViewSet(viewsets.ModelViewSet):
-    queryset = Question.objects.all().order_by('question')
+    queryset = Question.objects.all().order_by('category')
     serializer_class = QuestionSerializer
 
     def create(self, request):
