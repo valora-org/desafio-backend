@@ -24,7 +24,7 @@ class AnswerSerializer(serializers.ModelSerializer):
         fields = ('id', 'answer', 'isCorrect','question')
 
 
-class UserSerializer(serializers.HyperlinkedModelSerializer):
+class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
         fields = ['url', 'username', 'email', 'groups']
@@ -36,7 +36,6 @@ class GroupSerializer(serializers.HyperlinkedModelSerializer):
         fields = ['url', 'name']
 
 class QuizPageSerializer(serializers.ModelSerializer):
-    #question = QuestionSerializer()
     question = serializers.SlugRelatedField(slug_field="question", queryset=Question.objects.all())
     quiz = serializers.SlugRelatedField(slug_field="title", queryset=Quiz.objects.all())
     class Meta:
@@ -45,8 +44,6 @@ class QuizPageSerializer(serializers.ModelSerializer):
 
 class QuizSerializer(serializers.ModelSerializer):
     points = serializers.StringRelatedField(read_only=True)
-    #vote = serializers.StringRelatedField(read_only=True)
-    #quiz_page = serializers.StringRelatedField(read_only=True,many=True)
     
     class Meta:
         model = Quiz
