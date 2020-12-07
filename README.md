@@ -1,25 +1,24 @@
-Initial Setup:
-
-  run:
-  
-    docker-compose run web python manage.py migrate
-  
-  run:
-  
-    docker-compose run web python manage.py createsuperuser
-  
-
-Start Application:
+1 - Initial Setup:
 
   run:
   
     docker-compose up
+  
+  
+2 - EM OUTRO TERMINAL
+  
+  run:
+    
+    docker container ls
 
-Stop Application:
- 
- run:
- 
-    docker-compose stop
+3 - Copie o ID do container postgres
+  
+4 - Execute (Substitua abaixo 53e14a9597d5 pelo ID do container copiado no passo anterior):
+    
+    cat dump_2020-12-06_16_57_08.sql | docker exec -i 53e14a9597d5 psql -U postgres -d postgres
+  
+
+
     
 
 ## <img src="https://valora.cc/img/logo2.png" alt="Valora" width="24" /> Desafio Backend Python
