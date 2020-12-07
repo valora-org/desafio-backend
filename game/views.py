@@ -93,6 +93,11 @@ class QuizPageViewSet(viewsets.ModelViewSet):
 
     def create(self, request):
         print(request.user.groups.filter(name="Admin").exists())
+
+        if request.method=='PUT' and not override_method: 
+            print('This is a PUT')
+        return
+
         if((request.user.groups.filter(name="Admin").exists()) == False):
             response = {'message': 'Create function is not offered in this path.'}
             return Response(response, status=status.HTTP_403_FORBIDDEN)
@@ -102,6 +107,10 @@ class QuizPageViewSet(viewsets.ModelViewSet):
             serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+    def put(self, request, *args, **kwargs):
+        print('inside put')
+        return self.update(request, *args, **kwargs)
 
     permission_classes = [permissions.IsAuthenticated]
 
