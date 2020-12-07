@@ -1,3 +1,5 @@
+! Required: Docker Compose or Docker Desktop for Mac/Windows
+
 1 - Initial Setup:
 
   run:
