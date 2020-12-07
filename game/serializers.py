@@ -36,8 +36,8 @@ class GroupSerializer(serializers.HyperlinkedModelSerializer):
         fields = ['url', 'name']
 
 class QuizPageSerializer(serializers.ModelSerializer):
-    question = QuestionSerializer()
-
+    #question = QuestionSerializer()
+    question = serializers.SlugRelatedField(slug_field="question", queryset=Question.objects.all())
     class Meta:
         model = QuizPage
         fields = ['id','question']
