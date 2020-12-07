@@ -41,13 +41,13 @@ class QuizPageSerializer(serializers.ModelSerializer):
     quiz = serializers.SlugRelatedField(slug_field="title", queryset=Quiz.objects.all())
     class Meta:
         model = QuizPage
-        fields = ['id','question', 'quiz']
+        fields = ['id','question','vote', 'quiz']
 
 class QuizSerializer(serializers.ModelSerializer):
     points = serializers.StringRelatedField(read_only=True)
-    vote = serializers.StringRelatedField(read_only=True)
+    #vote = serializers.StringRelatedField(read_only=True)
     #quiz_page = serializers.StringRelatedField(read_only=True,many=True)
     
     class Meta:
         model = Quiz
-        fields = ['id','points','title','vote']
+        fields = ['id','points','title']
