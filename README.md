@@ -21,6 +21,12 @@
   
 5 - API disponível em http://localhost:8000/
 
+Default Users: 
+
+Admin User - username:admin, password:admin 
+
+Player User - username:supertest, password:supertest
+
 Obs: Postman Collection dentro da aplicação.
 
 ## <img src="https://valora.cc/img/logo2.png" alt="Valora" width="24" /> Desafio Backend Python
