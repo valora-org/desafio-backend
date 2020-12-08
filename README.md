@@ -17,11 +17,9 @@
   
 4 - Execute (Substitua abaixo 53e14a9597d5 pelo ID do container copiado no passo anterior):
     
-    cat dump_2020-12-06_16_57_08.sql | docker exec -i 53e14a9597d5 psql -U postgres -d postgres
+    cat dump_2020-12-08_14_11_48.sql | docker exec -i 53e14a9597d5 psql -U postgres -d postgres
   
-
-
-    
+5 - API disponível em http://localhost:8000/
 
 ## <img src="https://valora.cc/img/logo2.png" alt="Valora" width="24" /> Desafio Backend Python
 
