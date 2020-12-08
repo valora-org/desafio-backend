@@ -1,7 +1,7 @@
 #from django.shortcuts import render
 from rest_framework import viewsets
-from .serializers import CategorySerializer, QuestionSerializer, AnswerSerializer, UserSerializer, GroupSerializer, QuizPageSerializer, QuizSerializer
-from .models import Category, Question, Answer, QuizPage, Quiz
+from .serializers import CategorySerializer, QuestionSerializer, AnswerSerializer, UserSerializer, GroupSerializer, QuizPageSerializer
+from .models import Category, Question, Answer, QuizPage
 
 from django.contrib.auth.models import User, Group
 from rest_framework import permissions 
@@ -113,33 +113,5 @@ class QuizPageViewSet(viewsets.ModelViewSet):
         return self.update(request, *args, **kwargs)
 
     permission_classes = [permissions.IsAuthenticated]
-
-
-class QuizViewSet(viewsets.ModelViewSet):
-    
-    queryset = Quiz.objects.all()
-    serializer_class = QuizSerializer
-
-    def list(self, request):
-        queryset = Quiz.objects.all()
-        #print(queryset[0].points) ranking filter where user == current
-        serializer = QuizSerializer(queryset, many=True)
-        return Response(serializer.data)
-
-    def create(self, request):
-        print(request.user.groups.filter(name="Admin").exists())
-        if((request.user.groups.filter(name="Admin").exists()) == False):
-            response = {'message': 'Create function is not offered in this path.'}
-            return Response(response, status=status.HTTP_403_FORBIDDEN)
-
-        serializer = QuizSerializer(data=request.data)
-        if serializer.is_valid():
-            serializer.save()
-            return Response(serializer.data, status=status.HTTP_201_CREATED)
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-
-    permission_classes = [permissions.IsAuthenticated]
-
-
 
 

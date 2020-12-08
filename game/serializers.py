@@ -2,7 +2,7 @@ from rest_framework import serializers
 
 from django.contrib.auth.models import User, Group
 
-from .models import Category, Question, Answer, QuizPage, Quiz
+from .models import Category, Question, Answer, QuizPage
 
 class CategorySerializer(serializers.ModelSerializer):
     questions = serializers.StringRelatedField(many=True)
@@ -37,14 +37,8 @@ class GroupSerializer(serializers.HyperlinkedModelSerializer):
 
 class QuizPageSerializer(serializers.ModelSerializer):
     question = serializers.SlugRelatedField(slug_field="question", queryset=Question.objects.all())
-    quiz = serializers.SlugRelatedField(slug_field="title", queryset=Quiz.objects.all())
+    #quiz = serializers.SlugRelatedField(slug_field="title", queryset=Quiz.objects.all())
     class Meta:
         model = QuizPage
-        fields = ['id','question','vote', 'quiz']
+        fields = ['id','question','vote']
 
-class QuizSerializer(serializers.ModelSerializer):
-    points = serializers.StringRelatedField(read_only=True)
-    
-    class Meta:
-        model = Quiz
-        fields = ['id','points','title']

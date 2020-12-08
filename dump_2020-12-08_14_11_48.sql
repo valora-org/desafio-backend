@@ -633,7 +633,8 @@ ALTER SEQUENCE public.game_question_id_seq OWNED BY public.game_question.id;
 
 CREATE TABLE public.game_quizpage (
     id integer NOT NULL,
-    question_id integer NOT NULL
+    question_id integer NOT NULL,
+    vote character varying(50)
 );
 
 
@@ -827,7 +828,7 @@ COPY public.auth_permission (id, name, content_type_id, codename) FROM stdin;
 COPY public.auth_user (id, password, last_login, is_superuser, username, first_name, last_name, email, is_staff, is_active, date_joined) FROM stdin;
 2		\N	f	player1			player1@email.com	f	t	2020-12-04 12:50:51.597315+00
 3	pbkdf2_sha256$216000$KWMlYpQE4npR$mOqX2cKuW3vU1FxoPlmMLDSaJ1dZYVu78Pvbe/hkKJY=	2020-12-05 17:34:33.847079+00	t	supertest			supertest@email.com	t	t	2020-12-04 19:11:17.542415+00
-1	pbkdf2_sha256$216000$4fxoHx2uJyUj$ISfr7Jw8D7dWCF5ya3+tH6KxXGjRlMoPDaOPlrSZV8w=	2020-12-06 12:26:51.889585+00	t	admin			admin@email.com	t	t	2020-12-04 12:49:14.561053+00
+1	pbkdf2_sha256$216000$4fxoHx2uJyUj$ISfr7Jw8D7dWCF5ya3+tH6KxXGjRlMoPDaOPlrSZV8w=	2020-12-08 16:46:10.983852+00	t	admin			admin@email.com	t	t	2020-12-04 12:49:14.561053+00
 \.
 
 
@@ -908,6 +909,9 @@ COPY public.django_migrations (id, app, name, applied) FROM stdin;
 25	game	0007_remove_quizpage_answers	2020-12-06 13:03:46.83254+00
 26	game	0008_auto_20201206_1326	2020-12-06 13:26:34.035984+00
 27	game	0009_auto_20201206_1350	2020-12-06 13:50:27.964948+00
+28	game	0010_auto_20201207_1445	2020-12-08 16:50:52.700232+00
+29	game	0011_auto_20201207_1503	2020-12-08 16:50:52.751673+00
+30	game	0012_auto_20201208_1650	2020-12-08 16:50:52.794453+00
 \.
 
 
@@ -918,6 +922,7 @@ COPY public.django_migrations (id, app, name, applied) FROM stdin;
 COPY public.django_session (session_key, session_data, expire_date) FROM stdin;
 2u8g2f0z3nwcl9ysqwba79vobfw87a3d	.eJxVjEEOgjAQRe_StWloy0yLS_ecgcy0U0FNSSisjHcXEha6_e-9_1YDbes4bFWWYUrqqpy6_G5M8SnlAOlB5T7rOJd1mVgfij5p1f2c5HU73b-Dkeq4174Lljg6C4BgAucWTUxoG-kyumw4-C6DoJM2eALcZdsCNIxskgdSny_LhzdQ:1klbS5:WFC_mBHHgLZohhXQfib0F7Qgs9bYhIDPPAT1D50M8dc	2020-12-19 17:34:33.855201+00
 oja4cbl8jt72olnqg7e6wjhv3cxm6mii	.eJxVjEEOwiAQAP_C2RCwtCwevfcNZGEXqRpISnsy_l1JetDrzGRewuO-Zb83Xv1C4iK0OP2ygPHBpQu6Y7lVGWvZ1iXInsjDNjlX4uf1aP8GGVvuWwV4BgJFOuAUYkSmAccEo1FslQ4GwE5ATqXBJUxqYGvDVyfjjDEg3h_ukzfj:1klt7r:ULtud2YTt4is9Mq9mC2OpiGPr4t_X0aIPfwzGY6SCqw	2020-12-20 12:26:51.895653+00
+i3enw0836zg23pi6cxd3k9k6p6ev0k8f	.eJxVjEEOwiAQAP_C2RCwtCwevfcNZGEXqRpISnsy_l1JetDrzGRewuO-Zb83Xv1C4iK0OP2ygPHBpQu6Y7lVGWvZ1iXInsjDNjlX4uf1aP8GGVvuWwV4BgJFOuAUYkSmAccEo1FslQ4GwE5ATqXBJUxqYGvDVyfjjDEg3h_ukzfj:1kmg7u:aARhAN6EEU_RL-6ZaDprVrr4HYVCn4lfAxaR3yM2Q2o	2020-12-22 16:46:10.988214+00
 \.
 
 
@@ -1031,10 +1036,10 @@ COPY public.game_question (id, question, category_id) FROM stdin;
 -- Data for Name: game_quizpage; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
-COPY public.game_quizpage (id, question_id) FROM stdin;
-1	1
-2	2
-3	5
+COPY public.game_quizpage (id, question_id, vote) FROM stdin;
+1	1	\N
+2	2	\N
+3	5	\N
 \.
 
 
@@ -1098,7 +1103,7 @@ SELECT pg_catalog.setval('public.django_content_type_id_seq', 10, true);
 -- Name: django_migrations_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('public.django_migrations_id_seq', 27, true);
+SELECT pg_catalog.setval('public.django_migrations_id_seq', 30, true);
 
 
 --

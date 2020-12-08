@@ -9,7 +9,6 @@ router.register(r'questions',views.QuestionViewSet)
 router.register(r'answers', views.AnswerViewSet)
 
 router.register(r'quizpage', views.QuizPageViewSet)
-router.register(r'quiz', views.QuizViewSet)
 
 
 router.register(r'users', views.UserViewSet)
