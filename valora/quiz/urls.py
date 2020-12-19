@@ -5,6 +5,7 @@ from .views import AnswerList
 from .views import get_answer_list_by_category
 from .views import get_answer_list_by_user
 from .views import get_overall_ranking
+from .views import get_ranking_category
 
 urlpatterns = [
 
@@ -20,6 +21,6 @@ urlpatterns = [
     path('answer/author/<int:_id>/', get_answer_list_by_user, name='answer_author_list'),
 
     path('ranking/', get_overall_ranking, name='overall_ranking'),
-    # path('ranking/author/<int:_id>/', get_answer_list_by_user, name='answer_author_list'),
+    path('ranking/category/<int:_id>/', get_ranking_category, name='category_ranking'),
 
 ]

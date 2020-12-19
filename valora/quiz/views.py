@@ -131,12 +131,29 @@ def get_answer_list_by_user(request, _id):
 
 @api_view(['GET'])
 def get_overall_ranking(request):
-    c = Classification.objects.all().order_by('-points')
-    serializer = ClassificationSerializers(c, many=True)
+    classificates = Classification.objects.all().order_by('category')
 
-    response={}
+    dic = {}
+    for c in classificates:
+        if c.author not in dic:
+            dic[c.author.username] = 0
+        dic[c.author.username] += c.points
+
+    response = dict(sorted(dic.items(), key=lambda item: item[1]))
+    return Response(response, status=status.HTTP_200_OK)
 
 
-    return Response(serializer.data, status=status.HTTP_200_OK)
+@api_view(['GET'])
+def get_ranking_category(request, _id):
 
+    classificates = Classification.objects.filter(category_id=_id)
+
+    dic = {}
+    for c in classificates:
+        if c.author not in dic:
+            dic[c.author.username] = 0
+        dic[c.author.username] += c.points
+
+    response = dict(sorted(dic.items(), key=lambda item: item[1]))
+    return Response(response, status=status.HTTP_200_OK)
 
