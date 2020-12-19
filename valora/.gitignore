@@ -1,4 +1,5 @@
 *.pyc
 *.idea/
 ../Pipfile.lock
-
+quiz/__pycache__/*.pyc
+valora/__pycache__/*.pyc
