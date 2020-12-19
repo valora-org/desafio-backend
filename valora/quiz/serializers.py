@@ -18,8 +18,7 @@ class QuestionSerializer(serializers.ModelSerializer):
 
 
 class AnswerSerializers(serializers.ModelSerializer):
-    # category = CategorySerializer(required=True)
-    # question = QuestionSerializer(required=True)
+
     author = get_user_model()
 
     def validate(self, attrs):
@@ -31,50 +30,61 @@ class AnswerSerializers(serializers.ModelSerializer):
 
     def create(self, validated_data):
 
-        """
-        Checks if the answer has already been given
-        """
-        new_answer = Answer.objects.filter(question=validated_data['question'],
-                                          author=validated_data['author'],
-                                          category=validated_data['category'])
-        # Create a new answer
-        if len(new_answer) == 0:
+        # Checks if the answer has already been given
+        if not Answer.objects.filter(question=validated_data['question'],
+                                     author=validated_data['author'],
+                                     category=validated_data['category']).exists():
+
             Answer.objects.create(**validated_data)
 
+        new_answer = Answer.objects.filter(question=validated_data['question'],
+                                           author=validated_data['author'],
+                                           category=validated_data['category']).first()
+
+        new_answer = self.update(new_answer, validated_data)
+
         # Take the question related to the answer
-        question = Question.objects.filter(pk=validated_data['question'])
+        question = Question.objects.filter(pk=new_answer.question.id).first()
 
         # Check if is the right answer
         new_answer.is_correct = True if question.right_choice == new_answer.author_answer else False
         new_answer.save()
 
         # Update the classification for that user
-        classification = Classification.objects.filter(author=new_answer.author, category=new_answer.category)
-        if len(classification) == 0:
-            new_classification = Classification()
-            new_classification.author = new_answer.author
-            new_classification.category = new_answer.category
-            new_classification.points = 1 if new_answer.is_correct else 0
-            new_classification.save()
+        if not Classification.objects.filter(author=new_answer.author, category=new_answer.category).exists():
+            nc = Classification()
+            nc.author = new_answer.author
+            nc.category = new_answer.category
+            nc.points = 1 if new_answer.is_correct else 0
+            nc.save()
 
         # Update points for the user
         else:
+            c = Classification.objects.filter(author=new_answer.author, category=new_answer.category).first()
             if new_answer.is_correct:
-                classification[0].points += 1
+                c.points += 1
             else:
-                classification[0].points -= 1
-                if classification[0].points < 0:
-                    classification[0].points = 0
-            classification.save()
+                c.points = 0 if c.points-1 < 0 else c.points-1
+            c.save()
 
         return new_answer
 
+    def update(self, instance, validated_data):
+        answer = Answer.objects.filter(pk=instance.pk).first()
+        answer.author_answer = validated_data['author_answer']
+        answer.save()
+        return answer
+
     class Meta:
         model = Answer
-        fields = ('category', 'question', 'author', 'author_answer',)
+        fields = ('category', 'question', 'author', 'author_answer', 'is_correct')
 
 
 class ClassificationSerializers(serializers.ModelSerializer):
+
+    author = get_user_model()
+    category = CategorySerializer(required=True)
+
     class Meta:
         model = Classification
-        fields = '__all__'
+        fields = ('author', 'points', 'category',)

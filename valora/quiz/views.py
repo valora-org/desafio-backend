@@ -12,8 +12,9 @@ from rest_framework.views import APIView
 from django.shortcuts import get_object_or_404
 from django.contrib.auth.models import User, Group
 
-from .models import Category, Answer, Question
-from .serializers import CategorySerializer, QuestionSerializer, AnswerSerializers
+from .models import Category, Answer, Question, Classification
+from .serializers import CategorySerializer, QuestionSerializer
+from .serializers import AnswerSerializers, ClassificationSerializers
 
 
 class CategoryList(generics.ListCreateAPIView):
@@ -100,7 +101,7 @@ class AnswerViewSet(viewsets.ModelViewSet):
 
     def create(self, request, *args, **kwargs):
         try:
-            serializer = self.choose_serialize(request)
+            serializer = AnswerSerializers
             serializer = serializer(data=request.data)
             serializer.is_valid(raise_exception=True)
             self.perform_create(serializer)
@@ -126,4 +127,16 @@ def get_answer_list_by_user(request, _id):
     answer = Answer.objects.filter(author_id=_id)
     serializer = AnswerSerializers(answer, many=True)
     return Response(serializer.data, status=status.HTTP_200_OK)
+
+
+@api_view(['GET'])
+def get_overall_ranking(request):
+    c = Classification.objects.all().order_by('-points')
+    serializer = ClassificationSerializers(c, many=True)
+
+    response={}
+
+
+    return Response(serializer.data, status=status.HTTP_200_OK)
+
 

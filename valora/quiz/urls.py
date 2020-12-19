@@ -1,9 +1,10 @@
 from django.urls import path
 from .views import CategoryList, CategoryDetail, QuestionList, QuestionDetail
 from .views import get_question_list_by_category
-from .views import AnswerList # , AnswerDetail
+from .views import AnswerList
 from .views import get_answer_list_by_category
 from .views import get_answer_list_by_user
+from .views import get_overall_ranking
 
 urlpatterns = [
 
@@ -15,7 +16,10 @@ urlpatterns = [
     path('question/category/<int:_id>/', get_question_list_by_category, name='questions_category_list'),
 
     path('answer/', AnswerList.as_view(), name='answer_list'),
-    # path('answer/<int:pk>/', AnswerDetail.as_view(), name='answer_detail'),
     path('answer/category/<int:_id>/', get_answer_list_by_category, name='answer_category_list'),
     path('answer/author/<int:_id>/', get_answer_list_by_user, name='answer_author_list'),
+
+    path('ranking/', get_overall_ranking, name='overall_ranking'),
+    # path('ranking/author/<int:_id>/', get_answer_list_by_user, name='answer_author_list'),
+
 ]
