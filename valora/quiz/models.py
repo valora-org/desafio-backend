@@ -1,16 +1,40 @@
 from django.db import models
-from django.contrib.auth.models import User
+from django.contrib.auth import get_user_model
+
+User = get_user_model()
 
 
 class Category(models.Model):
-
     name = models.CharField(max_length=100)
+
+    class Meta:
+        verbose_name_plural = 'Categories'
 
     def __str__(self):
         return self.name
 
 
-class Quiz(models.Model):
+class Question(models.Model):
+
+    RIGHT_ANSWER = (
+        ("A", "A"),
+        ("B", "B"),
+        ("C", "C")
+    )
+
+    category = models.ForeignKey(Category, related_name='question_category', on_delete=models.DO_NOTHING)
+    question_text = models.CharField(max_length=400, blank=False, null=False)
+
+    choice_A = models.CharField(max_length=200, blank=False, null=False)
+    choice_B = models.CharField(max_length=200, blank=False, null=False)
+    choice_C = models.CharField(max_length=200, blank=False, null=False)
+    right_choice = models.CharField(max_length=1, choices=RIGHT_ANSWER, blank=False, null=False)
+
+    def __str__(self):
+        return '{0} - {1}'.format(self.category, self.question_text)
+
+
+class Answer(models.Model):
 
     ANSWER_CHOICES = (
         ("A", "A"),
@@ -18,27 +42,26 @@ class Quiz(models.Model):
         ("C", "C")
     )
 
-    category = models.ForeignKey(Category, related_name='category', on_delete=models.DO_NOTHING)
-    question = models.CharField(max_length=400, blank=False, null=False)
-    answer_A = models.CharField(max_length=200, blank=False, null=False)
-    answer_B = models.CharField(max_length=200, blank=False, null=False)
-    answer_C = models.CharField(max_length=200, blank=False, null=False)
-    right_answer = models.CharField(max_length=1, choices=ANSWER_CHOICES, blank=False, null=False)
-
-    def __str__(self):
-        return "{0} - {1}".format(self.category, self.question)
-
-
-class Results(models.Model):
-
-    quiz = models.ForeignKey(Quiz, related_name='quiz', on_delete=models.DO_NOTHING)
+    category = models.ForeignKey(Category, related_name='answer_category', on_delete=models.CASCADE)
+    question = models.ForeignKey(Question, related_name='answer_question', on_delete=models.CASCADE)
     author = models.ForeignKey(User, on_delete=models.DO_NOTHING)
-    answer = models.BooleanField()
+    author_answer = models.CharField(max_length=1, choices=ANSWER_CHOICES, blank=False, null=False)
+    is_correct = models.BooleanField(default=False)
 
     def __str__(self):
         _answer = "Incorrect"
-        if self.answer:
-            resposta = "Correct"
+        if self.is_correct:
+            _answer = "Correct"
 
-        return "Result: {0} - {1} - {2}".format(self.quiz, self.author.username, resposta)
+        return "Result: {0} - {1} - {2}".format(self.question.id, self.author.username, _answer)
+
+
+class Classification(models.Model):
+
+    author = models.ForeignKey(User, on_delete=models.DO_NOTHING)
+    points = models.IntegerField(default=0)
+    category = models.ForeignKey(Category, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return "Category: {0} - {1} : {2} points".format(self.category, self.author.username, self.points)
 
