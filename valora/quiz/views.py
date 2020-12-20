@@ -25,6 +25,7 @@ class CategoryList(generics.ListCreateAPIView):
     """
     List all categories
     """
+    permission_classes = (permissions.DjangoModelPermissions, )
     queryset = Category.objects.all().order_by('name')
     serializer_class = CategorySerializer
 
