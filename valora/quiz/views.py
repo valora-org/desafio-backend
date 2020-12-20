@@ -3,6 +3,9 @@ from rest_framework import status
 from rest_framework import permissions
 from rest_framework.decorators import api_view
 
+from django.contrib.auth.models import User, Group
+from django.db.models.signals import post_save
+from django.dispatch import receiver
 
 from django.http import Http404
 from rest_framework import generics, status, viewsets
@@ -11,6 +14,7 @@ from rest_framework.views import APIView
 
 from django.shortcuts import get_object_or_404
 from django.contrib.auth.models import User, Group
+from django.contrib.auth.decorators import user_passes_test
 
 from .models import Category, Answer, Question, Classification
 from .serializers import CategorySerializer, QuestionSerializer
@@ -40,7 +44,12 @@ class CategoryDetail(APIView):
         return Response(serializer.data)
 
     @staticmethod
+    @user_passes_test(lambda u: u.groups.filter(name='Admin').exists())
     def post(request):
+        if not request.user.groups.filter(name="Admin").exists():
+            response = {'error': 'POST not allowed for this user.'}
+            return Response(response, status=status.HTTP_403_FORBIDDEN)
+
         serializer = CategorySerializer(data=request.data)
         if serializer.is_valid():
             serializer.save()
@@ -78,6 +87,7 @@ class QuestionDetail(APIView):
         return Response(serializer.data)
 
     @staticmethod
+    @user_passes_test(lambda u: u.groups.filter(name='Admin').exists())
     def post(request):
         serializer = QuestionSerializer(data=request.data)
         if serializer.is_valid():
@@ -157,3 +167,13 @@ def get_ranking_category(request, _id):
     response = dict(sorted(dic.items(), key=lambda item: item[1]))
     return Response(response, status=status.HTTP_200_OK)
 
+
+@receiver(post_save, sender=User)
+def create_user_profile(sender, instance, created, **kwargs):
+    """
+     Each new user that is created is added to the Player group
+    """
+    if created:
+        is_superuser = instance.is_superuser
+        if not is_superuser:
+            instance.groups.add(Group.objects.get(name='Player'))

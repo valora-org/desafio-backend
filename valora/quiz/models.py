@@ -63,5 +63,5 @@ class Classification(models.Model):
     category = models.ForeignKey(Category, on_delete=models.CASCADE)
 
     def __str__(self):
-        return "Category: {0} - {1} : {2} points".format(self.category, self.author.username, self.points)
+        return "Category: {0} - {1} : {2} points".format(self.category.name, self.author.username, self.points)
 

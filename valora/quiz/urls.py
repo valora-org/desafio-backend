@@ -22,5 +22,4 @@ urlpatterns = [
 
     path('ranking/', get_overall_ranking, name='overall_ranking'),
     path('ranking/category/<int:_id>/', get_ranking_category, name='category_ranking'),
-
 ]

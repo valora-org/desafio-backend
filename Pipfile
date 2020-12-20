@@ -8,6 +8,7 @@ verify_ssl = true
 [packages]
 django = "*"
 djangorestframework = "*"
+django-rest-auth = {extras = ["with_social"], version = "*"}
 
 [requires]
 python_version = "3.7"
