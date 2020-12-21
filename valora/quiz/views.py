@@ -1,9 +1,6 @@
-
-from rest_framework import status
 from rest_framework import permissions
 from rest_framework.decorators import api_view
 
-from django.contrib.auth.models import User, Group
 from django.db.models.signals import post_save
 from django.dispatch import receiver
 
@@ -12,20 +9,19 @@ from rest_framework import generics, status, viewsets
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
-from django.shortcuts import get_object_or_404
 from django.contrib.auth.models import User, Group
 from django.contrib.auth.decorators import user_passes_test
 
 from .models import Category, Answer, Question, Classification
 from .serializers import CategorySerializer, QuestionSerializer
-from .serializers import AnswerSerializers, ClassificationSerializers
+from .serializers import AnswerSerializers
 
 
 class CategoryList(generics.ListCreateAPIView):
     """
     List all categories
     """
-    permission_classes = (permissions.DjangoModelPermissions, )
+    permission_classes = (permissions.DjangoModelPermissions,)
     queryset = Category.objects.all().order_by('name')
     serializer_class = CategorySerializer
 
@@ -141,26 +137,14 @@ def get_answer_list_by_user(request, _id):
 
 
 @api_view(['GET'])
-def get_overall_ranking(request):
-    classificates = Classification.objects.all().order_by('category')
+def get_ranking(request, _id=None):
+    if _id is None:
+        clas = Classification.objects.all().order_by('category')
+    else:
+        clas = Classification.objects.filter(category_id=_id)
 
     dic = {}
-    for c in classificates:
-        if c.author not in dic:
-            dic[c.author.username] = 0
-        dic[c.author.username] += c.points
-
-    response = dict(sorted(dic.items(), key=lambda item: item[1]))
-    return Response(response, status=status.HTTP_200_OK)
-
-
-@api_view(['GET'])
-def get_ranking_category(request, _id):
-
-    classificates = Classification.objects.filter(category_id=_id)
-
-    dic = {}
-    for c in classificates:
+    for c in clas:
         if c.author not in dic:
             dic[c.author.username] = 0
         dic[c.author.username] += c.points
