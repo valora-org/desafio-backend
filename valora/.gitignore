@@ -1,5 +1,11 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+/__pycache__/
+*.py[cod]
+
 *.pyc
 *.idea/
 ../Pipfile.lock
-quiz/__pycache__/*.pyc
-valora/__pycache__/*.pyc
+/../Pipfile.lock
+
+
