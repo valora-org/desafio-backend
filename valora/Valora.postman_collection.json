@@ -17,7 +17,7 @@
 					}
 				],
 				"url": {
-					"raw": "http://localhost:8000/api/category",
+					"raw": "http://localhost:8000/api/category/",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -25,7 +25,8 @@
 					"port": "8000",
 					"path": [
 						"api",
-						"category"
+						"category",
+						""
 					]
 				}
 			},
@@ -74,12 +75,12 @@
 				"header": [
 					{
 						"key": "Authorization",
-						"value": "Token 483325994134d5baf0e303d938a0756d4ec4fb83",
-						"type": "text"
+						"type": "text",
+						"value": "Token 483325994134d5baf0e303d938a0756d4ec4fb83"
 					}
 				],
 				"url": {
-					"raw": "http://localhost:8000/api/category",
+					"raw": "http://localhost:8000/api/category/1/",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -87,7 +88,9 @@
 					"port": "8000",
 					"path": [
 						"api",
-						"category"
+						"category",
+						"1",
+						""
 					]
 				}
 			},
@@ -282,7 +285,7 @@
 			"response": []
 		},
 		{
-			"name": "/api/answer/author/ranking/",
+			"name": "/api/ranking/",
 			"protocolProfileBehavior": {
 				"disableBodyPruning": true
 			},
@@ -321,7 +324,7 @@
 			"response": []
 		},
 		{
-			"name": "/api/answer/author/ranking/category/1/",
+			"name": "/api/ranking/category/1/",
 			"protocolProfileBehavior": {
 				"disableBodyPruning": true
 			},
@@ -344,7 +347,7 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:8000/api/ranking/",
+					"raw": "http://localhost:8000/api/ranking/category/1/",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -353,6 +356,44 @@
 					"path": [
 						"api",
 						"ranking",
+						"category",
+						"1",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/rest_auth/registration/",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"type": "text",
+						"value": "Token 483325994134d5baf0e303d938a0756d4ec4fb83"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"category\": 1,\n    \"question\": 1,\n    \"author\": 2,\n    \"author_answer\": \"A\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8000/rest_auth/registration/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"rest_auth",
+						"registration",
 						""
 					]
 				}
