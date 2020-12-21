@@ -1,79 +1,67 @@
-## <img src="https://valora.cc/img/logo2.png" alt="Valora" width="24" /> Desafio Backend Python
+# Desafio Backend Python
 
-Parabéns! Se você chegou até aqui significa que você passou pelas etapas mais difíceis do nosso processo seletivo. Somos extremamente criteriosos com as pessoas que vão integrar nosso time porque só aceitamos pessoas incríveis!
+### Techs
 
-Agora é a parte fácil. Chegou a hora de mostrar todas as suas habilidades de transformar café em código. Vamos lá?
+* [Django] - Python Web library 
+* [Django Rest Framework] - Python Web Library for API`s 
+* [SQLite 3] - Simple database for prototipes
 
-Nesse desafio iremos avaliar suas habilidades em:
+All the code is open source with a public repository on GitHub.
 
-* **Python**
-* **Django**
-* **Django REST Framework**
-* **Pytest**
-* **Docker**
+### Clone project
 
-Você irá desenvolver a API de uma aplicação para a criação de um quiz de perguntas e respostas!
+```sh
+$ git clone https://github.com/luigus/desafio-backend desafio-backend-luigus 
+$ cd desafio-backend-luigus/valora
+$ git checkout develop
+```
+### Create Docker Image
+```sh
+$ docker build -t django-image -f Dockerfile .
+```
+### Run Docker Container
+```sh
+$ docker run -it -p 8000:8000 django-image
+```
 
-**A aplicação deverá prover o registro e autenticação de dois tipos de usuários**:
+### API
+ File with all API calls : Valora.postman_collection.json
 
-* Admin
-* Player
+| API | METHOD | ENDPOINTS | USER | 
+| ------ | ------ |------ |------ |
+| List of categories | GET | /api/category/ | Player/Admin | 
+| Category description | GET |/api/category/<id_category>/ | Player/Admin | 
+| New Category | POST |/api/category/ | Admin | 
+| List of questions | GET | /api/question/ | Player/Admin | 
+| Question description | GET |/api/question/<id_question>/ | Player/Admin | 
+| List of questions by category| GET | /api/question/category/<id_category>/ | Player/Admin | 
+| New Question | POST |/api/question/ | Admin | 
+| List of answers of all users | GET | /api/answer/ | Player/Admin | 
+| List of answers by user | GET |/api/answer/author/<id_author>/ | Player/Admin | 
+| New Answer | POST |/api/question/ | Player/Admin | 
+| List of ranking of all categories | GET |/api/ranking/ | Player/Admin | 
+| List of ranking by categories | GET |/api/ranking/category/<id_category>/ | Player/Admin | 
 
-**Cada quiz é composto por**:
 
-* 10 perguntas com 3 respostas onde apenas 1 é correta.
-* Cada resposta correta acumula a 1 ponto.
-* Cada resposta errada perde 1 ponto. A menor pontuação possível é 0.
-* Possui uma categoria.
+### Django super-user
 
-**Ao iniciar o jogo**:
+* User: luigus
+* Password: MOMOeang
 
-* O player deve escolher uma categoria válida e receber um quiz com perguntas aleatórias referentes a categoria escolhida.
+### Django tests
+For run models and views tests use this comand below :
+```sh
+$ python manage.py test quiz
+```
 
-**Ao finalizar o jogo**:
+### Todos
+ - Develop the front-end
+ - Check security of the API
 
-* O player deve receber a contabilização dos seus pontos juntamente com a sua posição atual no ranking global. Não há limitação de quantos quizzes o player pode responder.
+License
+----
 
-**O ranking global**:
+MIT
 
-* É a contabilização dos pontos acumulados por cada player.
-* Ranking geral considera todas as categorias.
-* Ranking por categoria agrupa por categorias.
-
-**Permissões**:
-
-* Todos os endpoints devem estar protegidos por autenticação.
-* Usuários do tipo **Admin** tem permissão para criar perguntas e respostas para os quizzes.
-* Usuários do tipo **Player** tem permissão para jogar e consultar o ranking.
-
-## Requisitos
-
-* O projeto precisa estar configurado para rodar em um ambiente macOS ou Ubuntu (preferencialmente como container Docker).
-* Deve anexar ao seu projeto uma coleção do postman com todos os endpoints criados e exemplos de utilização.
-
-**Para executar seu código devemos executar apenas os seguintes comandos**:
-
-* git clone $seu-fork
-* cd $seu-fork
-* comando para instalar dependências
-* comando para executar a aplicação
-
-## Critério de avaliação
-
-* **Organização do código**: Separação de módulos, view e model
-* **Clareza**: O README explica de forma resumida qual é o problema e como pode rodar a aplicação?
-* **Assertividade**: A aplicação está fazendo o que é esperado? Se tem algo faltando, o README explica o porquê?
-* **Legibilidade do código** (incluindo comentários)
-* **Segurança**: Existe alguma vulnerabilidade clara?
-* **Cobertura de testes** (Não esperamos cobertura completa mas é importante garantir o fluxo principal)
-* **Histórico de commits** (estrutura e qualidade)
-* **UX**: A API é intuitiva?
-* **Escolhas técnicas**: A escolha das bibliotecas, banco de dados, arquitetura, etc, é a melhor escolha para a aplicação?
-
-## Dúvidas
-
-Quaisquer dúvidas que você venha a ter, consulte as issues para ver se alguém já não a fez e caso você não ache sua resposta, abra você mesmo uma nova issue!
-
-Ao completar o desafio, submeta um pull-request a esse repositório com uma breve explicação das decisões tomadas e principalmente as instruções para execução do projeto.
-
-**Boa sorte! ;)**
+   
+   

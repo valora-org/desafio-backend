@@ -4,6 +4,11 @@ from rest_framework import status
 from django.contrib.auth.models import Group, User
 
 
+# ------------------------------------------------------------------------
+# To run
+# python manage.py test quiz
+# ------------------------------------------------------------------------
+
 class RegistrationTestCase(APITestCase):
 
     def setUp(self):
