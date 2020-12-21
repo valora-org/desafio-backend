@@ -1,4 +1,4 @@
-
+import os
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -8,7 +8,8 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'f9z$mbypv)j66*!h)#a@f$u1gbow27x2%4s^%e+@n-ctkv200o'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+#DEBUG = True
+DEBUG = int(os.environ.get('DEBUG', default=1))
 
 ALLOWED_HOSTS = []
 
