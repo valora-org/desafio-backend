@@ -31,7 +31,7 @@ class Question(models.Model):
     right_choice = models.CharField(max_length=1, choices=RIGHT_ANSWER, blank=False, null=False)
 
     def __str__(self):
-        return '{0} - {1}'.format(self.category, self.question_text)
+        return '{0} - {1} - Correct: {2}'.format(self.category, self.question_text, self.right_choice)
 
 
 class Answer(models.Model):
