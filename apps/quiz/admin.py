@@ -1,5 +1,5 @@
 from django.contrib import admin
-from apps.quiz.models import match
+from apps.quiz.models import Match
 
 
 class matchs(admin.ModelAdmin):
@@ -7,4 +7,4 @@ class matchs(admin.ModelAdmin):
     list_display_links = ('id', 'question')
 
 
-admin.site.register(match, matchs)
+admin.site.register(Match, matchs)

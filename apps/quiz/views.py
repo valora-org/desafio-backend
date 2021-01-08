@@ -1,7 +1,9 @@
-from django.http import JsonResponse
+from rest_framework import viewsets
+from apps.quiz.models import Match
+from apps.quiz.serializer import MatchSerializer
 
 
-def match(request):
-    if request.method == 'GET':
-        player = {'id': 1, 'nome': 'Guilherme'}
-        return JsonResponse(player)
+class MatchViewSet(viewsets.ModelViewSet):
+    """Exibindo partidas"""
+    queryset = Match.objects.all()
+    serializer_class = MatchSerializer

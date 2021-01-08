@@ -1,7 +1,7 @@
 from django.db import models
 
 
-class match(models.Model):
+class Match(models.Model):
     OPTIONS = (
         ("1", "Answers One"),
         ("2", "Answers Two"),
