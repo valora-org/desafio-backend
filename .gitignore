@@ -127,8 +127,10 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
-/venv
+/venv*
 .idea
-../venv
+../venv*
 /desafio-backend/venv
-/venv/
+/venv/*
+desafio-backend/venv/*
+
