@@ -1,0 +1,27 @@
+Django== 3.1.4
+Markdown==    3.3.3
+asgiref==  3.3.1
+importlib-metadata==    3.3.0
+pip==    20.3.3
+pytz==    2020.4
+setuptools==    51.0.0
+sqlparse==    0.4.1
+typing-extensions==    3.7.4.3
+zipp==3.4.0
+django-widget-tweaks==1.4.1
+dj-database-url==0.4.2
+python-decouple==3.1
+django-widgets-improved ==1.5.0
+MarkupPy	==1.14
+PyYAML ==	5.3.1
+asgiref	== 3.3.1
+defusedxml	==0.6.0
+diff-match-patch	== 20200713
+django-braces ==	1.14.0
+django-crispy-forms	 == 1.10.0
+django-filter	== 2.4.0
+django-import-export ==	2.4.0
+djangorestframework-simplejwt==4.4.0
+PyJWT==1.7.1
+# pip install djangorestframework_simplejwt
+ django-import-export , django-braces pip install django-filter pip install django-crispy-forms pip install django-filter
