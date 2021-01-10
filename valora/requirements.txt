@@ -21,7 +21,12 @@ django-braces ==	1.14.0
 django-crispy-forms	 == 1.10.0
 django-filter	== 2.4.0
 django-import-export ==	2.4.0
-djangorestframework-simplejwt==4.4.0
 PyJWT==1.7.1
-# pip install djangorestframework_simplejwt
- django-import-export , django-braces pip install django-filter pip install django-crispy-forms pip install django-filter
+psycopg2-binary==2.8.6
+pip==    20.3.3
+setuptools==    51.0.0
+djangorestframework==    3.12.2
+django-rest-auth == 0.9.5
+django-allauth ==  	0.44.0
+django-nested-admin	== 3.3.3
+pandas == 1.2.0
