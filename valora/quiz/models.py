@@ -1,6 +1,6 @@
 from django.db import models
 
-from quiz.choices import CORRECT
+from quiz import choices
 
 
 class Category(models.Model):
@@ -20,13 +20,13 @@ class Question(models.Model):
     option_a = models.CharField(max_length=500, blank=False, null=False, verbose_name='Option A')
     option_b = models.CharField(max_length=500, blank=False, null=False, verbose_name='Option B')
     option_c = models.CharField(max_length=500, blank=False, null=False, verbose_name='Option C')
-    correct = models.CharField(max_length=2, blank=False, null=False, choices=CORRECT)
-    correct_user = models.CharField(max_length=2, blank=True, null=True, choices=CORRECT)
+    correct = models.CharField(max_length=2, blank=False, null=False, choices=choices.CORRECT)
+    correct_user = models.CharField(max_length=2, blank=True, null=True, choices=choices.CORRECT)
 
     class Meta:
-        verbose_name = ("Questão")
-        verbose_name_plural = ("Questões")
+        verbose_name = ("Question")
+        verbose_name_plural = ("Questions")
 
     def __str__(self):
-        return self.question
+        return f'Question={self.question}'
 
