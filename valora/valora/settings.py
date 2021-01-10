@@ -50,7 +50,9 @@ INSTALLED_APPS = [
     'rest_auth.registration',
 
 
-
+    #APPS
+    'user',
+    'quiz',
 
 ]
 
@@ -70,7 +72,6 @@ LOGIN_REDIRECT_URL = 'user:account-redirect'
 
 LOGIN_URL = '/account/api-auth/login/'
 
-APPEND_SLASH = True
 
 
 REST_FRAMEWORK = {
@@ -93,7 +94,7 @@ REST_FRAMEWORK = {
     ),
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
 
-    'PAGE_SIZE': 100
+    'PAGE_SIZE': 10
 }
 
 TEMPLATES = [
@@ -160,7 +161,8 @@ USE_I18N = True
 USE_L10N = True
 
 USE_TZ = True
-# APPEND_SLASH=False
+#Coloca barra no fim da url
+APPEND_SLASH = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
@@ -169,6 +171,5 @@ STATIC_URL = '/static/'
 ACCOUNT_EMAIL_REQUIRED = True
 ACCOUNT_USERNAME_REQUIRED = True
 ACCOUNT_EMAIL_VERIFICATION = 'none'
-# ACCOUNT_AUTHENTICATION_METHOD = 'username'
-# ACCOUNT_EMAIL_REQUIRED = False
+
 
