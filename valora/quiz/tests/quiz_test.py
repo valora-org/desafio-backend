@@ -16,7 +16,9 @@ url_question_id = 'http://127.0.0.1:8000/question/1/'
 
 
 class CategoryTestCase(APITestCase):
-    # Teste com usuário adm
+
+    """ Teste com usuário adm ,
+     crud categotia [PUT,POST,GET,DELETE] """
 
     def setUp(self):
         self.client = APIClient()
@@ -49,7 +51,9 @@ class CategoryTestCase(APITestCase):
 
 
 class QuestionTestCase(APITestCase):
-    # Teste com usuário adm
+    """ Teste com usuário adm ,
+     crud questão [PUT,POST,GET,DELETE] """
+
     def setUp(self):
         self.client = APIClient()
         self.user = User.objects.create_superuser(username=username, email=email, password=password)
