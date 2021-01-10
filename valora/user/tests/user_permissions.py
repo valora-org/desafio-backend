@@ -55,7 +55,6 @@ class UserPesmissionsTestCase(APITestCase):
         self.assertEquals(self.response.status_code, 200)
 
 
-
 class UserPesmissionsAdmTestCase(APITestCase):
     # Teste com usuário admin
     def setUp(self):
