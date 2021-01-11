@@ -1,20 +1,20 @@
 from django.contrib.auth.models import User
 from rest_framework import serializers
 
-from user.models import UserProfile
+from user import models
 
 
 class UserSerializer(serializers.ModelSerializer):
     password = serializers.CharField(
         style={'input_type': 'password'},
         write_only=True,
-        label="Senha"
+        label="Password"
     )
 
     password_confirm = serializers.CharField(
         style={'input_type': 'password'},
         write_only=True,
-        label="Confirme a senha"
+        label="Confirm the Password"
     )
 
     class Meta:
@@ -38,7 +38,7 @@ class UserSerializer(serializers.ModelSerializer):
         password_confirm = self.validated_data['password_confirm']
 
         if password != password_confirm:
-            raise serializers.ValidationError({'password': 'As senhas não são iguais.'})
+            raise serializers.ValidationError({'password': 'Passwords are not the same.'})
         conta.set_password(password)
         conta.save()
         return conta
@@ -48,18 +48,18 @@ class UserProfileSerializer(serializers.ModelSerializer):
     username = serializers.CharField(read_only=True, source="user.username")
 
     class Meta:
-        model = UserProfile
+        model = models.UserProfile
         fields = ('sequential', 'username', 'points')
 
 
 class TempUserProfileSerializer(serializers.ModelSerializer):
     username = serializers.CharField(read_only=True, source="user.username")
-
     ranking = serializers.SerializerMethodField('get_ranking')
+    # Usando HyperlinkedModelSerializer para ajudar na movientação das pags
 
     def get_ranking(self, obj):
         return "http://127.0.0.1:8000/ranking/"
 
     class Meta:
-        model = UserProfile
+        model = models.UserProfile
         fields = ('sequential', 'username', 'total_points', 'temp_points', 'ranking')
