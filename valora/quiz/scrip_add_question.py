@@ -3,7 +3,7 @@ import xlrd
 from quiz.models import Question, Category
 from valora.settings import BASE_DIR
 
-"""Roda script no python console para alimenta o banco de questões
+"""Rodar script no python console para alimentar o banco de questões
  script :
  from quiz import scrip_add_question
  alimentar_banco()
