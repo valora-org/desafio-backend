@@ -14,6 +14,8 @@ class UserProfile(models.Model):
     temp_points = models.IntegerField(blank=True, default=0)
     total_points = models.IntegerField(blank=True, default=0)
 
+    # Acredito que posso melhora esse sistema de pontos ...
+
     def adicionar_points(self):
         self.total_points += 1
         self.save()
