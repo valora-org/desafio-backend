@@ -1,28 +1,13 @@
 from django.contrib import admin
-from quiz.models import Question
-from django.contrib import admin
+from import_export.admin import ImportExportModelAdmin
 
-from quiz.models import Question
+from quiz.models import Question, Category
 
-#
-#
-# # admin.site.unregister(Question)
-# # admin.site.register(Question, Category)
-#
-#
-# class TestInline(nested_admin.NestedTabularInline):
-# 	model = Test
-# 	extra = 4
-# 	max_num = 4
-#
-#
-# class QuestionInline(nested_admin.NestedTabularInline):
-# 	model = Question
-# 	inlines = [TestInline,]
-# 	extra = 10
-#
-#
-# class QuizAdmin(nested_admin.NestedModelAdmin):
-# 	inlines = [QuestionInline,]
 
-admin.site.register(Question)
+@admin.register(Question)
+class QuestionAdmin(ImportExportModelAdmin):
+    raw_id_fields = ('category',)
+    list_display = ('category', 'question', 'correct',)
+
+
+admin.site.register(Category)
