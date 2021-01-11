@@ -6,6 +6,8 @@ from rest_framework.test import APITestCase, APIClient
 from quiz.models import Category, Question
 
 # variáveis globais
+
+
 username = "usuariotest"
 password = "senha123msa"
 email = "albertow@gmail.com"
@@ -16,7 +18,6 @@ url_question_id = 'http://127.0.0.1:8000/question/1/'
 
 
 class CategoryTestCase(APITestCase):
-
     """ Teste com usuário adm ,
      crud categotia [PUT,POST,GET,DELETE] """
 
@@ -58,6 +59,7 @@ class QuestionTestCase(APITestCase):
         self.client = APIClient()
         self.user = User.objects.create_superuser(username=username, email=email, password=password)
         self.token = Token.objects.create(user=self.user)
+        self.client.force_login(user=self.user)
         self.client.credentials(HTTP_AUTHORIZATION='Token ' + self.token.key)
         self.categoria = Category.objects.create(category="Python")
 
@@ -66,7 +68,6 @@ class QuestionTestCase(APITestCase):
         self.assertEquals(self.response.status_code, 200)
 
     def teste_post_question(self):
-        self.client.force_login(user=self.user)
         data = {"category": "1", "question": "soma 2 +2 ", "option_a": "2", "option_b": "3", "option_c": "4",
                 "correct": "C"}
         self.response = self.client.post(url_question, data, format='json')
@@ -78,7 +79,7 @@ class QuestionTestCase(APITestCase):
         data = {"category": "1", "question": "soma 2 +2 ", "option_a": "2", "option_b": "3", "option_c": "4",
                 "correct": "A"}
         self.response = self.client.put(url_question_id, data=data, format='json')
-        self.assertEquals(Question.objects.first().correct,"A")
+        self.assertEquals(Question.objects.first().correct, "A")
         self.assertEquals(self.response.status_code, status.HTTP_200_OK)
 
     def teste_delete_question(self):
@@ -88,3 +89,35 @@ class QuestionTestCase(APITestCase):
         self.assertEquals(Question.objects.all().count(), 0)
         self.assertEquals(self.response.status_code, status.HTTP_204_NO_CONTENT)
 
+
+# class QuizTestCase(APITestCase):
+#     """ Teste quiz [PUT,POST,GET,DELETE] """
+#
+#     def setUp(self):
+#         self.client = APIClient()
+#         self.user = User.objects.create_user(username=username, email=email, password=password)
+#         self.token = Token.objects.create(user=self.user)
+#         self.client.force_login(user=self.user)
+#         self.client.credentials(HTTP_AUTHORIZATION='Token ' + self.token.key)
+#
+#
+#     def teste_x_quiz(self):
+#         self.response = requests.post('http://127.0.0.1:8000/api-token-auth/', {
+#             "username": "admin",
+#             "password": "admin123"
+#         })
+#
+#         print(self.response.json()["token"])
+#
+#         data =  {"question": "soma 2 +2", "correct_user": "C"}
+#
+#         headers = {
+#             'Content-Type': 'application/json',
+#             'Accept': 'application/json',
+#             'Authorization': 'Token ' + self.response.json()["token"]
+#         }
+#         self.response = requests.post('http://127.0.0.1:8000/quiz/1/', data=data,
+#                                       headers=headers)
+#         print(self.response.content)
+#         print(UserProfile.objects.all()[0].total_points)
+#         self.assertEquals(UserProfile.objects.all()[0].total_points, 1)
