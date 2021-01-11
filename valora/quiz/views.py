@@ -1,5 +1,5 @@
 from django.shortcuts import redirect
-from rest_framework import response, views, permissions, viewsets
+from rest_framework import response, permissions, viewsets
 
 from quiz import serializer, models
 from user.models import UserProfile
@@ -25,20 +25,20 @@ class QuestionAdminViewSet(viewsets.ModelViewSet):
     permission_classes = (permissions.IsAdminUser,)
 
 
-class StartQuiz(views.APIView):
-    queryset = models.Question.objects.all()
+class StartQuiz(viewsets.ModelViewSet):
+    queryset = models.Question.objects.all().order_by('-category')
     serializer_class = serializer.QuestionSerializer
     permission_classes = (permissions.IsAuthenticated,)
 
-    def get_queryset(self, category_id):
+    def get_queryset(self):
         profile = UserProfile.objects.get(user=self.request.user)
-        queryset = models.Question.objects.filter(category__id=category_id).exclude(
+        queryset = models.Question.objects.filter(category__id=self.kwargs['category_id']).exclude(
             question__in=[item.question for item in profile.question_correct.all()]).exclude(
             question__in=[item.question for item in profile.question_wrong.all()]).order_by('?')[0:10]
         return queryset
 
-    def get(self, request, category_id):
-        serializer_ = serializer.QuestionSerializer(self.get_queryset(category_id), many=True)
+    def get(self, request):
+        serializer_ = serializer.QuestionSerializer(self.get_queryset(), many=True)
         return response.Response(serializer_.data)
 
     def post(self, request, category_id):
