@@ -45,7 +45,7 @@ Para rodar os testes, utilize o comando abaixo:
 
 ```
 ./manage.py test quiz.tests.quiz_test
-./manage.py test user.tests.quiz_test
+./manage.py test user.tests.user_test
 ./manage.py test user.tests.user_permissions
 ```
 
