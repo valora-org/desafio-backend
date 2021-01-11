@@ -51,7 +51,7 @@ Para rodar os testes, utilize o comando abaixo:
 
 
 
-# Para rodar o script no python console para alimenta o banco de questões.
+# Para rodar o script no python console para alimentar o banco de questões.
 
 
 ```shell
