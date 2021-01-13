@@ -31,14 +31,18 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
-    'rest_framework',
-    'apps.quiz',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+
+    # 'django_filters'
+    'rest_framework',
+    'rest_framework.authtoken',
+
+    'apps.quiz',
 ]
 
 MIDDLEWARE = [
@@ -120,3 +124,24 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
 STATIC_URL = '/static/'
+
+REST_FRAMEWORK = {
+    # authentication token
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework.authentication.TokenAuthentication',
+    ),
+    # permission only is authentication
+    'DEFAULT_PERMISSION_CLASSES': (
+        'rest_framework.permissions.IsAuthenticated',
+    ),
+    # pagination
+    'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
+    'PAGE_SIZE': 10,
+    # request limit
+    # 'DEFAULT_THROTTLE_CLASSES': {
+    #     'rest_framework_throttling.UserRateThrottle'
+    # },
+    # 'DEFAULT_THROTTLE_RATES': {
+    #     'user': '10/minute'
+    # }
+}

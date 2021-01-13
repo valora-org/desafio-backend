@@ -9,9 +9,15 @@
 			"name": "Consultar categorias",
 			"request": {
 				"method": "GET",
-				"header": [],
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Token 43857ad9b574dc96a5e44f48f50878f0d8f5009b",
+						"type": "text"
+					}
+				],
 				"url": {
-					"raw": "http://127.0.0.1:8000/category/",
+					"raw": "http://127.0.0.1:8000/api/v1/category/",
 					"protocol": "http",
 					"host": [
 						"127",
@@ -21,8 +27,17 @@
 					],
 					"port": "8000",
 					"path": [
+						"api",
+						"v1",
 						"category",
 						""
+					],
+					"query": [
+						{
+							"key": "",
+							"value": "",
+							"disabled": true
+						}
 					]
 				}
 			},
@@ -32,9 +47,15 @@
 			"name": "Consultar quizzes",
 			"request": {
 				"method": "GET",
-				"header": [],
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Token 43857ad9b574dc96a5e44f48f50878f0d8f5009b",
+						"type": "text"
+					}
+				],
 				"url": {
-					"raw": "http://127.0.0.1:8000/match/",
+					"raw": "http://127.0.0.1:8000/api/v1/matchGame/",
 					"protocol": "http",
 					"host": [
 						"127",
@@ -44,8 +65,56 @@
 					],
 					"port": "8000",
 					"path": [
-						"match",
+						"api",
+						"v1",
+						"matchGame",
 						""
+					],
+					"query": [
+						{
+							"key": "",
+							"value": "",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Consultar quizzes pela categoria",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Token 43857ad9b574dc96a5e44f48f50878f0d8f5009b",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://127.0.0.1:8000/api/v1/matchGame/category/1",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"v1",
+						"matchGame",
+						"category",
+						"1"
+					],
+					"query": [
+						{
+							"key": "",
+							"value": "",
+							"disabled": true
+						}
 					]
 				}
 			},
@@ -55,9 +124,15 @@
 			"name": "Consultar respostas dadas",
 			"request": {
 				"method": "GET",
-				"header": [],
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Token 43857ad9b574dc96a5e44f48f50878f0d8f5009b",
+						"type": "text"
+					}
+				],
 				"url": {
-					"raw": "http://127.0.0.1:8000/selection/",
+					"raw": "http://127.0.0.1:8000/api/v1/selection/",
 					"protocol": "http",
 					"host": [
 						"127",
@@ -67,8 +142,17 @@
 					],
 					"port": "8000",
 					"path": [
+						"api",
+						"v1",
 						"selection",
 						""
+					],
+					"query": [
+						{
+							"key": "",
+							"value": "",
+							"disabled": true
+						}
 					]
 				}
 			},
@@ -78,7 +162,13 @@
 			"name": "Cadastrar categoria",
 			"request": {
 				"method": "POST",
-				"header": [],
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Token 43857ad9b574dc96a5e44f48f50878f0d8f5009b",
+						"type": "text"
+					}
+				],
 				"body": {
 					"mode": "raw",
 					"raw": "{\r\n    \"name\": \"ciências\"\r\n}",
@@ -89,7 +179,7 @@
 					}
 				},
 				"url": {
-					"raw": "http://127.0.0.1:8000/category/",
+					"raw": "http://127.0.0.1:8000/api/v1/category/",
 					"protocol": "http",
 					"host": [
 						"127",
@@ -99,8 +189,17 @@
 					],
 					"port": "8000",
 					"path": [
+						"api",
+						"v1",
 						"category",
 						""
+					],
+					"query": [
+						{
+							"key": "",
+							"value": "",
+							"disabled": true
+						}
 					]
 				}
 			},
@@ -110,10 +209,16 @@
 			"name": "Cadastrar novo quiz",
 			"request": {
 				"method": "POST",
-				"header": [],
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Token 43857ad9b574dc96a5e44f48f50878f0d8f5009b",
+						"type": "text"
+					}
+				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"id_category\": 1,\r\n    \"question\": \"Qual a cor do mar?\",\r\n    \"answers_one\": \"verde\",\r\n    \"answers_two\": \"azul\",\r\n    \"answers_three\": \"amarelo\",\r\n    \"correct_answers\": 2\r\n}",
+					"raw": "{\r\n    \"category_id\": 1,\r\n    \"question\": \"Qual a cor do mar?\",\r\n    \"answers_one\": \"verde\",\r\n    \"answers_two\": \"azul\",\r\n    \"answers_three\": \"amarelo\",\r\n    \"correct_answers\": 2\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -121,7 +226,7 @@
 					}
 				},
 				"url": {
-					"raw": "http://127.0.0.1:8000/match/",
+					"raw": "http://127.0.0.1:8000/api/v1/matchGame/",
 					"protocol": "http",
 					"host": [
 						"127",
@@ -131,8 +236,17 @@
 					],
 					"port": "8000",
 					"path": [
-						"match",
+						"api",
+						"v1",
+						"matchGame",
 						""
+					],
+					"query": [
+						{
+							"key": "",
+							"value": "",
+							"disabled": true
+						}
 					]
 				}
 			},
@@ -142,10 +256,16 @@
 			"name": "Responder quiz",
 			"request": {
 				"method": "POST",
-				"header": [],
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Token 43857ad9b574dc96a5e44f48f50878f0d8f5009b",
+						"type": "text"
+					}
+				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"player_selection\": 1,\r\n    \"id_question\": 1,\r\n    \"id_player\": 1\r\n}",
+					"raw": "{\r\n    \"player_selection\": 1,\r\n    \"match_game_id\": 1,\r\n    \"player_id\": 1\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -153,7 +273,7 @@
 					}
 				},
 				"url": {
-					"raw": "http://127.0.0.1:8000/selection/",
+					"raw": "http://127.0.0.1:8000/api/v1/selection/",
 					"protocol": "http",
 					"host": [
 						"127",
@@ -163,8 +283,17 @@
 					],
 					"port": "8000",
 					"path": [
+						"api",
+						"v1",
 						"selection",
 						""
+					],
+					"query": [
+						{
+							"key": "",
+							"value": "",
+							"disabled": true
+						}
 					]
 				}
 			},
@@ -174,7 +303,13 @@
 			"name": "Alterar categoria existente",
 			"request": {
 				"method": "PUT",
-				"header": [],
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Token 43857ad9b574dc96a5e44f48f50878f0d8f5009b",
+						"type": "text"
+					}
+				],
 				"body": {
 					"mode": "raw",
 					"raw": "{\r\n    \"name\": \"ciências\"\r\n}",
@@ -198,6 +333,13 @@
 						"category",
 						"2",
 						""
+					],
+					"query": [
+						{
+							"key": "",
+							"value": "",
+							"disabled": true
+						}
 					]
 				}
 			},
@@ -207,10 +349,16 @@
 			"name": "Alterar quiz existente",
 			"request": {
 				"method": "PUT",
-				"header": [],
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Token 43857ad9b574dc96a5e44f48f50878f0d8f5009b",
+						"type": "text"
+					}
+				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"id_category\": 2,\r\n    \"question\": \"cenora?\",\r\n    \"answers_one\": \"quero\",\r\n    \"answers_two\": \"não gosto\",\r\n    \"answers_three\": \"já comi\",\r\n    \"correct_answers\": 1\r\n}",
+					"raw": "{\r\n    \"category_id\": 2,\r\n    \"question\": \"cenora?\",\r\n    \"answers_one\": \"quero\",\r\n    \"answers_two\": \"não gosto\",\r\n    \"answers_three\": \"já comi\",\r\n    \"correct_answers\": 1\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -231,6 +379,13 @@
 						"match",
 						"2",
 						""
+					],
+					"query": [
+						{
+							"key": "",
+							"value": "",
+							"disabled": true
+						}
 					]
 				}
 			},
@@ -240,10 +395,16 @@
 			"name": "Alterar resposta existente",
 			"request": {
 				"method": "PUT",
-				"header": [],
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Token 43857ad9b574dc96a5e44f48f50878f0d8f5009b",
+						"type": "text"
+					}
+				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"player_selection\": 1,\r\n    \"id_question\": 2,\r\n    \"id_player\": 1\r\n}",
+					"raw": "{\r\n    \"player_selection\": 1,\r\n    \"match_game_id\": 2,\r\n    \"player_id\": 1\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -264,6 +425,13 @@
 						"selection",
 						"3",
 						""
+					],
+					"query": [
+						{
+							"key": "",
+							"value": "",
+							"disabled": true
+						}
 					]
 				}
 			},
@@ -273,9 +441,15 @@
 			"name": "Deletar categoria",
 			"request": {
 				"method": "DELETE",
-				"header": [],
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Token 43857ad9b574dc96a5e44f48f50878f0d8f5009b",
+						"type": "text"
+					}
+				],
 				"url": {
-					"raw": "http://127.0.0.1:8000/category/1/",
+					"raw": "http://127.0.0.1:8000/api/v1/category/1/",
 					"protocol": "http",
 					"host": [
 						"127",
@@ -285,9 +459,18 @@
 					],
 					"port": "8000",
 					"path": [
+						"api",
+						"v1",
 						"category",
 						"1",
 						""
+					],
+					"query": [
+						{
+							"key": "",
+							"value": "",
+							"disabled": true
+						}
 					]
 				}
 			},
@@ -297,9 +480,15 @@
 			"name": "Deletar quiz",
 			"request": {
 				"method": "DELETE",
-				"header": [],
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Token 43857ad9b574dc96a5e44f48f50878f0d8f5009b",
+						"type": "text"
+					}
+				],
 				"url": {
-					"raw": "http://127.0.0.1:8000/match/1/",
+					"raw": "http://127.0.0.1:8000/api/v1/matchGame/1/",
 					"protocol": "http",
 					"host": [
 						"127",
@@ -309,9 +498,18 @@
 					],
 					"port": "8000",
 					"path": [
-						"match",
+						"api",
+						"v1",
+						"matchGame",
 						"1",
 						""
+					],
+					"query": [
+						{
+							"key": "",
+							"value": "",
+							"disabled": true
+						}
 					]
 				}
 			},
@@ -321,9 +519,15 @@
 			"name": "Deletar resposta",
 			"request": {
 				"method": "DELETE",
-				"header": [],
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Token 43857ad9b574dc96a5e44f48f50878f0d8f5009b",
+						"type": "text"
+					}
+				],
 				"url": {
-					"raw": "http://127.0.0.1:8000/selection/2/",
+					"raw": "http://127.0.0.1:8000/api/v1/selection/2/",
 					"protocol": "http",
 					"host": [
 						"127",
@@ -333,14 +537,22 @@
 					],
 					"port": "8000",
 					"path": [
+						"api",
+						"v1",
 						"selection",
 						"2",
 						""
+					],
+					"query": [
+						{
+							"key": "",
+							"value": "",
+							"disabled": true
+						}
 					]
 				}
 			},
 			"response": []
 		}
-	],
-	"protocolProfileBehavior": {}
+	]
 }

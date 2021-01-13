@@ -1,14 +1,12 @@
 from django.contrib import admin
 from django.urls import path, include
-from apps.quiz.views import CategoryViewSet, MatchViewSet, SelectionViewSet
-from rest_framework import routers
 
-router = routers.DefaultRouter()
-router.register('category', CategoryViewSet, basename='Category')
-router.register('match', MatchViewSet, basename='Match')
-router.register('selection', SelectionViewSet, basename='Selection')
+from apps.quiz.urls import router
+
 
 urlpatterns = [
+    path('api/v1/', include(router.urls)),
+    path('api/v1/', include('apps.quiz.urls')),
     path('admin/', admin.site.urls),
-    path('', include(router.urls))
+    path('auth/', include('rest_framework.urls'))
 ]
