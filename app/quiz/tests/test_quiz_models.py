@@ -1,6 +1,6 @@
 import pytest
 from quiz import models as qz
-from accounts import models as ac
+from accounts.models import User
 
 @pytest.mark.django_db
 def test_category_create():
@@ -124,7 +124,7 @@ def test_submit_player_create():
     )
 
     # Create object user
-    user = ac.User.objects.create(
+    user = User.objects.create(
         username="user"
     )
 
@@ -171,7 +171,7 @@ def test_players_answer_create():
     )
 
     # Create object user
-    user = ac.User.objects.create(
+    user = User.objects.create(
         username="user"
     )
 

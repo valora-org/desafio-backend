@@ -1,4 +1,6 @@
 from quiz.models import Category, Quiz, SubmitPlayer, Question, Answer, PlayersAnswer
+from accounts.models import User
+from accounts.serializers import UserSerializer
 from rest_framework import serializers
 
 class CategorySerializer(serializers.ModelSerializer):
@@ -184,11 +186,42 @@ class GetQuizSerializer(serializers.ModelSerializer):
 class RankingSerializer(serializers.ModelSerializer):
 	"""
 		Serializer to return all fields of the model SubmitPlayer
-			for overall ranking..
+			for ranking..
 
 	"""
+	# Retrieval of the user.
+	user = serializers.SerializerMethodField()
+	# Retrieval of the quiz.
+	quiz = serializers.SerializerMethodField()
 
 	class Meta:
 		model = SubmitPlayer
 		fields = ["user", "quiz", "score"]
+	
+	def get_user(self, obj):
+		"""
+			Return users.
+
+		"""
+		try:
+			user = User.objects.get(submitplayer=obj)
+			serializer = UserSerializer(user)
+			return serializer.data
+			
+		except SubmitPlayer.DoesNotExist:
+			return None 
+
+	def get_quiz(self, obj):
+		"""
+			Return quiz.
+
+		"""
+		try:
+			quiz = Quiz.objects.get(submitplayer=obj)
+			serializer = QuizListSerializer(quiz)
+			return serializer.data
+			
+
+		except SubmitPlayer.DoesNotExist:
+			return None 
 	

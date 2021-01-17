@@ -103,7 +103,7 @@ class SubmitQuiz(generics.GenericAPIView):
 		
 		# Create or Get object
 		submit_player, created = SubmitPlayer.objects.get_or_create(user=self.request.user, quiz=quiz)
-		question = get_object_or_404(Question, id=question_id)
+		question = get_object_or_404(Question, id=question_id, quiz=quiz)
 		
 		# Save answer
 		if answer_id is not None:
@@ -112,21 +112,29 @@ class SubmitQuiz(generics.GenericAPIView):
 			obj.answer = answer
 			obj.save()
 
-		# Add and save the score
+		# Correct answers
 		correct_answers = 0
 
+		# Rigth question?
+		rigth_question = None
+
+		# Add and save the score
 		for players_answer in PlayersAnswer.objects.filter(submit_player=submit_player):
 			answer = Answer.objects.get(question=players_answer.question, is_correct=True)
 			
 			if players_answer.answer == answer:
+				rigth_question = True
 				correct_answers += 1
+			
+			else:
+				rigth_question = False
 
 		submit_player.score = correct_answers
 		
 		submit_player.save()
-
+		
 		# Return response
-		return Response(self.get_serializer(quiz).data)
+		return Response({'quiz' : self.get_serializer(quiz).data, 'rigth_question':rigth_question})
 
 
 class GetQuiz(generics.GenericAPIView):
@@ -158,7 +166,7 @@ class GetQuiz(generics.GenericAPIView):
 
 class RankingList(generics.ListAPIView):
 	"""
-		View for the player to view all quizzes.
+		View for the player to view overall ranking.
 
 	"""
 
@@ -178,6 +186,32 @@ class RankingList(generics.ListAPIView):
 
 		# Get all objects
 		queryset = SubmitPlayer.objects.all().order_by("-score")
+		
+		# Return response
+		return queryset
+
+class CategoryRankingList(generics.ListAPIView):
+	"""
+		View for the player to view ranking by category.
+
+	"""
+
+	# Authentication required
+	permission_classes = [
+		permissions.IsAuthenticated
+	]
+
+	# Respective serializer
+	serializer_class = RankingSerializer
+	
+	def get_queryset(self, *args, **kwargs):
+		"""
+			GET method
+
+		"""
+	
+		# Get all objects
+		queryset = SubmitPlayer.objects.filter(quiz__category__title=self.request.headers['Category']).order_by("-score")
 		
 		# Return response
 		return queryset
