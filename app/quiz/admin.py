@@ -1,6 +1,6 @@
 from django.contrib import admin
 import nested_admin
-from .models import Quiz, Question, Answer, SubmitPlayer, PlayersAnswer
+from .models import Category, Quiz, Question, Answer, SubmitPlayer, PlayersAnswer
 
 
 class AnswerInline(nested_admin.NestedTabularInline):
@@ -47,6 +47,7 @@ class SubmitPlayerAdmin(admin.ModelAdmin):
 	inlines = [PlayersAnswerInline,]
 
 # Registers
+admin.site.register(Category)
 admin.site.register(Quiz, QuizAdmin)
 admin.site.register(Question)
 admin.site.register(Answer)

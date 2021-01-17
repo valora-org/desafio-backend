@@ -4,7 +4,7 @@ from rest_framework import generics, permissions, status
 from rest_framework.response import Response
 from quiz.models import Answer, Question, Quiz, SubmitPlayer, PlayersAnswer
 from accounts.models import User
-from quiz.serializers import PlayerQuizListSerializer, QuizListSerializer, QuizResultSerializer
+from quiz.serializers import PlayerQuizListSerializer, QuizListSerializer, QuizResultSerializer, GetQuizSerializer, RankingSerializer
 
 class PlayerQuizList(generics.ListAPIView):
 	"""
@@ -141,7 +141,7 @@ class GetQuiz(generics.GenericAPIView):
 	]
 
 	# Respective serializer
-	serializer_class = QuizResultSerializer
+	serializer_class = GetQuizSerializer
 	
 
 	def get(self, request, *args, **kwargs):
@@ -155,3 +155,29 @@ class GetQuiz(generics.GenericAPIView):
 
 		# Return response
 		return Response(self.get_serializer(quiz).data)
+
+class RankingList(generics.ListAPIView):
+	"""
+		View for the player to view all quizzes.
+
+	"""
+
+	# Authentication required
+	permission_classes = [
+		permissions.IsAuthenticated
+	]
+
+	# Respective serializer
+	serializer_class = RankingSerializer
+	
+	def get_queryset(self, *args, **kwargs):
+		"""
+			GET method
+
+		"""
+
+		# Get all objects
+		queryset = SubmitPlayer.objects.all().order_by("-score")
+		
+		# Return response
+		return queryset

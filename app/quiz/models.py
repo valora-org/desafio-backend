@@ -4,6 +4,17 @@ from django.db.models.signals import pre_save
 from django.dispatch import receiver
 from django.template.defaultfilters import slugify
 
+class Category(models.Model):
+	"""
+		Category model to store data related to the categories.
+		Each category has its title.
+
+	"""
+
+	title = models.CharField(max_length=100)
+
+	def __str__(self):
+		return self.title
 
 class Quiz(models.Model):
 	"""
@@ -13,6 +24,7 @@ class Quiz(models.Model):
 	"""
 	name = models.CharField(max_length=100)
 	slug = models.SlugField(blank=True)
+	category = models.ForeignKey(Category, on_delete=models.CASCADE)
 	timestamp = models.DateTimeField(auto_now_add=True)
 
 	class Meta:

@@ -1,15 +1,40 @@
-from quiz.models import Quiz, SubmitPlayer, Question, Answer, PlayersAnswer
+from quiz.models import Category, Quiz, SubmitPlayer, Question, Answer, PlayersAnswer
 from rest_framework import serializers
 
+class CategorySerializer(serializers.ModelSerializer):
+	"""
+		Serializer to return the title of the model Category.
+
+	"""
+	class Meta:
+		model = Category
+		fields = ["title"]
 
 class QuizListSerializer(serializers.ModelSerializer):
 	"""
 		Serializer to return the id, name, category of the model Quiz.
 
 	"""
+	# Retrieval of the player.
+	category = serializers.SerializerMethodField()
+
 	class Meta:
 		model = Quiz
-		fields = ["id", "name", "slug"]
+		fields = ["id", "category", "name", "slug"]
+
+	def get_category(self, obj):
+		"""
+			Return category of the quiz.
+
+		"""
+		try:
+			category = Category.objects.get(quiz=obj)
+			serializer = CategorySerializer(category)
+			return serializer.data
+
+		
+		except Category.DoesNotExist:
+			return None
 				
 class AnswerSerializer(serializers.ModelSerializer):
 	"""
@@ -54,9 +79,12 @@ class PlayerQuizListSerializer(serializers.ModelSerializer):
 	# Retrieval of the score.
 	score = serializers.SerializerMethodField()
 
+	# Retrieval of the score.
+	category = serializers.SerializerMethodField()
+
 	class Meta:
 		model = Quiz
-		fields = ["id", "name", "slug", "score"]
+		fields = ["id", "name", "category", "slug", "score"]
 
 	def get_score(self, obj):
 		"""
@@ -69,6 +97,20 @@ class PlayerQuizListSerializer(serializers.ModelSerializer):
 			return submit_player.score
 		
 		except SubmitPlayer.DoesNotExist:
+			return None
+			
+	def get_category(self, obj):
+		"""
+			Return category of the quiz.
+
+		"""
+		try:
+			category = Category.objects.get(quiz=obj)
+			serializer = CategorySerializer(category)
+			return serializer.data
+
+		
+		except Category.DoesNotExist:
 			return None
 
 
@@ -84,7 +126,6 @@ class SubmitPlayerSerializer(serializers.ModelSerializer):
 		model = SubmitPlayer
 		fields = "__all__"
 
-
 class QuizResultSerializer(serializers.ModelSerializer):
 	"""
 		Serializer to return the results obtained to the player.
@@ -93,9 +134,10 @@ class QuizResultSerializer(serializers.ModelSerializer):
 
 	# Retrieval of the player.
 	submit_player_set = serializers.SerializerMethodField()
-	# Return fields of the question.
-	question_set = QuestionSerializer(many=True)
-
+	
+	# Retrieval of the player.
+	category = CategorySerializer()
+	
 	class Meta:
 		model = Quiz
 		fields = "__all__"
@@ -113,4 +155,40 @@ class QuizResultSerializer(serializers.ModelSerializer):
 		except SubmitPlayer.DoesNotExist:
 			return None 
 
-		
+class GetQuizSerializer(serializers.ModelSerializer):
+	"""
+		Serializer to return the questions of quiz for player.
+
+	"""
+
+	# Return fields of the question.
+	question_set = QuestionSerializer(many=True)
+
+	class Meta:
+		model = Quiz
+		fields = ["question_set"]
+
+	def get_question_set(self, obj):
+		"""
+			Return questions and answers.
+
+		"""
+		try:
+			question = Questions.objects.all(quiz=obj).order_by("?")
+			serializer = QuestionsSerializer(question)
+			return serializer.data
+
+		except SubmitPlayer.DoesNotExist:
+			return None 
+
+class RankingSerializer(serializers.ModelSerializer):
+	"""
+		Serializer to return all fields of the model SubmitPlayer
+			for overall ranking..
+
+	"""
+
+	class Meta:
+		model = SubmitPlayer
+		fields = ["user", "quiz", "score"]
+	

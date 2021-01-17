@@ -79,10 +79,16 @@ def test_get_quiz_unauthorized_request():
 
 	"""
 
+   # Create object category
+   category = qz.Category.objects.create(
+      title = "test"
+   )
+
    # Create object quiz
    quiz = qz.Quiz.objects.create(
-       name="Quiz Test",
-       slug="quiz-test",
+      name="Quiz Test",
+      category = category,
+      slug="quiz-test",
    )
 
    # APICliente instance
@@ -100,10 +106,16 @@ def test_get_quiz_authorized_request():
 
 	"""
 
+   # Create object category
+   category = qz.Category.objects.create(
+      title = "test"
+   )
+
    # Create object quiz
    quiz = qz.Quiz.objects.create(
-       name="Quiz Test",
-       slug="quiz-test",
+      name="Quiz Test",
+      category = category,
+      slug="quiz-test",
    )
 
    # APICliente instance
@@ -118,4 +130,3 @@ def test_get_quiz_authorized_request():
    response = api_client.get('/quiz/quizzes/' + str(quiz.slug) + '/')
    # Assert
    assert response.status_code == 200
-

@@ -5,3 +5,4 @@ django-cors-headers==3.6.0
 django-rest-knox==4.1.0
 django-nested-admin==3.3.3
 pytest-django==4.1.0
+
