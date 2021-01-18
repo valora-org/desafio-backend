@@ -139,10 +139,22 @@ def test_ranking_unauthorized_request():
 
 	"""
 
+   # Create object category
+   category = qz.Category.objects.create(
+      title = "test"
+   )
+
+   # Create object quiz
+   quiz = qz.Quiz.objects.create(
+      name="Quiz Test",
+      category = category,
+      slug="quiz-test",
+   )
+
    # APICliente instance
    api_client = APIClient()
    # Response 
-   response = api_client.get('/quiz/ranking/')
+   response = api_client.get('/quiz/ranking/'+ str(quiz.slug) + '/')
    # Assert
    assert response.status_code == 401
 
@@ -154,6 +166,18 @@ def test_ranking_authorized_request():
 
 	"""
 
+   # Create object category
+   category = qz.Category.objects.create(
+      title = "test"
+   )
+
+   # Create object quiz
+   quiz = qz.Quiz.objects.create(
+      name="Quiz Test",
+      category = category,
+      slug="quiz-test",
+   )
+
    # APICliente instance
    api_client = APIClient()
    # Get or Create user
@@ -163,7 +187,7 @@ def test_ranking_authorized_request():
    # Insert token in instance APICliente
    api_client.credentials(HTTP_AUTHORIZATION='Token ' + token)
    # Response 
-   response = api_client.get('/quiz/ranking/')
+   response = api_client.get('/quiz/ranking/'+ str(quiz.slug) + '/')
    # Assert
    assert response.status_code == 200
 
