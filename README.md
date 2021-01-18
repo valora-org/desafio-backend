@@ -50,15 +50,15 @@ $ docker-compose up
         - serializers.py
         - urls.py
         - views.py
-      db.sqlite3
-      manage.py
-      pytest.ini
-  docker-compose.yml
-  Dockerfile
-  exemplos_de_utilizacao.postman_collection.json
-  LICENSE
-  README.md
-  requirements.txt
+      - db.sqlite3
+      - manage.py
+      - pytest.ini
+    - docker-compose.yml
+    - Dockerfile
+    - exemplos_de_utilizacao.postman_collection.json
+    - LICENSE
+    - README.md
+    - requirements.txt
     
 ## Tecnologias Utilizadas
 Nesse projeto foi utilizado as seguintes tecnologias:
