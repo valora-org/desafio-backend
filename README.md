@@ -1,3 +1,5 @@
+## <img src="https://valora.cc/img/logo2.png" alt="Valora" width="24" /> Desafio Backend Python
+
 ## Descrição
 - Este projeto tem fim avaliativo para o processo seletivo de desenvolvedor backend python da empresa Valora.
 - Foi desenvolvida uma API para uma aplicação para a criação de um quiz de perguntas e respostas.
