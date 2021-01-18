@@ -3,8 +3,8 @@
 ## Descrição
 - Este projeto tem fim avaliativo para o processo seletivo de desenvolvedor backend python da empresa Valora.
 - Foi desenvolvida uma API para uma aplicação para a criação de um quiz de perguntas e respostas.
-- O administrador pode criar quizzes com 10 questões e cada questão com 3 opções de respostas onde apenas uma é correta.
-- Cada quiz deve ter um nome, uma categoria e slug.
+- O administrador pode criar quizzes com 10 questões e cada questão com 3 opções de respostas, onde apenas uma é correta.
+- Cada quiz deve ter um nome, uma categoria e um slug.
 
 ## Execução do Projeto
 
@@ -19,8 +19,9 @@ $ docker-compose up
   # username: admin
   # password: admin
 ```
-## Diagrama das pastas e arquivos do projeto
-
+## Diagrama das Pastas e Arquivos do Projeto
+  A aplicação app é dividida em dois APPs: accounts e quiz.
+  
   - desafio-backend
     - app
       - accounts
@@ -70,6 +71,7 @@ Nesse projeto foi utilizado as seguintes tecnologias:
 * **Django REST Framework**
 * **Pytest**
 * **Docker**
+* **DB sqlite3**
 
 ## Bibliotecas Utilizadas
 
@@ -103,7 +105,7 @@ As seguintes features foram implementadas:
 * Listar todos os questinários cadastrados.
 * Visualizar perguntas e opções de respostas para um determinado questionário.
 * Enviar resposta para uma determinada questão de um respectivo questionário.
-* Listar o desempenho para todos os questionários respondidos.
+* Listar o seu desempenho para todos os questionários respondidos.
 * Visualizar ranking geral por quiz.
 * Visualizar ranking por categoria.
 
@@ -175,7 +177,7 @@ As seguintes features foram implementadas:
 
 ## Testes
 
-- Os testes implementados podem ser acessados na pasta "Tests" de cada aplicação, ou seja, existe uma pasta "Tests" para a aplicação "quiz" e uma para a aplicação "accounts".
+- Os testes implementados podem ser acessados na pasta "Tests" de cada aplicativo, ou seja, existe uma pasta "Tests" para o APP "quiz" e uma para o APP "accounts".
 Foram testados os models e as conexões com os endpoints.
 - OBS: Não foram testadas as conexões com os endpoints de _method_ POST, por eu não conseguir encontrar esta informação em tempo hábil na documentação da biblioteca.
 
