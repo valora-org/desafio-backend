@@ -185,7 +185,7 @@ class RankingList(generics.ListAPIView):
 		"""
 
 		# Get all objects
-		queryset = SubmitPlayer.objects.all().order_by("-score")
+		queryset = SubmitPlayer.objects.filter(quiz__slug=self.kwargs['slug']).order_by("-score")
 		
 		# Return response
 		return queryset
