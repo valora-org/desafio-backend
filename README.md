@@ -3,7 +3,21 @@
 ## Descrição
 - Este projeto tem fim avaliativo para o processo seletivo de desenvolvedor backend python da empresa Valora.
 - Foi desenvolvida uma API para uma aplicação para a criação de um quiz de perguntas e respostas.
-- Abaixo pode ser visualizado um diagrama simples das pastas e arquivos do projeto:
+
+## Execução do Projeto
+
+```bash
+$ git clone ...
+
+$ docker-compose build
+
+$ docker-compose up
+
+# Acesse http://0.0.0.0:8000/admin/
+  # username: admin
+  # password: admin
+```
+## Diagrama das pastas e arquivos do projeto
 
   - desafio-backend
     - app
@@ -46,7 +60,6 @@
    README.md
    requirements.txt
     
-  
 ## Tecnologias Utilizadas
 Nesse projeto foi utilizado as seguintes tecnologias:
 
