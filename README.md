@@ -94,38 +94,38 @@ As seguintes features foram implementadas:
 
 ## Endpoints
 * Player Create
-  - Description: Endpoint para criação de um novo player.
-  - Method: POST
+  - Descrição: Endpoint para criação de um novo player.
+  - Método: POST
   - URL: http://0.0.0.0:8000/accounts/create/
   - Body:
     - Format: json
     - { "username" : " ", "password": " "}
     
 * Player Login
-  - Description: Endpoint para login de um respectivo player.
-  - Method: POST
+  - Descrição: Endpoint para login de um respectivo player.
+  - Método: POST
   - URL: http://0.0.0.0:8000/accounts/login/
   - Body:
     - Format: json
     - { "username" : " ", "password": " "}  
 
 * List Quizzes
-  - Description: Endpoint para visualizar todos os questionários cadastrados no sistema.
-  - Method: GET
+  - Descrição: Endpoint para visualizar todos os questionários cadastrados no sistema.
+  - Método: GET
   - URL: http://0.0.0.0:8000/quiz/quizzes/
   - Headers:
     - Authorization: Token *Insira o token*
 
 * View Questions
-  - Description: Endpoint para visualizar todas as questões e suas respectivas opções de respostas para um determinado questionário.
-  - Method: GET
+  - Descrição: Endpoint para visualizar todas as questões e suas respectivas opções de respostas para um determinado questionário.
+  - Método: GET
   - URL: http://0.0.0.0:8000/quiz/quizzes/${slug-quiz}$/
   - Headers:
     - Authorization: Token *Insira o token*
     
 * Submit Answers
-  - Description: Endpoint para envio da resposta escolhida pelo player para uma determinada questão de um quiz.
-  - Method: POST
+  - Descrição: Endpoint para envio da resposta escolhida pelo player para uma determinada questão de um quiz.
+  - Método: POST
   - URL: http://0.0.0.0:8000/quiz/quizzes/submit/${slug-quiz}$/
   - Body:
     - Format: json
@@ -135,22 +135,22 @@ As seguintes features foram implementadas:
     - Authorization: Token *Insira o token*
 
 * My Results
-  - Description: Endpoint para o player visualizar todos os questionários participados por ele e seus respectivos scores.
-  - Method: GET
+  - Descrição: Endpoint para o player visualizar todos os questionários participados por ele e seus respectivos scores.
+  - Método: GET
   - URL: http://0.0.0.0:8000/quiz/player-quizzes/
   - Headers:
     - Authorization: Token *Insira o token*
  
 * Ranking by Quiz
-  - Description: Endpoint para visualização do ranking geral por questionário.
-  - Method: GET
+  - Descrição: Endpoint para visualização do ranking geral por questionário.
+  - Método: GET
   - URL: http://0.0.0.0:8000/quiz/ranking/${slug-quiz}$/
   - Headers:
     - Authorization: Token *Insira o token*
  
 * Ranking by Category
-  - Description: Endpoint para visualização do ranking por categoria.
-  - Method: GET
+  - Descrição: Endpoint para visualização do ranking por categoria.
+  - Método: GET
   - URL: http://0.0.0.0:8000/quiz/ranking/category/
   - Headers:
     - Authorization: Token *Insira o token*
@@ -158,7 +158,7 @@ As seguintes features foram implementadas:
 
 * OBS: Todos os endpoints testados e com exemplos podem ser acessados através da coleção criada no Postman. A coleção pode ser acessada na raiz deste diretório com o nome "exemplos_de_utilizacao.postman_collection.json"
 
-## Tests
+## Testes
 
 - Os testes implementados podem ser acessados na pasta "Tests" de cada aplicação, ou seja, existe uma pasta "Tests" para a aplicação "quiz" e uma para a aplicação "accounts".
 Foram testados os models e as conexões com os endpoints.
