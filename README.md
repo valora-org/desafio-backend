@@ -3,6 +3,8 @@
 ## Descrição
 - Este projeto tem fim avaliativo para o processo seletivo de desenvolvedor backend python da empresa Valora.
 - Foi desenvolvida uma API para uma aplicação para a criação de um quiz de perguntas e respostas.
+- O administrador pode criar quizzes com 10 questões e cada questão com 3 opções de respostas onde apenas uma é correta.
+- Cada quiz deve ter um nome, uma categoria e slug.
 
 ## Execução do Projeto
 
@@ -182,3 +184,10 @@ Para executar os testes:
 $ docker-compose run app pytest
 ```
 
+## Dificuldades Encontradas
+
+- Durante a implementação deste projeto encontrei dificuldades em apresentar as questões de forma aleatória através do endpoint _View Questions_, quando faço a busca das questões de um determinado quiz, acrescento no final do código o _.order_by("?")_, porém as questões não retornam de forma aleatória. Como solução, acredito, que a aleatoriedade poderia ser implementada em um futuro _frontend_ que consome esta API. 
+
+- O ranking por categoria está se comportando incorretamente, pois se o mesmo player responder questionários diferentes, porém, com a mesma categoria, o ranking não retorna um score total, mas sim, um score para cada questionário respondido da categoria solicitada, isso se deve ao fato, à escolha da arquitetura dos models da aplicação. Como solução, seria necessário remodelar a arquitetura da aplicação para salvar um score total por player por categoria, na qual encontrei dificuldades de implementar em tempo hábil.
+
+- Por fim, eu não tenho dificuldades com a linguagem de programação _Python_, porém, como foi dito na entrevista, eu não tinha conhecimentos com _backend_ em django e DRF, mas acredito, que consegui aprender e entregar uma solução para o desafio, mediante a facilidade, documentação e conteúdo expressivo sobre esses _frameworks_.
