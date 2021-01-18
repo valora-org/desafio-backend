@@ -164,9 +164,9 @@ class GetQuiz(generics.GenericAPIView):
 		# Return response
 		return Response(self.get_serializer(quiz).data)
 
-class RankingList(generics.ListAPIView):
+class QuizRankingList(generics.ListAPIView):
 	"""
-		View for the player to view overall ranking.
+		View for the player to view overall ranking by quiz.
 
 	"""
 
