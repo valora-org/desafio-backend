@@ -73,6 +73,7 @@ Nesse projeto foi utilizado as seguintes tecnologias:
 * **Docker**
 * **DB sqlite3**
 
+- OBS: Foi escolhido o banco de dados SQLite3, pois os mesmo é relacional e leve, sem necessidade de configuração para utilizá-lo.
 ## Bibliotecas Utilizadas
 
 * Django==2.2.13
@@ -159,14 +160,14 @@ As seguintes features foram implementadas:
     - Authorization: Token *Insira o token*
  
 * Ranking by Quiz
-  - Descrição: Endpoint para visualização do ranking geral por questionário.
+  - Descrição: Endpoint para visualização do ranking geral por questionário em ordem decrescente de score.
   - Método: GET
   - URL: http://0.0.0.0:8000/quiz/ranking/${slug-quiz}$/
   - Headers:
     - Authorization: Token *Insira o token*
  
 * Ranking by Category
-  - Descrição: Endpoint para visualização do ranking por categoria.
+  - Descrição: Endpoint para visualização do ranking por categoria em ordem decrescente de score.
   - Método: GET
   - URL: http://0.0.0.0:8000/quiz/ranking/category/
   - Headers:
