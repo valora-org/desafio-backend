@@ -1,0 +1,988 @@
+{
+	"info": {
+		"_postman_id": "bd663e6e-df9f-4902-9e22-981be4e8c4f2",
+		"name": "Quizzes",
+		"description": "collections to access app quizzes",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "User Create",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"username\" : \"tester\",\n\t\"password\": \"tester123\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://0.0.0.0:8000/accounts/create/",
+					"protocol": "http",
+					"host": [
+						"0",
+						"0",
+						"0",
+						"0"
+					],
+					"port": "8000",
+					"path": [
+						"accounts",
+						"create",
+						""
+					]
+				},
+				"description": "Retorna id, username e token do novo usuário cadastrado."
+			},
+			"response": [
+				{
+					"name": "User Create",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"username\" : \"tester\",\n\t\"password\": \"tester123\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://0.0.0.0:8000/accounts/create/",
+							"protocol": "http",
+							"host": [
+								"0",
+								"0",
+								"0",
+								"0"
+							],
+							"port": "8000",
+							"path": [
+								"accounts",
+								"create",
+								""
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Date",
+							"value": "Mon, 18 Jan 2021 11:16:08 GMT"
+						},
+						{
+							"key": "Server",
+							"value": "WSGIServer/0.2 CPython/3.8.5"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Vary",
+							"value": "Accept, Origin"
+						},
+						{
+							"key": "Allow",
+							"value": "POST, OPTIONS"
+						},
+						{
+							"key": "X-Frame-Options",
+							"value": "SAMEORIGIN"
+						},
+						{
+							"key": "Content-Length",
+							"value": "112"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"user\": {\n        \"id\": 5,\n        \"username\": \"tester\"\n    },\n    \"token\": \"ecd73f4b3934bfb46f2956c419da0def4108e94252fe9fa97131790284acedd3\"\n}"
+				}
+			]
+		},
+		{
+			"name": "User Login",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"username\" : \"tester\",\n\t\"password\": \"tester123\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://0.0.0.0:8000/accounts/login/",
+					"protocol": "http",
+					"host": [
+						"0",
+						"0",
+						"0",
+						"0"
+					],
+					"port": "8000",
+					"path": [
+						"accounts",
+						"login",
+						""
+					]
+				},
+				"description": "Retorna id, username e token para o usuario logado."
+			},
+			"response": [
+				{
+					"name": "User Login",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"username\" : \"tester\",\n\t\"password\": \"tester123\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://0.0.0.0:8000/accounts/login/",
+							"protocol": "http",
+							"host": [
+								"0",
+								"0",
+								"0",
+								"0"
+							],
+							"port": "8000",
+							"path": [
+								"accounts",
+								"login",
+								""
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Date",
+							"value": "Mon, 18 Jan 2021 11:19:52 GMT"
+						},
+						{
+							"key": "Server",
+							"value": "WSGIServer/0.2 CPython/3.8.5"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Vary",
+							"value": "Accept, Origin"
+						},
+						{
+							"key": "Allow",
+							"value": "POST, OPTIONS"
+						},
+						{
+							"key": "X-Frame-Options",
+							"value": "SAMEORIGIN"
+						},
+						{
+							"key": "Content-Length",
+							"value": "112"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"user\": {\n        \"id\": 5,\n        \"username\": \"tester\"\n    },\n    \"token\": \"0e5dc9dbb40c34e4cd31ebac2869d00eb00612b8ee00e2bf3566fd121e985959\"\n}"
+				}
+			]
+		},
+		{
+			"name": "List Quizzes",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Token 0e5dc9dbb40c34e4cd31ebac2869d00eb00612b8ee00e2bf3566fd121e985959",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://0.0.0.0:8000/quiz/quizzes/",
+					"protocol": "http",
+					"host": [
+						"0",
+						"0",
+						"0",
+						"0"
+					],
+					"port": "8000",
+					"path": [
+						"quiz",
+						"quizzes",
+						""
+					]
+				},
+				"description": "Retorna todos os quizzes cadastrados no sistema. Com id, categoria, nome e slug dos quizzes.\n"
+			},
+			"response": [
+				{
+					"name": "List Quizzes",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Token 0e5dc9dbb40c34e4cd31ebac2869d00eb00612b8ee00e2bf3566fd121e985959",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://0.0.0.0:8000/quiz/quizzes/",
+							"protocol": "http",
+							"host": [
+								"0",
+								"0",
+								"0",
+								"0"
+							],
+							"port": "8000",
+							"path": [
+								"quiz",
+								"quizzes",
+								""
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Date",
+							"value": "Mon, 18 Jan 2021 12:19:34 GMT"
+						},
+						{
+							"key": "Server",
+							"value": "WSGIServer/0.2 CPython/3.8.5"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Vary",
+							"value": "Accept, Origin"
+						},
+						{
+							"key": "Allow",
+							"value": "GET, HEAD, OPTIONS"
+						},
+						{
+							"key": "X-Frame-Options",
+							"value": "SAMEORIGIN"
+						},
+						{
+							"key": "Content-Length",
+							"value": "355"
+						}
+					],
+					"cookie": [],
+					"body": "[\n    {\n        \"id\": 3,\n        \"category\": {\n            \"title\": \"Matemática\"\n        },\n        \"name\": \"Operações Matemáticas\",\n        \"slug\": \"operacoes-matematicas\"\n    },\n    {\n        \"id\": 4,\n        \"category\": {\n            \"title\": \"Conhecimentos Gerais\"\n        },\n        \"name\": \"Quiz sobre o Brasil\",\n        \"slug\": \"quiz-sobre-o-brasil\"\n    },\n    {\n        \"id\": 5,\n        \"category\": {\n            \"title\": \"Matemática\"\n        },\n        \"name\": \"Operação Adição\",\n        \"slug\": \"operacao-adicao\"\n    }\n]"
+				}
+			]
+		},
+		{
+			"name": "View Questions",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"type": "text",
+						"value": "Token 0e5dc9dbb40c34e4cd31ebac2869d00eb00612b8ee00e2bf3566fd121e985959"
+					}
+				],
+				"url": {
+					"raw": "http://0.0.0.0:8000/quiz/quizzes/operacoes-matematicas/",
+					"protocol": "http",
+					"host": [
+						"0",
+						"0",
+						"0",
+						"0"
+					],
+					"port": "8000",
+					"path": [
+						"quiz",
+						"quizzes",
+						"operacoes-matematicas",
+						""
+					]
+				},
+				"description": "Retorna todas as questões e suas opções de respostas cadastradas para um determinado quiz. Retorna id, label e quiz respectivos da questão. Retorna id, question e label das respectivas opções de respostas. \n"
+			},
+			"response": [
+				{
+					"name": "View Questions - Quiz sobre o Brasil",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"type": "text",
+								"value": "Token 0e5dc9dbb40c34e4cd31ebac2869d00eb00612b8ee00e2bf3566fd121e985959"
+							}
+						],
+						"url": {
+							"raw": "http://0.0.0.0:8000/quiz/quizzes/quiz-sobre-o-brasil/",
+							"protocol": "http",
+							"host": [
+								"0",
+								"0",
+								"0",
+								"0"
+							],
+							"port": "8000",
+							"path": [
+								"quiz",
+								"quizzes",
+								"quiz-sobre-o-brasil",
+								""
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Date",
+							"value": "Mon, 18 Jan 2021 12:04:19 GMT"
+						},
+						{
+							"key": "Server",
+							"value": "WSGIServer/0.2 CPython/3.8.5"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Vary",
+							"value": "Accept, Origin"
+						},
+						{
+							"key": "Allow",
+							"value": "GET, HEAD, OPTIONS"
+						},
+						{
+							"key": "X-Frame-Options",
+							"value": "SAMEORIGIN"
+						},
+						{
+							"key": "Content-Length",
+							"value": "2326"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"question_set\": [\n        {\n            \"id\": 15,\n            \"answer_set\": [\n                {\n                    \"id\": 43,\n                    \"question\": 15,\n                    \"label\": \"Portugal\"\n                },\n                {\n                    \"id\": 44,\n                    \"question\": 15,\n                    \"label\": \"Espanha\"\n                },\n                {\n                    \"id\": 45,\n                    \"question\": 15,\n                    \"label\": \"Inglaterra\"\n                }\n            ],\n            \"label\": \"Qual país colonizou o Brasil?\",\n            \"quiz\": 4\n        },\n        {\n            \"id\": 16,\n            \"answer_set\": [\n                {\n                    \"id\": 46,\n                    \"question\": 16,\n                    \"label\": \"São Paulo\"\n                },\n                {\n                    \"id\": 47,\n                    \"question\": 16,\n                    \"label\": \"Brasília\"\n                },\n                {\n                    \"id\": 48,\n                    \"question\": 16,\n                    \"label\": \"Rio de Janeiro\"\n                }\n            ],\n            \"label\": \"Qual a capital do Brasil?\",\n            \"quiz\": 4\n        },\n        {\n            \"id\": 17,\n            \"answer_set\": [\n                {\n                    \"id\": 49,\n                    \"question\": 17,\n                    \"label\": \"Fortaleza\"\n                },\n                {\n                    \"id\": 50,\n                    \"question\": 17,\n                    \"label\": \"Porto Alegre\"\n                },\n                {\n                    \"id\": 51,\n                    \"question\": 17,\n                    \"label\": \"Rio de Janeiro\"\n                }\n            ],\n            \"label\": \"Qual a cidade do Brasil considerada \\\"cidade maravilhosa\\\"?\",\n            \"quiz\": 4\n        },\n        {\n            \"id\": 18,\n            \"answer_set\": [\n                {\n                    \"id\": 52,\n                    \"question\": 18,\n                    \"label\": \"26\"\n                },\n                {\n                    \"id\": 53,\n                    \"question\": 18,\n                    \"label\": \"27\"\n                },\n                {\n                    \"id\": 54,\n                    \"question\": 18,\n                    \"label\": \"21\"\n                }\n            ],\n            \"label\": \"Quantos Estados existem no Brasil? (Sem o Distrito Federal)\",\n            \"quiz\": 4\n        },\n        {\n            \"id\": 19,\n            \"answer_set\": [\n                {\n                    \"id\": 55,\n                    \"question\": 19,\n                    \"label\": \"Pedro Álvares Cabral\"\n                },\n                {\n                    \"id\": 56,\n                    \"question\": 19,\n                    \"label\": \"Cristóvão Colombo\"\n                },\n                {\n                    \"id\": 57,\n                    \"question\": 19,\n                    \"label\": \"Oscar Niemeyer\"\n                }\n            ],\n            \"label\": \"Quem descobriu o Brasil?\",\n            \"quiz\": 4\n        },\n        {\n            \"id\": 20,\n            \"answer_set\": [\n                {\n                    \"id\": 58,\n                    \"question\": 20,\n                    \"label\": \"Mais que 200 milhões?\"\n                },\n                {\n                    \"id\": 59,\n                    \"question\": 20,\n                    \"label\": \"Menos que 10 milhões?\"\n                },\n                {\n                    \"id\": 60,\n                    \"question\": 20,\n                    \"label\": \"50 milhões\"\n                }\n            ],\n            \"label\": \"Qual a população do Brasil?\",\n            \"quiz\": 4\n        },\n        {\n            \"id\": 21,\n            \"answer_set\": [\n                {\n                    \"id\": 61,\n                    \"question\": 21,\n                    \"label\": \"São Paulo\"\n                },\n                {\n                    \"id\": 62,\n                    \"question\": 21,\n                    \"label\": \"Bahia\"\n                },\n                {\n                    \"id\": 63,\n                    \"question\": 21,\n                    \"label\": \"Ceará\"\n                }\n            ],\n            \"label\": \"Qual o Estado mais populoso do Brasil?\",\n            \"quiz\": 4\n        },\n        {\n            \"id\": 22,\n            \"answer_set\": [\n                {\n                    \"id\": 64,\n                    \"question\": 22,\n                    \"label\": \"Europa\"\n                },\n                {\n                    \"id\": 65,\n                    \"question\": 22,\n                    \"label\": \"América do Sul\"\n                },\n                {\n                    \"id\": 66,\n                    \"question\": 22,\n                    \"label\": \"Ásia\"\n                }\n            ],\n            \"label\": \"O Brasil é localizado em qual continente?\",\n            \"quiz\": 4\n        },\n        {\n            \"id\": 23,\n            \"answer_set\": [\n                {\n                    \"id\": 67,\n                    \"question\": 23,\n                    \"label\": \"Itaipu\"\n                },\n                {\n                    \"id\": 68,\n                    \"question\": 23,\n                    \"label\": \"Nuclear\"\n                },\n                {\n                    \"id\": 69,\n                    \"question\": 23,\n                    \"label\": \"Petrobras\"\n                }\n            ],\n            \"label\": \"Qual o nome da usina hidroelétrica binacional localizada sobre o Rio Paraná?\",\n            \"quiz\": 4\n        },\n        {\n            \"id\": 24,\n            \"answer_set\": [\n                {\n                    \"id\": 70,\n                    \"question\": 24,\n                    \"label\": \"2004\"\n                },\n                {\n                    \"id\": 71,\n                    \"question\": 24,\n                    \"label\": \"2005\"\n                },\n                {\n                    \"id\": 72,\n                    \"question\": 24,\n                    \"label\": \"2006\"\n                }\n            ],\n            \"label\": \"Em que ano o primeiro astronauta brasileiro foi ao espaço?\",\n            \"quiz\": 4\n        }\n    ]\n}"
+				},
+				{
+					"name": "View Questions - Operações Matemáticas",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"type": "text",
+								"value": "Token 0e5dc9dbb40c34e4cd31ebac2869d00eb00612b8ee00e2bf3566fd121e985959"
+							}
+						],
+						"url": {
+							"raw": "http://0.0.0.0:8000/quiz/quizzes/operacoes-matematicas/",
+							"protocol": "http",
+							"host": [
+								"0",
+								"0",
+								"0",
+								"0"
+							],
+							"port": "8000",
+							"path": [
+								"quiz",
+								"quizzes",
+								"operacoes-matematicas",
+								""
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Date",
+							"value": "Mon, 18 Jan 2021 11:56:31 GMT"
+						},
+						{
+							"key": "Server",
+							"value": "WSGIServer/0.2 CPython/3.8.5"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Vary",
+							"value": "Accept, Origin"
+						},
+						{
+							"key": "Allow",
+							"value": "GET, HEAD, OPTIONS"
+						},
+						{
+							"key": "X-Frame-Options",
+							"value": "SAMEORIGIN"
+						},
+						{
+							"key": "Content-Length",
+							"value": "1602"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"question_set\": [\n        {\n            \"id\": 5,\n            \"answer_set\": [\n                {\n                    \"id\": 13,\n                    \"question\": 5,\n                    \"label\": \"1\"\n                },\n                {\n                    \"id\": 14,\n                    \"question\": 5,\n                    \"label\": \"2\"\n                },\n                {\n                    \"id\": 15,\n                    \"question\": 5,\n                    \"label\": \"11\"\n                }\n            ],\n            \"label\": \"1 + 1?\",\n            \"quiz\": 3\n        },\n        {\n            \"id\": 6,\n            \"answer_set\": [\n                {\n                    \"id\": 16,\n                    \"question\": 6,\n                    \"label\": \"5\"\n                },\n                {\n                    \"id\": 17,\n                    \"question\": 6,\n                    \"label\": \"10\"\n                },\n                {\n                    \"id\": 18,\n                    \"question\": 6,\n                    \"label\": \"25\"\n                }\n            ],\n            \"label\": \"5^2?\",\n            \"quiz\": 3\n        },\n        {\n            \"id\": 7,\n            \"answer_set\": [\n                {\n                    \"id\": 19,\n                    \"question\": 7,\n                    \"label\": \"1\"\n                },\n                {\n                    \"id\": 20,\n                    \"question\": 7,\n                    \"label\": \"5\"\n                },\n                {\n                    \"id\": 21,\n                    \"question\": 7,\n                    \"label\": \"0\"\n                }\n            ],\n            \"label\": \"10 / 10?\",\n            \"quiz\": 3\n        },\n        {\n            \"id\": 8,\n            \"answer_set\": [\n                {\n                    \"id\": 22,\n                    \"question\": 8,\n                    \"label\": \"15\"\n                },\n                {\n                    \"id\": 23,\n                    \"question\": 8,\n                    \"label\": \"35\"\n                },\n                {\n                    \"id\": 24,\n                    \"question\": 8,\n                    \"label\": \"3\"\n                }\n            ],\n            \"label\": \"3 x 5?\",\n            \"quiz\": 3\n        },\n        {\n            \"id\": 9,\n            \"answer_set\": [\n                {\n                    \"id\": 25,\n                    \"question\": 9,\n                    \"label\": \"15\"\n                },\n                {\n                    \"id\": 26,\n                    \"question\": 9,\n                    \"label\": \"20\"\n                },\n                {\n                    \"id\": 27,\n                    \"question\": 9,\n                    \"label\": \"10\"\n                }\n            ],\n            \"label\": \"20 - 10?\",\n            \"quiz\": 3\n        },\n        {\n            \"id\": 10,\n            \"answer_set\": [\n                {\n                    \"id\": 28,\n                    \"question\": 10,\n                    \"label\": \"6\"\n                },\n                {\n                    \"id\": 29,\n                    \"question\": 10,\n                    \"label\": \"35\"\n                },\n                {\n                    \"id\": 30,\n                    \"question\": 10,\n                    \"label\": \"10\"\n                }\n            ],\n            \"label\": \"34 + 1?\",\n            \"quiz\": 3\n        },\n        {\n            \"id\": 11,\n            \"answer_set\": [\n                {\n                    \"id\": 31,\n                    \"question\": 11,\n                    \"label\": \"8\"\n                },\n                {\n                    \"id\": 32,\n                    \"question\": 11,\n                    \"label\": \"4\"\n                },\n                {\n                    \"id\": 33,\n                    \"question\": 11,\n                    \"label\": \"10\"\n                }\n            ],\n            \"label\": \"2^3?\",\n            \"quiz\": 3\n        },\n        {\n            \"id\": 12,\n            \"answer_set\": [\n                {\n                    \"id\": 34,\n                    \"question\": 12,\n                    \"label\": \"16\"\n                },\n                {\n                    \"id\": 35,\n                    \"question\": 12,\n                    \"label\": \"4\"\n                },\n                {\n                    \"id\": 36,\n                    \"question\": 12,\n                    \"label\": \"1\"\n                }\n            ],\n            \"label\": \"4 x 4?\",\n            \"quiz\": 3\n        },\n        {\n            \"id\": 13,\n            \"answer_set\": [\n                {\n                    \"id\": 37,\n                    \"question\": 13,\n                    \"label\": \"2\"\n                },\n                {\n                    \"id\": 38,\n                    \"question\": 13,\n                    \"label\": \"1\"\n                },\n                {\n                    \"id\": 39,\n                    \"question\": 13,\n                    \"label\": \"10\"\n                }\n            ],\n            \"label\": \"4 / 4?\",\n            \"quiz\": 3\n        },\n        {\n            \"id\": 14,\n            \"answer_set\": [\n                {\n                    \"id\": 40,\n                    \"question\": 14,\n                    \"label\": \"10\"\n                },\n                {\n                    \"id\": 41,\n                    \"question\": 14,\n                    \"label\": \"1\"\n                },\n                {\n                    \"id\": 42,\n                    \"question\": 14,\n                    \"label\": \"2\"\n                }\n            ],\n            \"label\": \"10^1?\",\n            \"quiz\": 3\n        }\n    ]\n}"
+				}
+			]
+		},
+		{
+			"name": "Submit Answers",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Token e08120698c0f769eb3e6842ce7904839eef56a940e6fd0760ca423e97e9b90a8",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"question\": 6,\n\t\"answer\": 18\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://0.0.0.0:8000/quiz/quizzes/submit/operacoes-matematicas/",
+					"protocol": "http",
+					"host": [
+						"0",
+						"0",
+						"0",
+						"0"
+					],
+					"port": "8000",
+					"path": [
+						"quiz",
+						"quizzes",
+						"submit",
+						"operacoes-matematicas",
+						""
+					]
+				},
+				"description": "Retorna nome do quiz, categoria, slug e horário do envio do player. Retorna question e answer enviado pelo player e seu respectivo score atualizado com um booleando indicando se o player acertou a questão."
+			},
+			"response": [
+				{
+					"name": "Submit Answers - Operações Matemáticas - Questão id=6",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Token 0e5dc9dbb40c34e4cd31ebac2869d00eb00612b8ee00e2bf3566fd121e985959",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"question\": 6,\n\t\"answer\": 18\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://0.0.0.0:8000/quiz/quizzes/submit/operacoes-matematicas/",
+							"protocol": "http",
+							"host": [
+								"0",
+								"0",
+								"0",
+								"0"
+							],
+							"port": "8000",
+							"path": [
+								"quiz",
+								"quizzes",
+								"submit",
+								"operacoes-matematicas",
+								""
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Date",
+							"value": "Mon, 18 Jan 2021 12:09:23 GMT"
+						},
+						{
+							"key": "Server",
+							"value": "WSGIServer/0.2 CPython/3.8.5"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Vary",
+							"value": "Accept, Origin"
+						},
+						{
+							"key": "Allow",
+							"value": "POST, OPTIONS"
+						},
+						{
+							"key": "X-Frame-Options",
+							"value": "SAMEORIGIN"
+						},
+						{
+							"key": "Content-Length",
+							"value": "382"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"quiz\": {\n        \"id\": 3,\n        \"submit_player_set\": {\n            \"id\": 8,\n            \"playersanswer_set\": [\n                {\n                    \"id\": 14,\n                    \"submit_player\": 8,\n                    \"question\": 5,\n                    \"answer\": 14\n                },\n                {\n                    \"id\": 15,\n                    \"submit_player\": 8,\n                    \"question\": 6,\n                    \"answer\": 18\n                }\n            ],\n            \"score\": 2,\n            \"user\": 5,\n            \"quiz\": 3\n        },\n        \"category\": {\n            \"title\": \"Matemática\"\n        },\n        \"name\": \"Operações Matemáticas\",\n        \"slug\": \"operacoes-matematicas\",\n        \"timestamp\": \"2021-01-18T11:40:16.490273Z\"\n    },\n    \"rigth_question\": true\n}"
+				},
+				{
+					"name": "Submit Answers - Operações Matemáticas - Questão id=5",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Token 0e5dc9dbb40c34e4cd31ebac2869d00eb00612b8ee00e2bf3566fd121e985959",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"question\": 5,\n\t\"answer\": 14\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://0.0.0.0:8000/quiz/quizzes/submit/operacoes-matematicas/",
+							"protocol": "http",
+							"host": [
+								"0",
+								"0",
+								"0",
+								"0"
+							],
+							"port": "8000",
+							"path": [
+								"quiz",
+								"quizzes",
+								"submit",
+								"operacoes-matematicas",
+								""
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Date",
+							"value": "Mon, 18 Jan 2021 12:00:44 GMT"
+						},
+						{
+							"key": "Server",
+							"value": "WSGIServer/0.2 CPython/3.8.5"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Vary",
+							"value": "Accept, Origin"
+						},
+						{
+							"key": "Allow",
+							"value": "POST, OPTIONS"
+						},
+						{
+							"key": "X-Frame-Options",
+							"value": "SAMEORIGIN"
+						},
+						{
+							"key": "Content-Length",
+							"value": "329"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"quiz\": {\n        \"id\": 3,\n        \"submit_player_set\": {\n            \"id\": 8,\n            \"playersanswer_set\": [\n                {\n                    \"id\": 14,\n                    \"submit_player\": 8,\n                    \"question\": 5,\n                    \"answer\": 14\n                }\n            ],\n            \"score\": 1,\n            \"user\": 5,\n            \"quiz\": 3\n        },\n        \"category\": {\n            \"title\": \"Matemática\"\n        },\n        \"name\": \"Operações Matemáticas\",\n        \"slug\": \"operacoes-matematicas\",\n        \"timestamp\": \"2021-01-18T11:40:16.490273Z\"\n    },\n    \"rigth_question\": true\n}"
+				}
+			]
+		},
+		{
+			"name": "My results",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"type": "text",
+						"value": "Token 0e5dc9dbb40c34e4cd31ebac2869d00eb00612b8ee00e2bf3566fd121e985959"
+					}
+				],
+				"url": {
+					"raw": "http://0.0.0.0:8000/quiz/player-quizzes/",
+					"protocol": "http",
+					"host": [
+						"0",
+						"0",
+						"0",
+						"0"
+					],
+					"port": "8000",
+					"path": [
+						"quiz",
+						"player-quizzes",
+						""
+					]
+				},
+				"description": "Retorna nome do quiz, categoria, slug e score de todos os quizzes participados pelo player.\n"
+			},
+			"response": [
+				{
+					"name": "My results",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"type": "text",
+								"value": "Token 0e5dc9dbb40c34e4cd31ebac2869d00eb00612b8ee00e2bf3566fd121e985959"
+							}
+						],
+						"url": {
+							"raw": "http://0.0.0.0:8000/quiz/player-quizzes/",
+							"protocol": "http",
+							"host": [
+								"0",
+								"0",
+								"0",
+								"0"
+							],
+							"port": "8000",
+							"path": [
+								"quiz",
+								"player-quizzes",
+								""
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Date",
+							"value": "Mon, 18 Jan 2021 12:10:18 GMT"
+						},
+						{
+							"key": "Server",
+							"value": "WSGIServer/0.2 CPython/3.8.5"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Vary",
+							"value": "Accept, Origin"
+						},
+						{
+							"key": "Allow",
+							"value": "GET, HEAD, OPTIONS"
+						},
+						{
+							"key": "X-Frame-Options",
+							"value": "SAMEORIGIN"
+						},
+						{
+							"key": "Content-Length",
+							"value": "136"
+						}
+					],
+					"cookie": [],
+					"body": "[\n    {\n        \"id\": 3,\n        \"name\": \"Operações Matemáticas\",\n        \"category\": {\n            \"title\": \"Matemática\"\n        },\n        \"slug\": \"operacoes-matematicas\",\n        \"score\": 2\n    }\n]"
+				}
+			]
+		},
+		{
+			"name": "Ranking by Quiz",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Token 0e5dc9dbb40c34e4cd31ebac2869d00eb00612b8ee00e2bf3566fd121e985959",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://0.0.0.0:8000/quiz/ranking/operacoes-matematicas/",
+					"protocol": "http",
+					"host": [
+						"0",
+						"0",
+						"0",
+						"0"
+					],
+					"port": "8000",
+					"path": [
+						"quiz",
+						"ranking",
+						"operacoes-matematicas",
+						""
+					]
+				},
+				"description": "Retorna em ordem decrescente todos os players que participaram do respectivo quiz, com username, o quiz com categoria, nome e slug, e o score."
+			},
+			"response": [
+				{
+					"name": "Ranking by Quiz - Operações Matemáticas",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Token 0e5dc9dbb40c34e4cd31ebac2869d00eb00612b8ee00e2bf3566fd121e985959",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://0.0.0.0:8000/quiz/ranking/operacoes-matematicas/",
+							"protocol": "http",
+							"host": [
+								"0",
+								"0",
+								"0",
+								"0"
+							],
+							"port": "8000",
+							"path": [
+								"quiz",
+								"ranking",
+								"operacoes-matematicas",
+								""
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Date",
+							"value": "Mon, 18 Jan 2021 12:21:11 GMT"
+						},
+						{
+							"key": "Server",
+							"value": "WSGIServer/0.2 CPython/3.8.5"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Vary",
+							"value": "Accept, Origin"
+						},
+						{
+							"key": "Allow",
+							"value": "GET, HEAD, OPTIONS"
+						},
+						{
+							"key": "X-Frame-Options",
+							"value": "SAMEORIGIN"
+						},
+						{
+							"key": "Content-Length",
+							"value": "362"
+						}
+					],
+					"cookie": [],
+					"body": "[\n    {\n        \"user\": {\n            \"id\": 5,\n            \"username\": \"tester\"\n        },\n        \"quiz\": {\n            \"id\": 3,\n            \"category\": {\n                \"title\": \"Matemática\"\n            },\n            \"name\": \"Operações Matemáticas\",\n            \"slug\": \"operacoes-matematicas\"\n        },\n        \"score\": 2\n    },\n    {\n        \"user\": {\n            \"id\": 6,\n            \"username\": \"tester2\"\n        },\n        \"quiz\": {\n            \"id\": 3,\n            \"category\": {\n                \"title\": \"Matemática\"\n            },\n            \"name\": \"Operações Matemáticas\",\n            \"slug\": \"operacoes-matematicas\"\n        },\n        \"score\": 1\n    }\n]"
+				}
+			]
+		},
+		{
+			"name": "Ranking by Category",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Token 0e5dc9dbb40c34e4cd31ebac2869d00eb00612b8ee00e2bf3566fd121e985959",
+						"type": "text"
+					},
+					{
+						"key": "Category",
+						"value": "Matemática",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://0.0.0.0:8000/quiz/ranking/category/",
+					"protocol": "http",
+					"host": [
+						"0",
+						"0",
+						"0",
+						"0"
+					],
+					"port": "8000",
+					"path": [
+						"quiz",
+						"ranking",
+						"category",
+						""
+					]
+				},
+				"description": "Retorna em ordem decrescente todos os players que participaram de quizzes em uma respectiva categoria, com username, o quiz com categoria, nome e slug, e o score."
+			},
+			"response": [
+				{
+					"name": "Ranking by Category - Matemática",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Token 0e5dc9dbb40c34e4cd31ebac2869d00eb00612b8ee00e2bf3566fd121e985959",
+								"type": "text"
+							},
+							{
+								"key": "Category",
+								"value": "Matemática",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://0.0.0.0:8000/quiz/ranking/category/",
+							"protocol": "http",
+							"host": [
+								"0",
+								"0",
+								"0",
+								"0"
+							],
+							"port": "8000",
+							"path": [
+								"quiz",
+								"ranking",
+								"category",
+								""
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Date",
+							"value": "Mon, 18 Jan 2021 12:21:33 GMT"
+						},
+						{
+							"key": "Server",
+							"value": "WSGIServer/0.2 CPython/3.8.5"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Vary",
+							"value": "Accept, Origin"
+						},
+						{
+							"key": "Allow",
+							"value": "GET, HEAD, OPTIONS"
+						},
+						{
+							"key": "X-Frame-Options",
+							"value": "SAMEORIGIN"
+						},
+						{
+							"key": "Content-Length",
+							"value": "536"
+						}
+					],
+					"cookie": [],
+					"body": "[\n    {\n        \"user\": {\n            \"id\": 5,\n            \"username\": \"tester\"\n        },\n        \"quiz\": {\n            \"id\": 3,\n            \"category\": {\n                \"title\": \"Matemática\"\n            },\n            \"name\": \"Operações Matemáticas\",\n            \"slug\": \"operacoes-matematicas\"\n        },\n        \"score\": 2\n    },\n    {\n        \"user\": {\n            \"id\": 6,\n            \"username\": \"tester2\"\n        },\n        \"quiz\": {\n            \"id\": 3,\n            \"category\": {\n                \"title\": \"Matemática\"\n            },\n            \"name\": \"Operações Matemáticas\",\n            \"slug\": \"operacoes-matematicas\"\n        },\n        \"score\": 1\n    },\n    {\n        \"user\": {\n            \"id\": 6,\n            \"username\": \"tester2\"\n        },\n        \"quiz\": {\n            \"id\": 5,\n            \"category\": {\n                \"title\": \"Matemática\"\n            },\n            \"name\": \"Operação Adição\",\n            \"slug\": \"operacao-adicao\"\n        },\n        \"score\": 1\n    }\n]"
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	]
+}
