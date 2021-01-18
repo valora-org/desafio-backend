@@ -7,7 +7,7 @@
 	},
 	"item": [
 		{
-			"name": "User Create",
+			"name": "Player Create",
 			"request": {
 				"method": "POST",
 				"header": [],
@@ -40,7 +40,7 @@
 			},
 			"response": [
 				{
-					"name": "User Create",
+					"name": "Player Create",
 					"originalRequest": {
 						"method": "POST",
 						"header": [],
@@ -109,7 +109,7 @@
 			]
 		},
 		{
-			"name": "User Login",
+			"name": "Player Login",
 			"request": {
 				"method": "POST",
 				"header": [],
@@ -142,7 +142,7 @@
 			},
 			"response": [
 				{
-					"name": "User Login",
+					"name": "Player Login",
 					"originalRequest": {
 						"method": "POST",
 						"header": [],
@@ -663,7 +663,7 @@
 			]
 		},
 		{
-			"name": "My results",
+			"name": "My Results",
 			"request": {
 				"method": "GET",
 				"header": [
