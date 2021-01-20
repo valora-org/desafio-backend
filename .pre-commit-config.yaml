@@ -1,0 +1,81 @@
+exclude: 'docs|node_modules|migrations|.git|.tox'
+default_stages: [commit]
+fail_fast: true
+
+repos:
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v3.4.0
+    hooks:
+      - id: check-docstring-first
+        name: Check docstring is first
+        description: Checks a common error of defining a docstring after code.
+        entry: check-docstring-first
+        language: python
+        types: [python]
+
+      - id: check-case-conflict
+        name: Check for case conflicts
+        description: Check for files that would conflict in case-insensitive filesystems
+        entry: check-case-conflict
+        language: python
+
+      - id: check-merge-conflict
+        name: Check for merge conflicts
+        description: Check for files that contain merge conflict strings.
+        entry: check-merge-conflict
+        language: python
+        types: [text]
+
+      - id: detect-private-key
+        name: Detect Private Key
+        description: Detects the presence of private keys
+        entry: detect-private-key
+        language: python
+        types: [text]
+
+      - id: double-quote-string-fixer
+        name: Fix double quoted strings
+        description: This hook replaces double quoted strings with single quoted strings
+        entry: double-quote-string-fixer
+        language: python
+        types: [python]
+
+      - id: trailing-whitespace
+        name: Trim Trailing Whitespace
+        description: This hook trims trailing whitespace.
+        entry: trailing-whitespace-fixer
+        language: python
+        types: [text]
+        stages: [commit, push, manual]
+
+      - id: end-of-file-fixer
+        name: Fix End of Files
+        description: Ensures that a file is either empty, or ends with one newline.
+        entry: end-of-file-fixer
+        language: python
+        types: [text]
+        stages: [commit, push, manual]
+
+  - repo: https://github.com/asottile/reorder_python_imports
+    rev: v2.3.6
+    hooks:
+      - id: reorder-python-imports
+
+  -   repo: https://github.com/pre-commit/mirrors-yapf
+      rev: v0.30.0
+      hooks:
+      -   id: yapf
+
+  - repo: https://gitlab.com/pycqa/flake8
+    rev: 3.8.4
+    hooks:
+      - id: flake8
+        args: ['--config=setup.cfg', '--docstring-convention=google']
+        additional_dependencies: [
+          flake8-blind-except,
+          flake8-builtins,
+          flake8-cognitive-complexity,
+          flake8-django,
+          flake8-docstrings,
+          flake8-logging-format
+        ]
