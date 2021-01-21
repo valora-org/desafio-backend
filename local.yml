@@ -33,3 +33,13 @@ services:
       - local_postgres_data_backups:/backups:z
     env_file:
       - ./.envs/.local/.postgres
+
+  pgadmin:
+    image: dpage/pgadmin4
+    env_file:
+      - ./.envs/.local/.pgadmin
+    depends_on:
+      - postgres
+      - django
+    ports:
+      - 9000:80

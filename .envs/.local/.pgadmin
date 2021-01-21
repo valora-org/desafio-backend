@@ -1,0 +1,4 @@
+# PgAdmin
+# ------------------------------------------------------------------------------
+PGADMIN_DEFAULT_EMAIL=admin@admin.com
+PGADMIN_DEFAULT_PASSWORD=admin
