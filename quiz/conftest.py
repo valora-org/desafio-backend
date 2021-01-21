@@ -34,3 +34,9 @@ def user_credentials() -> Dict[str, str]:
         'username': user_data['username'],
         'password': user_data['password'],
     }
+
+
+@pytest.fixture()
+def ct() -> str:
+    """Return content type."""
+    return 'application/json; charset=utf-8'
