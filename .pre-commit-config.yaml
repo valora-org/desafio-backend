@@ -74,8 +74,12 @@ repos:
         additional_dependencies: [
           flake8-blind-except,
           flake8-builtins,
+          flake8-builtins,
           flake8-cognitive-complexity,
+          flake8-comprehensions,
           flake8-django,
           flake8-docstrings,
+          flake8-eradicate,
+          flake8-import-order,
           flake8-logging-format
         ]
