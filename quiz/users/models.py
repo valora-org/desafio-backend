@@ -32,6 +32,7 @@ class User(AbstractUser):
 
     class Role(models.TextChoices):
         """User role Choices."""
+
         ADMIN = 'A', _('Admin')
         PLAYER = 'P', _('Player')
         SUPERUSER = 'S', _('Superuser')
@@ -49,11 +50,12 @@ class User(AbstractUser):
     REQUIRED_FIELDS = ['password']
 
     def __str__(self):
-        """String representation for user instance."""
+        """Return a string representation for user instance."""
         return self.username
 
     class Meta:
         """Meta info for user model."""
+
         verbose_name = _('user')
         verbose_name_plural = _('users')
         ordering = ['username']

@@ -32,5 +32,6 @@ class UserFactory(DjangoModelFactory):
 
     class Meta:
         """Metaclass for factory configuration."""
+
         model = User
         django_get_or_create = ['username']

@@ -1,6 +1,8 @@
 from .base import *  # noqa
 from .base import env
 
+# flake8: noqa 501
+
 # GENERAL
 # ------------------------------------------------------------------------------
 # https://docs.djangoproject.com/en/dev/ref/settings/#debug

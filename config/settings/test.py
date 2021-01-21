@@ -1,8 +1,8 @@
-"""
-With these settings, tests run faster.
-"""
+"""With these settings, tests run faster."""
 from .base import *  # noqa
 from .base import env
+
+# flake8: noqa 501
 
 # GENERAL
 # ------------------------------------------------------------------------------

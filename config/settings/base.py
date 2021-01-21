@@ -1,6 +1,5 @@
-"""
-Base settings to build other settings files upon.
-"""
+"""Base settings to build other settings files upon."""
+# flake8: noqa 501
 from pathlib import Path
 
 import environ
