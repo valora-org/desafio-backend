@@ -20,15 +20,31 @@ class UserFactory(DjangoModelFactory):
     @post_generation
     def password(self, create: bool, extracted: Sequence[Any], **kwargs):
         """Create a password for user instance."""
-        password = (extracted if extracted else Faker(
+        password = (extracted if extracted else UserFactory.create_password())
+        self.set_password(password)
+
+    @classmethod
+    def as_dict(cls, **kwargs):
+        """Generate user information as dictionary."""
+        return {
+            'username': cls.username.generate(params={'locale': None}),
+            'name': cls.name.generate(params={'locale': None}),
+            'password': UserFactory.create_password(),
+            'role': cls.role.fuzz(),
+            **kwargs
+        }
+
+    @staticmethod
+    def create_password():
+        """Create a strong password."""
+        return Faker(
             'password',
             length=42,
             special_chars=True,
             digits=True,
             upper_case=True,
             lower_case=True,
-        ).generate(params={'locale': None}))
-        self.set_password(password)
+        ).generate(params={'locale': None})
 
     class Meta:
         """Metaclass for factory configuration."""
