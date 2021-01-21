@@ -5,5 +5,5 @@ from django.urls import path
 
 urlpatterns = [
     path(settings.ADMIN_URL, admin.site.urls),
-    path('api/', include('config.api_router')),
+    path('api/v1/', include('config.api_router')),
 ]
