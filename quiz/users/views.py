@@ -1,4 +1,4 @@
-from django.contrib.auth import get_user_model
+from drf_yasg.utils import swagger_auto_schema
 
 from rest_framework import status
 from rest_framework.decorators import action
@@ -9,14 +9,13 @@ from rest_framework.viewsets import GenericViewSet
 from .serializers import LoginSerializer
 from .serializers import SignupSerializer
 
-User = get_user_model()
-
 
 class AuthViewSet(GenericViewSet):
     """Authentication viewset."""
 
     permission_classes = [AllowAny]
 
+    @swagger_auto_schema(request_body=SignupSerializer)
     @action(methods=['post'], detail=False, url_path='signup')
     def signup(self, request, *args, **kwargs):
         """Create a new user."""
@@ -25,6 +24,8 @@ class AuthViewSet(GenericViewSet):
         serializer.save()
         return Response(serializer.data, status=status.HTTP_201_CREATED)
 
+    @swagger_auto_schema(request_body=LoginSerializer,
+                         responses={status.HTTP_200_OK: 'JWT credentials'})
     @action(methods=('post',), detail=False, url_path='login')
     def login(self, request, *args, **kwargs):
         """User login."""
