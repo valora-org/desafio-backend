@@ -2,6 +2,8 @@ from typing import Dict
 
 import pytest
 
+from quiz.categories.models import Category
+from quiz.categories.tests.factories import CategoryFactory
 from quiz.users.models import User
 from quiz.users.tests.factories import UserFactory
 
@@ -36,7 +38,13 @@ def user_credentials() -> Dict[str, str]:
     }
 
 
-@pytest.fixture()
+@pytest.fixture
 def ct() -> str:
     """Return content type."""
     return 'application/json; charset=utf-8'
+
+
+@pytest.fixture
+def category() -> Category:
+    """Category instance."""
+    return CategoryFactory()
