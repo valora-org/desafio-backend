@@ -62,6 +62,7 @@ DJANGO_APPS = [
     'django.contrib.staticfiles',
 ]
 THIRD_PARTY_APPS = [
+    'django_filters',
     'drf_yasg',
     'rest_framework',
 ]
@@ -237,6 +238,8 @@ REST_FRAMEWORK = {
         ('rest_framework_simplejwt.authentication.JWTAuthentication',),
     'DEFAULT_PERMISSION_CLASSES': ('rest_framework.permissions.IsAuthenticated',
                                   ),
+    'DEFAULT_FILTER_BACKENDS':
+        ('django_filters.rest_framework.DjangoFilterBackend',)
 }
 
 # django-cors-headers - https://github.com/adamchainz/django-cors-headers#setup
