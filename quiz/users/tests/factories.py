@@ -15,7 +15,7 @@ class UserFactory(DjangoModelFactory):
     username = Faker('user_name')
     name = Faker('name')
     role = FuzzyChoice(
-        choices=[c[0] for c in User.Role.choices if c != User.Role.SUPERUSER],)
+        choices=[c[0] for c in [User.Role.ADMIN, User.Role.PLAYER]])
 
     @post_generation
     def password(self, create: bool, extracted: Sequence[Any], **kwargs):
