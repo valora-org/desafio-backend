@@ -67,8 +67,9 @@ THIRD_PARTY_APPS = [
 ]
 
 LOCAL_APPS = [
-    'quiz.users.apps.UsersConfig',
     'quiz.categories.apps.CategoriesConfig',
+    'quiz.core.apps.CoreConfig',
+    'quiz.users.apps.UsersConfig',
 ]
 # https://docs.djangoproject.com/en/dev/ref/settings/#installed-apps
 INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + LOCAL_APPS
