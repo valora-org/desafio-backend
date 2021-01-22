@@ -58,9 +58,9 @@ def test_login_return_has_attr(user_credentials, rf, ct, attr):
     assert attr in response.data
 
 
-def test_login_non_signedup_forbidden(user_payload, rf, ct):
-    """Assert invalid credentials return status forbidden."""
+def test_login_non_signedup_unauthorized(user_payload, rf, ct):
+    """Assert invalid credentials return status unauthorized."""
     view = AuthViewSet.as_view({'post': 'login'})
     request = rf.post('/fake-url/', data=user_payload, content_type=ct)
     response = view(request)
-    assert response.status_code == status.HTTP_403_FORBIDDEN
+    assert response.status_code == status.HTTP_401_UNAUTHORIZED
