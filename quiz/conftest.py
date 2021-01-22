@@ -48,3 +48,9 @@ def ct() -> str:
 def category() -> Category:
     """Category instance."""
     return CategoryFactory()
+
+
+@pytest.fixture
+def category_payload() -> Dict[str, str]:
+    """Category payload."""
+    return CategoryFactory.as_dict()
