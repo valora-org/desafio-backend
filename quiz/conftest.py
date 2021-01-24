@@ -4,6 +4,8 @@ import pytest
 
 from quiz.categories.models import Category
 from quiz.categories.tests.factories import CategoryFactory
+from quiz.questions.models import Question
+from quiz.questions.tests.facories import QuestionFactory
 from quiz.users.models import User
 from quiz.users.tests.factories import UserFactory
 
@@ -54,3 +56,9 @@ def category() -> Category:
 def category_payload() -> Dict[str, str]:
     """Category payload."""
     return CategoryFactory.as_dict()
+
+
+@pytest.fixture
+def question() -> Question:
+    """Question."""
+    return QuestionFactory()
