@@ -60,5 +60,11 @@ def category_payload() -> Dict[str, str]:
 
 @pytest.fixture
 def question() -> Question:
-    """Question."""
+    """Question instance."""
     return QuestionFactory()
+
+
+@pytest.fixture
+def question_payload() -> Dict:
+    """Question payload."""
+    return QuestionFactory.as_dict()

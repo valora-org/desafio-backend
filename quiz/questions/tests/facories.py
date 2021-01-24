@@ -27,7 +27,16 @@ class QuestionFactory(DjangoModelFactory):
     @classmethod
     def as_dict(cls, **kwargs):
         """Generate question information as dictionary."""
-        return cls.stub(**kwargs).__dict__
+        return {
+            'statement': cls.statement.generate(params={'locale': None}),
+            'choices': [
+                Faker('sentence', nb_words=20).generate(params={'locale': None})
+                for _ in range(3)
+            ],
+            'correct_choice_index': randint(0, 2),
+            'categories': [CategoryFactory().id for _ in range(randint(1, 10))],
+            **kwargs
+        }
 
     class Meta:
         """Meta class for question factory."""
