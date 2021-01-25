@@ -4,6 +4,8 @@ from django.db import models
 from django.db.models import CharField
 from django.utils.translation import gettext_lazy as _
 
+from quiz.core.events.new_user import notify as notify_new_user
+
 
 class UserManager(BaseUserManager):
     """Manager for user model."""
@@ -15,6 +17,7 @@ class UserManager(BaseUserManager):
         user = self.model(name=name, username=username, role=role, **kwargs)
         user.set_password(password)
         user.save()
+        notify_new_user(user)
         return user
 
     def create_superuser(self, username, name='', password=None, **kwargs):
