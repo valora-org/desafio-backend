@@ -1,0 +1,23 @@
+[
+    {
+        "model": "categories.category",
+        "pk": 1,
+        "fields": {
+            "name": "Python"
+        }
+    },
+    {
+        "model": "categories.category",
+        "pk": 2,
+        "fields": {
+            "name": "Django"
+        }
+    },
+    {
+        "model": "categories.category",
+        "pk": 3,
+        "fields": {
+            "name": "Miscellaneous"
+        }
+    }
+]

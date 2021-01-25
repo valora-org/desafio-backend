@@ -1,0 +1,42 @@
+[
+{
+    "model": "users.user",
+    "pk": 1,
+    "fields": {
+        "password": "argon2$argon2i$v=19$m=512,t=2,p=2$VW1oSlluQlJvbUlI$aIq+poguccv6wlgiWYNAXg",
+        "last_login": null,
+        "is_superuser": false,
+        "first_name": "",
+        "last_name": "",
+        "email": "",
+        "is_staff": false,
+        "is_active": true,
+        "date_joined": "2021-01-24T23:57:27.289Z",
+        "name": "Player",
+        "username": "player",
+        "role": "P",
+        "groups": [],
+        "user_permissions": []
+    }
+},
+{
+    "model": "users.user",
+    "pk": 2,
+    "fields": {
+        "password": "argon2$argon2i$v=19$m=512,t=2,p=2$RFY4NlFMWnZQNFZM$rGXGdskhdTzPTPJY0xEH1A",
+        "last_login": null,
+        "is_superuser": false,
+        "first_name": "",
+        "last_name": "",
+        "email": "",
+        "is_staff": false,
+        "is_active": true,
+        "date_joined": "2021-01-24T23:58:33.381Z",
+        "name": "Admin",
+        "username": "admin",
+        "role": "A",
+        "groups": [],
+        "user_permissions": []
+    }
+}
+]
