@@ -6,6 +6,8 @@ from quiz.categories.models import Category
 from quiz.categories.tests.factories import CategoryFactory
 from quiz.questions.models import Question
 from quiz.questions.tests.facories import QuestionFactory
+from quiz.ranking.models import CategoryScore, Profile
+from quiz.ranking.tests.factories import CategoryScoreFactory, ProfileFactory
 from quiz.users.models import User
 from quiz.users.tests.factories import UserFactory
 
@@ -68,3 +70,18 @@ def question() -> Question:
 def question_payload() -> Dict:
     """Question payload."""
     return QuestionFactory.as_dict()
+
+
+@pytest.fixture
+def profile() -> Profile:
+    """Profile instance."""
+    profile = ProfileFactory()
+    CategoryScoreFactory(profile=profile)
+    CategoryScoreFactory(profile=profile)
+    return profile
+
+
+@pytest.fixture
+def category_score() -> CategoryScore:
+    """Category score instance."""
+    return CategoryScoreFactory()
