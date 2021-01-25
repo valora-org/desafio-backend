@@ -23,5 +23,4 @@ class Category(models.Model):
     @property
     def questions_count(self):
         """Quantity of questions from category."""
-        # TODO: implement after create questiosn app.
-        return -1
+        return self.questions.all().count()
