@@ -71,6 +71,7 @@ LOCAL_APPS = [
     'quiz.categories.apps.CategoriesConfig',
     'quiz.core.apps.CoreConfig',
     'quiz.questions.apps.QuestionsConfig',
+    'quiz.ranking.apps.RankingConfig',
     'quiz.users.apps.UsersConfig',
 ]
 # https://docs.djangoproject.com/en/dev/ref/settings/#installed-apps
