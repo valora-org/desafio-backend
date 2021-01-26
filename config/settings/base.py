@@ -70,6 +70,7 @@ THIRD_PARTY_APPS = [
 LOCAL_APPS = [
     'quiz.categories.apps.CategoriesConfig',
     'quiz.core.apps.CoreConfig',
+    'quiz.match.apps.MatchConfig',
     'quiz.questions.apps.QuestionsConfig',
     'quiz.ranking.apps.RankingConfig',
     'quiz.users.apps.UsersConfig',
