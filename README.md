@@ -139,6 +139,12 @@ A integração contínua (CI) é feita pelo Github Actions.
 
 O pipeline consiste em verificar a qualidade do código com o Flake8 e executar os testes unitários.
 
+---
+
+## <span style="color:green">Find the easter egg!</span>
+
+---
+
 <!-- Links -->
 [l01]: https://cookiecutter-django.readthedocs.io/en/latest/ "Django Cookiecutter"
 [l02]: https://b-ok.lat/book/2951511/0e8113 "Two Scoops of Django"
