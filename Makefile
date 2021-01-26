@@ -1,21 +1,35 @@
-build_local_docker:
+build:
 	docker-compose -f local.yml build
 
-run_local_docker:
+run:
 	docker-compose -f local.yml up
 
-run_tests:
-	docker-compose -f local.yml run --rm django /bin/bash -c "python manage.py migrate; coverage run -m pytest"
-	docker-compose -f local.yml down
+tests:
+	docker-compose -f local.yml run --rm django /bin/bash -c "\
+		python manage.py migrate;\
+		coverage run -m pytest"
+	@docker-compose -f local.yml down > /dev/null 2>&1
 
-tests_report:
+report:
 	docker-compose -f local.yml run --rm django /bin/bash -c "coverage report"
-	docker-compose -f local.yml down
+	@docker-compose -f local.yml down > /dev/null 2>&1
+
+loaddata:
+	docker-compose -f local.yml run --rm django /bin/bash -c "\
+		python manage.py migrate;\
+		python manage.py loaddata data --app users;\
+		python manage.py loaddata data --app ranking;\
+		python manage.py loaddata data --app categories;\
+		python manage.py loaddata data --app questions;\
+		"
 
 C=echo Type command
 run_cmd:
 	docker-compose -f local.yml run --rm django /bin/bash -c "$(C)"
-	docker-compose -f local.yml down
+	@docker-compose -f local.yml down > /dev/null 2>&1
 
 clear_volumes:
 	docker-compose -f local.yml down -v
+
+clear_db: clear_volumes
+	docker image rm quiz_production_postgres
