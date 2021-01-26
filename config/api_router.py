@@ -5,6 +5,7 @@ from rest_framework.routers import SimpleRouter
 
 from quiz.categories.views import CategoryViewSet
 from quiz.questions.views import QuestionViewSet
+from quiz.ranking.views import RankingViewSet
 from quiz.users.views import AuthViewSet
 
 if settings.DEBUG:
@@ -15,6 +16,7 @@ else:
 router.register('auth', AuthViewSet, basename='auth')
 router.register('questions', QuestionViewSet, basename='questions')
 router.register('categories', CategoryViewSet, basename='categories')
+router.register('ranking', RankingViewSet, basename='ranking')
 
 app_name = 'api-v1'
 urlpatterns = router.urls
