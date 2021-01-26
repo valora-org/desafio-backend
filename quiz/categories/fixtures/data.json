@@ -12,12 +12,5 @@
         "fields": {
             "name": "Django"
         }
-    },
-    {
-        "model": "categories.category",
-        "pk": 3,
-        "fields": {
-            "name": "Miscellaneous"
-        }
     }
 ]

@@ -1,0 +1,122 @@
+[
+  {
+    "model": "questions.question",
+    "pk": 1,
+    "fields": {
+      "statement": "What is a correct syntax to output 'Hello World' in Python?",
+      "choices": "[\"p('Hello World')\", \"print('Hello World')\", \"echo('Hello World')\"]",
+      "correct_choice_index": 1,
+      "categories": [
+        1
+      ]
+    }
+  },
+  {
+    "model": "questions.question",
+    "pk": 2,
+    "fields": {
+      "statement": "How do you insert COMMENTS in Python code?",
+      "choices": "[\"/*This is a comment*/\", \"#This is a comment\", \"//This is a comment\"]",
+      "correct_choice_index": 1,
+      "categories": [
+        1
+      ]
+    }
+  },
+  {
+    "model": "questions.question",
+    "pk": 3,
+    "fields": {
+      "statement": "Which one is NOT a legal variable name?",
+      "choices": "[\"_myvar\", \"Myvar\", \"my-var\"]",
+      "correct_choice_index": 2,
+      "categories": [
+        1
+      ]
+    }
+  },
+  {
+    "model": "questions.question",
+    "pk": 4,
+    "fields": {
+      "statement": "How do you create a variable with the numeric value 5?",
+      "choices": "[\"x=5\", \"x=(5)\", \"Both the others are correct\"]",
+      "correct_choice_index": 2,
+      "categories": [
+        1
+      ]
+    }
+  },
+  {
+    "model": "questions.question",
+    "pk": 5,
+    "fields": {
+      "statement": "What is the correct file extension for Python files?",
+      "choices": "[\".py\", \".pyt\", \".pyth\"]",
+      "correct_choice_index": 0,
+      "categories": [
+        1
+      ]
+    }
+  },
+  {
+    "model": "questions.question",
+    "pk": 6,
+    "fields": {
+      "statement": "What is the correct syntax to output the type of a variable or object in Python?",
+      "choices": "[\"print(type(x))\", \"print(typeof(x))\", \"print(type x)\"]",
+      "correct_choice_index": 0,
+      "categories": [
+        1
+      ]
+    }
+  },
+  {
+    "model": "questions.question",
+    "pk": 7,
+    "fields": {
+      "statement": "What is the correct choice for the Software Engineer position?",
+      "choices": "[\"Diego\", \"Armando\", \"Marcelino\"]",
+      "correct_choice_index": 0,
+      "categories": [
+        1
+      ]
+    }
+  },
+  {
+    "model": "questions.question",
+    "pk": 8,
+    "fields": {
+      "statement": "What is the correct way to create a function in Python?",
+      "choices": "[\"create my_function():\", \"def my_function():\", \"func my_function():\"]",
+      "correct_choice_index": 1,
+      "categories": [
+        1
+      ]
+    }
+  },
+  {
+    "model": "questions.question",
+    "pk": 9,
+    "fields": {
+      "statement": "What is a correct syntax to return the first character in a string?",
+      "choices": "[\"x = sub('Hello', 0, 1)\", \"x = 'Hello'[0]\", \"'Hello'.sub(0, 1)\"]",
+      "correct_choice_index": 1,
+      "categories": [
+        1
+      ]
+    }
+  },
+  {
+    "model": "questions.question",
+    "pk": 10,
+    "fields": {
+      "statement": "Which method can be used to remove any whitespace from both the beginning and the end of a string?",
+      "choices": "[\"ptrim()\", \"trim()\", \"strip()\"]",
+      "correct_choice_index": 2,
+      "categories": [
+        1
+      ]
+    }
+  }
+]

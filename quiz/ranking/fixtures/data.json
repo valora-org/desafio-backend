@@ -1,0 +1,9 @@
+[
+  {
+    "model": "ranking.profile",
+    "pk": 1,
+    "fields": {
+      "player": 1
+    }
+  }
+]
