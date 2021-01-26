@@ -1,4 +1,3 @@
-from django.core.validators import MaxLengthValidator, MinLengthValidator
 from django.db.utils import IntegrityError
 from django.shortcuts import get_object_or_404
 from django.utils.translation import gettext_lazy as _
@@ -37,6 +36,7 @@ class NewMatchSerializer(serializers.Serializer):
         """Create a new unique match for user according to category."""
         try:
             match = Match.objects.create(player=player, category=category)
+            match.save()
             return match
         except IntegrityError:
             msg = 'User has an open quiz, finish before create a new one'
@@ -68,14 +68,20 @@ class MatchResponseSerializer(serializers.Serializer):
     """Handle response data."""
 
     player = serializers.HiddenField(default=serializers.CurrentUserDefault())
-    responses = MatchResponseInputSerializer(
-        many=True, validators=[MinLengthValidator(10),
-                               MaxLengthValidator(10)])
+    responses = MatchResponseInputSerializer(many=True)
+
+    def check_duplicated_responses(self, responses):
+        """Check for duplicated responses."""
+        responses_set = {response.question.id for response in responses}
+        if len(responses_set) != len(responses):
+            msg = 'Check for duplicated answers'
+            raise serializers.ValidationError({'responses': _(msg)})
 
     def validate(self, attrs):
         """Check responses and delete match instance."""
         player = attrs.get('player')
         responses = [MatchResponse(**r) for r in attrs['responses']]
+        self.check_duplicated_responses(responses)
         match = get_object_or_404(Match, player=player)
         points, score = match.check_responses(responses)
         match.delete()
