@@ -1,0 +1,7 @@
+Django==2.2.13
+django-extensions==2.0.7
+djangorestframework==3.9.1
+django-cors-headers==3.6.0
+django-rest-knox==4.1.0
+django-nested-admin==3.3.3
+pytest-django==4.1.0
