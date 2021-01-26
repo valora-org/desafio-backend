@@ -44,10 +44,10 @@ class LoginSerializer(serializers.Serializer):
     """Serializer for login user."""
 
     password = serializers.CharField(max_length=150,
-                                     min_length=6,
+                                     min_length=5,
                                      write_only=True)
     username = serializers.CharField(max_length=150,
-                                     min_length=6,
+                                     min_length=5,
                                      write_only=True)
 
     def validate(self, attrs):
