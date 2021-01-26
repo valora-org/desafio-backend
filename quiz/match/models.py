@@ -45,7 +45,13 @@ class Match(models.Model):
         questions = Question.objects.filter(
             categories=self.category).order_by('?')[:quantity]
         self.questions_ids = [q.id for q in questions]
+        self.save_questions_ids(questions)
         return questions
+
+    def save_questions_ids(self, questions):
+        """Save questions ids."""
+        self.questions_ids = [question.id for question in questions]
+        self.save()
 
     def add_to_ranking_profile(self, points):
         """Add match score to ranking profile."""
