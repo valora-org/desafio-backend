@@ -51,6 +51,11 @@ class CategoryScore(models.Model):
                                  verbose_name=_('Question ctegories'))
     score = models.PositiveIntegerField(default=0)
 
+    class Meta:
+        """Meta info for category score model."""
+
+        unique_together = ['profile', 'category']
+
     def __str__(self):
         """Get string representation."""
         return f'{self.profile.username} | {self.category.name}'
