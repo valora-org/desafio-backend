@@ -1,79 +1,168 @@
-## <img src="https://valora.cc/img/logo2.png" alt="Valora" width="24" /> Desafio Backend Python
+# Valora quiz ![valora logo][i01]
 
-Parabéns! Se você chegou até aqui significa que você passou pelas etapas mais difíceis do nosso processo seletivo. Somos extremamente criteriosos com as pessoas que vão integrar nosso time porque só aceitamos pessoas incríveis!
+[![l13]][l14]
+[![l09]][l10]
+[![l11]][l12]
+[![l15]][l16]
 
-Agora é a parte fácil. Chegou a hora de mostrar todas as suas habilidades de transformar café em código. Vamos lá?
+Quiz defafio para backend Python/Django.
 
-Nesse desafio iremos avaliar suas habilidades em:
+[Requisitos originais][r01].
 
-* **Python**
-* **Django**
-* **Django REST Framework**
-* **Pytest**
-* **Docker**
+## Características
 
-Você irá desenvolver a API de uma aplicação para a criação de um quiz de perguntas e respostas!
+Projeto iniciado utilizando [Django Cookiecutter][l01] como recomendado nos livros dos Greenfelds [Two Scoops of Django][l02] e [Django Crash Course][l03] como bootstrap para projetos utilizando Django.
 
-**A aplicação deverá prover o registro e autenticação de dois tipos de usuários**:
+Testes unitários com [Pytest][l04] e com mocks de teste utilizando o [Factory Boy][l05].
 
-* Admin
-* Player
+Qualidade de código checada com [Flake8][l06], assegurando conformidade com a [PEP-8][l07] e outras PEPs e plugins que asseguram boas práticas em tratamentos de excessẽs, docstrings, comprehensions, comentários, etc.
 
-**Cada quiz é composto por**:
+Implemetação simples de um publish/subscriber como alternativa ao uso de Django signals, uma vez que são considerados como recurso a ser evitado.
 
-* 10 perguntas com 3 respostas onde apenas 1 é correta.
-* Cada resposta correta acumula a 1 ponto.
-* Cada resposta errada perde 1 ponto. A menor pontuação possível é 0.
-* Possui uma categoria.
+Código consiso, poucas linhas de código por funções, buscando aprooveitar as funcionalidades dos frameworks e libs utilizadas.
 
-**Ao iniciar o jogo**:
+Commits atomicos, seguindo com mensagens seguindo o padrão [Conventional Commits][l08].
 
-* O player deve escolher uma categoria válida e receber um quiz com perguntas aleatórias referentes a categoria escolhida.
+Utilização do formatador de códigos Python YAPF no padrão Google.
 
-**Ao finalizar o jogo**:
+Uso de pre commits hooks, assegurando a qualidade de código a cada commit.
 
-* O player deve receber a contabilização dos seus pontos juntamente com a sua posição atual no ranking global. Não há limitação de quantos quizzes o player pode responder.
+## Execução
 
-**O ranking global**:
+O projeto foi desenvolvido e testado em sistema operacional Linux Ubuntu, portanto não há garantia do seu funcionamento em Windows, Mac ou distro Linux não baseada em Debian.
 
-* É a contabilização dos pontos acumulados por cada player.
-* Ranking geral considera todas as categorias.
-* Ranking por categoria agrupa por categorias.
+1. Clonar o repositório
 
-**Permissões**:
+```shell
+git clone https://github.com/diego-marcelino/valora-quiz.git
+```
 
-* Todos os endpoints devem estar protegidos por autenticação.
-* Usuários do tipo **Admin** tem permissão para criar perguntas e respostas para os quizzes.
-* Usuários do tipo **Player** tem permissão para jogar e consultar o ranking.
+2. Construir a imagem
 
-## Requisitos
+```shell
+make build
+```
 
-* O projeto precisa estar configurado para rodar em um ambiente macOS ou Ubuntu (preferencialmente como container Docker).
-* Deve anexar ao seu projeto uma coleção do postman com todos os endpoints criados e exemplos de utilização.
+3. Exceutar o projeto
 
-**Para executar seu código devemos executar apenas os seguintes comandos**:
+```shell
+make run
+```
 
-* git clone $seu-fork
-* cd $seu-fork
-* comando para instalar dependências
-* comando para executar a aplicação
+Há um conjunto de dados disponível. Para carregá-lo no banco de dados utilizar o comando
 
-## Critério de avaliação
+```shell
+make loaddata
+```
 
-* **Organização do código**: Separação de módulos, view e model
-* **Clareza**: O README explica de forma resumida qual é o problema e como pode rodar a aplicação?
-* **Assertividade**: A aplicação está fazendo o que é esperado? Se tem algo faltando, o README explica o porquê?
-* **Legibilidade do código** (incluindo comentários)
-* **Segurança**: Existe alguma vulnerabilidade clara?
-* **Cobertura de testes** (Não esperamos cobertura completa mas é importante garantir o fluxo principal)
-* **Histórico de commits** (estrutura e qualidade)
-* **UX**: A API é intuitiva?
-* **Escolhas técnicas**: A escolha das bibliotecas, banco de dados, arquitetura, etc, é a melhor escolha para a aplicação?
+## Acesso
 
-## Dúvidas
+Após executar a inicialização do projeto, estará disponível em _localhost:8000_. Uma interface com Swagger estará acessível para consultar os endpoints e realizar requisições.
 
-Quaisquer dúvidas que você venha a ter, consulte as issues para ver se alguém já não a fez e caso você não ache sua resposta, abra você mesmo uma nova issue!
+Para utilizar autenticação no Swagger:
 
-Ao completar o desafio, submeta um pull-request a esse repositório com uma breve explicação das decisões tomadas e principalmente as instruções para execução do projeto.
+1. Fazer login atraves do endpoint de login e copiar o token de acesso.
 
-**Boa sorte! ;)**
+2. Clicar no botão _Authorize_
+
+![Botão Authorize][i03]
+
+3. Digitar: _Bearer_ + o token de acesso
+
+  ![Bearer token com Swagger][i02]
+
+4. Todas as requisições serão feitas com o token de acesso informado.
+
+Para fazer logout e utilizar outras credenciais clicar novamente no botão _Authorize_ e _Logout_, então repetir o processo para as novas credenciais.
+
+![Logout do Swagger][i04]
+
+### PgAdmin
+
+Há uma imagem do pgAdmin para acessar o banco de dados Postgres do projeto, disponível em _http://localhost:9000_.
+
+Para login na interface do pgAdmin utilizar as credenciais: username: _admin@admin.com_ password: _admin_.
+
+Para adicionar a conexão com o banco de dados utilizar a configuração seguinte com password: _dbpassword_.
+
+![Conexão pAdmin][i07]
+
+## Utilização
+
+### Admin
+
+1. Cria usuário atraves da rota signup e utiliza 'A' no atributo 'role'
+
+2. Faz login com suas credenciais pela rota 'login' e obtem seu json web token de acesso.
+
+3. Faz cadastro de categorias. Permissão de escrita e leitura.
+
+4. Faz cadastro de questões. Permissão de escrita e leitura.
+
+### Player
+
+1. Cria usuário atraves da rota signup e utiliza 'P' no atributo 'role'
+
+2. Faz login com suas credenciais pela rota 'login' e obtem seu json web token de acesso.
+
+3. Consulta as categorias disponíveis. Permissão somente de leitura.
+
+4. Cria um novo quiz informando a categoria desejada. Pode consultar seu quiz em aberto.
+
+5. Envia as respostas para o quiz em aberto, informando o id da questão e o indice da sua escolha.
+
+6. Consulta o ranking geral e por categoria a qualquer momento após logado.
+
+## Testes
+
+Os testes unitários foram desenvolvidos com [Pytest][l04] e mocks de teste utilizando o [Factory Boy][l05].
+
+Para executar os testes unitários utilizar o comando:
+
+```shell
+make tests
+```
+
+![Unit tests][i05]
+
+Para obter o report do coverage:
+
+```shell
+make report
+```
+
+![Coverage Report][i06]
+
+## Integração contínua
+
+A integração contínua (CI) é feita pelo Github Actions.
+
+O pipeline consiste em verificar a qualidade do código com o Flake8 e executar os testes unitários.
+
+<!-- Links -->
+[l01]: https://cookiecutter-django.readthedocs.io/en/latest/ "Django Cookiecutter"
+[l02]: https://b-ok.lat/book/2951511/0e8113 "Two Scoops of Django"
+[l03]: https://b-ok.lat/book/5412804/9c7fd0 "Django Crash Course"
+[l04]: https://docs.pytest.org "Pytes"
+[l05]: https://factoryboy.readthedocs.io "Factory Boy"
+[l06]: https://flake8.pycqa.org "Flake8"
+[l07]: https://www.python.org/dev/peps/pep-0008/ "PEP-8"
+[l08]: https://www.conventionalcommits.org/en/v1.0.0/ "Conventional Commits"
+[l09]: https://img.shields.io/badge/code%20style-YAPF-000000.svg "YAPF Badge"
+[l10]: https://github.com/google/yapf "YAPF Repo"
+[l11]: https://img.shields.io/badge/built%20with-Cookiecutter%20Django-ff69b4.svg "Django Cookiecutter Badge"
+[l12]: https://github.com/pydanny/cookiecutter-django/ "Django Cookiecutter Repo"
+[l13]: https://github.com/diego-marcelino/valora-quiz/workflows/CI/badge.svg "Github Badge"
+[l14]: https://github.com/diego-marcelino/valora-quiz/actions "Github Actions"
+[l15]: https://img.shields.io/badge/-Diego%20Marcelino-blue?logo=Linkedin&logoColor=white "Linkedin Badge"
+[l16]: https://www.linkedin.com/in/diegomarcelino/ "Linkedin Diego Marcelino"
+<!-- References -->
+[r01]: requirements.md "requisitos originais"
+<!-- Imagens -->
+[i01]: https://valora.cc/img/logo2.png "Valora logo"
+[i02]: images/swagger_bearer.png "Bearer token com Swagger"
+[i03]: images/swagger_authorize.png "Botão Authorize"
+[i04]: images/swagger_logout.png "Swagger Logout"
+[i05]: images/unit-tests.png "Unit tests"
+[i06]: images/coverage-report.png "Coverage report"
+[i07]: images/pgadmin.png "pg Admin server"
