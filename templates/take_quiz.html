@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="jumbotron jumbotron-fluid">
+    <div class="container">
+        <h1 class="display-4"><b>Perguntas:</b></h1>
+        <br>
+        <form method="POST" div class="form-group col-lg-5" style='text-align:center' id="center">
+            {% csrf_token %}
+            {% for p in Pergunta1 %}
+            <ul class="list-group">
+                <div class="form-check ">
+                    <label class="form-check-label" for="exampleRadios">
+                        <li class="list-group-item list-group-item-action active">
+                            <p>{{ p.question }}</p>
+                        </li>
+                    </label>
+                </div>
+                <div class=" form-check">
+                    <input class="form-check-input" type="radio" name="{{ p.id }}" id="exampleRadios1" value="1">
+                    <label class="form-check-label" for="exampleRadios1">
+                        <p>{{p.options.0}}
+                        </p>
+                    </label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="{{ p.id }}" id="exampleRadios2" value="2">
+                    <label class="form-check-label" for="exampleRadios2">
+                        <p>{{p.options.1}}
+                        </p>
+                    </label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="{{ p.id }}" id="exampleRadios3" value="3">
+                    <label class="form-check-label" for="exampleRadios3">
+                        <p>{{p.options.2}}</p>
+                    </label>
+                </div>
+                <br><br>
+            </ul>
+            <br>
+            <br>
+            </ul>
+            {% endfor %}
+            <button type="submit" class="btn btn-link col-lg-2">
+                Submit</button><br></form>
+    </div>
+</div>
+
+{% endblock content %}

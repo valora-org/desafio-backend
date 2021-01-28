@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="jumbotron jumbotron-fluid">
+    <div class="container">
+        <h1 class="display-4"><b>Perguntas:</b></h1>
+        <br>
+        <form method="POST" div class="form-group col-lg-5" style='text-align:center' id="center">
+            {% csrf_token %}
+            {% for p in Pergunta1 %}
+            <ul class="list-group">
+                <div class="form-check ">
+                    <li class="list-group-item list-group-item-action active">
+                        <p>{{ p.question }}</p>
+                    </li>
+                </div>
+                <div class=" form-check">
+                    <p>{{ p.options.0 }}</p>
+                </div>
+                <div class="form-check">
+                    <p>{{ p.options.1 }}</p>
+                </div>
+                <div class="form-check">
+                    <p>{{ p.options.2 }}</p>
+                </div>
+                {% if p.resposta == p.resposta_usuario %}
+                <p style="background-color:green; "><strong>Você acertou!!!</strong></p>
+                {% else %}
+                <p style="background-color:red;"><strong>Você errou essa!!!</strong></p>
+                {% endif %}
+            </ul>
+            <br>
+            <br>
+            {% endfor %}
+
+        </form>
+    </div>
+</div>
+<br><br>
+
+<br>
+<br>
+</ul>
+</div>
+</div>
+{% endblock content %}

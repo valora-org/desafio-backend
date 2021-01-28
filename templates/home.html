@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="jumbotron jumbotron-fluid">
+    <div class="container">
+        {% if user.is_authenticated %}
+        <p>Oi {{ user.username }}</p>
+        <p><a href="{% url 'logout' %}">Log Out</a></p>
+        {% else %}
+        <p>Você não está logado</p>
+        <a href="{% url 'login' %}">Log In</a>
+        <a href="{% url 'signup' %}">Sign Up</a>
+        {% endif %}
+        <h1 class="display-4"><b>Selecione uma classificação para começar:</b></h1>
+        <br>
+        {% for c in object_list %}
+        <form method="POST" div class="form-group col-lg-5" style='text-align:center' id="center">{% csrf_token %}
+            <a href="/{{ c.id }}" class="btn btn-primary">{{ c.nome_classificacao }}</a>
+            <br>
+            <br>
+            <!--<a href="{% url 'quiz' %}" class="btn btn-primary">{{ c.nome_classificacao }}</a>-->
+        </form>
+        {% endfor %}
+    </div>
+</div>
+</div>
+{% endblock content %}
