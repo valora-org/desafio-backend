@@ -1,0 +1,20 @@
+[[source]]
+url = "https://pypi.org/simple"
+verify_ssl = true
+name = "pypi"
+
+[packages]
+django = "*"
+djangorestframework = "~=3.11.0"
+requests = "*"
+dj-rest-auth = "==1.1.0"
+django-allauth = "~=0.42.0"
+django-filter = "*"
+psycopg2-binary = "==2.8.3"
+
+[dev-packages]
+pylint = "*"
+autopep8 = "*"
+
+[requires]
+python_version = "3.7"
