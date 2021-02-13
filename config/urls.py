@@ -17,9 +17,11 @@ from django.contrib import admin
 from django.conf import settings
 from django.conf.urls.static import static
 from django.urls import path
+from rest_framework.authtoken import views as token_views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('auth/', token_views.obtain_auth_token),
 ] + static(
         settings.STATIC_URL, document_root=settings.STATIC_ROOT
     ) + static(
