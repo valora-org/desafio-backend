@@ -10,4 +10,4 @@ environs = {extras = ["django"], version = "*"}
 pytest = "*"
 
 [dev-packages]
-
+flake8 = "*"
