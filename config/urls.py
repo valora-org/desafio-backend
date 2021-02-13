@@ -18,6 +18,13 @@ from django.conf import settings
 from django.conf.urls.static import static
 from django.urls import path
 from rest_framework.authtoken import views as token_views
+from rest_framework import routers
+from quiz.views import QuestionViewSet
+
+
+router = routers.SimpleRouter()
+router.register(r'questions', QuestionViewSet)
+
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -27,3 +34,5 @@ urlpatterns = [
     ) + static(
         settings.MEDIA_URL, document_root=settings.MEDIA_ROOT
     )
+
+urlpatterns += router.urls
