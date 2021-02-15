@@ -8,6 +8,8 @@ django = "*"
 djangorestframework = "*"
 environs = {extras = ["django"], version = "*"}
 pytest = "*"
+django-filter = "*"
+drf-writable-nested = "*"
 
 [dev-packages]
 flake8 = "*"
