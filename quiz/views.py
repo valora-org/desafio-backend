@@ -1,42 +1,38 @@
+from collections import defaultdict
 from django.shortcuts import get_object_or_404
 from django.utils.translation import gettext_lazy as _
-from rest_framework import viewsets, mixins, response, exceptions
+from rest_framework import viewsets, mixins, response, exceptions, permissions
 from .models import Question, Quiz, Answer, Category, Score
 from .serializers import (QuestionSerializer, QuestionListSerializer,
                           QuizListSerializer, QuizSerializer,
                           AnswerAdminSerializer, CategorySerializer,
-                          QuestionCreateSerializer, GameCreateSerializer)
+                          QuestionCreateSerializer, GameCreateSerializer,
+                          QuizResultSerializer)
 from .permissions import IsAdmin, IsAdminOrReadOnly
 from .mixins import ActionBasedSerializerMixin
 
 
 class GameViewSet(viewsets.ViewSet):
+    permission_classes = [permissions.IsAuthenticated]
+
     def create(self, request):
         game = GameCreateSerializer(data=request.data)
         game.is_valid(raise_exception=True)
-        questions = Question.objects.filter(
-            category__slug=game.data['category']
-        )
+        questions = Question.objects.random_questions(game.data['category'])
 
         quiz = Quiz()
         quiz.user = request.user
+        quiz.category = Category.objects.get(slug=game.data['category'])
         quiz.save()
         quiz.questions.set(questions)
 
         return response.Response(QuizSerializer(quiz).data)
-
-    def retrieve(self, request, pk=None):
-        queryset = Quiz.objects.filter(user=request.user)
-        quiz = get_object_or_404(queryset, pk=pk)
-        serializer = QuizSerializer(quiz)
-        return response.Response(serializer.data)
 
     def update(self, request, pk=None):
         queryset = Quiz.objects.filter(user=request.user, ended=False)
         quiz = get_object_or_404(queryset, pk=pk)
 
         answers: dict = request.data.get('answers')
-        finished = request.data.get('finished')
         points = 0
 
         try:
@@ -45,29 +41,36 @@ class GameViewSet(viewsets.ViewSet):
             raise exceptions.ValidationError(
                                 detail=_("Answers must be a dict."))
 
+        answers_list = []
         for p, r in items:
             question = quiz.questions.get(pk=p)
             answer = question.answer_set.get(pk=r)
+            answers_list.append(answer)
 
             if not question or not answer:
                 raise exceptions.ValidationError(
                                 detail=_("Erroneous question-answer pair."))
 
-            if finished:
-                answers[p] = answer.is_right
+            answers[p] = answer.is_right
+
+        for r in answers.values():
+            if r:
                 points += 1
+            else:
+                points -= 1
+        score = Score(
+            user=request.user,
+            quiz=quiz,
+            points=max(0, points)
+        )
+        score.save()
+        quiz.ended = True
+        quiz.answers.set(answers_list)
+        quiz.save()
 
-        if finished:
-            quiz.ended = True
-            quiz.save()
-            score = Score(
-                user=request.user,
-                quiz=quiz,
-                points=points
-            )
-            score.save()
+        result = QuizResultSerializer(quiz)
 
-        return response.Response(answers)
+        return response.Response(result.data)
 
 
 class QuestionViewSet(ActionBasedSerializerMixin, viewsets.ModelViewSet):
@@ -111,3 +114,27 @@ class CategoryViewSet(ActionBasedSerializerMixin, viewsets.ModelViewSet):
     serializer_classes = {
         'default': CategorySerializer
     }
+
+
+class RankingViewSet(viewsets.ViewSet):
+    def list(self, request):
+        scores = Score.objects.all()
+
+        def make_scoreboard(scores):
+            global_board = defaultdict(int)
+            category_board = defaultdict(dict)
+
+            for score in scores:
+                username = score.user.username
+                global_board[username] += score.points
+                if score.quiz.category:
+                    category = score.quiz.category.slug
+                    category_board[category].update({
+                        username: category_board[category].get(username, 0)+score.points
+                    })
+
+            return {"global": global_board, "categories": category_board}
+
+        board = make_scoreboard(scores)
+
+        return response.Response(board)

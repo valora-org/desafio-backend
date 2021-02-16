@@ -48,11 +48,20 @@ class QuizListSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Quiz
-        exclude = ()
+        exclude = ('answers',)
 
 
 class QuizSerializer(WritableNestedModelSerializer):
     questions = QuestionListSerializer(many=True)
+
+    class Meta:
+        model = Quiz
+        exclude = ('answers',)
+
+
+class QuizResultSerializer(serializers.ModelSerializer):
+    questions = QuestionSerializer(many=True)
+    answers = AnswerAdminSerializer(many=True)
 
     class Meta:
         model = Quiz
