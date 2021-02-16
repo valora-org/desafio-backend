@@ -102,7 +102,8 @@ class QuizViewSet(ActionBasedSerializerMixin, mixins.ListModelMixin,
         return queryset
 
 
-class AnswerViewSet(ActionBasedSerializerMixin, viewsets.ModelViewSet):
+class AnswerViewSet(ActionBasedSerializerMixin, mixins.DestroyModelMixin,
+                    mixins.UpdateModelMixin, viewsets.GenericViewSet):
     queryset = Answer.objects.all()
     permission_classes = [IsAdmin]
     serializer_classes = {

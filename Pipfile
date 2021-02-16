@@ -11,6 +11,7 @@ pytest = "*"
 django-filter = "*"
 drf-writable-nested = "*"
 gunicorn = "*"
+drf-yasg = "*"
 
 [dev-packages]
 flake8 = "*"
