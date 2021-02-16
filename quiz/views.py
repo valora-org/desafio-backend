@@ -69,8 +69,10 @@ class GameViewSet(viewsets.ViewSet):
         quiz.save()
 
         result = QuizResultSerializer(quiz)
+        res = result.data
+        res.update({"score": score.points})
 
-        return response.Response(result.data)
+        return response.Response(res)
 
 
 class QuestionViewSet(ActionBasedSerializerMixin, viewsets.ModelViewSet):

@@ -10,6 +10,7 @@ environs = {extras = ["django"], version = "*"}
 pytest = "*"
 django-filter = "*"
 drf-writable-nested = "*"
+gunicorn = "*"
 
 [dev-packages]
 flake8 = "*"
