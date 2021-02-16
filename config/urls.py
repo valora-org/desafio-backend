@@ -19,13 +19,15 @@ from django.conf.urls.static import static
 from django.urls import path
 from rest_framework.authtoken import views as token_views
 from rest_framework import routers
-from quiz.views import QuestionViewSet, QuizViewSet, CategoryViewSet
+from quiz.views import (QuestionViewSet, QuizViewSet, CategoryViewSet,
+                        GameViewSet)
 
 
 router = routers.SimpleRouter()
 router.register(r'questions', QuestionViewSet)
 router.register(r'categories', CategoryViewSet)
 router.register(r'quizes', QuizViewSet)
+router.register(r'game', GameViewSet, basename='game')
 
 
 urlpatterns = [

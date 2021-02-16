@@ -36,6 +36,8 @@ class Quiz(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL,
                              on_delete=models.SET_NULL,
                              null=True)
+    answers = models.ManyToManyField(Answer, blank=True)
+    ended = models.BooleanField(default=False)
 
 
 class Score(models.Model):

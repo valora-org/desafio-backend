@@ -53,8 +53,11 @@ class QuizListSerializer(serializers.ModelSerializer):
 
 class QuizSerializer(WritableNestedModelSerializer):
     questions = QuestionListSerializer(many=True)
-    category = CategorySerializer()
 
     class Meta:
         model = Quiz
         exclude = ()
+
+
+class GameCreateSerializer(serializers.Serializer):
+    category = serializers.SlugField(required=True)
