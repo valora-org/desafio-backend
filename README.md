@@ -33,3 +33,24 @@ pipenv run python manage.py runserver
 ```
 ## Documentação
  - A documentação da API pode ser vista acessando a url em: ```/docs/```
+## Como Jogar
+ 1) POST para /game/ passando a categoria:
+ ```
+ POST /game/
+ {
+     "categoria": <SLUG DA CATEGORIA>
+ }
+ ```
+ 2) Recebera um retorno com as perguntas e as opções de resposta.
+ 3) Para responder faça um PUT para /game/<id>/ com as respostas.
+ ```
+ PUT /game/<ID>/
+ {
+     "answers": {
+         "<ID_PERGUNTA>": "<ID_RESPOSTA>",
+         "<ID_PERGUNTA>": "<ID_RESPOSTA>",
+         "<ID_PERGUNTA>": "<ID_RESPOSTA>",
+         (...)
+     }
+ }
+ ```
