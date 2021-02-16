@@ -39,7 +39,13 @@ class GameViewSet(viewsets.ViewSet):
         finished = request.data.get('finished')
         points = 0
 
-        for p, r in answers.items():
+        try:
+            items = answers.items()
+        except AttributeError:
+            raise exceptions.ValidationError(
+                                detail=_("Answers must be a dict."))
+
+        for p, r in items:
             question = quiz.questions.get(pk=p)
             answer = question.answer_set.get(pk=r)
 
