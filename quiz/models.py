@@ -15,6 +15,8 @@ class Category(models.Model):
 
 class Question(models.Model):
     title = models.CharField(max_length=300)
+    category = models.ForeignKey(Category, null=True,
+                                 on_delete=models.SET_NULL)
 
     def __str__(self):
         return self.title
@@ -31,8 +33,9 @@ class Answer(models.Model):
 
 class Quiz(models.Model):
     questions = models.ManyToManyField(Question)
-    category = models.ForeignKey(Category, null=True,
-                                 on_delete=models.SET_NULL)
+    user = models.ForeignKey(settings.AUTH_USER_MODEL,
+                             on_delete=models.SET_NULL,
+                             null=True)
 
 
 class Score(models.Model):
