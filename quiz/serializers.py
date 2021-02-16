@@ -40,7 +40,7 @@ class QuestionListSerializer(WritableNestedModelSerializer):
 
     class Meta:
         model = Question
-        exclude = ()
+        exclude = ('category',)
 
 
 class QuizListSerializer(serializers.ModelSerializer):
@@ -48,7 +48,7 @@ class QuizListSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Quiz
-        exclude = ('category',)
+        exclude = ()
 
 
 class QuizSerializer(WritableNestedModelSerializer):
