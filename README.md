@@ -31,7 +31,5 @@ docker-compose up
 pipenv run python manage.py collectstatic
 pipenv run python manage.py runserver
 ```
-## Testes
-```bash
-pipenv run python manage.py test
-```
+## Documentação
+ - A documentação da API pode ser vista acessando a url em: ```/docs/```
