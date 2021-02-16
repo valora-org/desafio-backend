@@ -1,4 +1,4 @@
-from rest_framework import viewsets
+from rest_framework import viewsets, mixins
 from .models import Question, Quiz, Answer, Category
 from .serializers import (QuestionSerializer, QuestionListSerializer,
                           QuizListSerializer, QuizSerializer,
@@ -19,14 +19,20 @@ class QuestionViewSet(ActionBasedSerializerMixin, viewsets.ModelViewSet):
     }
 
 
-class QuizViewSet(ActionBasedSerializerMixin, viewsets.ModelViewSet):
+class QuizViewSet(ActionBasedSerializerMixin, mixins.ListModelMixin,
+                  mixins.RetrieveModelMixin, viewsets.GenericViewSet):
     queryset = Quiz.objects.all()
     permission_classes = [IsAdminOrReadOnly]
     serializer_classes = {
         'list': QuizListSerializer,
         'default': QuizSerializer,
     }
-    filter_fields = ['category__slug']
+
+    def get_queryset(self):
+        queryset = super().get_queryset()
+        queryset = queryset.filter(user=self.request.user)
+
+        return queryset
 
 
 class AnswerViewSet(ActionBasedSerializerMixin, viewsets.ModelViewSet):
