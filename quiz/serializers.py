@@ -9,10 +9,10 @@ class CategorySerializer(serializers.ModelSerializer):
         exclude = ()
 
 
-class AnswerAdminSerializer(serializers.ModelSerializer):
+class AnswerAdminSerializer(WritableNestedModelSerializer):
     class Meta:
         model = Answer
-        exclude = ()
+        exclude = ('question',)
 
 
 class AnswerSerializer(serializers.ModelSerializer):
