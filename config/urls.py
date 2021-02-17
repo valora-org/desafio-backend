@@ -48,7 +48,7 @@ schema_view = get_schema_view(
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('auth/', token_views.obtain_auth_token),
+    path('auth/', token_views.obtain_auth_token, name='get-token'),
     path('docs/', schema_view.with_ui('redoc', cache_timeout=0),
          name='schema-redoc')
 ] + static(
