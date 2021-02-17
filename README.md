@@ -54,3 +54,7 @@ pipenv run python manage.py runserver
      }
  }
  ```
+## Testes
+```bash
+pipenv run pytest
+```
