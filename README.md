@@ -1,79 +1,60 @@
-## <img src="https://valora.cc/img/logo2.png" alt="Valora" width="24" /> Desafio Backend Python
+# Quiz
 
-Parabéns! Se você chegou até aqui significa que você passou pelas etapas mais difíceis do nosso processo seletivo. Somos extremamente criteriosos com as pessoas que vão integrar nosso time porque só aceitamos pessoas incríveis!
+## Desenvolvimento
+### Usando pipenv
+ - Instale a ferramenta Pipenv, https://pipenv.pypa.io/en/latest/install/#installing-pipenv
+ - Instale as dependências do projeto com: ```pipenv install```
+### Usando virtualenv
+ - Crie seu virtualenv, ative e instale as dependências: ```pip install -r requirements.txt```
 
-Agora é a parte fácil. Chegou a hora de mostrar todas as suas habilidades de transformar café em código. Vamos lá?
+## Configuração
+ - Crie um arquivo ```.env```, baseado no exemplo em ```.env.example```
+### Banco de dados:
+ - O projeto já suporta o banco sqlite, para utilizar outros bancos, instale o conector equivalente e configure a url em ```.env```
+ - Exemplos de padrão de url para vários bancos podem ser encontrados em: https://github.com/jacobian/dj-database-url#url-schema
 
-Nesse desafio iremos avaliar suas habilidades em:
-
-* **Python**
-* **Django**
-* **Django REST Framework**
-* **Pytest**
-* **Docker**
-
-Você irá desenvolver a API de uma aplicação para a criação de um quiz de perguntas e respostas!
-
-**A aplicação deverá prover o registro e autenticação de dois tipos de usuários**:
-
-* Admin
-* Player
-
-**Cada quiz é composto por**:
-
-* 10 perguntas com 3 respostas onde apenas 1 é correta.
-* Cada resposta correta acumula a 1 ponto.
-* Cada resposta errada perde 1 ponto. A menor pontuação possível é 0.
-* Possui uma categoria.
-
-**Ao iniciar o jogo**:
-
-* O player deve escolher uma categoria válida e receber um quiz com perguntas aleatórias referentes a categoria escolhida.
-
-**Ao finalizar o jogo**:
-
-* O player deve receber a contabilização dos seus pontos juntamente com a sua posição atual no ranking global. Não há limitação de quantos quizzes o player pode responder.
-
-**O ranking global**:
-
-* É a contabilização dos pontos acumulados por cada player.
-* Ranking geral considera todas as categorias.
-* Ranking por categoria agrupa por categorias.
-
-**Permissões**:
-
-* Todos os endpoints devem estar protegidos por autenticação.
-* Usuários do tipo **Admin** tem permissão para criar perguntas e respostas para os quizzes.
-* Usuários do tipo **Player** tem permissão para jogar e consultar o ranking.
-
-## Requisitos
-
-* O projeto precisa estar configurado para rodar em um ambiente macOS ou Ubuntu (preferencialmente como container Docker).
-* Deve anexar ao seu projeto uma coleção do postman com todos os endpoints criados e exemplos de utilização.
-
-**Para executar seu código devemos executar apenas os seguintes comandos**:
-
-* git clone $seu-fork
-* cd $seu-fork
-* comando para instalar dependências
-* comando para executar a aplicação
-
-## Critério de avaliação
-
-* **Organização do código**: Separação de módulos, view e model
-* **Clareza**: O README explica de forma resumida qual é o problema e como pode rodar a aplicação?
-* **Assertividade**: A aplicação está fazendo o que é esperado? Se tem algo faltando, o README explica o porquê?
-* **Legibilidade do código** (incluindo comentários)
-* **Segurança**: Existe alguma vulnerabilidade clara?
-* **Cobertura de testes** (Não esperamos cobertura completa mas é importante garantir o fluxo principal)
-* **Histórico de commits** (estrutura e qualidade)
-* **UX**: A API é intuitiva?
-* **Escolhas técnicas**: A escolha das bibliotecas, banco de dados, arquitetura, etc, é a melhor escolha para a aplicação?
-
-## Dúvidas
-
-Quaisquer dúvidas que você venha a ter, consulte as issues para ver se alguém já não a fez e caso você não ache sua resposta, abra você mesmo uma nova issue!
-
-Ao completar o desafio, submeta um pull-request a esse repositório com uma breve explicação das decisões tomadas e principalmente as instruções para execução do projeto.
-
-**Boa sorte! ;)**
+## Rodando
+### Migrando o banco
+```bash
+pipenv run python manage.py migrate
+```
+### Criando um usuário administrador
+```bash
+pipenv run python manage.py createsuperuser
+```
+### Iniciando o servidor com docker:
+```bash
+docker-compose up
+```
+### Iniciando o servidor usando o pipenv
+```bash
+pipenv run python manage.py collectstatic
+pipenv run python manage.py runserver
+```
+## Documentação
+ - A documentação da API pode ser vista acessando a url em: ```/docs/```
+## Como Jogar
+ 1) POST para /game/ passando a categoria:
+ ```
+ POST /game/
+ {
+     "categoria": <SLUG DA CATEGORIA>
+ }
+ ```
+ 2) Recebera um retorno com as perguntas e as opções de resposta.
+ 3) Para responder faça um PUT para /game/<id>/ com as respostas.
+ ```
+ PUT /game/<ID>/
+ {
+     "answers": {
+         "<ID_PERGUNTA>": "<ID_RESPOSTA>",
+         "<ID_PERGUNTA>": "<ID_RESPOSTA>",
+         "<ID_PERGUNTA>": "<ID_RESPOSTA>",
+         (...)
+     }
+ }
+ ```
+## Testes
+```bash
+pipenv run pytest
+```
