@@ -23,8 +23,7 @@ INSTALLED_APPS = [
     'drf_yasg',
     'django_filters',
     'user',
-    'quiz',
-    'ranking'
+    'quiz'
 ]
 
 MIDDLEWARE = [
