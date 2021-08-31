@@ -54,6 +54,7 @@ INSTALLED_APPS = [
     "allauth",
     "rest_auth.registration",
     "users",
+    "quiz",
 ]
 
 REST_FRAMEWORK = {
