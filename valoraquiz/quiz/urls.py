@@ -14,4 +14,6 @@ router.register(r"answers", views.AnswerViewSet, basename="answers")
 urlpatterns = [
     path("", include(router.urls)),
     path("auth/", include("rest_auth.urls")),
+    path("quizzes/", views.QuizViewSet.as_view()),
+    path("quizzes/<int:quiz_id>/", views.QuizViewSet.as_view()),
 ]
