@@ -1,5 +1,6 @@
 from django.test import TestCase
-from .models import Category, Question, Answer
+from .models import Category, Question, Result
+from django.contrib.auth import User
 
 
 class CategoryModelTest(TestCase):
@@ -16,30 +17,30 @@ class QuestionModelTest(TestCase):
         self.obj = Category(category='História')
         self.obj.save()
         self.obj = Question(
-            question='Q1', 
-            category=Category.objects.all().first()
+            category=Category.objects.all().first(),
+            question='Q1',
+            answer1 = 'A1',
+            answer2 = 'A2',
+            answer3 = 'A3',
+            right_answer = 'A3'
             )
         self.obj.save()
 
     def test_create(self):
         self.assertTrue(Question.objects.exists())
 
+    def test_create(self):
+        self.assertTrue(Answer.objects.exists())
 
-class AnswerModelTest(TestCase):
+
+class ResultModelTest(TestCase):
     def setUp(self):
-        self.obj = Category(category='História')
-        self.obj.save()
-        self.obj = Question(
-            question='Q1', 
-            category=Category.objects.all().first()
-            )
-        self.obj.save()
-        self.obj = Answer(
-            answer = 'A1',
-            question=Question.objects.all().first(), 
-            category=Category.objects.all().first()
+        self.obj = Result(
+            user = User.objects.all().first(), # Get current user
+            category = Category.objects.all().first(),
+            score = 0           # Calculate score after finish quiz
             )
         self.obj.save()
 
     def test_create(self):
-        self.assertTrue(Answer.objects.exists())
+        self.assertTrue(Result.objects.exists())

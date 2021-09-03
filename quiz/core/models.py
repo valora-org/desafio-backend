@@ -1,4 +1,5 @@
 from django.db import models
+from django.contrib.auth.models import User
 
 
 class Category(models.Model):
@@ -6,12 +7,19 @@ class Category(models.Model):
 
 
 class Question(models.Model):
+    category = models.ForeignKey(Category, on_delete=models.CASCADE)
     question = models.CharField(max_length=255)
-    category = models.ForeignKey(Category, on_delete=models.CASCADE)
+    answer1 = models.CharField(max_length=255, default='A1')
+    answer2 = models.CharField(max_length=255, default='A2')
+    answer3 = models.CharField(max_length=255, default='A3')
+    right_answer = models.CharField(max_length=2, default='A1', choices=[
+        ('A1', 'answer1'),
+        ('A2', 'answer2'),
+        ('A3', 'answer3'),
+    ])
 
 
-class Answer(models.Model):
-    answer = models.CharField(max_length=255)
-    question = models.ForeignKey(Question, on_delete=models.CASCADE)
+class Result(models.Model):
+    score = models.IntegerField()
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
     category = models.ForeignKey(Category, on_delete=models.CASCADE)
-    right_answer = models.BooleanField(default=False)
