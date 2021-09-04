@@ -1,2 +1,4 @@
 Django==3.2.6
+djangorestframework==3.12.4
 python-decouple==3.4
+httpie==2.4.0

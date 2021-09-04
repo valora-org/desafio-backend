@@ -5,6 +5,9 @@ from django.contrib.auth.models import User
 class Category(models.Model):
     category = models.CharField(max_length=255)
 
+    def __str__(self):
+        return self.category
+
 
 class Question(models.Model):
     category = models.ForeignKey(Category, on_delete=models.CASCADE)
@@ -17,6 +20,9 @@ class Question(models.Model):
         ('A2', 'answer2'),
         ('A3', 'answer3'),
     ])
+
+    def __str__(self):
+        return self.category
 
 
 class Result(models.Model):
