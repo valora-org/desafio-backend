@@ -1,0 +1,81 @@
+{
+	"info": {
+		"_postman_id": "4284079c-ffd4-4905-b6b0-a1e6b8269912",
+		"name": "Ranking",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "list_global_ranking",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Token eabbfc3d28c663df827aee413efccd41a06cdd67",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://0.0.0.0:8000/api/ranking/?",
+					"protocol": "http",
+					"host": [
+						"0",
+						"0",
+						"0",
+						"0"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"ranking",
+						""
+					],
+					"query": [
+						{
+							"key": "",
+							"value": null
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "list_category_ranking",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Token eabbfc3d28c663df827aee413efccd41a06cdd67",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://0.0.0.0:8000/api/ranking/?",
+					"protocol": "http",
+					"host": [
+						"0",
+						"0",
+						"0",
+						"0"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"ranking",
+						""
+					],
+					"query": [
+						{
+							"key": "",
+							"value": null
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
