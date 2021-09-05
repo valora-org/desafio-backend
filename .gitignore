@@ -10,7 +10,6 @@ Pipfile.lock
 temp/
 db/
 
-
 # Ignore file/folders of tests
 htmlcov/
 .coverage
