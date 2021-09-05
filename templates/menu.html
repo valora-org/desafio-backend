@@ -1,0 +1,56 @@
+{% load i18n static %}
+
+ <div id="wrapper">
+
+    <a data-widget="pushmenu" data-toggle="offcanvas" href="#" >
+        <button class="hamburger is-closed overlay" type="button">
+        </button>
+    </a>
+
+    <nav class="navbar navbar-fixed-top" id="sidebar-wrapper" role="navigation">
+            
+        <ul class="nav sidebar-nav">
+            <li style="text-align:center; padding: 15px 0px 30px;">
+                <img src="{% static "img/logo/skyrim.svg" %}" alt="Skyrim" class="img-circle"
+                    style="max-width: 80%; ">
+            </li>
+            <li>
+                <a href="{% url "CV:Profile" %}">
+                    <i class="fa fa-id-card"></i> {% trans "Profile" %}
+                </a>
+            </li>
+            <li>
+                <a href="{% url "CV:Schedule" %}">
+                    <i class="fa fa-calendar-alt"></i> {% trans "Schedule" %}
+                </a>
+            </li>
+            <li>
+                <a href="{% url "Blog:Proj" %}">
+                    <i class="fa fa-project-diagram"></i> {% trans "Projects" %}
+                </a>
+            </li>
+            <li>
+                <a href="#">
+                    <i class="fa fa-images"></i> {% trans "Galery" %}
+                </a>
+            </li>
+            <li>
+                <a href="{% url "Blog:Blog" %}">
+                    <i class="fa fa-biohazard"></i> {% trans "Blog" %}
+                </a>
+            </li>
+            <li>
+                <a href="#">
+                    <i class="fas fa-chart-pie"></i> {% trans "Trade" %}
+                </a>
+            </li>
+            {% if request.user.is_superuser %}
+                <li>
+                    <a href="{% url "Admin" %}">
+                        <i class="fas fa-skull-crossbones"></i> {% trans "Admin" %}
+                    </a>
+                </li>
+            {% endif %}
+        </ul>
+    </nav>
+</div>

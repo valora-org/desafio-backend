@@ -1,0 +1,21 @@
+{% load static i18n %}
+<script type="text/javascript" src="{% static 'plugins/Fullscreen-Snow-Falling-Effect-With-jQuery-Snowfall/src/jquery.snowfall.js' %}"></script>
+
+<script type="text/javascript" charset="utf-8">
+    $.snowfall.start({
+        content:'<i class="fa fa-snowflake-o"></i>'
+    });
+    $.snowfall.start({
+        size: {
+            min: 30,
+            max: 50
+        },
+        color:'#00B9FF',
+        content:'&#10052;'
+    });
+    $.snowfall.start({
+        interval: 100,
+        disappear:'linear'
+    });
+    // $.snowfall.stop();
+</script>
