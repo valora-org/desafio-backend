@@ -75,7 +75,26 @@ class User(AbstractUser, PermissionsMixin):
     objects = UserManager()
 
     class Meta:
+        verbose_name = "Usuário"
+        verbose_name_plural = "Usuários"
         db_table = "user"
 
     def __str__(self) -> str:
         return self.email
+
+
+class Profile(models.Model):
+    user = models.OneToOneField(
+        "users.User",
+        verbose_name="User Profile",
+        on_delete=models.DO_NOTHING,
+    )
+    score = models.PositiveIntegerField(default=0)
+
+    class Meta:
+        verbose_name = "Perfil"
+        verbose_name_plural = "Perfis"
+        db_table = "profile"
+
+    def __str__(self) -> str:
+        return str(self.user)
