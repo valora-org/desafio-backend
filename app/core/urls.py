@@ -33,7 +33,8 @@ from .views import (
     AnswerViewSet,
     CategoryQuestionViewSet,
     QuizAPIView,
-    RankingViewSet
+    RankingViewSet,
+    UserViewSet
 )
 
 router = SimpleRouter()
@@ -42,6 +43,7 @@ router.register('questions', QuestionViewSet)
 router.register('answers', AnswerViewSet)
 router.register('categories-questions', CategoryQuestionViewSet)
 router.register('ranking', RankingViewSet)
+router.register('register', UserViewSet)
 urlpatterns = [
     path(
         'quiz/category/<str:category_id>/',

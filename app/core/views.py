@@ -1,6 +1,7 @@
 import random
 import logging
 from uuid import UUID
+
 from rest_framework import viewsets
 from rest_framework.views import APIView
 from rest_framework.response import Response
@@ -10,15 +11,23 @@ from rest_framework.permissions import IsAdminUser
 from rest_framework import mixins
 from django.core.exceptions import ObjectDoesNotExist
 from django.db import connection
+from django.contrib.auth import get_user_model
+
 from .permissions import PlayerPermission
 
 from .models import (
-    CategoryQuestionModel, AnswerModel, CategoryModel, QuestionModel, RankingModel
+    CategoryQuestionModel, AnswerModel, CategoryModel, QuestionModel,
+    RankingModel
 )
 from .serializers import (
     CategoryQuestionSerializer, AnswerSerializer, CategorySerializer,
-    QuestionSerializer, QuizSerializer, RankingSerializer
+    QuestionSerializer, QuizSerializer, RankingSerializer, UserSerializer
 )
+
+class UserViewSet(mixins.CreateModelMixin, viewsets.GenericViewSet):
+    UserModel = get_user_model()
+    queryset = UserModel.objects.all()
+    serializer_class = UserSerializer
 
 
 class CategoryViewSet(viewsets.ModelViewSet):

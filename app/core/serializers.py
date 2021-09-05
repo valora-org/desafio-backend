@@ -1,11 +1,39 @@
 from django.db.models import fields
 from rest_framework import serializers
+from django.contrib.auth import get_user_model
 
 from .models import (
     CategoryModel, AnswerModel, QuestionModel, CategoryQuestionModel,
     RankingModel
 )
 
+UserModel = get_user_model()
+
+class UserSerializer(serializers.Serializer):
+    username = serializers.CharField(required=True)
+    password = serializers.CharField(write_only=True)
+    confirm_password = serializers.CharField(write_only=True, required=True)
+    email = serializers.EmailField(required=True)
+    first_name = serializers.CharField(required=True)
+    last_name = serializers.CharField(required=True)
+    is_admin = serializers.BooleanField(write_only=True, required=True)
+
+    def create(self, validated_data):
+        admin = validated_data['is_admin']
+        data = {
+            'username': validated_data['username'],
+            'email': validated_data['email'],
+            'first_name': validated_data['first_name'],
+            'last_name': validated_data['last_name'],
+            'is_staff': admin,
+        }
+        user = UserModel.objects.create(**data)
+        user.set_password(validated_data['password'])
+        
+        if admin is True:
+            user.is_superuser = True
+        user.save()
+        return user
 
 class CategorySerializer(serializers.ModelSerializer):
 
