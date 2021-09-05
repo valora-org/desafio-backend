@@ -6,7 +6,7 @@
 
 ## Tasklist
 
-- [ ] Implementar modelo de user personalizado
+- [X] Implementar modelo de user personalizado
 - [ ] Criar models conforme modelagem
 - [ ] Implementar autenticação JWT
 
