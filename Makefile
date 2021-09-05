@@ -13,6 +13,7 @@ help: ## This help.
 	@awk 'BEGIN {FS = ":.*?## "} /^[a-zA-Z_-]+:.*?## / {printf "\033[36m%-30s\033[0m %s\n", $$1, $$2}' $(MAKEFILE_LIST)
 
 build: delete-container ## Build the container
+	@[ -f .env ] || cp template.env .env
 	@docker-compose build
 	@docker-compose up -d
 
@@ -32,10 +33,12 @@ shell: start ## Access django shell
 	@docker-compose exec app /bin/bash -c "./manage.py shell"
 
 up: start ## Start django dev server
-	@docker-compose exec app /bin/bash -c "./manage.py runserver 0.0.0.0:8000"
+	@docker-compose exec app /bin/bash -c "./manage.py migrate && ./manage.py runserver 0.0.0.0:8000"
+
 
 start:
 	@docker-compose start
+
 
 down: ## Stop container
 	@docker-compose stop || true
@@ -44,5 +47,8 @@ delete-container: down
 	@docker-compose down || true
 
 remove: delete-container ## Delete containers and images
+
+
+	
 
 .DEFAULT_GOAL := help

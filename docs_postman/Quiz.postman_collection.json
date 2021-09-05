@@ -1,0 +1,183 @@
+{
+	"info": {
+		"_postman_id": "45e9cdb5-9a64-4376-a4c7-526b82f52f48",
+		"name": "Quiz",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "create_quiz",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Token eabbfc3d28c663df827aee413efccd41a06cdd67",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"category_id\":2}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://0.0.0.0:8000/api/quizzes/",
+					"protocol": "http",
+					"host": [
+						"0",
+						"0",
+						"0",
+						"0"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"quizzes",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "list_quiz",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Token eabbfc3d28c663df827aee413efccd41a06cdd67",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://0.0.0.0:8000/api/quizzes/",
+					"protocol": "http",
+					"host": [
+						"0",
+						"0",
+						"0",
+						"0"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"quizzes",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "detail_quiz",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Token eabbfc3d28c663df827aee413efccd41a06cdd67",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://0.0.0.0:8000/api/quizzes/",
+					"protocol": "http",
+					"host": [
+						"0",
+						"0",
+						"0",
+						"0"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"quizzes",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "delete_quiz",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Token eabbfc3d28c663df827aee413efccd41a06cdd67",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://0.0.0.0:8000/api/quizzes/2/",
+					"protocol": "http",
+					"host": [
+						"0",
+						"0",
+						"0",
+						"0"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"quizzes",
+						"2",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "patch_quiz",
+			"request": {
+				"method": "PATCH",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Token 73833923289e72570ec39ffd6380bcf93c3782ef",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"answers\": [\n        {\n            \"question_id\":1,\n            \"answer_id\": 1\n        }\n    ],\n    \"is_finished\": true\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://0.0.0.0:8000/api/quizzes/1/",
+					"protocol": "http",
+					"host": [
+						"0",
+						"0",
+						"0",
+						"0"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"quizzes",
+						"1",
+						""
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
