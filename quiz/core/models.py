@@ -22,7 +22,7 @@ class Question(models.Model):
     ])
 
     def __str__(self):
-        return self.category
+        return self.question
 
 
 class Result(models.Model):
