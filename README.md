@@ -1,4 +1,4 @@
-## <img src="https://valora.cc/img/logo2.png" alt="Valora" width="24" /> Desafio Backend Python
+# <img src="https://valora.cc/img/logo2.png" alt="Valora" width="24" /> Desafio Backend Python
 
 ## Modelagem do banco
 
@@ -7,6 +7,8 @@
 ## Tasklist
 
 - [ ] Implementar modelo de user personalizado
+- [ ] Criar models conforme modelagem
+- [ ] Implementar autenticação JWT
 
 
 ## Download & Instruções para instalação.
