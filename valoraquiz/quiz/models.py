@@ -56,5 +56,3 @@ class Quiz(models.Model):
     is_finished = models.BooleanField(default=False)
     questions = models.ManyToManyField(Question)
     answers = models.ManyToManyField(Answer)
-
-    # TODO Criação do quiz, impedir criação sem 3 posibilidade de respostas.
