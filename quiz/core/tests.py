@@ -159,3 +159,37 @@ class QuestionApiTest(APITestCase):
         response = self.client.delete(f'{self.url}1/')
         self.assertEqual(response.status_code, status.HTTP_204_NO_CONTENT)
         self.assertEqual(Question.objects.count(), 0)
+
+
+class ChooseQuizApiTest(APITestCase):
+    def categories(self):
+        for n in range(3):
+            self.obj = Category(category=f'C{n+1}')
+            self.obj.save()
+        return Category.objects.all()
+
+    def create_questions(self):
+        for category in self.categories():
+            for n in range(10):
+                self.obj = Question(
+                    category = category,
+                    question =f'Q{n+1}',
+                    answer1 = 'A1',
+                    answer2 = 'A2',
+                    answer3 = 'A3',
+                    right_answer = 'A1'
+                    )
+                self.obj.save()
+        return Question.objects.all()
+
+    def setUp(self):
+        self.create_questions()
+        self.url = '/choosequiz/'
+        self.user_admin = User.objects.create_user('admin', '1', is_staff=True, is_superuser=True)
+
+    def test_list(self):
+        self.client.force_authenticate(self.user_admin)
+        response = self.client.get(self.url)
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.assertEqual(Category.objects.count(), 3)
+        self.assertEqual(Question.objects.count(), 30)
