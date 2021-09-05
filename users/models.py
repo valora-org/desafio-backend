@@ -68,6 +68,8 @@ class User(AbstractUser, PermissionsMixin):
     is_superuser = models.BooleanField(
         verbose_name="Usuário é super usuário", default=False
     )
+    score = models.PositiveIntegerField(default=0)
+
     REQUIRED_FIELDS = []
 
     USERNAME_FIELD = "email"
@@ -81,20 +83,3 @@ class User(AbstractUser, PermissionsMixin):
 
     def __str__(self) -> str:
         return self.email
-
-
-class Profile(models.Model):
-    user = models.OneToOneField(
-        "users.User",
-        verbose_name="User Profile",
-        on_delete=models.DO_NOTHING,
-    )
-    score = models.PositiveIntegerField(default=0)
-
-    class Meta:
-        verbose_name = "Perfil"
-        verbose_name_plural = "Perfis"
-        db_table = "profile"
-
-    def __str__(self) -> str:
-        return str(self.user)
