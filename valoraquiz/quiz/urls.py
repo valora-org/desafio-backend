@@ -16,4 +16,6 @@ urlpatterns = [
     path("auth/", include("rest_auth.urls")),
     path("quizzes/", views.QuizViewSet.as_view()),
     path("quizzes/<int:quiz_id>/", views.QuizViewSet.as_view()),
+    path("ranking/", views.RankingViewSet.as_view()),
+    path("ranking/<int:category_id>/", views.RankingViewSet.as_view()),
 ]

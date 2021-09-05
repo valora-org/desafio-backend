@@ -73,3 +73,30 @@ def create_answer(label, question, is_rigth):
     return models.Answer.objects.create(
         label=label, question=question, is_rigth=is_rigth
     )
+
+
+def get_ranking(quizzes):
+    users_ranking = {}
+    for quiz in quizzes:
+        score = 0
+        for answer in quiz.answers.all():
+            if answer.is_right == True:
+                score += 1
+            if answer.is_right == False:
+                score -= 1
+
+        if score < 0:
+            score = 0
+
+        if quiz.user.username not in users_ranking.keys():
+            users_ranking[quiz.user.username] = score
+            continue
+
+        users_ranking[quiz.user.username] += score
+
+    ranking = []
+    for username in sorted(users_ranking, reverse=True):
+        score = users_ranking[username]
+        ranking.append({username: score})
+
+    return ranking

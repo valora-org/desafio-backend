@@ -126,3 +126,25 @@ class QuizViewSet(views.APIView):
         quiz.delete()
 
         return response.Response(None, status=status.HTTP_204_NO_CONTENT)
+
+
+class RankingViewSet(views.APIView):
+    permission_classes = [
+        permissions.IsAuthenticated,
+    ]
+
+    def get(self, request, category_id=None):
+        if category_id:
+            return self.ranking_by_category(category_id=category_id)
+
+        return self.ranking_global()
+
+    def ranking_global(self):
+        quizzes = models.Quiz.objects.filter(is_finished=True)
+        ranking = services.get_ranking(quizzes=quizzes)
+        return response.Response(ranking, status.HTTP_200_OK)
+
+    def ranking_by_category(self, category_id):
+        quizzes = models.Quiz.objects.filter(is_finished=True, category_id=category_id)
+        ranking = services.get_ranking(quizzes=quizzes)
+        return response.Response(ranking, status.HTTP_200_OK)
