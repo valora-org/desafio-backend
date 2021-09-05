@@ -1,7 +1,6 @@
 from quiz.core.models import Category, Question
 from quiz.core.serializers import CategorySerializer, QuestionSerializer
 from rest_framework import viewsets
-from rest_framework import permissions
 
 
 class CategoryViewSet(viewsets.ModelViewSet):
