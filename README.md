@@ -2,7 +2,7 @@
 
 ## Modelagem do banco
 
-![](../main/static/media/modelage-desafio-backend.jpg)
+![](modelage-desafio-backend.jpg)
 
 ## Tasklist
 
