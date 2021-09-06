@@ -11,7 +11,9 @@
 - [X] Implementação da autenticação JWT
 - [X] CRUD Usuários
 - [X] CRUD Categoria
-- [ ] CRUD Questões
+- [X] CRUD Questões
+- [ ] Implementação do QUIZ
+- [ ] Implementação dos filtros do Rank
 
 
 ## Download & Instruções para instalação.
