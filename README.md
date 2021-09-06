@@ -53,9 +53,9 @@ player: 1
 | List of categories | GET | /category/ | player/admin | 
 | Category description | GET | /category/<id_category>/ | player/admin | 
 | New Category | POST | category/ | admin | 
-| List of questions | GET | /api/question/ | player/admin | 
+| List of questions | GET | /question/ | player/admin | 
 | Question description | GET | /question/<id_question>/ | player/admin | 
 | New Question | POST | question/ | admin | 
 | List of categories avalaible to quiz | GET | /choosequiz/ | player/admin | 
-| List of 10 questions and answers of selected category | GET | /choosequiz/<id_category>/ | player/admin | 
-| Calcule results and list user's point and ranking | GET | TO DO | Player/Admin | 
+| List of 10 questions and answers of selected category | GET | /startquiz/<id_category>/ | player/admin | 
+| Calcule results and list user's point and ranking | GET | TO DO | player/admin | 
