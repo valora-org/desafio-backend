@@ -27,10 +27,6 @@ pip install -r requirements.txt
 cp quiz/contrib/.env-sample .env
 SECRET_KEY=`python quiz/contrib/secret_gen.py`
 sed -i "/^SECRET_KEY=/c\SECRET_KEY=${SECRET_KEY}" .env
-# Make database
-python manage.py migrate
-# Load samples
-cat quiz/contrib/load_sample.py | python manage.py shell
 
 ```
 
@@ -44,7 +40,9 @@ python manage.py runserver
 <http://127.0.0.1:8000/>
 
 ## Credentials
+
 admin: 1
+
 player: 1
 
 ## Endpoints
