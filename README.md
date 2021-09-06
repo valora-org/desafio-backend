@@ -8,7 +8,10 @@
 
 - [X] Implementar modelo de user personalizado
 - [X] Criar models conforme modelagem
-- [ ] Implementar autenticação JWT
+- [X] Implementação da autenticação JWT
+- [X] CRUD Usuários
+- [ ] CRUD Categoria
+- [ ] CRUD Questões
 
 
 ## Download & Instruções para instalação.
