@@ -1,17 +1,23 @@
+import reversion
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.models import User
+from django.db import transaction
 from django.shortcuts import render
 
+from .models import Question, Quiz
 
-def profile(request):
-    profile = models.Profile.objects.first()
-    education = models.Education.objects.all()
-    xp = models.XP.objects.all()
-    current_xp = models.XP.objects.filter(is_current=True)
-    current_education = models.Education.objects.filter(is_current=True)
-    data = {
-        'profile':profile, 
-        'xp':xp, 
-        'education':education,
-        'current_xp':current_xp,
-        'current_education':current_education,
+
+@login_required
+@transaction.atomic
+# @reversion.views.create_revision(manage_manually=False, using=None, atomic=True, request_creates_revision=None)
+def quiz(request, quiz_id):
+    """
+    Quiz view.
+    """
+    quiz = Quiz.objects.get(id=quiz_id)
+    questions = Question.objects.filter(quiz=quiz)
+    context = {
+        'quiz': quiz,
+        'questions': questions,
     }
-    return render(request, 'cv/profile.html', data)
+    return render(request, 'quiz/quiz.html', context)
