@@ -36,7 +36,6 @@ INSTALLED_APPS = [
     'reversion',
     'debug_toolbar',
     'rest_framework',
-    'utils',
     'tests',
     'quiz',
 ]
@@ -135,7 +134,7 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'valora/static')
-STATICFILES_DIRS = (os.path.join(BASE_DIR, 'static/'),)
+# STATICFILES_DIRS = (os.path.join(BASE_DIR, 'static/'),)
 
 ALLOWED_HOSTS = config("ALLOWED_HOSTS")
 INTERNAL_IPS = config('INTERNAL_IPS')
@@ -143,17 +142,4 @@ INTERNAL_IPS = config('INTERNAL_IPS')
 ADMINS = config("ADMINS")
 MANAGERS = config("MANAGERS")
 
-PHONENUMBER_DEFAULT_REGION = 'BR'
-PHONENUMBER_DB_FORMAT = 'INTERNATIONAL'
-
-# EMAIL_HOST = config('EMAIL_HOST', default='localhost')
-# EMAIL_PORT = config('EMAIL_PORT', default=25, cast=int)
-# EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD', default='')
-# EMAIL_HOST_USER = config('EMAIL_HOST_USER', default='')
-# EMAIL_USE_TLS = config('EMAIL_USE_TLS', default=False, cast=bool)
-
-# RECAPTCHA_PUBLIC_KEY = config("RECAPTCHA_PUBLIC_KEY")
-# RECAPTCHA_PRIVATE_KEY = config("RECAPTCHA_PRIVATE_KEY")
-
-# Redirect to home URL after login (Default redirects to /accounts/profile/)
 LOGIN_REDIRECT_URL = '/'
