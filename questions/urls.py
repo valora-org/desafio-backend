@@ -15,4 +15,24 @@ urlpatterns = [
         q.delete_category,
         name="delete-category",
     ),
+    path(
+        "",
+        q.get_questions,
+        name="questions",
+    ),
+    path(
+        "create/",
+        q.create_question,
+        name="create-question",
+    ),
+    path(
+        "update/<str:pk>/",
+        q.update_question,
+        name="update-question",
+    ),
+    path(
+        "delete/<str:pk>/",
+        q.delete_question,
+        name="delete-question",
+    ),
 ]

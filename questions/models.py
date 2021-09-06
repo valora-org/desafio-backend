@@ -37,29 +37,32 @@ class Question(models.Model):
     )
     first_answer = models.CharField(
         max_length=255,
-        verbose_name="1ª Pergunta",
+        verbose_name="1ª Resposta",
         null=True,
     )
     second_answer = models.CharField(
         max_length=255,
-        verbose_name="2ª Pergunta",
+        verbose_name="2ª Resposta",
         null=True,
     )
     third_answer = models.CharField(
         max_length=255,
-        verbose_name="3ª Pergunta",
+        verbose_name="3ª Resposta",
         null=True,
     )
     CHOICE_CORRECT_ANSWER = (
-        ("1", "Primeira Pergunta"),
-        ("2", "Segunda Pergunta"),
-        ("3", "Terceira Pergunta"),
+        ("1", "Primeira Resposta"),
+        ("2", "Segunda Resposta"),
+        ("3", "Terceira Resposta"),
     )
     correct_answer = models.CharField(
         max_length=1,
         verbose_name="Resposta Correta",
         choices=CHOICE_CORRECT_ANSWER,
+        null=False,
+        blank=False,
     )
+    is_active = models.BooleanField(default=False)
 
     class Meta:
         verbose_name = "Pergunta"
