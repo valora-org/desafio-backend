@@ -1,79 +1,61 @@
-## <img src="https://valora.cc/img/logo2.png" alt="Valora" width="24" /> Desafio Backend Python
 
-Parabéns! Se você chegou até aqui significa que você passou pelas etapas mais difíceis do nosso processo seletivo. Somos extremamente criteriosos com as pessoas que vão integrar nosso time porque só aceitamos pessoas incríveis!
+# quiz
+## Dependences
 
-Agora é a parte fácil. Chegou a hora de mostrar todas as suas habilidades de transformar café em código. Vamos lá?
+```bash
+sudo apt-get install -y \
+python3-setuptools \
+python3-pip \
+python3-dev \
+python3-venv \
+git
 
-Nesse desafio iremos avaliar suas habilidades em:
+```
 
-* **Python**
-* **Django**
-* **Django REST Framework**
-* **Pytest**
-* **Docker**
+## Dev 
+```bash
+# Clones repository
+git clone https://github.com/dssantos/desafio-backend quiz
+cd quiz
+# Creates venv
+python3 -m venv .quiz
+source .quiz/bin/activate
+# Install libraries
+python -m pip install -U pip
+pip install -r requirements.txt
+# Environment variables
+cp quiz/contrib/.env-sample .env
+SECRET_KEY=`python quiz/contrib/secret_gen.py`
+sed -i "/^SECRET_KEY=/c\SECRET_KEY=${SECRET_KEY}" .env
+# Make database
+python manage.py migrate
+# Load samples
+cat quiz/contrib/load_sample.py | python manage.py shell
 
-Você irá desenvolver a API de uma aplicação para a criação de um quiz de perguntas e respostas!
+```
 
-**A aplicação deverá prover o registro e autenticação de dois tipos de usuários**:
+## Run
+```bash
+# Run server
+python manage.py runserver
 
-* Admin
-* Player
+```
+## Access server
+<http://127.0.0.1:8000/>
 
-**Cada quiz é composto por**:
+## Credentials
+admin: 1
+player: 1
 
-* 10 perguntas com 3 respostas onde apenas 1 é correta.
-* Cada resposta correta acumula a 1 ponto.
-* Cada resposta errada perde 1 ponto. A menor pontuação possível é 0.
-* Possui uma categoria.
-
-**Ao iniciar o jogo**:
-
-* O player deve escolher uma categoria válida e receber um quiz com perguntas aleatórias referentes a categoria escolhida.
-
-**Ao finalizar o jogo**:
-
-* O player deve receber a contabilização dos seus pontos juntamente com a sua posição atual no ranking global. Não há limitação de quantos quizzes o player pode responder.
-
-**O ranking global**:
-
-* É a contabilização dos pontos acumulados por cada player.
-* Ranking geral considera todas as categorias.
-* Ranking por categoria agrupa por categorias.
-
-**Permissões**:
-
-* Todos os endpoints devem estar protegidos por autenticação.
-* Usuários do tipo **Admin** tem permissão para criar perguntas e respostas para os quizzes.
-* Usuários do tipo **Player** tem permissão para jogar e consultar o ranking.
-
-## Requisitos
-
-* O projeto precisa estar configurado para rodar em um ambiente macOS ou Ubuntu (preferencialmente como container Docker).
-* Deve anexar ao seu projeto uma coleção do postman com todos os endpoints criados e exemplos de utilização.
-
-**Para executar seu código devemos executar apenas os seguintes comandos**:
-
-* git clone $seu-fork
-* cd $seu-fork
-* comando para instalar dependências
-* comando para executar a aplicação
-
-## Critério de avaliação
-
-* **Organização do código**: Separação de módulos, view e model
-* **Clareza**: O README explica de forma resumida qual é o problema e como pode rodar a aplicação?
-* **Assertividade**: A aplicação está fazendo o que é esperado? Se tem algo faltando, o README explica o porquê?
-* **Legibilidade do código** (incluindo comentários)
-* **Segurança**: Existe alguma vulnerabilidade clara?
-* **Cobertura de testes** (Não esperamos cobertura completa mas é importante garantir o fluxo principal)
-* **Histórico de commits** (estrutura e qualidade)
-* **UX**: A API é intuitiva?
-* **Escolhas técnicas**: A escolha das bibliotecas, banco de dados, arquitetura, etc, é a melhor escolha para a aplicação?
-
-## Dúvidas
-
-Quaisquer dúvidas que você venha a ter, consulte as issues para ver se alguém já não a fez e caso você não ache sua resposta, abra você mesmo uma nova issue!
-
-Ao completar o desafio, submeta um pull-request a esse repositório com uma breve explicação das decisões tomadas e principalmente as instruções para execução do projeto.
-
-**Boa sorte! ;)**
+## Endpoints
+| API | METHOD | ENDPOINTS | USER | 
+| ------ | ------ |------ |------ |
+| List of categories | GET | /category/ | player/admin | 
+| Category description | GET | /category/<id_category>/ | player/admin | 
+| New Category | POST | category/ | admin | 
+| List of questions | GET | /api/question/ | player/admin | 
+| Question description | GET | /question/<id_question>/ | player/admin | 
+| New Question | POST | question/ | admin | 
+| List of categories avalaible to quiz | GET | /choosequiz/ | player/admin | 
+| List of 10 questions and answers of selected category | GET | /choosequiz/<id_category>/ | player/admin | 
+| Calcule results and list user's point and ranking | GET | TO DO | Player/Admin | 
