@@ -13,7 +13,7 @@ services:
       MYSQL_USER: ${MYSQL_USER}
       MYSQL_PASSWORD: ${MYSQL_PASSWORD}
     ports:
-      - "${LOCALHOST}:${DATABASE_PORT}:3306"
+      - "${HOST}:${DATABASE_PORT}:3306"
     networks:
       - django-network
 
@@ -30,7 +30,7 @@ services:
     # entrypoint: /code/entrypoint.sh
     entrypoint: ["sh", "/code/entrypoint.sh"]
     ports:
-      - "${LOCALHOST}:${DJANGO_PORT}:8000"
+      - "${HOST}:${DJANGO_PORT}:8000"
     networks:
       - django-network
   
@@ -45,7 +45,7 @@ services:
       PMA_PASSWORD: ${MYSQL_PASSWORD}
       HIDE_PHP_VERSION: 1
     ports:
-      - "${LOCALHOST}:${PHPMYADMIN_PORT}:80"
+      - "${HOST}:${PHPMYADMIN_PORT}:80"
     networks:
       - django-network
 

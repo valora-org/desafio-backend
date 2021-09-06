@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     'reversion',
     'utils',
     'tests',
+    'rest_framework',
 ]
 
 MIDDLEWARE = [
@@ -93,7 +94,7 @@ DATABASES = {
         'NAME':     config('MYSQL_DATABASE_NAME'),
         'USER':     config('MYSQL_USER'),
         'PASSWORD': config('MYSQL_PASSWORD'),
-        'HOST':     config('LOCALHOST'),
+        'HOST':     config('HOST'),
         'PORT':     config('DATABASE_PORT'),
     }
 }
