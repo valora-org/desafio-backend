@@ -8,6 +8,7 @@ router = DefaultRouter()
 router.register(r'category', views.CategoryViewSet)
 router.register(r'question', views.QuestionViewSet)
 router.register(r'choosequiz', views.ChooseQuizViewSet, basename='choosequiz')
+router.register(r'startquiz', views.StartQuizViewSet, basename='startquiz')
 
 # The API URLs are now determined automatically by the router.
 urlpatterns = [

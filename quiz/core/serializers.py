@@ -18,3 +18,11 @@ class ChooseQuizSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Category
         fields = ['id', 'category']
+
+
+class StartQuizSerializer(serializers.Serializer):
+    category = serializers.CharField(max_length=255)
+    question = serializers.CharField(max_length=255)
+    answer1 = serializers.CharField(max_length=255)
+    answer2 = serializers.CharField(max_length=255)
+    answer3 = serializers.CharField(max_length=255)

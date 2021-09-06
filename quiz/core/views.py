@@ -4,7 +4,8 @@ from rest_framework import permissions
 from rest_framework.response import Response
 from quiz.core.serializers import (CategorySerializer, 
                                    QuestionSerializer, 
-                                   ChooseQuizSerializer
+                                   ChooseQuizSerializer,
+                                   StartQuizSerializer
                                    )
 
 
@@ -32,5 +33,17 @@ class ChooseQuizViewSet(viewsets.ModelViewSet):
         return Category.objects.filter(pk__in=choosed)
     queryset = categories_with_10_questions()
     serializer_class = ChooseQuizSerializer
-    permission_classes = [permissions.IsAdminUser]
+    permission_classes = [permissions.IsAuthenticated]
     
+
+class StartQuizViewSet(viewsets.ModelViewSet):
+    def get_queryset(self):
+        pass
+
+    def retrieve(self, request, pk):
+        category = Category.objects.get(pk=pk)
+        queryset = Question.objects.filter(category=category)[:10]
+        serializer = StartQuizSerializer(queryset, many=True)
+        return Response(serializer.data)
+
+    serializer_class = StartQuizSerializer
