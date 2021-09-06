@@ -11,9 +11,6 @@ from .models import Question, Quiz
 @transaction.atomic
 # @reversion.views.create_revision(manage_manually=False, using=None, atomic=True, request_creates_revision=None)
 def quiz(request, quiz_id):
-    """
-    Quiz view.
-    """
     quiz = Quiz.objects.get(id=quiz_id)
     questions = Question.objects.filter(quiz=quiz)
     context = {

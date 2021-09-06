@@ -12,6 +12,13 @@ python manage.py collectstatic --noinput
 echo "APPLY DATABASE MIGRATIONS"
 python manage.py migrate
 
+if [ ${DEBUG} == True ]
+then
+    # Running Tests
+    echo "RUNING TESTS"
+    pytest
+fi
+
 # Start server
 echo "STARTING SERVER"
 python manage.py runserver 0.0.0.0:8000

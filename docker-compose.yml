@@ -16,6 +16,20 @@ services:
       - "${HOST}:${DATABASE_PORT}:3306"
     networks:
       - django-network
+  db-test:
+    image: mariadb:latest
+    restart: always
+    env_file: .env
+    environment:
+      TZ: ${TZ}
+      MYSQL_ROOT_PASSWORD: ${MYSQL_TEST_ROOT_PASSWORD}
+      MYSQL_DATABASE: ${MYSQL_TEST_DATABASE_NAME}
+      MYSQL_USER: ${MYSQL_TEST_USER}
+      MYSQL_PASSWORD: ${MYSQL_TEST_PASSWORD}
+    ports:
+      - "${HOST}:${DATABASE_TEST_PORT}:3306"
+    networks:
+      - django-network
 
   django:
     depends_on:

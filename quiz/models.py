@@ -18,18 +18,22 @@ class Quiz(models.Model):
         (10, _('Anagrams')),
     ]
 
-    # user = models.OneToOneField(Player, on_delete=models.CASCADE, primary_key=True, related_name='quiz')
+    # user = models.OneToOneField(Player, on_delete=models.CASCADE, primary_key=True)
     score = models.IntegerField(default=0, verbose_name=_("Score"))
     category = models.PositiveSmallIntegerField(choices=CATEGORY, verbose_name=_("Category"), default=0)
 
 class Question(models.Model):
-    quiz = models.ForeignKey(Quiz, on_delete=models.CASCADE, related_name='question')
+    quiz = models.ForeignKey(Quiz, on_delete=models.CASCADE)
     question = models.CharField(max_length=200, verbose_name=_("Question"), blank=True)
+    true_answer = models.PositiveSmallIntegerField(verbose_name=_("True Answer"), default=0)
+
+class Answer(models.Model):
+    question = models.ForeignKey(Question, on_delete=models.CASCADE)
     answer = models.CharField(max_length=200, verbose_name=_("Answer"), blank=True)
     
 class Player(User):
-    admin = models.BooleanField(default=False)
-    quiz = models.ForeignKey(Quiz, on_delete=models.CASCADE, related_name='player')
+    admin = models.BooleanField(default=False, verbose_name=_("Player Admin"))
+    quiz = models.ForeignKey(Quiz, on_delete=models.CASCADE)
 
     def __str__(self):
         return self.username
