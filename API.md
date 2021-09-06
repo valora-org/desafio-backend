@@ -63,6 +63,14 @@ Player
 username: bruno
 password: bruno@12345
 
+## Excução dos testes
+*Fiz alguns testes básicos somente para verificação do conhecimento
+
+*Para rodá-lo suba a API em um terminal e rode os testes no outro
+ - rodar a api: python manage runserver
+ - rodar os testes:  pytest tests.py
+
+
 ## Melhorias a fazer
 
 - [] Definir um banco Postgres
