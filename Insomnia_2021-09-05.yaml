@@ -1,0 +1,905 @@
+_type: export
+__export_format: 4
+__export_date: 2021-09-06T01:04:08.294Z
+__export_source: insomnia.desktop.app:v2021.5.2
+resources:
+  - _id: req_20d6424ffce3474bb8646cacf9379a3c
+    parentId: fld_91f256caa68a469dbf90226a6a0b9890
+    modified: 1630878934595
+    created: 1630873176901
+    url: "{{ _.API_URL_WITHOUT_V1 }}/api/v1/register/"
+    name: Register Admin
+    description: ""
+    method: POST
+    body:
+      mimeType: application/json
+      text: |-
+        {
+        	"username": "brunoalmeidamartins11",
+        	"first_name": "Bruno",
+        	"last_name": "Almeida",
+        	"password": "bruno270591",
+        	"confirm_password": "bruno270591",
+        	"email": "brunoalmeidamartin6s@admin.com",
+        	"is_admin": true
+
+        }
+    parameters: []
+    headers:
+      - name: Content-Type
+        value: application/json
+        id: pair_ca98dcda5cc54051bd116701744cc0a0
+    authentication: {}
+    metaSortKey: -1630723769486
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: fld_91f256caa68a469dbf90226a6a0b9890
+    parentId: wrk_6a65d8f019c047f68281ed043b7c5102
+    modified: 1630628233649
+    created: 1630628125400
+    name: desafio-backend
+    description: ""
+    environment: {}
+    environmentPropertyOrder: null
+    metaSortKey: -1611848266234
+    _type: request_group
+  - _id: wrk_6a65d8f019c047f68281ed043b7c5102
+    parentId: null
+    modified: 1611847573683
+    created: 1611847573683
+    name: Insomnia
+    description: ""
+    scope: collection
+    _type: workspace
+  - _id: req_e00082494ba444a9a0f2f8556cfdbe41
+    parentId: fld_91f256caa68a469dbf90226a6a0b9890
+    modified: 1630878948500
+    created: 1630878943940
+    url: "{{ _.API_URL_WITHOUT_V1 }}/api/v1/register/"
+    name: Register Player
+    description: ""
+    method: POST
+    body:
+      mimeType: application/json
+      text: |-
+        {
+        	"username": "brunoalmeidamartins11",
+        	"first_name": "Bruno",
+        	"last_name": "Almeida",
+        	"password": "bruno270591",
+        	"confirm_password": "bruno270591",
+        	"email": "brunoalmeidamartin6s@admin.com",
+        	"is_admin": false
+
+        }
+    parameters: []
+    headers:
+      - name: Content-Type
+        value: application/json
+        id: pair_ca98dcda5cc54051bd116701744cc0a0
+    authentication: {}
+    metaSortKey: -1630723769461
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: req_352c17dbd5d544bd8abf3258e1bc7982
+    parentId: fld_91f256caa68a469dbf90226a6a0b9890
+    modified: 1630880175785
+    created: 1630723769436
+    url: "{{ _.API_URL_WITHOUT_V1 }}/api/token/"
+    name: Login
+    description: ""
+    method: POST
+    body:
+      mimeType: application/json
+      text: |-
+        {
+        	"username": "bruno",
+        	"password": "bruno@12345"
+        }
+    parameters: []
+    headers:
+      - name: Content-Type
+        value: application/json
+        id: pair_ca98dcda5cc54051bd116701744cc0a0
+    authentication: {}
+    metaSortKey: -1630723769436
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: req_cbf0ffc6a1354b8a9f472f85e8d9082d
+    parentId: fld_91f256caa68a469dbf90226a6a0b9890
+    modified: 1630851900251
+    created: 1630628208062
+    url: "{{ _.API_URL_V1 }}/categories/"
+    name: GET Categories List
+    description: ""
+    method: GET
+    body: {}
+    parameters: []
+    headers:
+      - id: pair_ee4250d7013d498684c9f59e0b636c8f
+        name: Authorization
+        value: Bearer {{ _.ACCESS_TOKEN }}
+        description: ""
+    authentication: {}
+    metaSortKey: -1630023021514.5
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: req_9957fa74a3cb43ca9948cc9cc9d2867b
+    parentId: fld_91f256caa68a469dbf90226a6a0b9890
+    modified: 1630871896173
+    created: 1630628161251
+    url: "{{ _.API_URL_V1 }}/categories/de53151d-8046-4188-8799-626e986ab3b2/"
+    name: GET Categories
+    description: ""
+    method: GET
+    body: {}
+    parameters: []
+    headers:
+      - id: pair_f8e72c30be1b47a6a7919067fb083050
+        name: Authorization
+        value: Bearer {{ _.ACCESS_TOKEN }}
+        description: ""
+        disabled: false
+    authentication: {}
+    metaSortKey: -1630023021464.5
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: req_dfef0e524d9e49fd8c9e14a21e58175a
+    parentId: fld_91f256caa68a469dbf90226a6a0b9890
+    modified: 1630878853778
+    created: 1630878839336
+    url: "{{ _.API_URL_V1 }}/categories/"
+    name: POST Categories
+    description: ""
+    method: POST
+    body:
+      mimeType: application/json
+      text: |-
+        {
+        	"name": "Matemática"
+        }
+    parameters: []
+    headers:
+      - id: pair_f8e72c30be1b47a6a7919067fb083050
+        name: Authorization
+        value: Bearer {{ _.ACCESS_TOKEN }}
+        description: ""
+        disabled: false
+      - name: Content-Type
+        value: application/json
+        id: pair_f92c03d7ad0a4c719cca1b48d0014e35
+    authentication: {}
+    metaSortKey: -1629947379003.6875
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: req_f2376b3e1c5042739536f1f9a31f2f13
+    parentId: fld_91f256caa68a469dbf90226a6a0b9890
+    modified: 1630870934941
+    created: 1630870835705
+    url: "{{ _.API_URL_V1 }}/categories/de53151d-8046-4188-8799-626e986ab3b2/"
+    name: PUT Categories
+    description: ""
+    method: PUT
+    body:
+      mimeType: application/json
+      text: |-
+        {
+        	"name": "Matemática"
+        }
+    parameters: []
+    headers:
+      - id: pair_f8e72c30be1b47a6a7919067fb083050
+        name: Authorization
+        value: Bearer {{ _.ACCESS_TOKEN }}
+        description: ""
+        disabled: false
+      - name: Content-Type
+        value: application/json
+        id: pair_f92c03d7ad0a4c719cca1b48d0014e35
+    authentication: {}
+    metaSortKey: -1629871736542.875
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: req_e89c6f18ddde46f394e919fe1fa52a56
+    parentId: fld_91f256caa68a469dbf90226a6a0b9890
+    modified: 1630878283425
+    created: 1630878264313
+    url: "{{ _.API_URL_V1 }}/categories/c15241a5-07e4-4815-8540-f3abb60b8e88/"
+    name: DELETE Category
+    description: ""
+    method: DELETE
+    body:
+      mimeType: application/json
+      text: |-
+        {
+        	"name": "Matemática"
+        }
+    parameters: []
+    headers:
+      - id: pair_f8e72c30be1b47a6a7919067fb083050
+        name: Authorization
+        value: Bearer {{ _.ACCESS_TOKEN }}
+        description: ""
+        disabled: false
+      - name: Content-Type
+        value: application/json
+        id: pair_f92c03d7ad0a4c719cca1b48d0014e35
+    authentication: {}
+    metaSortKey: -1629796094082.0625
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: req_3298bdc1a311491d8961732f5b27ae62
+    parentId: fld_91f256caa68a469dbf90226a6a0b9890
+    modified: 1630851917122
+    created: 1630628295879
+    url: "{{ _.API_URL_V1 }}/questions/"
+    name: GET Questions List
+    description: ""
+    method: GET
+    body: {}
+    parameters: []
+    headers:
+      - id: pair_af602751ea7f48c5815780b2c19e99c3
+        name: Authorization
+        value: Bearer {{ _.ACCESS_TOKEN }}
+        description: ""
+    authentication: {}
+    metaSortKey: -1629720451621.25
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: req_ca518662ce034f5a9936c00a3e84ec8b
+    parentId: fld_91f256caa68a469dbf90226a6a0b9890
+    modified: 1630878343290
+    created: 1630628407441
+    url: "{{ _.API_URL_V1 }}/questions/a6b2086c-021c-4a03-aff1-fe7300fcd190/"
+    name: GET Questions
+    description: ""
+    method: GET
+    body: {}
+    parameters: []
+    headers:
+      - id: pair_fe390c0c57564a3eb613c0ea9db1eb73
+        name: Authorization
+        value: Bearer {{ _.ACCESS_TOKEN }}
+        description: ""
+        disabled: false
+    authentication: {}
+    metaSortKey: -1629569166699.625
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: req_c8e01ec2d3064241a48cf54f22998d34
+    parentId: fld_91f256caa68a469dbf90226a6a0b9890
+    modified: 1630878875844
+    created: 1630878867641
+    url: "{{ _.API_URL_V1 }}/questions/"
+    name: POST Questions
+    description: ""
+    method: POST
+    body:
+      mimeType: application/json
+      text: >-
+        {
+        	"question": "Uma confecção que produz biquínis, teve uma produção de 12 567 peças no mês de janeiro. No mês de fevereiro, como a procura foi ainda maior, foram produzidas 2 342 peças a mais que em janeiro. Quantas"
+        }
+    parameters: []
+    headers:
+      - id: pair_fe390c0c57564a3eb613c0ea9db1eb73
+        name: Authorization
+        value: Bearer {{ _.ACCESS_TOKEN }}
+        description: ""
+        disabled: false
+      - name: Content-Type
+        value: application/json
+        id: pair_6733d8d0d204439fb550343541771ee2
+    authentication: {}
+    metaSortKey: -1629569166687.125
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: req_cb980c3677814966bc12b1137ed36028
+    parentId: fld_91f256caa68a469dbf90226a6a0b9890
+    modified: 1630878411178
+    created: 1630878361230
+    url: "{{ _.API_URL_V1 }}/questions/a6b2086c-021c-4a03-aff1-fe7300fcd190/"
+    name: PUT Questions
+    description: ""
+    method: PUT
+    body:
+      mimeType: application/json
+      text: >-
+        {
+        	"question": "Uma confecção que produz biquínis, teve uma produção de 12 567 peças no mês de janeiro. No mês de fevereiro, como a procura foi ainda maior, foram produzidas 2 342 peças a mais que em janeiro. Quantas"
+        }
+    parameters: []
+    headers:
+      - id: pair_fe390c0c57564a3eb613c0ea9db1eb73
+        name: Authorization
+        value: Bearer {{ _.ACCESS_TOKEN }}
+        description: ""
+        disabled: false
+      - name: Content-Type
+        value: application/json
+        id: pair_6733d8d0d204439fb550343541771ee2
+    authentication: {}
+    metaSortKey: -1629569166674.625
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: req_7d89248a9c0443bb9b22138170013d6e
+    parentId: fld_91f256caa68a469dbf90226a6a0b9890
+    modified: 1630878451473
+    created: 1630878429799
+    url: "{{ _.API_URL_V1 }}/questions/a6b2086c-021c-4a03-aff1-fe7300fcd190/"
+    name: DELETE Questions
+    description: ""
+    method: DELETE
+    body: {}
+    parameters: []
+    headers:
+      - id: pair_fe390c0c57564a3eb613c0ea9db1eb73
+        name: Authorization
+        value: Bearer {{ _.ACCESS_TOKEN }}
+        description: ""
+        disabled: false
+    authentication: {}
+    metaSortKey: -1629569166662.125
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: req_c8925054211740b7877d5b905d63542c
+    parentId: fld_91f256caa68a469dbf90226a6a0b9890
+    modified: 1630851948626
+    created: 1630628481327
+    url: "{{ _.API_URL_V1 }}/answers/"
+    name: GET Answers List
+    description: ""
+    method: GET
+    body: {}
+    parameters: []
+    headers:
+      - id: pair_5778bdc43b0941d3843476c4ceaa3a46
+        name: Authorization
+        value: Bearer {{ _.ACCESS_TOKEN }}
+        description: ""
+    authentication: {}
+    metaSortKey: -1629569166649.625
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: req_e559327b48cb49edaafc65f9bc3787de
+    parentId: fld_91f256caa68a469dbf90226a6a0b9890
+    modified: 1630878487142
+    created: 1630628507890
+    url: "{{ _.API_URL_V1 }}/answers/bd7f1983-9216-437e-9237-7aeacdf5abbf/"
+    name: GET Answers
+    description: ""
+    method: GET
+    body: {}
+    parameters: []
+    headers:
+      - id: pair_3eba97ff7d81413f9d3270bdddd15afc
+        name: Authorization
+        value: Bearer {{ _.ACCESS_TOKEN }}
+        description: ""
+    authentication: {}
+    metaSortKey: -1629493524213.8125
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: req_4ff81f43c99c4a818fab0ef01d25a629
+    parentId: fld_91f256caa68a469dbf90226a6a0b9890
+    modified: 1630878620762
+    created: 1630878610843
+    url: "{{ _.API_URL_V1 }}/answers/"
+    name: POST Answers
+    description: ""
+    method: POST
+    body:
+      mimeType: application/json
+      text: |-
+        {
+          "question": "a6b2086c-021c-4a03-aff1-fe7300fcd190",
+          "answer": "14909",
+          "correct_answer": false 
+        }
+    parameters: []
+    headers:
+      - id: pair_3eba97ff7d81413f9d3270bdddd15afc
+        name: Authorization
+        value: Bearer {{ _.ACCESS_TOKEN }}
+        description: ""
+      - name: Content-Type
+        value: application/json
+        id: pair_989190a8196244d58f520c71f9d02c05
+    authentication: {}
+    metaSortKey: -1629493524201.3125
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: req_37535d23f6e042b2be2369ca5b030e97
+    parentId: fld_91f256caa68a469dbf90226a6a0b9890
+    modified: 1630878600593
+    created: 1630878503762
+    url: "{{ _.API_URL_V1 }}/answers/bd7f1983-9216-437e-9237-7aeacdf5abbf/"
+    name: PUT Answers
+    description: ""
+    method: PUT
+    body:
+      mimeType: application/json
+      text: |-
+        {
+          "question": "a6b2086c-021c-4a03-aff1-fe7300fcd190",
+          "answer": "14909",
+          "correct_answer": false 
+        }
+    parameters: []
+    headers:
+      - id: pair_3eba97ff7d81413f9d3270bdddd15afc
+        name: Authorization
+        value: Bearer {{ _.ACCESS_TOKEN }}
+        description: ""
+      - name: Content-Type
+        value: application/json
+        id: pair_989190a8196244d58f520c71f9d02c05
+    authentication: {}
+    metaSortKey: -1629493524188.8125
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: req_2f124129f97d41c1aaff18bd96e79e8e
+    parentId: fld_91f256caa68a469dbf90226a6a0b9890
+    modified: 1630878820717
+    created: 1630878813377
+    url: "{{ _.API_URL_V1 }}/answers/bd7f1983-9216-437e-9237-7aeacdf5abbf/"
+    name: DELETE Answers
+    description: ""
+    method: DELETE
+    body: {}
+    parameters: []
+    headers:
+      - id: pair_3eba97ff7d81413f9d3270bdddd15afc
+        name: Authorization
+        value: Bearer {{ _.ACCESS_TOKEN }}
+        description: ""
+    authentication: {}
+    metaSortKey: -1629493524176.3125
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: req_d7ef6929cc3147d5baaf165a3aa3c6eb
+    parentId: fld_91f256caa68a469dbf90226a6a0b9890
+    modified: 1630878672067
+    created: 1630628577273
+    url: "{{ _.API_URL_V1 }}/categories-questions/"
+    name: GET Categories-Questions List
+    description: ""
+    method: GET
+    body: {}
+    parameters: []
+    headers:
+      - id: pair_5763be651a46434f976b914b77f56523
+        name: Authorization
+        value: Bearer {{ _.ACCESS_TOKEN }}
+        description: ""
+    authentication: {}
+    metaSortKey: -1629493524163.8125
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: req_5ecbb64b61264b189beec9c5b7bd2b85
+    parentId: fld_91f256caa68a469dbf90226a6a0b9890
+    modified: 1630878676975
+    created: 1630628600781
+    url: "{{ _.API_URL_V1
+      }}/categories-questions/78692d51-2703-428f-bdca-55b2fd1bc5b5/"
+    name: GET Categories-Questions
+    description: ""
+    method: GET
+    body: {}
+    parameters: []
+    headers:
+      - id: pair_e98662de771240cfb3ac70577c92e3fe
+        name: Authorization
+        value: Bearer {{ _.ACCESS_TOKEN }}
+        description: ""
+    authentication: {}
+    metaSortKey: -1629455702970.9062
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: req_f85bc17f05c348be9c0caca8a4aba094
+    parentId: fld_91f256caa68a469dbf90226a6a0b9890
+    modified: 1630878749028
+    created: 1630878727897
+    url: "{{ _.API_URL_V1 }}/categories-questions/"
+    name: POST Categories-Questions
+    description: ""
+    method: POST
+    body:
+      mimeType: application/json
+      text: |-
+        {
+          "category": "de53151d-8046-4188-8799-626e986ab3b2",
+          "question": "a6b2086c-021c-4a03-aff1-fe7300fcd190"
+        }
+    parameters: []
+    headers:
+      - id: pair_e98662de771240cfb3ac70577c92e3fe
+        name: Authorization
+        value: Bearer {{ _.ACCESS_TOKEN }}
+        description: ""
+      - name: Content-Type
+        value: application/json
+        id: pair_2e5dcaef4a204130b0d11471cf8f9046
+    authentication: {}
+    metaSortKey: -1629450975321.793
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: req_fcbb082803ad470aba9da76a47a52f3d
+    parentId: fld_91f256caa68a469dbf90226a6a0b9890
+    modified: 1630878755779
+    created: 1630878688714
+    url: "{{ _.API_URL_V1
+      }}/categories-questions/78692d51-2703-428f-bdca-55b2fd1bc5b5/"
+    name: PUT Categories-Questions
+    description: ""
+    method: PUT
+    body:
+      mimeType: application/json
+      text: |-
+        {
+          "category": "de53151d-8046-4188-8799-626e986ab3b2",
+          "question": "a6b2086c-021c-4a03-aff1-fe7300fcd190"
+        }
+    parameters: []
+    headers:
+      - id: pair_e98662de771240cfb3ac70577c92e3fe
+        name: Authorization
+        value: Bearer {{ _.ACCESS_TOKEN }}
+        description: ""
+      - name: Content-Type
+        value: application/json
+        id: pair_2e5dcaef4a204130b0d11471cf8f9046
+    authentication: {}
+    metaSortKey: -1629446247672.6797
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: req_fea51faedfb748d7aa87114ab0a69acd
+    parentId: fld_91f256caa68a469dbf90226a6a0b9890
+    modified: 1630878780088
+    created: 1630878769847
+    url: "{{ _.API_URL_V1
+      }}/categories-questions/78692d51-2703-428f-bdca-55b2fd1bc5b5/"
+    name: DELETE Categories-Questions
+    description: ""
+    method: DELETE
+    body: {}
+    parameters: []
+    headers:
+      - id: pair_e98662de771240cfb3ac70577c92e3fe
+        name: Authorization
+        value: Bearer {{ _.ACCESS_TOKEN }}
+        description: ""
+    authentication: {}
+    metaSortKey: -1629441520023.5664
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: req_9af3f4b93d7c4d8787e87f26d1e8aceb
+    parentId: fld_91f256caa68a469dbf90226a6a0b9890
+    modified: 1630888718685
+    created: 1630628721953
+    url: "{{ _.API_URL_V1 }}/quiz/category/99cd235f-e77c-47d5-8d90-fd512475d6a3/"
+    name: GET Quiz By Category
+    description: ""
+    method: GET
+    body: {}
+    parameters: []
+    headers:
+      - id: pair_bb005aa3068b471884b61e71a6394e27
+        name: Authorization
+        value: Bearer {{ _.ACCESS_TOKEN }}
+        description: ""
+    authentication: {}
+    metaSortKey: -1629436792374.4531
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: req_80fc6b02531441e885c1ec9c723f1b28
+    parentId: fld_91f256caa68a469dbf90226a6a0b9890
+    modified: 1630886430301
+    created: 1630629262974
+    url: "{{ _.API_URL_V1 }}/quiz/category/de53151d-8046-4188-8799-626e986ab3b2/"
+    name: POST Quiz By Category
+    description: ""
+    method: POST
+    body:
+      mimeType: application/json
+      text: |-
+        [
+          {
+              "id_question": "a6b2086c-021c-4a03-aff1-fe7300fcd190",
+              "id_answer": "6b10d83d-8a8f-4851-bfe8-250e8f4791ef"  
+          },
+          {
+              "id_question": "e52b2c09-23d3-46e5-b3d1-7af62f05536c",
+              "id_answer": "ad724cdf-7db4-4a48-8d41-a7be3e214cb8"
+          },
+          {
+              "id_question": "208ada0e-9f97-4231-8cc0-eab886e3ab9e",
+              "id_answer": "37fab49e-edc7-4e53-ac49-9788d12e7cc5"
+          },
+          {
+              "id_question": "a60ed825-c1e0-4cff-8807-11de63f07f86",
+              "id_answer": "b939c122-0c1d-4dc9-af96-476267bb6965"
+          },
+          {
+              "id_question": "50baf93b-8902-447d-98d9-5f3b94e87f1f",
+              "id_answer": "c3391192-ca23-4143-8e59-6e486cd30eda"
+          },
+          {
+              "id_question": "a87c64a1-121f-4004-abb1-790e4522b8b6",
+              "id_answer": "269ca84b-55ff-4db3-a5f7-d825e5f75062"
+          },
+          {
+              "id_question": "40cb7abf-fd13-41dc-959d-e9e59a587dd7",
+              "id_answer": "881c0992-1844-483c-9ec0-a33cbd9fde40"
+          },
+          {
+              "id_question": "843a781d-6e88-49b7-8c2a-f4b77871b2a1",
+              "id_answer": "30f2ced3-3af5-4962-b8f5-902f85d2a993"
+          },
+          {
+              "id_question": "1847b6bc-241e-43fd-8b83-b2dc1f2d2e62",
+              "id_answer": "adc27240-2133-4dda-bb73-d0b8228af4b7"
+          },
+          {
+              "id_question": "2ad79a31-abd4-402c-b38e-aa4a1ed00946",
+              "id_answer": "be74b1de-aeca-4683-b7d3-a4c64f4df1b8"
+        	}
+        ]
+    parameters: []
+    headers:
+      - name: Content-Type
+        value: application/json
+        id: pair_4b091df5bca0486daac1a66de5a3e77b
+      - id: pair_6bf8c8871ad847ed975b8eca64909dda
+        name: Authorization
+        value: Bearer {{ _.ACCESS_TOKEN }}
+        description: ""
+    authentication: {}
+    metaSortKey: -1629427337076.2266
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: req_ac4dd5c5d32740f6a1e094c3c8ac4a4b
+    parentId: fld_91f256caa68a469dbf90226a6a0b9890
+    modified: 1630764691735
+    created: 1630764674752
+    url: "{{ _.API_URL_V1 }}/ranking/"
+    name: GET Ranking
+    description: ""
+    method: GET
+    body: {}
+    parameters: []
+    headers:
+      - id: pair_bb005aa3068b471884b61e71a6394e27
+        name: Authorization
+        value: Bearer {{ _.ACCESS_TOKEN }}
+        description: ""
+    authentication: {}
+    metaSortKey: -1629427337026.2266
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: req_d0b45907c8a84d9587a3e1697ea9bc4a
+    parentId: fld_91f256caa68a469dbf90226a6a0b9890
+    modified: 1630871698131
+    created: 1630847988711
+    url: "{{ _.API_URL_V1 }}/ranking/de53151d-8046-4188-8799-626e986ab3b2"
+    name: GET Ranking By Category
+    description: ""
+    method: GET
+    body: {}
+    parameters: []
+    headers:
+      - id: pair_bb005aa3068b471884b61e71a6394e27
+        name: Authorization
+        value: Bearer {{ _.ACCESS_TOKEN }}
+        description: ""
+    authentication: {}
+    metaSortKey: -1629422609402.1133
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: env_2b917d802cc3663fe29abf6d4efb3d5437bdf052
+    parentId: wrk_6a65d8f019c047f68281ed043b7c5102
+    modified: 1611847573721
+    created: 1611847573721
+    name: Base Environment
+    data: {}
+    dataPropertyOrder: null
+    color: null
+    isPrivate: false
+    metaSortKey: 1611847573721
+    _type: environment
+  - _id: jar_2b917d802cc3663fe29abf6d4efb3d5437bdf052
+    parentId: wrk_6a65d8f019c047f68281ed043b7c5102
+    modified: 1620415643042
+    created: 1611847573723
+    name: Default Jar
+    _type: cookie_jar
+  - _id: spc_5e92ec6314ad4c4bb4bb3e07ba646af3
+    parentId: wrk_6a65d8f019c047f68281ed043b7c5102
+    modified: 1611847573684
+    created: 1611847573684
+    fileName: Insomnia
+    contents: ""
+    contentType: yaml
+    _type: api_spec
+  - _id: env_f6f776e0f5b5473d9cc1538227e1d8ee
+    parentId: env_2b917d802cc3663fe29abf6d4efb3d5437bdf052
+    modified: 1630724224930
+    created: 1630628007821
+    name: desafio-backend
+    data:
+      API_URL_V1: http://127.0.0.1:8000/api/v1
+      API_URL_WITHOUT_V1: http://127.0.0.1:8000
+      ACCESS_TOKEN: "{% response 'body', 'req_352c17dbd5d544bd8abf3258e1bc7982',
+        'b64::JC5hY2Nlc3M=::46b', 'always', 60 %}"
+    dataPropertyOrder:
+      "&":
+        - API_URL_V1
+        - API_URL_WITHOUT_V1
+        - ACCESS_TOKEN
+    color: "#30bf08"
+    isPrivate: false
+    metaSortKey: 1611848096400
+    _type: environment
