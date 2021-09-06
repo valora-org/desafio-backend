@@ -30,6 +30,13 @@ sed -i "/^SECRET_KEY=/c\SECRET_KEY=${SECRET_KEY}" .env
 
 ```
 
+## Tests
+```bash
+# Run tests
+python manage.py test
+
+```
+
 ## Run
 ```bash
 # Run server
