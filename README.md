@@ -10,7 +10,7 @@
 - [X] Criar models conforme modelagem
 - [X] Implementação da autenticação JWT
 - [X] CRUD Usuários
-- [ ] CRUD Categoria
+- [X] CRUD Categoria
 - [ ] CRUD Questões
 
 
@@ -21,4 +21,6 @@
 * 3 - Criar virtual environment: python -m venv venv
 * 4 - venv\scripts\activate
 * 5 - pip install -r requirements.txt
-* 6 - python manage.py runserver
+* 6 - python manage.py migrate
+* 7 - python manage.py createsuperuser
+* 8 - python manage.py runserver
