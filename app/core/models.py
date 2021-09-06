@@ -101,7 +101,8 @@ class AnswerModel(Base):
         verbose_name_plural = 'Respostas'
 
     def __str__(self):
-        return f'{self.question} {self.answer}'
+        is_correct = 'Correta' if self.correct_answer is True else 'Incorreta'
+        return f'{self.question} {self.answer} - {is_correct}'
 
 
 class RankingModel(Base):

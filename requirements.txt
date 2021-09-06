@@ -1,9 +1,8 @@
-asgiref==3.4.1
-Django==3.2.6
-django-filter==2.4.0
-djangorestframework==3.12.4
-djangorestframework-simplejwt==4.8.0
-Markdown==3.3.4
-PyJWT==2.1.0
-pytz==2021.1
-sqlparse==0.4.1
+Requirement already satisfied: pytest in ./venv/lib/python3.8/site-packages (6.2.5)
+Requirement already satisfied: attrs>=19.2.0 in ./venv/lib/python3.8/site-packages (from pytest) (21.2.0)
+Requirement already satisfied: iniconfig in ./venv/lib/python3.8/site-packages (from pytest) (1.1.1)
+Requirement already satisfied: pluggy<2.0,>=0.12 in ./venv/lib/python3.8/site-packages (from pytest) (1.0.0)
+Requirement already satisfied: py>=1.8.2 in ./venv/lib/python3.8/site-packages (from pytest) (1.10.0)
+Requirement already satisfied: packaging in ./venv/lib/python3.8/site-packages (from pytest) (21.0)
+Requirement already satisfied: toml in ./venv/lib/python3.8/site-packages (from pytest) (0.10.2)
+Requirement already satisfied: pyparsing>=2.0.2 in ./venv/lib/python3.8/site-packages (from packaging->pytest) (2.4.7)
