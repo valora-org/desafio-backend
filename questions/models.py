@@ -2,7 +2,12 @@ from django.db import models
 
 
 class Category(models.Model):
-    name = models.CharField(max_length=255, verbose_name="Nome da categoria")
+    name = models.CharField(
+        max_length=255,
+        verbose_name="Nome da categoria",
+        unique=True,
+    )
+    is_active = models.BooleanField(default=False)
 
     class Meta:
         verbose_name = "Categoria"

@@ -13,5 +13,5 @@ class QuestionAdmin(admin.ModelAdmin):
 @admin.register(Category)
 class CategoryAdmin(admin.ModelAdmin):
     model = Category
-    list_display = ["id", "name"]
+    list_display = ["id", "name", "is_active"]
     search_fields = ["name"]
