@@ -1,13 +1,21 @@
+import random
+
 from django.core.exceptions import ObjectDoesNotExist
 from django.db import IntegrityError
 from django.utils.datastructures import MultiValueDictKeyError
+from rank.models import Rank
 from rest_framework import status
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.permissions import IsAdminUser, IsAuthenticated
 from rest_framework.response import Response
 
 from questions.models import Category, Question
-from questions.serializers import CategorySerializer, QuestionSerializer
+from questions.serializers import (
+    CategorySerializer,
+    QuestionSerializer,
+    QuizCategorySerializer,
+    QuizSerializer,
+)
 
 
 @api_view(["GET"])
@@ -56,16 +64,20 @@ def update_category(request, pk):
 @permission_classes([IsAdminUser])
 def delete_category(request, pk):
     try:
-        category_for_deletion = Category.objects.get(id=pk)
+        category_for_del = Category.objects.get(id=pk)
     except ObjectDoesNotExist:
         message = {"detail": f"Categoria ID {pk} não encontrada"}
         return Response(message, status=status.HTTP_400_BAD_REQUEST)
     except ValueError:
         message = {"detail": f"Valor: {pk} não corresponde a um ID válido"}
         return Response(message, status=status.HTTP_400_BAD_REQUEST)
-    # TODO Quando deletear as categorias, implementar para desativar as perguntas
-    category_for_deletion.is_active = False
-    category_for_deletion.save()
+
+    category_for_del.is_active = False
+    category_for_del.save()
+    questions_for_del = Question.objects.filter(category=category_for_del)
+    for question in questions_for_del:
+        question.is_active = False
+
     return Response("Categoria deletada")
 
 
@@ -172,3 +184,74 @@ def delete_question(request, pk):
     category_for_deletion.is_active = False
     category_for_deletion.save()
     return Response("Questão deletada")
+
+
+@api_view(["GET"])
+@permission_classes([IsAuthenticated])
+def get_quiz(request):
+    category = Category.objects.filter(is_active=True)
+    serializer = QuizCategorySerializer(category, many=True)
+    return Response(serializer.data)
+
+
+@api_view(["GET"])
+@permission_classes([IsAuthenticated])
+def quiz_questions(request, pk):
+    try:
+        category = Category.objects.get(id=pk)
+        lst_questions = Question.objects.filter(category=category).values_list(
+            "id", flat=True
+        )
+        rdm_questions = random.sample(list(lst_questions), 10)
+        questions = Question.objects.filter(id__in=rdm_questions)
+        serializer = QuizSerializer(questions, many=True)
+        return Response(serializer.data)
+    except ValueError:
+        message = {"detail": f"Não existe categoria com o ID {pk}"}
+    except ObjectDoesNotExist:
+        message = {"detail": f"Não existe categoria com o ID {pk}"}
+    return Response(message, status=status.HTTP_400_BAD_REQUEST)
+
+
+@api_view(["POST"])
+@permission_classes([IsAuthenticated])
+def answers_question(request):
+    user = request.user
+    data = request.data
+    response = {}
+    score = 0
+    category = None
+    for k, v in data.items():
+        try:
+            question = Question.objects.get(id=k)
+        except ObjectDoesNotExist:
+            message = {"detail": f"Não existe pergunta com o ID {k}"}
+            return Response(message, status=status.HTTP_400_BAD_REQUEST)
+        if category:
+            if category != question.category:
+                message = {
+                    "detail": f"Questão ID {k},  pertence a outra categoria"
+                }
+                return Response(message, status=status.HTTP_400_BAD_REQUEST)
+        else:
+            category = question.category
+        if question.correct_answer == v:
+            score += 1
+        else:
+            if score > 0:
+                score -= 1
+    response["Jogada Atual"] = f"Você obteve {score} Pts"
+    Rank.objects.create(score=score, category=category, profile=user)
+    rank = Rank.objects.filter(profile=user)
+    rank_global = rank.values_list("score", flat=True)
+    rank_by_category = rank.filter(category=category).values_list(
+        "score", flat=True
+    )
+    score_global = sum(rank_global)
+    score_by_category = sum(rank_by_category)
+    response["Pontuação global"] = f"Sua pontuação total: {score_global} Pts"
+    response[
+        "Pontuação global na categoria"
+    ] = f"Sua pontuação total nessa categoria: {score_by_category} Pts"
+
+    return Response(response)

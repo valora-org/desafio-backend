@@ -35,4 +35,19 @@ urlpatterns = [
         q.delete_question,
         name="delete-question",
     ),
+    path(
+        "quiz/",
+        q.get_quiz,
+        name="quiz-category",
+    ),
+    path(
+        "quiz/<str:pk>/",
+        q.quiz_questions,
+        name="quiz-question",
+    ),
+    path(
+        "quiz-answers/",
+        q.answers_question,
+        name="quiz-answers",
+    ),
 ]
