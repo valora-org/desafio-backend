@@ -13,4 +13,5 @@ router.register(r'startquiz', views.StartQuizViewSet, basename='startquiz')
 # The API URLs are now determined automatically by the router.
 urlpatterns = [
     path('', include(router.urls)),
+    path('result/', views.resultList, name="result-list")
 ]

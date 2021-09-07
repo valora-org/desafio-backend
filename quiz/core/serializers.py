@@ -1,4 +1,4 @@
-from quiz.core.models import Category, Question
+from quiz.core.models import Category, Question, Result
 from rest_framework import serializers
 
 
@@ -26,3 +26,9 @@ class StartQuizSerializer(serializers.Serializer):
     answer1 = serializers.CharField(max_length=255)
     answer2 = serializers.CharField(max_length=255)
     answer3 = serializers.CharField(max_length=255)
+
+class ResultSerializer(serializers.Serializer):
+    class Meta:
+        model = Result
+        fields = ['user', 'category', 'score']
+        
