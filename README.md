@@ -66,7 +66,7 @@ player: 1
 | Calcule quiz results and list user's point and ranking | POST | /result/ | player/admin | 
 
 ## Postman collection
-[![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/d2bd389aa67ec7f128ed)
+[![Run in Postman](https://run.pstmn.io/button.svg)](https://documenter.getpostman.com/view/4817709/U16hrRA5)
 
 ## Examples using httpie in bash
 ```bash
