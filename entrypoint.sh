@@ -17,6 +17,7 @@ then
     # Running Tests
     echo "RUNING TESTS"
     pytest
+    #TODO : stop database test after tests
 fi
 
 # Start server

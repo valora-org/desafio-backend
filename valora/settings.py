@@ -21,7 +21,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 
 SECRET_KEY = config('SECRET_KEY')
-DEBUG = config('DEBUG', default=True, cast=bool)
+DEBUG = config('DEBUG', default=False, cast=bool)
 
 
 # Application definition
@@ -137,9 +137,16 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'valora/static')
 # STATICFILES_DIRS = (os.path.join(BASE_DIR, 'static/'),)
 
 ALLOWED_HOSTS = config("ALLOWED_HOSTS")
-INTERNAL_IPS = config('INTERNAL_IPS')
 
 ADMINS = config("ADMINS")
 MANAGERS = config("MANAGERS")
 
 LOGIN_REDIRECT_URL = '/'
+
+AUTH_USER_MODEL = 'quiz.User'
+
+
+if DEBUG:
+    # # tricks to have debug toolbar when developing with docker
+    # `debug` is only True in templates if the vistor IP is in INTERNAL_IPS.
+    INTERNAL_IPS = type(str('c'), (), {'__contains__': lambda *a: True})()

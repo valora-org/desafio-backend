@@ -16,6 +16,7 @@ services:
       - "${HOST}:${DATABASE_PORT}:3306"
     networks:
       - django-network
+      
   db-test:
     image: mariadb:latest
     restart: always

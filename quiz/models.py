@@ -1,8 +1,27 @@
 from django.db import models
-from django.contrib.auth.models import User
+from django.contrib.auth.models import AbstractUser
 from django.utils.translation import ugettext_lazy as _
 
-        
+
+class User(AbstractUser):
+    ROLE = [
+        (0, _('Player')),
+        (1, _('Admin')),
+    ]
+
+    role = models.PositiveSmallIntegerField(choices=ROLE, blank=True, null=True, verbose_name=_("Player Admin"))
+
+    def __str__(self):
+        return self.username
+    
+    class Meta:
+        permissions = (
+            ("play", "To play the game"),
+            ("see_ranking", "To see the ranking"),
+            ("create_questions", "To create new questions"),
+            ("create_answers", "To create new answers"),
+            )
+
 class Quiz(models.Model):
     CATEGORY = [
         (0, _('Music')),
@@ -21,19 +40,23 @@ class Quiz(models.Model):
     # user = models.OneToOneField(Player, on_delete=models.CASCADE, primary_key=True)
     score = models.IntegerField(default=0, verbose_name=_("Score"))
     category = models.PositiveSmallIntegerField(choices=CATEGORY, verbose_name=_("Category"), default=0)
+    user = models.ManyToManyField(User, verbose_name=_("User"))
+
+    def __str__(self):
+        return str(self.CATEGORY[self.category][-1])
 
 class Question(models.Model):
     quiz = models.ForeignKey(Quiz, on_delete=models.CASCADE)
     question = models.CharField(max_length=200, verbose_name=_("Question"), blank=True)
     true_answer = models.PositiveSmallIntegerField(verbose_name=_("True Answer"), default=0)
 
+    def __str__(self):
+        return self.question
+
 class Answer(models.Model):
     question = models.ForeignKey(Question, on_delete=models.CASCADE)
     answer = models.CharField(max_length=200, verbose_name=_("Answer"), blank=True)
-    
-class Player(User):
-    admin = models.BooleanField(default=False, verbose_name=_("Player Admin"))
-    quiz = models.ForeignKey(Quiz, on_delete=models.CASCADE)
 
     def __str__(self):
-        return self.username
+        return self.answer
+
