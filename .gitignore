@@ -1,3 +1,4 @@
 .env
 .quiz/
 *.pyc
+__pycache__/
