@@ -1,4 +1,6 @@
 from django.contrib.auth.hashers import make_password
+from django.db import IntegrityError
+from django.utils.datastructures import MultiValueDictKeyError
 from rest_framework import status
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.permissions import IsAdminUser, IsAuthenticated
@@ -45,9 +47,11 @@ def register_user(request):
         )
         serializer = UserSerializerWithToken(user, many=False)
         return Response(serializer.data)
-    except:
-        message = {"detail": "Usuário com e-mail já existe"}
-        return Response(message, status=status.HTTP_400_BAD_REQUEST)
+    except MultiValueDictKeyError:
+        message = {"detail": "Parâmetros inválidos"}
+    except IntegrityError:
+        message = {"detail": "E-mail já cadastrado"}
+    return Response(message, status=status.HTTP_400_BAD_REQUEST)
 
 
 @api_view(["GET"])
