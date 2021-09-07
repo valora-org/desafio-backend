@@ -13,7 +13,7 @@
 - [X] CRUD Categoria
 - [X] CRUD Questões
 - [X] Implementação do QUIZ
-- [ ] Implementação dos filtros do Rank
+- [X] Implementação dos filtros do Rank
 
 
 ## Download & Instruções para instalação.
