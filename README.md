@@ -63,4 +63,27 @@ player: 1
 | New Question | POST | question/ | admin | 
 | List of categories avalaible to quiz | GET | /choosequiz/ | player/admin | 
 | List of 10 questions and answers of selected category | GET | /startquiz/<id_category>/ | player/admin | 
-| Calcule results and list user's point and ranking | GET | TO DO | player/admin | 
+| Calcule quiz results and list user's point and ranking | POST | /result/ | player/admin | 
+
+
+## Examples using httpie in bash
+```bash
+# List of categories
+http -a admin:1 http://127.0.0.1:8000/category/
+# Category 1 description
+http -a admin:1 http://127.0.0.1:8000/category/1/
+# New category
+echo '{"category":"C4"}' | http -a admin:1 POST http://127.0.0.1:8000/category/
+# List of questions
+http -a admin:1 http://127.0.0.1:8000/question/
+# Question 1 description
+http -a admin:1 http://127.0.0.1:8000/question/1/
+# New question
+echo '{"category": "http://127.0.0.1:8000/category/3/","question": "Q12","answer1": "A1","answer2": "A2","answer3": "A3","right_answer": "A3"}' | http -a admin:1 POST http://127.0.0.1:8000/question/
+# List of categories avalaible to quiz
+http -a player:1 http://127.0.0.1:8000/choosequiz/
+# List of 10 questions and answers of category 1
+http -a player:1 http://127.0.0.1:8000/startquiz/1/
+# Calcule quiz results and list user's score and ranking
+echo '{"category":"1", "answers": {"1":"A1", "2":"A1", "3":"A1", "4":"A2", "5":"A3", "6":"A1", "7":"A1", "8":"A1", "9":"A1", "10":"A1"}}' | http -a player:1 POST http://127.0.0.1:8000/result/
+```
