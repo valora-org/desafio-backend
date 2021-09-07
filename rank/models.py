@@ -24,4 +24,4 @@ class Rank(models.Model):
         db_table = "rank"
 
     def __str__(self) -> str:
-        return self.score
+        return f"{self.profile} - {self.score}"
