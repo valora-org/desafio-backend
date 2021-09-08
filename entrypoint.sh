@@ -5,8 +5,8 @@ echo "INSTALL NEW REQUIREMENTS"
 pip install -r requirements.txt
 
 # Creating super user
-echo "CREATE SUPER USER"
-python manage.py createsuperuser
+# echo "CREATE SUPER USER"
+# python manage.py createsuperuser
 
 # Collect static files
 echo "COLLECT STATIC FILES"

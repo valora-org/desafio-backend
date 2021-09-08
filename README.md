@@ -23,7 +23,6 @@ o comando fará os seguintes procedimentos:
 * Criará um container django a partir do Dockerfile especificado;
 * Executará o entrypoint especificado no docker-compose.yml:
   * O entrypoint fará a coleta de arquivos estáticos;
-  * Criará um super usuário;
   * Criará novas migrations;
   * Aplicará as migrations ao banco de dados;
   * Fará testes unitários se a variável `DEBUG` estiver definida com `True` no `.env`;
@@ -34,7 +33,7 @@ Para acessar a aplicação no navegador, basta acessar o HOST especificado no ar
 
 192.168.0.175:8000
 
-> **_NOTE:_**  Se não desejar criar um super usuário no início do projeto, comente o código `python manage.py createsuperuser` no arquivo `entrypoint.sh`. Caso não desabilite este trecho de código, é necessário ficar de olho no shell, pois a cada execução do container, será pedido para criar um novo super usuário.
+> **_NOTE:_**  Se desejar criar um super usuário, é necessário acessar o shell do django.
 
 ### **Testes**
 
