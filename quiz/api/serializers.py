@@ -15,7 +15,7 @@ class RankingSerializer(serializers.ModelSerializer):
 class QuizSerializer(serializers.ModelSerializer):
     class Meta:
         model = models.Quiz
-        fields = ['id', 'category']
+        fields = ['id', 'category', 'user']
 
 class QuestionSerializer(serializers.ModelSerializer):
     class Meta:

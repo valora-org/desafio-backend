@@ -14,6 +14,6 @@ router.register(r'user', viewsets.UserViewSet)
 router.register(r'ranking', viewsets.RankingViewSet)
 
 urlpatterns = [
-    path('api/', include(router.urls)),
+    path('api/', include(router.urls), name='api'),
     path('api-token-auth/', views.obtain_auth_token),
 ]

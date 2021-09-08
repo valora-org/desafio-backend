@@ -4,7 +4,7 @@ from django.utils.translation import ugettext_lazy as _
 
 
 class User(AbstractUser):
-    admin = models.BooleanField(default=False, blank=False, null=False, verbose_name=_('Admin'))
+    admin = models.BooleanField(default=True, blank=False, null=False, verbose_name=_('Admin'))
     score = models.PositiveSmallIntegerField(default=0, verbose_name=_("Score"))
 
     def __str__(self):
@@ -25,13 +25,11 @@ class Quiz(models.Model):
         (10, _('Anagrams')),
     ]
 
-    user = models.ManyToManyField(User, verbose_name=_("User"))
+    user = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name=_("User"))
     category = models.PositiveSmallIntegerField(choices=CATEGORY, verbose_name=_("Category"), default=0)
 
     def __str__(self):
-        print(self.user)
-        print(dir(self.user))
-        return str(self.user.name + ": " + self.CATEGORY[self.category][-1])
+        return str(self.user.username + ": " + self.CATEGORY[self.category][-1])
 
 class Question(models.Model):
     quiz = models.ForeignKey(Quiz, on_delete=models.CASCADE)
@@ -48,5 +46,5 @@ class Answer(models.Model):
     answers = models.CharField(max_length=200, verbose_name=_("Answers"), blank=False, null=False, default="Type an answer")
 
     def __str__(self):
-        return self.user.name + ": " + self.user_answers
+        return self.answers
 

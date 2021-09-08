@@ -17,8 +17,7 @@ Including another URLconf
 from django.conf import settings
 from django.contrib import admin
 from django.urls import path
-from django.shortcuts import redirect
-from django.conf.urls import (include, handler400, handler403, handler404, handler500)
+from django.conf.urls import include
     
 from django.views.generic.base import RedirectView
 

@@ -3,6 +3,9 @@ from decouple import config
 from valora import settings
 
 
+URL = 'http://' + str(config('HOST')) + ":" + str(config('DJANGO_PORT'))
+
+
 @pytest.fixture(scope='session')
 def django_db_setup():
     settings.DATABASES['default'] = {
@@ -11,5 +14,5 @@ def django_db_setup():
         'USER':     config('MYSQL_TEST_USER'),
         'PASSWORD': config('MYSQL_TEST_PASSWORD'),
         'HOST':     config('HOST'),
-        'PORT':     config('DATABASE_PORT'),
+        'PORT':     config('DATABASE_TEST_PORT'),
     }

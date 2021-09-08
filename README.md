@@ -55,6 +55,12 @@ Se a variável `DEBUG` estiver definida como `True` no `.env`, a aplicação ir�
 
 Todos os endpoints da aplicação estão disponíveis na rota `api/`.
 
+* api/quiz/
+* api/question/
+* api/answer/
+* api/user/
+* api/ranking/
+
 ---
 
 ## **Estruturação da aplicação**
@@ -65,3 +71,5 @@ Todos os endpoints da aplicação estão disponíveis na rota `api/`.
 * Permissões
 * Senha de usuário através do admin (Porque o django faz encryptação da senha)
 * Separar ranking de criar novo usuário
+* Retorno de perguntas aleatórias
+* Testes não estão acessando banco de testes por algum raio de motivo
