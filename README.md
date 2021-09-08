@@ -1,79 +1,53 @@
-## <img src="https://valora.cc/img/logo2.png" alt="Valora" width="24" /> Desafio Backend Python
+# **Valora**
+## **Como executar a aplicação**
 
-Parabéns! Se você chegou até aqui significa que você passou pelas etapas mais difíceis do nosso processo seletivo. Somos extremamente criteriosos com as pessoas que vão integrar nosso time porque só aceitamos pessoas incríveis!
+---
 
-Agora é a parte fácil. Chegou a hora de mostrar todas as suas habilidades de transformar café em código. Vamos lá?
+### **Requisitos**
 
-Nesse desafio iremos avaliar suas habilidades em:
+* Docker
+* 
 
-* **Python**
-* **Django**
-* **Django REST Framework**
-* **Pytest**
-* **Docker**
+> **_NOTE:_**  Podem haver outros requisitos não detectados, como gcc, g++, mysqlclient.
 
-Você irá desenvolver a API de uma aplicação para a criação de um quiz de perguntas e respostas!
+---
+### **Configurações**
 
-**A aplicação deverá prover o registro e autenticação de dois tipos de usuários**:
+Primeiro de tudo, altere o arquivo `.env` da forma como desejar. O indicado é que apenas se alterem as portas que serão abertas, de forma que não haja conflito com outras aplicações.
 
-* Admin
-* Player
+---
+### **Execução**
 
-**Cada quiz é composto por**:
+> **_NOTE:_**  A primeira execução pode levar alguns minutos para preparar as aplicações, devido à ter que fazer download das imagens docker e criação de novos containers.
 
-* 10 perguntas com 3 respostas onde apenas 1 é correta.
-* Cada resposta correta acumula a 1 ponto.
-* Cada resposta errada perde 1 ponto. A menor pontuação possível é 0.
-* Possui uma categoria.
+Para executar o projeto, basta utilizar o comando `docker-compose up`.
+o comando fará os seguintes procedimentos:
 
-**Ao iniciar o jogo**:
+* Criará dois bancos de dados, sendo um para o projeto e outro para testes;
+* Conectará o banco de dados do projeto ao PHPMyadmin;
+* Criará um container django a partir do Dockerfile especificado;
+* Executará o entrypoint especificado no docker-compose.yml:
+  * O entrypoint fará a coleta de arquivos estáticos;
+  * Criará novas migrations;
+  * Aplicará as migrations ao banco de dados;
+  * Fará testes unitários se a variável `DEBUG` estiver definida com `True` no `.env`;
+  * Iniciará o servidor web;
 
-* O player deve escolher uma categoria válida e receber um quiz com perguntas aleatórias referentes a categoria escolhida.
 
-**Ao finalizar o jogo**:
+Para acessar a aplicação no navegador, basta acessar o HOST especificado no arquivo `.env`, seguido da porta de cada container. Ex:
 
-* O player deve receber a contabilização dos seus pontos juntamente com a sua posição atual no ranking global. Não há limitação de quantos quizzes o player pode responder.
+192.168.0.175:8000
 
-**O ranking global**:
+### **Testes**
 
-* É a contabilização dos pontos acumulados por cada player.
-* Ranking geral considera todas as categorias.
-* Ranking por categoria agrupa por categorias.
+Para executar os testes unitários de acordo com as configurações do arquivo `pytest.ini`, basta utilizar o comando `pytest`.
 
-**Permissões**:
+> **_NOTE:_**  Necessário acessar o shell do container do django.
 
-* Todos os endpoints devem estar protegidos por autenticação.
-* Usuários do tipo **Admin** tem permissão para criar perguntas e respostas para os quizzes.
-* Usuários do tipo **Player** tem permissão para jogar e consultar o ranking.
+### **Debug**
 
-## Requisitos
+Se a variável `DEBUG` estiver definida como `True` no `.env`, a aplicação irá rodar em modo debug, e o desenvolvedor terá acesso ao menu do pacote debug_toolbar na aplicação.
 
-* O projeto precisa estar configurado para rodar em um ambiente macOS ou Ubuntu (preferencialmente como container Docker).
-* Deve anexar ao seu projeto uma coleção do postman com todos os endpoints criados e exemplos de utilização.
+### **API**
 
-**Para executar seu código devemos executar apenas os seguintes comandos**:
-
-* git clone $seu-fork
-* cd $seu-fork
-* comando para instalar dependências
-* comando para executar a aplicação
-
-## Critério de avaliação
-
-* **Organização do código**: Separação de módulos, view e model
-* **Clareza**: O README explica de forma resumida qual é o problema e como pode rodar a aplicação?
-* **Assertividade**: A aplicação está fazendo o que é esperado? Se tem algo faltando, o README explica o porquê?
-* **Legibilidade do código** (incluindo comentários)
-* **Segurança**: Existe alguma vulnerabilidade clara?
-* **Cobertura de testes** (Não esperamos cobertura completa mas é importante garantir o fluxo principal)
-* **Histórico de commits** (estrutura e qualidade)
-* **UX**: A API é intuitiva?
-* **Escolhas técnicas**: A escolha das bibliotecas, banco de dados, arquitetura, etc, é a melhor escolha para a aplicação?
-
-## Dúvidas
-
-Quaisquer dúvidas que você venha a ter, consulte as issues para ver se alguém já não a fez e caso você não ache sua resposta, abra você mesmo uma nova issue!
-
-Ao completar o desafio, submeta um pull-request a esse repositório com uma breve explicação das decisões tomadas e principalmente as instruções para execução do projeto.
-
-**Boa sorte! ;)**
+Todos os endpoints da aplicação estão disponíveis na rota `api/`.

@@ -9,7 +9,7 @@ class User(AbstractUser):
         (1, _('Admin')),
     ]
 
-    role = models.PositiveSmallIntegerField(choices=ROLE, blank=True, null=True, verbose_name=_("Player Admin"))
+    role = models.PositiveSmallIntegerField(choices=ROLE, blank=False, null=False, verbose_name=_("Role"))
 
     def __str__(self):
         return self.username
@@ -37,10 +37,9 @@ class Quiz(models.Model):
         (10, _('Anagrams')),
     ]
 
-    # user = models.OneToOneField(Player, on_delete=models.CASCADE, primary_key=True)
+    user = models.ManyToManyField(User, verbose_name=_("User"))
     score = models.IntegerField(default=0, verbose_name=_("Score"))
     category = models.PositiveSmallIntegerField(choices=CATEGORY, verbose_name=_("Category"), default=0)
-    user = models.ManyToManyField(User, verbose_name=_("User"))
 
     def __str__(self):
         return str(self.CATEGORY[self.category][-1])

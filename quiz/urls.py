@@ -7,12 +7,12 @@ from quiz.api import viewsets
 app_name = 'quiz'
 
 router = routers.DefaultRouter()
-router.register(r'quiz', viewsets.QuizViewSet)
-router.register(r'question', viewsets.QuestionViewSet)
-router.register(r'answer', viewsets.AnswerViewSet)
-router.register(r'user', viewsets.UserViewSet)
+router.register(r'/quiz', viewsets.QuizViewSet)
+router.register(r'/question', viewsets.QuestionViewSet)
+router.register(r'/answer', viewsets.AnswerViewSet)
+router.register(r'/user', viewsets.UserViewSet)
 
 urlpatterns = [
-    path('', include(router.urls)),
+    path('api', include(router.urls)),
     # path('', views.quiz, name="Profile"),
 ]

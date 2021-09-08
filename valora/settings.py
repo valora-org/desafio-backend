@@ -36,6 +36,7 @@ INSTALLED_APPS = [
     'reversion',
     'debug_toolbar',
     'rest_framework',
+    'django_filters',
     'tests',
     'quiz',
 ]
@@ -150,3 +151,7 @@ if DEBUG:
     # # tricks to have debug toolbar when developing with docker
     # `debug` is only True in templates if the vistor IP is in INTERNAL_IPS.
     INTERNAL_IPS = type(str('c'), (), {'__contains__': lambda *a: True})()
+
+REST_FRAMEWORK = {
+    'DEFAULT_FILTER_BACKENDS': ['django_filters.rest_framework.DjangoFilterBackend']
+}

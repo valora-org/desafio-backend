@@ -10,12 +10,12 @@ class QuizSerializer(serializers.ModelSerializer):
 class QuestionSerializer(serializers.ModelSerializer):
     class Meta:
         model = models.Question
-        fields = ['id', 'question', 'true_answer']
+        fields = ['id', 'quiz', 'question', 'true_answer']
 
 class AnswerSerializer(serializers.ModelSerializer):
     class Meta:
         model = models.Answer
-        fields = ['id', 'answer']
+        fields = ['id', 'question', 'answer']
 
 class UserSerializer(serializers.ModelSerializer):
     class Meta:

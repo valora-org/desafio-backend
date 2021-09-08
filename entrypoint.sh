@@ -9,6 +9,9 @@ echo "COLLECT STATIC FILES"
 python manage.py collectstatic --noinput
 
 # Apply database migrations
+echo "MAKING MIGRATIONS"
+python manage.py makemigrations
+
 echo "APPLY DATABASE MIGRATIONS"
 python manage.py migrate
 
