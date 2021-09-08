@@ -1,8 +1,5 @@
 # **Valora**
 ## **Como executar a aplicação**
-
----
-
 ### **Requisitos**
 
 * Docker
@@ -38,16 +35,29 @@ Para acessar a aplicação no navegador, basta acessar o HOST especificado no ar
 
 192.168.0.175:8000
 
+---
+
 ### **Testes**
 
 Para executar os testes unitários de acordo com as configurações do arquivo `pytest.ini`, basta utilizar o comando `pytest`.
 
 > **_NOTE:_**  Necessário acessar o shell do container do django.
 
+---
+
 ### **Debug**
 
 Se a variável `DEBUG` estiver definida como `True` no `.env`, a aplicação irá rodar em modo debug, e o desenvolvedor terá acesso ao menu do pacote debug_toolbar na aplicação.
 
+---
+
 ### **API**
 
 Todos os endpoints da aplicação estão disponíveis na rota `api/`.
+
+---
+
+## **Estruturação da aplicação**
+### **asdf**
+
+## **Pontos a Melhorar**

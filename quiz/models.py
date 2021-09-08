@@ -4,23 +4,11 @@ from django.utils.translation import ugettext_lazy as _
 
 
 class User(AbstractUser):
-    ROLE = [
-        (0, _('Player')),
-        (1, _('Admin')),
-    ]
-
-    role = models.PositiveSmallIntegerField(choices=ROLE, blank=False, null=False, verbose_name=_("Role"))
+    role = models.BooleanField(default=False, blank=False, null=False, verbose_name=_('Role'))
+    score = models.PositiveSmallIntegerField(default=0, verbose_name=_("Score"))
 
     def __str__(self):
         return self.username
-    
-    class Meta:
-        permissions = (
-            ("play", "To play the game"),
-            ("see_ranking", "To see the ranking"),
-            ("create_questions", "To create new questions"),
-            ("create_answers", "To create new answers"),
-            )
 
 class Quiz(models.Model):
     CATEGORY = [
@@ -38,7 +26,6 @@ class Quiz(models.Model):
     ]
 
     user = models.ManyToManyField(User, verbose_name=_("User"))
-    score = models.IntegerField(default=0, verbose_name=_("Score"))
     category = models.PositiveSmallIntegerField(choices=CATEGORY, verbose_name=_("Category"), default=0)
 
     def __str__(self):
@@ -46,16 +33,18 @@ class Quiz(models.Model):
 
 class Question(models.Model):
     quiz = models.ForeignKey(Quiz, on_delete=models.CASCADE)
-    question = models.CharField(max_length=200, verbose_name=_("Question"), blank=True)
-    true_answer = models.PositiveSmallIntegerField(verbose_name=_("True Answer"), default=0)
+    # user = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name=_("User"))
+    question = models.CharField(max_length=200, verbose_name=_("Question"), blank=False, null=False, default="Type an question")
+    correct_answer = models.PositiveSmallIntegerField(verbose_name=_("Correct Answer"), default=0, null=False,)
+    user_answer = models.PositiveSmallIntegerField(verbose_name=_("User Answer"), default=0, blank=True)
 
     def __str__(self):
         return self.question
 
 class Answer(models.Model):
     question = models.ForeignKey(Question, on_delete=models.CASCADE)
-    answer = models.CharField(max_length=200, verbose_name=_("Answer"), blank=True)
+    answers = models.CharField(max_length=200, verbose_name=_("Answers"), blank=False, null=False, default="Type an answer")
 
     def __str__(self):
-        return self.answer
+        return self.user.name + ": " + self.user_answers
 

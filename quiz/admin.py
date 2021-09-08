@@ -1,8 +1,7 @@
 from django.contrib import admin
 from reversion.admin import VersionAdmin
-from .models import Quiz, Question
 from django.contrib.auth.admin import UserAdmin
-from .models import User
+from .models import User, Quiz, Question, Answer
 
 admin.site.register(User, UserAdmin)
 
@@ -14,3 +13,6 @@ class QuizAdmin(VersionAdmin):
 class QuestionAdmin(VersionAdmin):
     pass
 
+@admin.register(Answer)
+class AnswerAdmin(VersionAdmin):
+    pass
