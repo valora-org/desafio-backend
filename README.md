@@ -7,12 +7,10 @@
 
 > **_NOTE:_**  Podem haver outros requisitos não detectados, como gcc, g++, mysqlclient.
 
----
 ### **Configurações**
 
 Primeiro de tudo, altere o arquivo `.env` da forma como desejar. O indicado é que apenas se alterem as portas que serão abertas, de forma que não haja conflito com outras aplicações.
 
----
 ### **Execução**
 
 > **_NOTE:_**  A primeira execução pode levar alguns minutos para preparar as aplicações, devido à ter que fazer download das imagens docker e criação de novos containers.
@@ -25,6 +23,7 @@ o comando fará os seguintes procedimentos:
 * Criará um container django a partir do Dockerfile especificado;
 * Executará o entrypoint especificado no docker-compose.yml:
   * O entrypoint fará a coleta de arquivos estáticos;
+  * Criará um super usuário;
   * Criará novas migrations;
   * Aplicará as migrations ao banco de dados;
   * Fará testes unitários se a variável `DEBUG` estiver definida com `True` no `.env`;
@@ -35,7 +34,7 @@ Para acessar a aplicação no navegador, basta acessar o HOST especificado no ar
 
 192.168.0.175:8000
 
----
+> **_NOTE:_**  Se não desejar criar um super usuário no início do projeto, comente o código `python manage.py createsuperuser` no arquivo `entrypoint.sh`. Caso não desabilite este trecho de código, é necessário ficar de olho no shell, pois a cada execução do container, será pedido para criar um novo super usuário.
 
 ### **Testes**
 
@@ -43,13 +42,11 @@ Para executar os testes unitários de acordo com as configurações do arquivo `
 
 > **_NOTE:_**  Necessário acessar o shell do container do django.
 
----
 
 ### **Debug**
 
 Se a variável `DEBUG` estiver definida como `True` no `.env`, a aplicação irá rodar em modo debug, e o desenvolvedor terá acesso ao menu do pacote debug_toolbar na aplicação.
 
----
 
 ### **API**
 
@@ -61,7 +58,6 @@ Todos os endpoints da aplicação estão disponíveis na rota `api/`.
 * api/user/
 * api/ranking/
 
----
 
 ## **Estruturação da aplicação**
 ### **valora**
@@ -77,8 +73,6 @@ Ficam os testes unitários
 Onde ficam as regras do jogo, as models e as apis do projeto.
 
 
-
----
 ## **Pontos à Melhorar**
 
 * O código para atribuir permissões para os jogadores gerou redundâncias desnecessárias no viewset;
@@ -89,6 +83,5 @@ Onde ficam as regras do jogo, as models e as apis do projeto.
 * O relacionamento das models poderia ser melhor estruturado.
 * A `correct_answer` é definida antes de haver qualquer resposta salva.
 
----
 
 # FICO À DISPOSIÇÃO PARA ESCLARECER DÚVIDAS SOBRE O PROJETO
