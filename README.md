@@ -61,3 +61,7 @@ Todos os endpoints da aplicação estão disponíveis na rota `api/`.
 ### **asdf**
 
 ## **Pontos a Melhorar**
+
+* Permissões
+* Senha de usuário através do admin (Porque o django faz encryptação da senha)
+* Separar ranking de criar novo usuário

@@ -2,15 +2,20 @@ from quiz import models
 from rest_framework import serializers
 
 
-# class UserSerializer(serializers.ModelSerializer):
-#     class Meta:
-#         model = models.User
-#         fields = ['id', 'role', 'username', 'score']
+class UserSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = models.User
+        fields = ['id', 'username', 'admin']
+
+class RankingSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = models.User
+        fields = ['id', 'username', 'score']
 
 class QuizSerializer(serializers.ModelSerializer):
     class Meta:
         model = models.Quiz
-        fields = ['id', 'user', 'category']
+        fields = ['id', 'category']
 
 class QuestionSerializer(serializers.ModelSerializer):
     class Meta:
