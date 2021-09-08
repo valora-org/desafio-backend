@@ -8,6 +8,11 @@ import random
 
 
 class UserViewSet(viewsets.ModelViewSet):
+    """
+    `UserViewSet` é a viewset de `User` model.
+    provê acesso aos dados de usuários:
+    `username` e `admin`
+    """
     permission_classes = [permissions.IsAuthenticated]
     serializer_class = serializers.UserSerializer
     filter_backends =  (SearchFilter,)
@@ -16,6 +21,11 @@ class UserViewSet(viewsets.ModelViewSet):
     queryset = models.User.objects.all()
 
 class RankingViewSet(viewsets.ReadOnlyModelViewSet):
+    """
+    `RankingViewSet` é uma viewset de `User` model.
+    provê acesso ao ranking global do score de cada usuário:
+    `username` e `score`
+    """
     permission_classes = [permissions.IsAuthenticated]
     serializer_class = serializers.RankingSerializer
     filter_backends =  (SearchFilter,)
@@ -24,6 +34,11 @@ class RankingViewSet(viewsets.ReadOnlyModelViewSet):
     queryset = models.User.objects.filter(admin=False)
 
 class QuizViewSet(viewsets.ModelViewSet):
+    """
+    `QuizViewSet` é uma viewset da `Quiz` model.
+    provê criação de novos quizzes, com determinadas categorias, desde que o usuário seja admin.
+    `user` e `category`
+    """
     permission_classes = [permissions.IsAuthenticated]
     serializer_class = serializers.QuizSerializer
     queryset = models.Quiz.objects.all()
@@ -50,6 +65,11 @@ class QuizViewSet(viewsets.ModelViewSet):
             raise PermissionDenied()
 
 class QuestionViewSet(viewsets.ModelViewSet):
+    """
+    `QuestionViewSet` é uma viewset da `Question` model.
+    provê criação de novas Perguntas e permite que o Player responda a uma pergunta.
+    `question`, `user_answer`, `correct_answer`
+    """
     permission_classes = [permissions.IsAuthenticated]
     queryset = models.Question.objects.all()
     serializer_class = serializers.QuestionSerializer
@@ -92,6 +112,11 @@ class QuestionViewSet(viewsets.ModelViewSet):
             raise PermissionDenied()
 
 class AnswerViewSet(viewsets.ModelViewSet):
+    """
+    `AnswerViewSet` é uma viewset da `Answer` model.
+    provê criação de no máximo 3 Respostas para determinada questão, apenas pelo usuário admin.
+    `question`, `answer`
+    """
     permission_classes = [permissions.IsAuthenticated]
     queryset = models.Answer.objects.all()
     serializer_class = serializers.AnswerSerializer

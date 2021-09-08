@@ -33,7 +33,6 @@ class Quiz(models.Model):
 
 class Question(models.Model):
     quiz = models.ForeignKey(Quiz, on_delete=models.CASCADE)
-    # user = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name=_("User"))
     question = models.CharField(max_length=200, verbose_name=_("Question"), blank=False, null=False, default="Type an question")
     correct_answer = models.PositiveSmallIntegerField(verbose_name=_("Correct Answer"), default=0, null=False,)
     user_answer = models.PositiveSmallIntegerField(verbose_name=_("User Answer"), default=0, blank=True)

@@ -1,38 +1,40 @@
-from django.urls import reverse_lazy, reverse
 from rest_framework import status
 from rest_framework.test import APITestCase
 from quiz.models import User
 from tests.conftest import URL
 
-class AccountTests(APITestCase):
+class UserTests(APITestCase):
     def test_check_user(self):
         route = '/api/user/'
-        user = User.objects.create_user('test', 'Pas$w0rd')
-        self.assertTrue(self.client.login(username='test', password='Pas$w0rd'))
+        user = User.objects.create_user('valora', 'Pas$w0rd')
+        self.client.force_authenticate(user)
         response = self.client.get(URL + route)
         self.assertEqual(response.status_code, status.HTTP_200_OK)
 
-    def test_create_user(self):
-        # Necessário logar para acessar
+    def test_create_user_1(self):
         route = '/api/user/'
         data = {
-            'id' : 6,
             'username': 'Test',
             'admin': 'False'
         }
         response = self.client.post(URL + route, data, format='json')
         self.assertEqual(response.status_code, status.HTTP_403_FORBIDDEN)
-        # self.assertEqual(User.objects.count(), 1)
-        self.assertEqual(User.objects.get().username, 'Test')
-        self.assertEqual(User.objects.get().admin, 'False')
 
-    # def test_create_account(self):
-    #     url = reverse('api/quiz')
-    #     data = {
-    #         'category': 'Music',
-    #         'user': 'test'
-    #     }
-    #     response = self.client.post(url, data, format='json')
-    #     self.assertEqual(response.status_code, status.HTTP_201_CREATED)
-    #     self.assertEqual(Quiz.objects.count(), 1)
-    #     self.assertEqual(Quiz.objects.get().category, 'Music')
+    def test_create_user_2(self):
+        user = User.objects.create_user('Test', 'Pas$w0rd', admin=True)
+        user.save()
+        user.refresh_from_db()
+        # self.client.login(username='Test', password='Pas$w0rd')
+        self.client.force_authenticate(user)
+
+        route = '/api/user/'
+        data = {
+            'id': 1,
+            'username': 'Vampire',
+            'admin': 'False'
+        }
+
+        response = self.client.post(URL + route, data, format='json')
+        self.assertEqual(response.status_code, status.HTTP_201_CREATED)
+        self.assertEqual(User.objects.get(username='Vampire').username, 'Vampire')
+        self.assertEqual(User.objects.get(username='Vampire').admin, False)

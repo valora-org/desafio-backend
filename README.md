@@ -64,12 +64,31 @@ Todos os endpoints da aplicação estão disponíveis na rota `api/`.
 ---
 
 ## **Estruturação da aplicação**
-### **asdf**
+### **valora**
 
-## **Pontos a Melhorar**
+É onde se encontram as configurações do projeto, como as variáveis de ambiente, as configurações de banco de dados, etc.
 
-* Permissões
-* Senha de usuário através do admin (Porque o django faz encryptação da senha)
-* Separar ranking de criar novo usuário
-* Retorno de perguntas aleatórias
-* Testes não estão acessando banco de testes por algum raio de motivo
+### **tests**
+
+Ficam os testes unitários
+
+### **quiz**
+
+Onde ficam as regras do jogo, as models e as apis do projeto.
+
+
+
+---
+## **Pontos à Melhorar**
+
+* O código para atribuir permissões para os jogadores gerou redundâncias desnecessárias no viewset;
+* O mecanismo de atribuição de senhas de usuário só pode ser feito através de terminal ou menu admin (Porque o django faz encryptação da senha. Podem haver outras formas de se fazer isso);
+* Como requisitado no escopo do projeto, a aplicação não está retornando perguntas aleatórias;
+* Testes parecem não estar acessando banco de testes por algum raio de motivo;
+* Poderiam ser feitos mais testes unitários para a aplicação.
+* O relacionamento das models poderia ser melhor estruturado.
+* A `correct_answer` é definida antes de haver qualquer resposta salva.
+
+---
+
+# FICO À DISPOSIÇÃO PARA ESCLARECER DÚVIDAS SOBRE O PROJETO
