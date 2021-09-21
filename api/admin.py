@@ -15,7 +15,7 @@ class UserAdmin(BaseUserAdmin):
     form = UserAdminForm
     fieldsets = (
         (None, {
-            'fields': ('username', 'email')
+            'fields': ('username', 'email', 'password')
         }),
         ('Informações Básicas', {
             'fields': ('name', 'last_login')

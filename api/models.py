@@ -25,7 +25,6 @@ class User(AbstractBaseUser, PermissionsMixin):
     date_joined = models.DateTimeField('Data de Entrada', auto_now_add=True)
 
     USERNAME_FIELD = 'username'
-    REQUIRED_FIELDS = ['email']
 
     objects = UserManager()
 
