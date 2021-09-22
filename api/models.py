@@ -23,8 +23,10 @@ class User(AbstractBaseUser, PermissionsMixin):
     is_staff = models.BooleanField('Equipe', default=False)
     is_active = models.BooleanField('Ativo', default=True)
     date_joined = models.DateTimeField('Data de Entrada', auto_now_add=True)
+    is_admin = models.BooleanField(default=False, blank=False)
 
     USERNAME_FIELD = 'username'
+    REQUIRED_FIELDS = ['email']
 
     objects = UserManager()
 
