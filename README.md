@@ -16,6 +16,7 @@ Este é o repositório de uma API para quiz, onde pode criar perguntas, consulta
 * Django REST Framework
 * Docker
 * Docker Compose
+* Test do Django REST Framework
 
 # Como funciona
 
@@ -93,6 +94,14 @@ Existe dois tipos de consulta do ranking:
     }
     ```
 
+# Teste
+
+Para realizar os teste, foi utilizado o test do Django REST Framework. Para sua execução basta usar o comando abaixo:
+
+```
+./manage.py test
+```
+
 # Backup
 
 O backup que será usado para popular o banco contém:
@@ -128,6 +137,3 @@ Todos os endpoints estão com a autenticação por `Session`, `Basic` (usuário 
 | http://0.0.0.0:8000/resposta/ |     POST     |  player  | Responder pergunta<br />com texto da resposta |                                       resposta                                       |     Certo ou Errado     |
 | http://0.0.0.0:8000/perguntas/ |     POST     |  admin  |                Criar pergunta                | pergunta<br />categoria<br />alternativa_correta<br />alternativa1<br />alternativa2 |         detail         |
 |  http://0.0.0.0:8000/ranking/  | POST<br />GET |  player  |                  Ver ranking                  |                                   categoria (POST)                                   |         Ranking         |
-
-
-Repositório: https://github.com/raphach7/quiz-valora/

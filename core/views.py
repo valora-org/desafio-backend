@@ -44,7 +44,7 @@ def index(request):
             except:
                 return Response({"detail": "Informe uma categoria"}, status=status.HTTP_400_BAD_REQUEST)
             quiz = Quiz.criar(usuario, dados["categoria"])
-            return Response(QuizSerializer(quiz).data) #serializa o quiz e envia para visualizacao
+            return Response(QuizSerializer(quiz).data, status=status.HTTP_201_CREATED) #serializa o quiz e envia para visualizacao
 
 
 '''
@@ -54,7 +54,7 @@ Necessario informar a categoria, pergunta, alterarnativa correta, alternativa1, 
 @api_view(['POST'])
 @authentication_classes((SessionAuthentication, BasicAuthentication, TokenAuthentication))
 @permission_classes((IsAuthenticated,))
-def crear_perguntas(request):
+def criar_perguntas(request):
     dados = request.data
     try:
         usuario = Usuario.objects.get(user = request.user)

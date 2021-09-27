@@ -16,7 +16,7 @@ router.register(r'categorias', views.CategoriaViewSet)
 urlpatterns = [
     # path('core/', include(router.urls)),
     path('', views.index, name='index'),
-    path('perguntas/', views.crear_perguntas, name='perguntas'),
+    path('perguntas/', views.criar_perguntas, name='perguntas'),
     path('play/', views.play, name='play'),
     path('resposta/', views.resposta, name='resposta'),
     path('ranking/', views.ranking, name='ranking')
