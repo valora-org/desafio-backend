@@ -137,3 +137,7 @@ Todos os endpoints estão com a autenticação por `Session`, `Basic` (usuário 
 | http://0.0.0.0:8000/resposta/ |     POST     |  player  | Responder pergunta<br />com texto da resposta |                                       resposta                                       |     Certo ou Errado     |
 | http://0.0.0.0:8000/perguntas/ |     POST     |  admin  |                Criar pergunta                | pergunta<br />categoria<br />alternativa_correta<br />alternativa1<br />alternativa2 |         detail         |
 |  http://0.0.0.0:8000/ranking/  | POST<br />GET |  player  |                  Ver ranking                  |                                   categoria (POST)                                   |         Ranking         |
+
+# Considerações finais
+
+Na modelagem eu pensei em uma API um pouco mais simples, sem salvar a resposta no banco, pois não vi necessidade, com isso, fiz um controle para saber em qual é a pergunta que ainda não foi respondida e evitar repetição, isso ajuda o quiz poder ser respondido por várias pessoas ao mesmo tempo, sem conflito entre os usuários e cada um respondendo o seu quiz.
