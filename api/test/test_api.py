@@ -1,3 +1,6 @@
+import random
+import time
+
 from django.urls import reverse
 from rest_framework import status
 from rest_framework.test import APITestCase
@@ -32,12 +35,12 @@ class UsersTestCase(APITestCase):
         self.assertEqual(response.status_code, status.HTTP_401_UNAUTHORIZED)
 
     def test_user_detail_retrieve(self):
-        response = self.client.get(reverse("users-detail", kwargs={"pk": 1}))
+        response = self.client.get(reverse("users-detail", kwargs={"pk": self.user.pk}))
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.assertEqual(response.data['username'], self.user.username)
 
 
-class QuizTestCase(APITestCase):
+class QuizFlowTestCase(APITestCase):
 
     def setUp(self):
         self.user = User.objects._create_user(username="admin",
@@ -61,8 +64,13 @@ class QuizTestCase(APITestCase):
         response = self.client.post(reverse("category-list"), data=data, format='json')
         return response.data
 
-    def test_create_quiz(self):
-        data = {"name": "Meu Quiz", "category": self.category['id']}
+    def test_search_category(self):
+        data = {"search": "Mus"}
+        response = self.client.get(reverse('category-list'), data, format='json')
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+
+    def test_create_questions(self):
+        data = {"category": self.category['id']}
         questions = list()
         for item in range(1, 11):
             questions.append({"question": f"Pergunta {item}",
@@ -72,6 +80,31 @@ class QuizTestCase(APITestCase):
                                   for anw in range(0, 3)]
                               })
         data.update({"question": questions})
-        response = self.client.post(reverse('quiz-list'), data,  format='json')
+        response = self.client.post(reverse('question-list'), data, format='json')
         self.assertEqual(response.status_code, status.HTTP_200_OK)
 
+    def test_quiz_flow(self):
+        self.test_create_questions()  # Cria perguntas por categoria
+        data = {
+            "user": self.user.id,
+            "category": int(self.category['id'])
+        }
+
+        # Adiciona perguntas no quiz por categoria
+        response = self.client.post(reverse('quiz-list'), data=data, format='json')
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+
+        # Response as perguntas de forma aleatoria, as respostas certas está sempre no indice 0
+        data_quiz = response.data
+        quiz_id = data_quiz['id']
+
+        for question in data_quiz['questions'][:5]:
+            data = {
+                "question": question['id'],
+                "answer": question['answer'][random.randint(0, 2)]
+            }
+            response = self.client.put(f"/api/quiz/{quiz_id}/", data=data)
+            self.assertEqual(response.status_code, status.HTTP_200_OK)
+
+        response = self.client.post(f"/api/quiz/{quiz_id}/finish/")
+        self.assertEqual(response.status_code, status.HTTP_200_OK)

@@ -18,3 +18,6 @@ migrate:
 
 start-services:
 	make build start migrate create-super-user
+
+test:
+	python manage.py test
