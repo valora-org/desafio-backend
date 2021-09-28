@@ -1,15 +1,18 @@
 import random
 
-from django.db.models import Count, Sum
+from django.db.models import Sum
 from django.shortcuts import get_object_or_404
 from rest_framework import viewsets, permissions, status
 from rest_framework.decorators import action
+from rest_framework.exceptions import PermissionDenied
 from rest_framework.filters import SearchFilter
+from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from rest_framework_simplejwt import authentication
 
 from api.models import User, Category, Answer, Question, Quiz
-from api.serializers import UserSerializer, CategorySerializer, AnswerSerializer, QuestionSerializer, QuizSerializer
+from api.serializers import UserSerializer, CategorySerializer, AnswerSerializer, QuestionSerializer, QuizSerializer, \
+    UserCreateSerializer
 
 
 class UserViewSet(viewsets.ModelViewSet):
@@ -17,6 +20,18 @@ class UserViewSet(viewsets.ModelViewSet):
     authentication_classes = (authentication.JWTAuthentication,)
     queryset = User.objects.all()
     serializer_class = UserSerializer
+
+    def create(self, request, *args, **kwargs):
+        data = request.data
+        user = User(**data)
+        serializer = UserCreateSerializer(data=user.__dict__)
+        try:
+            if serializer.is_valid(raise_exception=True):
+                result = User.objects.create_user(**serializer.data)
+                serializer = UserSerializer(result)
+                return Response(serializer.data)
+        except Exception as e:
+            return Response(e.args[0], status=status.HTTP_400_BAD_REQUEST)
 
 
 class CategoryViewSet(viewsets.ModelViewSet):
@@ -29,19 +44,20 @@ class CategoryViewSet(viewsets.ModelViewSet):
 
 
 class AnswerViewSet(viewsets.ModelViewSet):
-    permission_classes = (permissions.IsAuthenticated,)
+    permission_classes = (IsAuthenticated,)
     authentication_classes = (authentication.JWTAuthentication,)
     queryset = Answer.objects.all()
     serializer_class = AnswerSerializer
 
 
 class QuestionViewSet(viewsets.ModelViewSet):
-    permission_classes = (permissions.IsAuthenticated,)
+    permission_classes = [IsAuthenticated]
     authentication_classes = (authentication.JWTAuthentication,)
     queryset = Question.objects.all()
     serializer_class = QuestionSerializer
 
     def create(self, request, *args, **kwargs):
+        ValidateUser(request)
         category = get_object_or_404(Category, id=request.data['category'])
         del request.data['category']
 
@@ -149,3 +165,14 @@ class QuizViewSet(viewsets.ModelViewSet):
                 for item in ranking_by_cat]
 
         return Response(data)
+
+class ValidateUser(object):
+    def __init__(self, request):
+        self.__data = request
+        self.__validate()
+
+    def __validate(self):
+        auth_user_id = self.__data.auth.payload['user_id']
+        user = User.objects.get(pk=auth_user_id)
+        if not user.is_staff:
+            raise PermissionDenied()

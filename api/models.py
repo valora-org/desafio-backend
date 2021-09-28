@@ -23,7 +23,6 @@ class User(AbstractBaseUser, PermissionsMixin):
     is_staff = models.BooleanField(default=False)
     is_active = models.BooleanField(default=True)
     date_joined = models.DateTimeField(auto_now_add=True)
-    is_admin = models.BooleanField(default=False, blank=False)
 
     USERNAME_FIELD = 'username'
     REQUIRED_FIELDS = ['email']

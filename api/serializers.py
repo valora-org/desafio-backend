@@ -6,7 +6,12 @@ from api.models import User, Category, Answer, Question, Quiz
 class UserSerializer(ModelSerializer):
     class Meta:
         model = User
-        fields = ('id', 'username', 'email', 'name', 'is_active', 'is_admin')
+        fields = ('id', 'username', 'email', 'name', 'is_active', 'is_staff')
+
+class UserCreateSerializer(ModelSerializer):
+    class Meta:
+        model = User
+        fields = ('id', 'username', 'password', 'email', 'name', 'is_staff')
 
 
 class CategorySerializer(ModelSerializer):
