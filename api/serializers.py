@@ -1,6 +1,6 @@
 from rest_framework.serializers import ModelSerializer
 
-from api.models import User, Category, Answer, Question, Quiz, Play
+from api.models import User, Category, Answer, Question, Quiz
 
 
 class UserSerializer(ModelSerializer):
@@ -28,14 +28,8 @@ class QuestionSerializer(ModelSerializer):
 
 
 class QuizSerializer(ModelSerializer):
-    question = QuestionSerializer(many=True)
+    questions = QuestionSerializer(many=True, read_only=True)
 
     class Meta:
         model = Quiz
-        fields = ('id', 'name', 'category', 'question')
-
-
-class PlaySerializer(ModelSerializer):
-    class Meta:
-        model = Play
         fields = '__all__'

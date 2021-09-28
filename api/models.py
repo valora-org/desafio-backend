@@ -60,22 +60,19 @@ class Answer(models.Model):
 class Question(models.Model):
     question = models.TextField()
     answer = models.ManyToManyField(Answer)
+    category = models.ForeignKey(Category, on_delete=models.SET_NULL, null=True)
 
     def __str__(self):
         return self.question
 
 
 class Quiz(models.Model):
-    name = models.TextField(null=False)
-    category = models.ForeignKey(Category, on_delete=models.SET_NULL, null=True)
-    question = models.ManyToManyField(Question)
-
-    def __str__(self):
-        return self.name
-
-
-class Play(models.Model):
-    correct_answers = models.IntegerField(blank=True, default=0)
-    quiz = models.ForeignKey(Quiz, on_delete=models.SET_NULL, null=True)
+    questions = models.ManyToManyField(Question, name='questions')
     user = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
     created = models.DateTimeField(auto_now_add=True)
+    correct_answers = models.IntegerField(blank=True, default=0)
+    finish = models.DateTimeField(auto_now=True, blank=True)
+    category = models.ForeignKey(Category, null=True, blank=True, on_delete=models.SET_NULL)
+
+    def __str__(self):
+        return f"{self.pk} - {self.user} - {self.correct_answers}"
