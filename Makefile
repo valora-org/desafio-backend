@@ -20,4 +20,4 @@ start-services:
 	make build start migrate create-super-user
 
 test:
-	python manage.py test
+	docker-compose run --rm web python manage.py test
