@@ -1,79 +1,135 @@
-## <img src="https://valora.cc/img/logo2.png" alt="Valora" width="24" /> Desafio Backend Python
+# Quiz Api
+Desafio backend para um quiz desenvolvido em Python e Django.
 
-Parabéns! Se você chegou até aqui significa que você passou pelas etapas mais difíceis do nosso processo seletivo. Somos extremamente criteriosos com as pessoas que vão integrar nosso time porque só aceitamos pessoas incríveis!
 
-Agora é a parte fácil. Chegou a hora de mostrar todas as suas habilidades de transformar café em código. Vamos lá?
+## Especificação técnica
+- O projeto foi desenvolvido usando Django rest framework para api, JWT para autenticação e
+ geração de token, banco de dados PostgreSQL que rodará em um container Docker.
 
-Nesse desafio iremos avaliar suas habilidades em:
+## Importante
+- É pré-requisito ter o Docker instalado na maquina onde será 'deployado'.
+- Para deploy do projeto será necessario ter o 'Make' para o uso de comandos makefile.
+- Para instalar caso necessario: ```sudo apt-get install build-essential```
 
-* **Python**
-* **Django**
-* **Django REST Framework**
-* **Pytest**
-* **Docker**
+## Deploy
+1. Abrir o prompt de comando ou bash.
+2. Clonar o projeto: ``` git clone https://github.com/anthonylopez15/quiz.git ```
+3. Ir até a pasta raiz do projeto: ```cd quiz```
+4. Iniciar os serviços: ```make start-services```
+5. Verificar se o servidor está rodando: http://localhost:8000/api/
 
-Você irá desenvolver a API de uma aplicação para a criação de um quiz de perguntas e respostas!
+# Regras de negócio
+- Somente o usuário Admin pode criar perguntas e respostas.
+- O usuário Player somente poderá jogar e consultar o ranking.
+- O que define o tipo de usuário é o campo ``is_staff: true`` para admin, ``is_staff: false`` 
+para usuario não admin. Por default o campo é false caso não seja passado no body da request.
+- Por padrão, no deploy é criado um usuário super admin Django como mostra o exemplo na url ``/api/token/`` a seguir.
 
-**A aplicação deverá prover o registro e autenticação de dois tipos de usuários**:
 
-* Admin
-* Player
+# Endpoints
+## Fluxo do quiz
+- Login:
+```
+POST - api/token/
+{
+    "username": "admin@gmail.com",
+    "password": "Pass.123"
+}
+```
+- Criar categoria:
+```
+POST /api/category/
+{
+    "description": "Musica"
+}
+```
+- Criar perguntas:
+```
+POST /api/question/
+{
+    "category": 1,
+    "question": [
+        {
+            "question": "Pergunta 1?",
+            "answer": [
+                {
+                    "answer": "Resposta 1.1",
+                    "is_right": false
+                },
+                ...
+            ]
+        },
+         {
+            "question": "Pergunta 2?",
+            "answer": [
+                {
+                    "answer": "Resposta 1.2",
+                    "is_right": false
+                },
+                ...
+            ]
+        },
+        ...
+    ]
+}
+```
+- Pesquisar por category: 
+```
+GET /api/category?search={CATEGORY_DESCRIPTION}
+```
+- Começar um quiz por categoria:
+```
+POST /api/quiz/
+{
+    "user": 1,
+    "category": 2
+}
+```
+- Responder perguntas: 
+```
+PUT /api/quiz/{ID_QUIZ}/
+{
+    "question": 15,
+    "answer": 44
+}
+```
+- Finalizar quiz: 
+```
+POST /api/quiz/{ID_QUIZ}/finish/
+```
+- Ranking global 
+```
+GET /api/quiz/ranking-global/
+```
+- Ranking por categoria
+```
+GET /api/quiz/ranking-by-category/
+```
+- Criar usuario:
+```
+POST /api/user/
+{
+    "username": "player_1",
+    "password": "Player.123",
+    "email": "player.1@gmail.com",
+    "name": "Player",
+    "is_staff": false (not required)
+}
+```
 
-**Cada quiz é composto por**:
+## Caso de teste
+- Na pasta raiz do projeto foi disponibilizado o arquivo de configuração de todos os 
+endpoints na qual será necessário importá-lo para testar no postman.
+- Será necessário adicionar o token nas variaveis de ambiente do postman para que seja passado no header da 
+request para autenticação.
+- Todas as urls se encontram no postman e podem ser testadas.
+- Para rodar os testes unitários: ``make test``
 
-* 10 perguntas com 3 respostas onde apenas 1 é correta.
-* Cada resposta correta acumula a 1 ponto.
-* Cada resposta errada perde 1 ponto. A menor pontuação possível é 0.
-* Possui uma categoria.
-
-**Ao iniciar o jogo**:
-
-* O player deve escolher uma categoria válida e receber um quiz com perguntas aleatórias referentes a categoria escolhida.
-
-**Ao finalizar o jogo**:
-
-* O player deve receber a contabilização dos seus pontos juntamente com a sua posição atual no ranking global. Não há limitação de quantos quizzes o player pode responder.
-
-**O ranking global**:
-
-* É a contabilização dos pontos acumulados por cada player.
-* Ranking geral considera todas as categorias.
-* Ranking por categoria agrupa por categorias.
-
-**Permissões**:
-
-* Todos os endpoints devem estar protegidos por autenticação.
-* Usuários do tipo **Admin** tem permissão para criar perguntas e respostas para os quizzes.
-* Usuários do tipo **Player** tem permissão para jogar e consultar o ranking.
-
-## Requisitos
-
-* O projeto precisa estar configurado para rodar em um ambiente macOS ou Ubuntu (preferencialmente como container Docker).
-* Deve anexar ao seu projeto uma coleção do postman com todos os endpoints criados e exemplos de utilização.
-
-**Para executar seu código devemos executar apenas os seguintes comandos**:
-
-* git clone $seu-fork
-* cd $seu-fork
-* comando para instalar dependências
-* comando para executar a aplicação
-
-## Critério de avaliação
-
-* **Organização do código**: Separação de módulos, view e model
-* **Clareza**: O README explica de forma resumida qual é o problema e como pode rodar a aplicação?
-* **Assertividade**: A aplicação está fazendo o que é esperado? Se tem algo faltando, o README explica o porquê?
-* **Legibilidade do código** (incluindo comentários)
-* **Segurança**: Existe alguma vulnerabilidade clara?
-* **Cobertura de testes** (Não esperamos cobertura completa mas é importante garantir o fluxo principal)
-* **Histórico de commits** (estrutura e qualidade)
-* **UX**: A API é intuitiva?
-* **Escolhas técnicas**: A escolha das bibliotecas, banco de dados, arquitetura, etc, é a melhor escolha para a aplicação?
-
-## Dúvidas
-
-Quaisquer dúvidas que você venha a ter, consulte as issues para ver se alguém já não a fez e caso você não ache sua resposta, abra você mesmo uma nova issue!
-
-Ao completar o desafio, submeta um pull-request a esse repositório com uma breve explicação das decisões tomadas e principalmente as instruções para execução do projeto.
-
-**Boa sorte! ;)**
+### Comandos Make
+1. Criar o build dos containers ``make build``
+2. Iniciar os containers docker``make start``
+3. Para os containers ``make stop``
+4. Deletar os serviços ``make down``
+5. Inciar todos os serviços de uma vez ``make start-services``
+6. Inciar unit test ``make test``
+7. Popular o banco com dados ficticios ``make build-data``
