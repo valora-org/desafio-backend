@@ -9,6 +9,8 @@ djangorestframework = "*"
 djangorestframework-simplejwt = "*"
 django-filter = "*"
 psycopg2-binary = "*"
+requests = "*"
+objects = "*"
 
 [dev-packages]
 

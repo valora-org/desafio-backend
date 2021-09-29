@@ -98,7 +98,7 @@ class QuizViewSet(viewsets.ModelViewSet):
         quiz.user = get_object_or_404(User, id=request.data['user'])
         quiz.category = get_object_or_404(Category, id=request.data['category'])
         quiz.save()
-        quiz.questions.set(questions[:5])
+        quiz.questions.set(questions[:10])
         serializer = QuizSerializer(quiz)
         return Response(serializer.data)
 

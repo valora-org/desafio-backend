@@ -21,3 +21,6 @@ start-services:
 
 test:
 	docker-compose run --rm web python manage.py test
+
+build-data:
+	python insert_data.py
