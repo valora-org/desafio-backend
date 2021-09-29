@@ -1,0 +1,477 @@
+{
+	"info": {
+		"_postman_id": "234217f9-1889-4d51-8328-ffede0216ca7",
+		"name": "Valora Endpoints",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Quiz",
+			"item": [
+				{
+					"name": "Search category",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{TOKEN}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8000/api/category?search=edu",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"category"
+							],
+							"query": [
+								{
+									"key": "search",
+									"value": "edu"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Iniciar Quiz",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{TOKEN}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"user\": 2,\r\n    \"category\": 3\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8000/api/quiz/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"quiz",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Reponder Quiz",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{TOKEN}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"question\": 15,\r\n    \"answer\": 44\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8000/api/quiz/5/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"quiz",
+								"5",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Finalizar Quiz",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{TOKEN}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8000/api/quiz/8/finish/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"quiz",
+								"8",
+								"finish",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Ranking Global",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{TOKEN}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8000/api/quiz/ranking-global/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"quiz",
+								"ranking-global",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Ranking por Categoria",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{TOKEN}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8000/api/quiz/ranking-by-category/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"quiz",
+								"ranking-by-category",
+								""
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Questions",
+			"item": [
+				{
+					"name": "Create Questions",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{TOKEN}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"category\": 1,\r\n    \"question\": [\r\n        {\r\n            \"question\": \"Pergunta 1?\",\r\n            \"answer\": [\r\n                {\r\n                    \"answer\": \"Resposta 1.1\",\r\n                    \"is_right\": false\r\n                },\r\n                {\r\n                    \"answer\": \"Resposta 2.1\",\r\n                    \"is_right\": true\r\n                },\r\n                {\r\n                    \"answer\": \"Resposta 3.1\",\r\n                    \"is_right\": false\r\n                }\r\n            ]\r\n        },\r\n         {\r\n            \"question\": \"Pergunta 2?\",\r\n            \"answer\": [\r\n                {\r\n                    \"answer\": \"Resposta 1.2\",\r\n                    \"is_right\": false\r\n                },\r\n                {\r\n                    \"answer\": \"Resposta 2.2\",\r\n                    \"is_right\": true\r\n                },\r\n                {\r\n                    \"answer\": \"Resposta 2.2\",\r\n                    \"is_right\": false\r\n                }\r\n            ]\r\n        },\r\n         {\r\n            \"question\": \"Pergunta 3?\",\r\n            \"answer\": [\r\n                {\r\n                    \"answer\": \"Resposta 1.3\",\r\n                    \"is_right\": false\r\n                },\r\n                {\r\n                    \"answer\": \"Resposta 2.3\",\r\n                    \"is_right\": true\r\n                },\r\n                {\r\n                    \"answer\": \"Resposta 2.3\",\r\n                    \"is_right\": false\r\n                }\r\n            ]\r\n        },\r\n         {\r\n            \"question\": \"Pergunta 4?\",\r\n            \"answer\": [\r\n                {\r\n                    \"answer\": \"Resposta 1.4\",\r\n                    \"is_right\": false\r\n                },\r\n                {\r\n                    \"answer\": \"Resposta 2.4\",\r\n                    \"is_right\": true\r\n                },\r\n                {\r\n                    \"answer\": \"Resposta 2.4\",\r\n                    \"is_right\": false\r\n                }\r\n            ]\r\n        },\r\n         {\r\n            \"question\": \"Pergunta 5?\",\r\n            \"answer\": [\r\n                {\r\n                    \"answer\": \"Resposta 1.5\",\r\n                    \"is_right\": false\r\n                },\r\n                {\r\n                    \"answer\": \"Resposta 2.5\",\r\n                    \"is_right\": true\r\n                },\r\n                {\r\n                    \"answer\": \"Resposta 2.5\",\r\n                    \"is_right\": false\r\n                }\r\n            ]\r\n        },\r\n         {\r\n            \"question\": \"Pergunta 6?\",\r\n            \"answer\": [\r\n                {\r\n                    \"answer\": \"Resposta 1.6\",\r\n                    \"is_right\": false\r\n                },\r\n                {\r\n                    \"answer\": \"Resposta 2.6\",\r\n                    \"is_right\": true\r\n                },\r\n                {\r\n                    \"answer\": \"Resposta 2.6\",\r\n                    \"is_right\": false\r\n                }\r\n            ]\r\n        },\r\n         {\r\n            \"question\": \"Pergunta 7?\",\r\n            \"answer\": [\r\n                {\r\n                    \"answer\": \"Resposta 1.7\",\r\n                    \"is_right\": false\r\n                },\r\n                {\r\n                    \"answer\": \"Resposta 2.7\",\r\n                    \"is_right\": true\r\n                },\r\n                {\r\n                    \"answer\": \"Resposta 2.7\",\r\n                    \"is_right\": false\r\n                }\r\n            ]\r\n        },\r\n         {\r\n            \"question\": \"Pergunta 8?\",\r\n            \"answer\": [\r\n                {\r\n                    \"answer\": \"Resposta 1.8\",\r\n                    \"is_right\": false\r\n                },\r\n                {\r\n                    \"answer\": \"Resposta 2.8\",\r\n                    \"is_right\": true\r\n                },\r\n                {\r\n                    \"answer\": \"Resposta 2.8\",\r\n                    \"is_right\": false\r\n                }\r\n            ]\r\n        },\r\n         {\r\n            \"question\": \"Pergunta 9?\",\r\n            \"answer\": [\r\n                {\r\n                    \"answer\": \"Resposta 1.9\",\r\n                    \"is_right\": false\r\n                },\r\n                {\r\n                    \"answer\": \"Resposta 2.9\",\r\n                    \"is_right\": true\r\n                },\r\n                {\r\n                    \"answer\": \"Resposta 2.9\",\r\n                    \"is_right\": false\r\n                }\r\n            ]\r\n        },\r\n         {\r\n            \"question\": \"Pergunta 10?\",\r\n            \"answer\": [\r\n                {\r\n                    \"answer\": \"Resposta 1.10\",\r\n                    \"is_right\": false\r\n                },\r\n                {\r\n                    \"answer\": \"Resposta 2.10\",\r\n                    \"is_right\": true\r\n                },\r\n                {\r\n                    \"answer\": \"Resposta 2.10\",\r\n                    \"is_right\": false\r\n                }\r\n            ]\r\n        },\r\n         {\r\n            \"question\": \"Pergunta 11?\",\r\n            \"answer\": [\r\n                {\r\n                    \"answer\": \"Resposta 1.11\",\r\n                    \"is_right\": false\r\n                },\r\n                {\r\n                    \"answer\": \"Resposta 2.11\",\r\n                    \"is_right\": true\r\n                },\r\n                {\r\n                    \"answer\": \"Resposta 2.11\",\r\n                    \"is_right\": false\r\n                }\r\n            ]\r\n        }\r\n    ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8000/api/question/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"question",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "List Questions",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{TOKEN}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8000/api/question",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"question"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "User",
+			"item": [
+				{
+					"name": "Login",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "",
+								"value": "",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\": \"player.18@gmail.com\",\r\n    \"password\": \"1234!@#$\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8000/api/token/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"token",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create User",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{TOKEN}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\": \"player_19\",\r\n    \"password\": \"1234!@#$\",\r\n    \"email\": \"player.19@gmail.com\",\r\n    \"name\": \"testandooo\",\r\n    \"is_staff\": true\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8000/api/users/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"users",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get User",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{TOKEN}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8000/api/users/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"users",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "List Users",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{TOKEN}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "http://localhost:8000/api/users",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"users"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Categoria",
+			"item": [
+				{
+					"name": "Create Category",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{TOKEN}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"description\": \"Arte\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8000/api/category/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"category",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "List Categorias",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{TOKEN}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8000/api/category/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"category",
+								""
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

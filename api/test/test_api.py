@@ -12,7 +12,8 @@ class UsersTestCase(APITestCase):
     def setUp(self):
         self.user = User.objects._create_user(username="admin",
                                               email='admin@gmail.com',
-                                              password='1234!@#$')
+                                              password='1234!@#$',
+                                              is_staff=True)
         self.api_authentication()
 
     def api_authentication(self):
@@ -45,7 +46,8 @@ class QuizFlowTestCase(APITestCase):
     def setUp(self):
         self.user = User.objects._create_user(username="admin",
                                               email='admin@gmail.com',
-                                              password='1234!@#$')
+                                              password='1234!@#$',
+                                              is_staff=True)
         self.api_authentication()
         self.category = self.create_category()
 
