@@ -79,4 +79,16 @@ Ao completar o desafio, submeta um pull-request a esse repositório com uma brev
 **Boa sorte! ;)**
 
 
+
+O projeto foi configurado para rodar em um container DOCKER basta seguir os passos abaixo:
+
+comando para criar uma imagem do docker
+
+docker-compose run web django-admin.py startproject desafiobackend .
+
+executando a imagem 
+
+docker-compose up
+
+
 Endpoint POSTMAN: https://www.getpostman.com/collections/c7ea13d3c744c9c70bdc
