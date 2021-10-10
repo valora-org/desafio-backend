@@ -77,3 +77,6 @@ Quaisquer dúvidas que você venha a ter, consulte as issues para ver se alguém
 Ao completar o desafio, submeta um pull-request a esse repositório com uma breve explicação das decisões tomadas e principalmente as instruções para execução do projeto.
 
 **Boa sorte! ;)**
+
+
+Endpoint POSTMAN: https://www.getpostman.com/collections/c7ea13d3c744c9c70bdc

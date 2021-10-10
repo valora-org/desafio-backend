@@ -1,0 +1,31 @@
+{
+	"folders": [
+		{
+			"path": "..\\easy_oral_health_p3"
+		},
+		{
+			"path": "..\\ppr"
+		},
+		{
+			"path": "..\\sinae"
+		},
+		{
+			"path": "..\\escola"
+		},
+		{
+			"path": "..\\pontos_turisticos"
+		},
+		{
+			"path": "..\\bipp-bank"
+		},
+		{
+			"path": "."
+		},
+		{
+			"path": "..\\superensino"
+		}
+	],
+	"settings": {
+		"liveServer.settings.multiRootWorkspaceName": "desafiobackend"
+	}
+}
