@@ -9,8 +9,8 @@ Nesse desafio iremos avaliar suas habilidades em:
 * **Python**
 * **Django**
 * **Django REST Framework**
-* **Pytest**
-* **Docker**
+* **Pytest** (desejável mas não obrigatório)
+* **Docker** (desejável mas não obrigatório)
 
 Você irá desenvolver a API de uma aplicação para a criação de um quiz de perguntas e respostas!
 
@@ -34,11 +34,12 @@ Você irá desenvolver a API de uma aplicação para a criação de um quiz de p
 
 * O player deve receber a contabilização dos seus pontos juntamente com a sua posição atual no ranking global. Não há limitação de quantos quizzes o player pode responder.
 
-**O ranking global**:
+**O ranking**:
 
 * É a contabilização dos pontos acumulados por cada player.
 * Ranking geral considera todas as categorias.
 * Ranking por categoria agrupa por categorias.
+* Este requisito é desejável mas não obrigatório.
 
 **Permissões**:
 
