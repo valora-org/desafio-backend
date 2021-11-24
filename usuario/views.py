@@ -20,3 +20,11 @@ class UsuarioViewSet(viewsets.ModelViewSet):
                 return Response(serializer.data)
         except Exception as e:
             return Response(e.args[0], status=status.HTTP_400_BAD_REQUEST)
+
+    def update(self, request, pk=None):
+        response = {'message': 'Função Desabilitada'}
+        return Response(response, status=status.HTTP_403_FORBIDDEN)
+
+    def partial_update(self, request, pk=None):
+        response = {'message': 'Função Desabilitada'}
+        return Response(response, status=status.HTTP_403_FORBIDDEN)

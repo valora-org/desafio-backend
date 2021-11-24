@@ -46,7 +46,8 @@ INSTALLED_APPS = [
     'usuario',
     'categoria',
     'questao',
-    'resposta'
+    'resposta',
+    'jogo'
     #PACOTES DE TERCEIROS
 ]
 

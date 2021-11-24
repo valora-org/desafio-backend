@@ -1,5 +1,5 @@
 from rest_framework import routers
 from . import views
 router = routers.SimpleRouter()
-router.register(r'categorias', views.CategoriaViewSet, basename='categorias')
+router.register(r'categoria', views.CategoriaViewSet, basename='categoria')
 urlpatterns = router.urls
