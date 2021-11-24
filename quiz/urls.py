@@ -21,4 +21,5 @@ urlpatterns = [
     path('login/',views.obtain_auth_token,name='get-token'),
     path('',include('usuario.urls')),
     path('',include('categoria.urls')),
+    path('',include('questao.urls')),
 ]
