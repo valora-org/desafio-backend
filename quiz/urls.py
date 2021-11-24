@@ -22,4 +22,5 @@ urlpatterns = [
     path('',include('usuario.urls')),
     path('',include('categoria.urls')),
     path('',include('questao.urls')),
+    path('',include('resposta.urls')),
 ]

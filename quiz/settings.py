@@ -45,7 +45,8 @@ INSTALLED_APPS = [
     #MINHAS CLASSES
     'usuario',
     'categoria',
-    'questao'
+    'questao',
+    'resposta'
     #PACOTES DE TERCEIROS
 ]
 
