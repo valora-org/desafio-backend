@@ -7,7 +7,7 @@ from resposta.serializers import RespostaSerializer
 
 
 class QuestaoSerializer(serializers.ModelSerializer):
-    respostas = serializers.StringRelatedField(many=True,read_only=True)
+    respostas = RespostaSerializer(many=True,read_only=True)
     class Meta:
         model = Questao
         fields = ('id','texto','categoria','respostas')
