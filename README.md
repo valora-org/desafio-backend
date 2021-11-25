@@ -1,80 +1,72 @@
-## <img src="https://valora.cc/img/logo2.png" alt="Valora" width="24" /> Desafio Backend Python
+# Teste Para desenvolvedor - Valora
 
-Parabéns! Se você chegou até aqui significa que você passou pelas etapas mais difíceis do nosso processo seletivo. Somos extremamente criteriosos com as pessoas que vão integrar nosso time porque só aceitamos pessoas incríveis!
+Desenvolvedor Ricardo Enehias
 
-Agora é a parte fácil. Chegou a hora de mostrar todas as suas habilidades de transformar café em código. Vamos lá?
+# Resumo
 
-Nesse desafio iremos avaliar suas habilidades em:
+- Projeto de API desenvolvido com django rest framework, autenticação por Token, rodando em um SGBD MySql,
+  conteinerização com docker.
 
-* **Python**
-* **Django**
-* **Django REST Framework**
-* **Pytest** (desejável mas não obrigatório)
-* **Docker** (desejável mas não obrigatório)
+# Requisitos
 
-Você irá desenvolver a API de uma aplicação para a criação de um quiz de perguntas e respostas!
+- docker-compose versão 1.29 ou compatível
+- docker-compose versão 20.10 ou compatível
 
-**A aplicação deverá prover o registro e autenticação de dois tipos de usuários**:
+# Instalação
 
-* Admin
-* Player
+Clonar o projeto
 
-**Cada quiz é composto por**:
+````
+git clone https://github.com/enehias/desafio-backend.git
+````
 
-* 10 perguntas com 3 respostas onde apenas 1 é correta.
-* Cada resposta correta acumula a 1 ponto.
-* Cada resposta errada perde 1 ponto. A menor pontuação possível é 0.
-* Possui uma categoria.
+Acessar pasta do projeto
 
-**Ao iniciar o jogo**:
+````
+cd desafio-backend
+````
 
-* O player deve escolher uma categoria válida e receber um quiz com perguntas aleatórias referentes a categoria escolhida.
+Iniciar build, e deploy do contêiner
 
-**Ao finalizar o jogo**:
+````
+make iniciar-app 
+````
 
-* O player deve receber a contabilização dos seus pontos juntamente com a sua posição atual no ranking global. Não há limitação de quantos quizzes o player pode responder.
+Rodar dados para aplicação
 
-**O ranking**:
+````
+make init-data-app 
+````
 
-* É a contabilização dos pontos acumulados por cada player.
-* Ranking geral considera todas as categorias.
-* Ranking por categoria agrupa por categorias.
-* Este requisito é desejável mas não obrigatório.
+- Usuários Iniciais
+    - Admin
+        - username: adminValora
+        - password: 1234
+        - is_staff: true
+    - Player
+        - username: playerValora
+        - password: 1234
+        - is_staff: false
 
-**Permissões**:
+---
 
-* Todos os endpoints devem estar protegidos por autenticação.
-* Usuários do tipo **Admin** tem permissão para criar perguntas e respostas para os quizzes.
-* Usuários do tipo **Player** tem permissão para jogar e consultar o ranking.
+# Principais Endpoints
 
-## Requisitos
+Todas as rotas são protegidas com Token(exceto login)
 
-* O projeto precisa estar configurado para rodar em um ambiente macOS ou Ubuntu (preferencialmente como container Docker).
-* Deve anexar ao seu projeto uma coleção do postman com todos os endpoints criados e exemplos de utilização.
-
-**Para executar seu código devemos executar apenas os seguintes comandos**:
-
-* git clone $seu-fork
-* cd $seu-fork
-* comando para instalar dependências
-* comando para executar a aplicação
-
-## Critério de avaliação
-
-* **Organização do código**: Separação de módulos, view e model
-* **Clareza**: O README explica de forma resumida qual é o problema e como pode rodar a aplicação?
-* **Assertividade**: A aplicação está fazendo o que é esperado? Se tem algo faltando, o README explica o porquê?
-* **Legibilidade do código** (incluindo comentários)
-* **Segurança**: Existe alguma vulnerabilidade clara?
-* **Cobertura de testes** (Não esperamos cobertura completa mas é importante garantir o fluxo principal)
-* **Histórico de commits** (estrutura e qualidade)
-* **UX**: A API é intuitiva?
-* **Escolhas técnicas**: A escolha das bibliotecas, banco de dados, arquitetura, etc, é a melhor escolha para a aplicação?
-
-## Dúvidas
-
-Quaisquer dúvidas que você venha a ter, consulte as issues para ver se alguém já não a fez e caso você não ache sua resposta, abra você mesmo uma nova issue!
-
-Ao completar o desafio, submeta um pull-request a esse repositório com uma breve explicação das decisões tomadas e principalmente as instruções para execução do projeto.
-
-**Boa sorte! ;)**
+| Descrição                                   | URI              | Método | Payload                                                                                                                                                                                                                                                                                                                                             |
+| ------------------------------------------- | ---------------- | ------ | ---------- |
+| Logar na aplicação                          | login/        | POST      | ```{"username": "adminValora", "password":"1234"}```   |                                                                                                                                                                                                                                                                                                             |
+| Criar uma categoria                          | categoria/     | POST   |  ```{"nome":"Tecnologia"}``` |
+| Listar todas as categoria na base de dados | categoria/      | GET    | Não se aplica       |      
+| Criar questão             | questao/ | POST    | ```{"texto":"Pergunta X?","categoria":1}```|                                                                                                                                                                                                                                                                                             |
+| Pesquisar uma questão                            | questao/{id}        | GET   | params: - id: id da questão   |
+| Listar todas as questões na base de dados | questao/      | GET    | Não se aplica       |                                                                                                                                                                                                                                                                                                                    |
+| Criar resposta             | questao/ | POST    | ```{"texto":"Resposta X!","questão":1,correta:true}```|                                                                                                                                                                                                                                                                                             |
+| Pesquisar uma resposta                            | resposta/{id}        | GET   | params: - id: id da resposta   |
+| Listar todas as respostas na base de dados | resposta/      | GET    | Não se aplica       | 
+| Iniciar Quiz | iniciar-jogo/      | POST    | ```{"categoria":2}```       | 
+| Pesquisar Quiz | buscar-jogo/{id}      | GET    | params: - id: id do jogo|
+| Finalizar Quiz | finalizar-jogo/{id}      | PUT    | ```{"repostas":[{"questao":1,"resposta":3},{"questao":2,"resposta":6},{"questao":3,"resposta":9}]```<br>params: - id: id do jogo|
+| Ranking Global | ranking/global      | GET    | Não se aplica|
+| Ranking Categoria | ranking/categoria      | GET    | Não se aplica|

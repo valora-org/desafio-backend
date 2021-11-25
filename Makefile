@@ -5,7 +5,7 @@ iniciar-app:
 parar-app:
 	@sudo docker-compose down -v
 
-exec-migrate-flush-populate-app:
+init-data-app:
 	@sudo docker-compose run web python manage.py makemigrations
 	@sudo docker-compose run web python manage.py migrate
 	@sudo docker-compose run web python manage.py flush --noinput
