@@ -10,7 +10,7 @@ services:
       - MYSQL_PORT=3306
       - MYSQL_ROOT_HOST=%
       - MYSQL_DATABASE=valora
-      - MYSQL_USER=belter
+      - MYSQL_USER=ricardo
       - MYSQL_PASSWORD=belter_2017
       - MYSQL_ROOT_PASSWORD=123456_abc
   web:

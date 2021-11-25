@@ -24,4 +24,5 @@ urlpatterns = [
     path('',include('questao.urls')),
     path('',include('resposta.urls')),
     path('',include('jogo.urls')),
+    path('ranking/',include('ranking.urls')),
 ]

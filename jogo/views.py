@@ -37,7 +37,7 @@ class JogoAPIView(APIView):
         return Response({"status": "success", "data": serializer.data},
                         status=status.HTTP_200_OK)
 
-    def post(self, request,id=None):
+    def put(self, request,id=None):
         jogo = get_object_or_404(Jogo, id=id)
 
         if jogo.nota is not None or jogo.usuario!=request.user:
