@@ -11,4 +11,5 @@ init-data-app:
 	@sudo docker-compose run web python manage.py flush --noinput
 	@sudo docker-compose run web python manage.py shell < populate.py
 
-
+test-app:
+	 @sudo docker-compose run web python manage.py test
