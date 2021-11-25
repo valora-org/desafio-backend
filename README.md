@@ -37,6 +37,10 @@ Rodar dados para aplicação
 ````
 make init-data-app 
 ````
+# Regras de negoócio
+- o usuário tipo admin, tem autorização completa no sistema
+- o usuario player pode apenas, iniciar um jogo, finalizar e consulta  seus jogos, e consultar rankings
+- usuário tipo admin, tem o atributo is_staff como verdadeiro, enquanto os players falso
 
 - Usuários Iniciais
     - Admin
@@ -47,9 +51,7 @@ make init-data-app
         - username: playerValora
         - password: 1234
         - is_staff: false
-
----
-
+        
 # Principais Endpoints
 
 Todas as rotas são protegidas com Token(exceto login)
@@ -67,6 +69,6 @@ Todas as rotas são protegidas com Token(exceto login)
 | Listar todas as respostas na base de dados | resposta/      | GET    | Não se aplica       | 
 | Iniciar Quiz | iniciar-jogo/      | POST    | ```{"categoria":2}```       | 
 | Pesquisar Quiz | buscar-jogo/{id}      | GET    | params: - id: id do jogo|
-| Finalizar Quiz | finalizar-jogo/{id}      | PUT    | ```{"repostas":[{"questao":1,"resposta":3},{"questao":2,"resposta":6},{"questao":3,"resposta":9}]```<br>params: - id: id do jogo|
+| Finalizar Quiz | finalizar-jogo/{id}      | PUT    | ```{"respostas":[{"questao":1,"resposta":3},{"questao":2,"resposta":6},{"questao":3,"resposta":9}]```<br>params: - id: id do jogo|
 | Ranking Global | ranking/global      | GET    | Não se aplica|
 | Ranking Categoria | ranking/categoria      | GET    | Não se aplica|
