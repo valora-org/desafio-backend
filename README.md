@@ -37,6 +37,7 @@ Rodar dados para aplicação
 ````
 make init-data-app 
 ````
+-Aplicação irá rodar http://127.0.0.1:8000
 # Regras de negoócio
 - o usuário tipo admin, tem autorização completa no sistema
 - o usuario player pode apenas, iniciar um jogo, finalizar e consulta  seus jogos, e consultar rankings
