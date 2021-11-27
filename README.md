@@ -1,23 +1,17 @@
-## <img src="https://valora.cc/img/logo2.png" alt="Valora" width="24" /> Desafio Backend Python
+##  Desafio Backend Python - William Elias Alves
 
-Parabéns! Se você chegou até aqui significa que você passou pelas etapas mais difíceis do nosso processo seletivo. Somos extremamente criteriosos com as pessoas que vão integrar nosso time porque só aceitamos pessoas incríveis!
+A seguir temos a descrição geral da aplicação , contendo as habilidades usadas e descrições de execução de código.
 
-Agora é a parte fácil. Chegou a hora de mostrar todas as suas habilidades de transformar café em código. Vamos lá?
 
-Nesse desafio iremos avaliar suas habilidades em:
+### Habilidades Usadas
 
 * **Python**
 * **Django**
 * **Django REST Framework**
-* **Pytest** (desejável mas não obrigatório)
-* **Docker** (desejável mas não obrigatório)
+* **Pytest** 
+* **Docker e compose** 
 
-Você irá desenvolver a API de uma aplicação para a criação de um quiz de perguntas e respostas!
-
-**A aplicação deverá prover o registro e autenticação de dois tipos de usuários**:
-
-* Admin
-* Player
+### Requisitos Funcionais
 
 **Cada quiz é composto por**:
 
@@ -47,17 +41,22 @@ Você irá desenvolver a API de uma aplicação para a criação de um quiz de p
 * Usuários do tipo **Admin** tem permissão para criar perguntas e respostas para os quizzes.
 * Usuários do tipo **Player** tem permissão para jogar e consultar o ranking.
 
-## Requisitos
+
+## Requisitos de SO
 
 * O projeto precisa estar configurado para rodar em um ambiente macOS ou Ubuntu (preferencialmente como container Docker).
 * Deve anexar ao seu projeto uma coleção do postman com todos os endpoints criados e exemplos de utilização.
 
+## Execução
+
 **Para executar seu código devemos executar apenas os seguintes comandos**:
 
-* git clone $seu-fork
-* cd $seu-fork
-* comando para instalar dependências
-* comando para executar a aplicação
+    * git clone $desafio-backend
+    * cd $desafio-backend
+    * comando para instalar dependências : **sh build.sh**
+    * comando para executar a aplicação: **sh execute.sh**
+
+***
 
 ## Critério de avaliação
 
@@ -70,11 +69,3 @@ Você irá desenvolver a API de uma aplicação para a criação de um quiz de p
 * **Histórico de commits** (estrutura e qualidade)
 * **UX**: A API é intuitiva?
 * **Escolhas técnicas**: A escolha das bibliotecas, banco de dados, arquitetura, etc, é a melhor escolha para a aplicação?
-
-## Dúvidas
-
-Quaisquer dúvidas que você venha a ter, consulte as issues para ver se alguém já não a fez e caso você não ache sua resposta, abra você mesmo uma nova issue!
-
-Ao completar o desafio, submeta um pull-request a esse repositório com uma breve explicação das decisões tomadas e principalmente as instruções para execução do projeto.
-
-**Boa sorte! ;)**

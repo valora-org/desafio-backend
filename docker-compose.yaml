@@ -1,0 +1,39 @@
+version: '3.7'
+
+services:
+  web:
+    build: 
+      context: ./docker/api/ 
+    ports:
+      - "8080:8080"
+    # add this when nginx service is enabled
+    # expose:
+    #   - 8080
+    volumes:
+      - ".:/code"
+    depends_on:
+      - db
+
+  db:
+    image: postgres:12.9-alpine
+    env_file:
+      - .env
+    volumes:
+      - "/var/run/postgres/postgres.sock:/var/run/postgres/postgres.sock"
+      - "dbdata:/var/lib/postgresql/data"
+
+
+  # -> optional setup
+  # nginx: 
+  #   build: ./docker/nginx/
+  #   volumes:
+  #     - .:/code
+  #   ports:
+  #     - 80:80
+  #   links:
+  #     - "web:web"
+
+#code and data persistence volumes
+volumes:
+  code:
+  dbdata:
