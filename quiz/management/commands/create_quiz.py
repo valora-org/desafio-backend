@@ -10,14 +10,9 @@ dir_path = os.path.dirname(os.path.realpath(__file__))
 
 class Command(BaseCommand):
     help = 'Create Base admin users'
-    # def add_arguments(self, parser):
-    #     parser.add_argument('poll_ids', nargs='+', type=int)
-
     def handle(self, *args, **options):
 
         try:
-            print(dir_path)
-
             with open(f'{dir_path}/quiz.json','r') as f:
                 data = json.load(f)
             f.close()

@@ -62,16 +62,17 @@ A seguir temos a descrição geral da aplicação , contendo as habilidades usad
 * comando para rodar os testes : **sh test.sh**
 * comando para executar a aplicação: **sh execute.sh**
 
+## Pendências
+
+* validação de única opção selecionada - Formulário de criação de questão 
+
 ***
 
 ## Critério de avaliação
 
-* **Organização do código**: Separação de módulos, view e model
 * **Clareza**: O README explica de forma resumida qual é o problema e como pode rodar a aplicação?
 * **Assertividade**: A aplicação está fazendo o que é esperado? Se tem algo faltando, o README explica o porquê?
 * **Legibilidade do código** (incluindo comentários)
 * **Segurança**: Existe alguma vulnerabilidade clara?
 * **Cobertura de testes** (Não esperamos cobertura completa mas é importante garantir o fluxo principal)
-* **Histórico de commits** (estrutura e qualidade)
 * **UX**: A API é intuitiva?
-* **Escolhas técnicas**: A escolha das bibliotecas, banco de dados, arquitetura, etc, é a melhor escolha para a aplicação?

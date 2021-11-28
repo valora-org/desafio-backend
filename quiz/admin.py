@@ -9,7 +9,6 @@ from .forms import *
 
 class OptionInlineAdmin(admin.TabularInline):
     model = Option
-    # form = PhotographerChangeForm
     extra = 0
     min_num = 3
     max_num = 3

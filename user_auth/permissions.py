@@ -18,7 +18,7 @@ class IsPlayer(BasePermission):
         auth = request.auth
         print(auth)
         if auth is not None:
-            
+            print(type(request.user))
             return isinstance(request.user,Player)
         else:
             return False

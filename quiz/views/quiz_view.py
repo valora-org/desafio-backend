@@ -7,11 +7,11 @@ from rest_framework.permissions import *
 from rest_framework.decorators import action
 from django.http import JsonResponse
 from quiz.serializers import *
+from desafio_config.utils.auth import PlayerAuth 
 
 class QuizViewset(MixedPermissionModelViewSet):
     queryset = Quiz.objects.all()
     serializer_class = QuizSerializer
-    permissions_classes = [IsPlayer]
     permission_classes_by_action = {'list': [IsPlayer],
                                     'create': [AllowAny],
                                     'retrieve': [IsPlayer],
@@ -20,12 +20,9 @@ class QuizViewset(MixedPermissionModelViewSet):
                                     'partial_update': [IsAdminUser],
                                     }
     
-    authentication_classes = [JWTAuthentication]
+    authentication_classes = [PlayerAuth]
 
-    def get_queryset(self):
-        user = self.request.user
-        query_set = self.queryset
-        return query_set.filter(pk=user.id)
+   
     
     # @action(['GET'],detail=False,permissions_classes=[IsPlayer])
     # def get_categories(self,request,pk=None):
@@ -37,20 +34,20 @@ class QuizViewset(MixedPermissionModelViewSet):
     #     )
     
 
-    # @action(['GET'],detail=True,permissions_classes=[IsPlayer])
-    # def questions(self,request,pk=None):
-    #     instance = self.get_object()
+    @action(['GET'],detail=True,permission_classes=[IsPlayer])
+    def questions(self,request,pk=None):
+        instance = self.get_object()
 
-    #     questions = instance.questions.all()
+        questions = instance.questions.all()
 
-    #     ser = QuestionGetSimpleSerializer(questions)
+        ser = QuestionGetSimpleSerializer(questions,many=True)
 
-    #     return JsonResponse(
-    #         ser.data,safe=False
-    #     )
+        return JsonResponse(
+            ser.data,safe=False
+        )
     
 
-    # @action(['POST'],detail=True,permissions_classes=[IsPlayer])
+    # @action(['POST'],detail=True,permission_classes=[IsPlayer])
     # def send_answers(self,request,pk=None):
     #     instance = self.get_object()
     #     data = request.data

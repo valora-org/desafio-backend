@@ -4,11 +4,11 @@ from user_auth.permissions import *
 from rest_framework_simplejwt.authentication import JWTAuthentication
 from desafio_config.utils.views import MixedPermissionModelViewSet
 from rest_framework.permissions import *
+from desafio_config.utils.auth import PlayerAuth
 
 class PlayerViewset(MixedPermissionModelViewSet):
     queryset = Player.objects.all()
     serializer_class = PlayerSerializer
-    permissions_classes = [IsPlayer]
     permission_classes_by_action = {'list': [IsPlayer],
                                     'create': [AllowAny],
                                     'retrieve': [IsPlayer],
@@ -17,7 +17,7 @@ class PlayerViewset(MixedPermissionModelViewSet):
                                     'partial_update': [IsAdminUser],
                                     }
     
-    authentication_classes = [JWTAuthentication]
+    authentication_classes = [PlayerAuth]
 
     def get_queryset(self):
         user = self.request.user
