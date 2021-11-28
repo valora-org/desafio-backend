@@ -5,7 +5,7 @@ class PlayerSerializer(serializers.ModelSerializer):
     
     class Meta:
         model = Player
-        fields = ["password","email","picture"]
+        fields = ["id","password","email","picture"]
         extra_kwargs = {
             'picture': {'required':False},
             'password': {'write_only':True}
