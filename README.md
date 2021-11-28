@@ -42,10 +42,15 @@ A seguir temos a descrição geral da aplicação , contendo as habilidades usad
 * Usuários do tipo **Player** tem permissão para jogar e consultar o ranking.
 
 
-## Requisitos de SO
+### Requisitos de SO
 
 * O projeto precisa estar configurado para rodar em um ambiente macOS ou Ubuntu (preferencialmente como container Docker).
 * Deve anexar ao seu projeto uma coleção do postman com todos os endpoints criados e exemplos de utilização.
+
+### Diagrama de classes
+
+![Alt text](https://github.com/williamelias/desafio-backend/blob/dev/class_diagram.png)
+
 
 ## Execução
 
