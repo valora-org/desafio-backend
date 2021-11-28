@@ -5,6 +5,12 @@ ENV PYTHONUNBUFFERED=1
 WORKDIR /code 
 
 RUN python3 -m pip install --upgrade pip
+RUN apk update && apk add \
+    postgresql-dev \
+    gcc \
+    make 
+
+RUN apk add build-base zlib-dev jpeg-dev libxml2-dev libxslt-dev
 
 COPY req.txt req.txt 
 

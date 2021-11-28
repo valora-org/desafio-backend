@@ -53,8 +53,8 @@ CORS_ALLOW_HEADERS = (
 # Application definition
 
 DEFAULT_APPS = [
-    'jet',
-    'jet.dashboard',
+    # 'jet',
+    # 'jet.dashboard',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -125,16 +125,21 @@ TEMPLATES = [
 
 ASGI_APPLICATION = 'desafio_config.asgi.application'
 
+#default user 
+
+AUTH_USER_MODEL = 'user_auth.CustomUser'
 
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
 DATABASES = {
     'default': {
-        "host": env.str("POSTGRES_HOST"),
-        "user": env.str("POSTGRES_USER"),
-        "name": env.str("POSTGRES_NAME"),
-        "password": env.str("POSTGRES_PASSWORD"),
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        "HOST": env.str("POSTGRES_HOST"),
+        "USER": env.str("POSTGRES_USER"),
+        "NAME": env.str("POSTGRES_DB"),
+        "PORT": 5432,
+        "PASSWORD": env.str("POSTGRES_PASSWORD"),
     }
 
     # 'default':env.db()

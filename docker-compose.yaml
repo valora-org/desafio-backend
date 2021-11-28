@@ -1,6 +1,16 @@
 version: '3.7'
 
 services:
+  db:
+    image: postgres:12
+    env_file:
+      - .env
+    volumes:
+      # - "/var/run/postgres/postgres.sock:/var/run/postgres/postgres.sock"
+      # - "dbdata:/var/lib/postgresql/data"
+      - "./code"
+    restart: always
+
   web:
     build: 
       context: ./docker/api/ 
@@ -13,16 +23,7 @@ services:
       - ".:/code"
     depends_on:
       - db
-
-  db:
-    image: postgres:12.9-alpine
-    env_file:
-      - .env
-    volumes:
-      - "/var/run/postgres/postgres.sock:/var/run/postgres/postgres.sock"
-      - "dbdata:/var/lib/postgresql/data"
-
-
+  
   # -> optional setup
   # nginx: 
   #   build: ./docker/nginx/
@@ -35,5 +36,4 @@ services:
 
 #code and data persistence volumes
 volumes:
-  code:
   dbdata:

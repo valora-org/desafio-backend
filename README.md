@@ -59,6 +59,7 @@ A seguir temos a descrição geral da aplicação , contendo as habilidades usad
 * git clone $desafio-backend
 * cd $desafio-backend
 * comando para instalar dependências : **sh build.sh**
+* comando para rodar os testes : **sh test.sh**
 * comando para executar a aplicação: **sh execute.sh**
 
 ***
