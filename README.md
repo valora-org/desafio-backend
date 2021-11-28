@@ -51,10 +51,10 @@ A seguir temos a descrição geral da aplicação , contendo as habilidades usad
 
 **Para executar seu código devemos executar apenas os seguintes comandos**:
 
-    * git clone $desafio-backend
-    * cd $desafio-backend
-    * comando para instalar dependências : **sh build.sh**
-    * comando para executar a aplicação: **sh execute.sh**
+* git clone $desafio-backend
+* cd $desafio-backend
+* comando para instalar dependências : **sh build.sh**
+* comando para executar a aplicação: **sh execute.sh**
 
 ***
 
