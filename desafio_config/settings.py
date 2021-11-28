@@ -66,7 +66,8 @@ DEFAULT_APPS = [
 ]
 
 CREATED_APPS = [
-    'user_auth'
+    'user_auth',
+    'quiz'
 ]
 
 INSTALLED_APPS = DEFAULT_APPS + CREATED_APPS
@@ -129,7 +130,8 @@ ASGI_APPLICATION = 'desafio_config.asgi.application'
 
 #default user 
 
-AUTH_USER_MODEL = 'user_auth.Player'
+# AUTH_USER_MODEL = 'user_auth.Player'
+AUTH_USER_MODEL = 'user_auth.CustomUser'
 
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
@@ -174,9 +176,11 @@ REST_FRAMEWORK = {
     'PAGE_SIZE': 10,
     'DEFAULT_PERMISSION_CLASSES': [
         'rest_framework.permissions.IsAuthenticated',
+        'rest_framework.permissions.IsAdminUser',
     ],
     'DEFAULT_AUTHENTICATION_CLASSES': (
         'rest_framework_simplejwt.authentication.JWTAuthentication',
+        'desafio_config.utils.auth.PlayerAuth',
         'rest_framework.authentication.BasicAuthentication',
         'rest_framework.authentication.SessionAuthentication',
     )
@@ -329,3 +333,13 @@ JET_THEMES = [
 ]
 
 
+STATIC_URL = '/static/'
+PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
+STATIC_ROOT = os.path.join(PROJECT_ROOT, 'static')
+
+STATICFILES_DIRS = (os.path.join(BASE_DIR, 'static'),)
+
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, "media")
+
+# REST CONFIG

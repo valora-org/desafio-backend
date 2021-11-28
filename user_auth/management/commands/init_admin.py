@@ -10,8 +10,7 @@ class Command(BaseCommand):
 
     def handle(self, *args, **options):
         for email in ADMINS:
-            print(email)
-            print(DEFAULT_PW)
+       
             try:
                 admin = CustomUser.objects.create_superuser(
                     email=email[1],
