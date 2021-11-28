@@ -28,5 +28,16 @@ class QuestionAdmin(ModelAdmin):
         return super().get_queryset(request)
 
 
-admin.site.register(Quiz)
+class QuizAdmin(ModelAdmin):
+    model = Quiz
+   
+    list_display = ['id','category']
+    list_filter = ['id']
+
+ 
+    def get_queryset(self, request):
+     
+        return super().get_queryset(request)
+
+admin.site.register(Quiz,QuizAdmin)
 admin.site.register(Question,QuestionAdmin)

@@ -1,0 +1,386 @@
+[
+    {
+        "category": "Flora",
+        "questions": [
+            {
+                "enunciation": "Qual fruta é essencial para produção de chocolate?",
+                "options": [
+                    {
+                        "text": "manga",
+                        "is_correct":false
+                    },
+                    {
+                        "text": "beringela",
+                        "is_correct":false
+                    },
+                    {
+                        "text": "cacau",
+                        "is_correct":true
+                    }
+                ]
+            },
+            {
+                "enunciation": "Qual o nome da fruta da paixão ",
+                "options": [
+                    {
+                        "text": "manga",
+                        "is_correct":false
+                    },
+                    {
+                        "text": "maracujá",
+                        "is_correct":true
+                    },
+                    {
+                        "text": "cacau",
+                        "is_correct":false
+                    }
+                ]
+            },
+            {
+                "enunciation": "Qual dessas plantas é muito ingerida por ruminantes?",
+                "options": [
+                    {
+                        "text": "capim",
+                        "is_correct":true
+                    },
+                    {
+                        "text": "carrapicho",
+                        "is_correct":false
+                    },
+                    {
+                        "text": "rosas",
+                        "is_correct":false
+                    }
+                ]
+            },
+            {
+                "enunciation": "Qual dessas plantas é conhecida por armazenar muita água durante os períodos de seca?",
+                "options": [
+                    {
+                        "text": "Barriga d'água ",
+                        "is_correct":false
+                    },
+                    {
+                        "text": "cacto",
+                        "is_correct":false
+                    },
+                    {
+                        "text": "todas respostas estão certas",
+                        "is_correct":true
+                    }
+                ]
+            },
+            {
+                "enunciation": "Qual fruta é muito ingerida por primatas, no geral?",
+                "options": [
+                    {
+                        "text": "manga",
+                        "is_correct":false
+                    },
+                    {
+                        "text": "banana",
+                        "is_correct":true
+                    },
+                    {
+                        "text": "maçã",
+                        "is_correct":false
+                    }
+                ]
+            },
+            {
+                "enunciation": "Qual das árvores a seguir produz a pinha?",
+                "options": [
+                    {
+                        "text": "mangueira",
+                        "is_correct":false
+                    },
+                    {
+                        "text": "goiabeira",
+                        "is_correct":false
+                    },
+                    {
+                        "text": "pinheiro",
+                        "is_correct":true
+                    }
+                ]
+            },
+            {
+                "enunciation": "Qual dessas plantas é uma planta aquática?",
+                "options": [
+                    {
+                        "text": "vitória régia",
+                        "is_correct":true
+                    },
+                    {
+                        "text": "palmeira",
+                        "is_correct":false
+                    },
+                    {
+                        "text": "cacau",
+                        "is_correct":false
+                    }
+                ]
+            }
+            , {
+                "enunciation": "Que fruto o limoeiro dá?",
+                "options": [
+                    {
+                        "text": "manga",
+                        "is_correct":false
+                    },
+                    {
+                        "text": "beringela",
+                        "is_correct":false
+                    },
+                    {
+                        "text": "limão",
+                        "is_correct":true
+                    }
+                ]
+            },
+            {
+                "enunciation": "Que planta é natural do sul do Brasil?",
+                "options": [
+                    {
+                        "text": "barriga d'agua ",
+                        "is_correct":false
+                    },
+                    {
+                        "text": "coqueirinho",
+                        "is_correct":false
+                    },
+                    {
+                        "text": "araucária",
+                        "is_correct":true
+                    }
+                ]
+            },
+            {
+                "enunciation": "Qual insumo retirado de uma seringueira?",
+                "options": [
+                    {
+                        "text": "manga",
+                        "is_correct":false
+                    },
+                    {
+                        "text": "latex",
+                        "is_correct":true
+                    },
+                    {
+                        "text": "cacau",
+                        "is_correct":false
+                    }
+                ]
+            },
+            {
+                "enunciation": "Qual dessas árvores é conhecida como árvore de natal?",
+                "options": [
+                    {
+                        "text": "mangueira",
+                        "is_correct":false
+                    },
+                    {
+                        "text": "palmeira",
+                        "is_correct":false
+                    },
+                    {
+                        "text": "pinheiro",
+                        "is_correct":false
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "category": "Fauna",
+        "questions": [
+            {
+                "enunciation": "Qual fruta é essencial para produção de chocolate?",
+                "options": [
+                    {
+                        "text": "manga",
+                        "is_correct":false
+                    },
+                    {
+                        "text": "beringela",
+                        "is_correct":false
+                    },
+                    {
+                        "text": "cacau",
+                        "is_correct":true
+                    }
+                ]
+            },
+            {
+                "enunciation": "Qual o nome da fruta da paixão ",
+                "options": [
+                    {
+                        "text": "manga",
+                        "is_correct":false
+                    },
+                    {
+                        "text": "maracujá",
+                        "is_correct":true
+                    },
+                    {
+                        "text": "cacau",
+                        "is_correct":false
+                    }
+                ]
+            },
+            {
+                "enunciation": "Qual dessas plantas é muito ingerida por ruminantes?",
+                "options": [
+                    {
+                        "text": "capim",
+                        "is_correct":true
+                    },
+                    {
+                        "text": "carrapicho",
+                        "is_correct":false
+                    },
+                    {
+                        "text": "rosas",
+                        "is_correct":false
+                    }
+                ]
+            },
+            {
+                "enunciation": "Qual dessas plantas é conhecida por armazenar muita água durante os períodos de seca?",
+                "options": [
+                    {
+                        "text": "Barriga d'água ",
+                        "is_correct":false
+                    },
+                    {
+                        "text": "cacto",
+                        "is_correct":false
+                    },
+                    {
+                        "text": "todas respostas estão certas",
+                        "is_correct":true
+                    }
+                ]
+            },
+            {
+                "enunciation": "Qual fruta é muito ingerida por primatas, no geral?",
+                "options": [
+                    {
+                        "text": "manga",
+                        "is_correct":false
+                    },
+                    {
+                        "text": "banana",
+                        "is_correct":true
+                    },
+                    {
+                        "text": "maçã",
+                        "is_correct":false
+                    }
+                ]
+            },
+            {
+                "enunciation": "Qual das árvores a seguir produz a pinha?",
+                "options": [
+                    {
+                        "text": "mangueira",
+                        "is_correct":false
+                    },
+                    {
+                        "text": "goiabeira",
+                        "is_correct":false
+                    },
+                    {
+                        "text": "pinheiro",
+                        "is_correct":true
+                    }
+                ]
+            },
+            {
+                "enunciation": "Qual dessas plantas é uma planta aquática?",
+                "options": [
+                    {
+                        "text": "vitória régia",
+                        "is_correct":true
+                    },
+                    {
+                        "text": "palmeira",
+                        "is_correct":false
+                    },
+                    {
+                        "text": "cacau",
+                        "is_correct":false
+                    }
+                ]
+            }
+            , {
+                "enunciation": "Que fruto o limoeiro dá?",
+                "options": [
+                    {
+                        "text": "manga",
+                        "is_correct":false
+                    },
+                    {
+                        "text": "beringela",
+                        "is_correct":false
+                    },
+                    {
+                        "text": "limão",
+                        "is_correct":true
+                    }
+                ]
+            },
+            {
+                "enunciation": "Que planta é natural do sul do Brasil?",
+                "options": [
+                    {
+                        "text": "barriga d'agua ",
+                        "is_correct":false
+                    },
+                    {
+                        "text": "coqueirinho",
+                        "is_correct":false
+                    },
+                    {
+                        "text": "araucária",
+                        "is_correct":true
+                    }
+                ]
+            },
+            {
+                "enunciation": "Qual insumo retirado de uma seringueira?",
+                "options": [
+                    {
+                        "text": "manga",
+                        "is_correct":false
+                    },
+                    {
+                        "text": "latex",
+                        "is_correct":true
+                    },
+                    {
+                        "text": "cacau",
+                        "is_correct":false
+                    }
+                ]
+            },
+            {
+                "enunciation": "Qual dessas árvores é conhecida como árvore de natal?",
+                "options": [
+                    {
+                        "text": "mangueira",
+                        "is_correct":false
+                    },
+                    {
+                        "text": "palmeira",
+                        "is_correct":false
+                    },
+                    {
+                        "text": "pinheiro",
+                        "is_correct":false
+                    }
+                ]
+            }
+        ]
+    }
+]
