@@ -1,18 +1,17 @@
-from user_auth.models.profiles import CustomUser
 from django.core.management.base import BaseCommand, CommandError
-from desafio_config.settings import ADMINS,DEFAULT_PW
-# from django.contrib.auth.models import User
 import json 
-import os 
 from quiz.models.quiz import *
+from .utils import dir_path
 
-dir_path = os.path.dirname(os.path.realpath(__file__))
 
 class Command(BaseCommand):
-    help = 'Create Base admin users'
+    help = 'Create quiz'
+    
     def handle(self, *args, **options):
 
         try:
+            # open json file with quiz content
+
             with open(f'{dir_path}/quiz.json','r') as f:
                 data = json.load(f)
             f.close()

@@ -18,8 +18,6 @@ class Command(BaseCommand):
                     password=DEFAULT_PW,
                     is_superuser=True,
                     is_staff=True,
-                    # user_type='Admin'
-                    # password_confirm=DEFAULT_PW
                 )
         
             except Exception as e:

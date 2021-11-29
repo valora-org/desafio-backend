@@ -1,4 +1,3 @@
-from django.forms.widgets import TextInput
 from rest_framework import serializers 
 from quiz.models.question import *
 
@@ -45,6 +44,7 @@ class QuestionPointSerializer(serializers.Serializer):
     class Meta:
         fields = ['id','answer','point_value']
     
+    # return 1 or -1 according to correct answer of question list
     def get_point_value(self):
         correct_option = self.id.options.get(is_correct=True)
         condition  = self.answer == correct_option

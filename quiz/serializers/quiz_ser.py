@@ -3,11 +3,19 @@ from quiz.models.quiz import *
 import functools 
 from .question_ser import QuestionPointSerializer
 from quiz.models.rank import *
+from .uitls import *
 
 class QuizSerializer(serializers.ModelSerializer):
+    is_available = serializers.SerializerMethodField()
     class Meta:
         model = Quiz 
         fields = "__all__"
+    
+    #return if the quiz question is complete
+    def get_is_available(self,data):
+        if not hasattr(data,'questions'):
+            return False
+        return data.questions.all().count() >= 10
 
 
 class QuizField(serializers.RelatedField):
@@ -30,13 +38,15 @@ class QuizQuestionAnswerSerializer(serializers.Serializer):
             'questions': {'write_only':True}
         }
     
+    #return 1 or -1 according to answer of question
     def get_point_value(self,question_id,answer):
         correct_option = question_id.options.get(is_correct=True)
         condition  = answer == correct_option
         point = 1 if condition else -1 
 
         return point
-    
+
+    #manage player_rank and points
     def create_or_update_player_rank(self,player,quiz,value):
         player_rank,created = PlayerRank.objects.get_or_create(player=player)
         points = player_rank.points.all()
@@ -51,27 +61,34 @@ class QuizQuestionAnswerSerializer(serializers.Serializer):
                 quiz=quiz,
                 value=value
             )
-        player_rank.points.add(point)
+       
+        # update points list and get actual rank user
+        update_rank(player_rank,point)
 
-        player_rank.set_total_points()
-        print(PlayerRank.objects.order_by("-total_points").filter(total_points__lte=player_rank.total_points))
-        total_rank = PlayerRank.objects.order_by("-total_points").filter(total_points__lte=player_rank.total_points).count()
+        rank = get_rank(player_rank)
 
         return {
             'total_points':player_rank.total_points,
             'quiz_points':value,
-            'rank': total_rank + 1
+            'rank': rank
         }
     
+
+    #use python lib to iter and sum items
+    def get_quiz_point(self,questions):
+        mapped = list(map(lambda x: self.get_point_value(x['id'],x['answer']),questions))
+        reduced = functools.reduce(lambda a,b: a +b,mapped)
+        reduced_point = reduced if reduced >= 0 else 0
+
+        return reduced_point
 
     def create(self,validated):
         quiz = self.context['quiz']
         player = self.context['request'].user 
 
         questions = validated['questions']      
-        mapped = list(map(lambda x: self.get_point_value(x['id'],x['answer']),questions))
-        reduced = functools.reduce(lambda a,b: a +b,mapped)
-        reduced = reduced if reduced >= 0 else 0
+       
+        reduced = self.get_quiz_point(questions)
         response = self.create_or_update_player_rank(player,quiz,reduced)
 
         return response

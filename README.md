@@ -58,14 +58,14 @@ A seguir temos a descrição geral da aplicação , contendo as habilidades usad
 
 * git clone $desafio-backend
 * cd $desafio-backend
-* comando para instalar dependências : **sh build.sh**
+* comando para instalar dependências e popular base: **sh build.sh**
 * comando para rodar os testes : **sh test.sh**
 * comando para executar a aplicação: **sh execute.sh**
 
 ## Pendências
 
-* validação de única opção selecionada - Formulário de criação de questão 
-
+* validação de única opção selecionada - Formulário de criação de questão (Admin) 
+* validação de existência da resposta na lista de options - Question answer serializers (send_answer)
 ***
 
 ## Critério de avaliação

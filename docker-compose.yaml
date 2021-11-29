@@ -16,7 +16,9 @@ services:
       context: ./docker/api/ 
     ports:
       - "8080:8080"
-    # add this when nginx service is enabled
+
+
+    #_______add this when nginx service is enabled______
     # expose:
     #   - 8080
     volumes:
@@ -24,7 +26,7 @@ services:
     depends_on:
       - db
   
-  # -> optional setup
+  #_______optional service setup______
   # nginx: 
   #   build: ./docker/nginx/
   #   volumes:

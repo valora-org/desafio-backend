@@ -40,7 +40,11 @@ class QuizViewset(MixedPermissionModelViewSet):
 
         questions = instance.questions.all()
 
-
+        #verify if quiz questions is complete
+        if not questions.count() >= 10:
+            return JsonResponse(
+                {'error':"Item não disponível"}
+            )
         questions = random.choices(questions, k=10)
         ser = QuestionGetSimpleSerializer(questions,many=True)
 
@@ -57,6 +61,7 @@ class QuizViewset(MixedPermissionModelViewSet):
         ser = QuizQuestionAnswerSerializer(data=data,context=context)
         ser.is_valid(raise_exception=True)
         saved = ser.save()
+        
         return JsonResponse(
             saved,safe=False
         )

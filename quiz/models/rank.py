@@ -5,9 +5,7 @@ import functools
 
 class Point(models.Model):
     quiz = models.ForeignKey(Quiz,on_delete=models.CASCADE)
-    # player_rank = models.ForeignKey(PlayerRank,on_delete=models.CASCADE) 
     value = models.IntegerField(default=0)
-
 
 
 class PlayerRank(models.Model):
@@ -18,7 +16,8 @@ class PlayerRank(models.Model):
         self.value = total_point
         self.save()
     
-     
+    
+    # override points according quiz ralized
     def set_total_points(self):
         points = list(self.points.all().values('value'))
         reduced = (functools.reduce(lambda a,b: int(a)+int(b),points))

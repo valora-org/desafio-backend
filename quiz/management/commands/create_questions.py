@@ -5,13 +5,12 @@ from desafio_config.settings import ADMINS,DEFAULT_PW
 from quiz.models.quiz import * 
 from quiz.models.question import *
 import json 
-import os
-
-dir_path = os.path.dirname(os.path.realpath(__file__))
+from .utils import dir_path
 
 class Command(BaseCommand):
     help = 'Create Base admin users'
   
+    # get questions by quiz category and populate
     def process_questions(self,questions,category):
         for item in questions:
             enunciation = item['enunciation']
@@ -24,6 +23,8 @@ class Command(BaseCommand):
     def handle(self, *args, **options):
 
         try:
+            # open json file with questions content
+
             with open(f'{dir_path}/questions.json','r') as f:
                 data = json.load(f)
 

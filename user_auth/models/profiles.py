@@ -26,4 +26,5 @@ class CustomUser(AbstractUser):
 class Player(CustomUser):
     picture = models.FileField(
         _('foto'), blank=True, default='member-default.jpg', upload_to=UploadImage)
+    user_type = models.CharField(default='Player',max_length=6,editable=False)
 

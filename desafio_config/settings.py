@@ -53,8 +53,6 @@ CORS_ALLOW_HEADERS = (
 # Application definition
 
 DEFAULT_APPS = [
-    # 'jet',
-    # 'jet.dashboard',
     'rest_framework',
     'rest_framework_simplejwt',
     'django.contrib.admin',
@@ -74,8 +72,6 @@ INSTALLED_APPS = DEFAULT_APPS + CREATED_APPS
 
 
 # test config
-
-
 
 class DisableMigrations(object):
 
@@ -129,8 +125,6 @@ TEMPLATES = [
 ASGI_APPLICATION = 'desafio_config.asgi.application'
 
 #default user 
-
-# AUTH_USER_MODEL = 'user_auth.Player'
 AUTH_USER_MODEL = 'user_auth.CustomUser'
 
 # Database
@@ -146,7 +140,6 @@ DATABASES = {
         "PASSWORD": env.str("POSTGRES_PASSWORD"),
     }
 
-    # 'default':env.db()
 }
 # Password validation
 # https://docs.djangoproject.com/en/3.2/ref/settings/#auth-password-validators

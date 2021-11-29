@@ -5,11 +5,5 @@ class Quiz(models.Model):
       max_length=100,unique=True
     )
     
-    @property
-    def is_available(self):
-      if not hasattr(self,'questions'):
-          return False
-      return self.questions.all().count() == 10
-      
     def __str__(self):
         return self.category

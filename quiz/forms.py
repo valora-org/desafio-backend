@@ -10,12 +10,10 @@ class QuestionForm(forms.ModelForm):
   
     def clean(self):
         cleaned =  super().clean()  
-        print(cleaned)
         return cleaned
     
  
     def save(self, commit: False):
         
         saved = super().save(commit=commit)
-        print(saved)
         return saved
