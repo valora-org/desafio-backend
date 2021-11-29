@@ -1,5 +1,6 @@
 from django.db import models
 from .quiz import *
+import random
 
 class Question(models.Model):
     enunciation = models.CharField(max_length=128)

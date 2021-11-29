@@ -40,6 +40,8 @@ class QuizViewset(MixedPermissionModelViewSet):
 
         questions = instance.questions.all()
 
+
+        questions = random.choices(questions, k=10)
         ser = QuestionGetSimpleSerializer(questions,many=True)
 
         return JsonResponse(
@@ -47,15 +49,14 @@ class QuizViewset(MixedPermissionModelViewSet):
         )
     
 
-    # @action(['POST'],detail=True,permission_classes=[IsPlayer])
-    # def send_answers(self,request,pk=None):
-    #     instance = self.get_object()
-    #     data = request.data
-    #     context = {'request':request,"quiz":instance}
-    #     ser = QuestionAnswerSerializer(data=data,context=context)
-    #     ser.is_valid(raise_exception=True)
-    #     ser.save()
-        
-    #     return JsonResponse(
-    #         ser.data,safe=False
-    #     )
+    @action(['POST'],detail=True,permission_classes=[IsPlayer])
+    def send_answers(self,request,pk=None):
+        instance = self.get_object()
+        data = request.data
+        context = {'request':request,"quiz":instance}
+        ser = QuizQuestionAnswerSerializer(data=data,context=context)
+        ser.is_valid(raise_exception=True)
+        saved = ser.save()
+        return JsonResponse(
+            saved,safe=False
+        )

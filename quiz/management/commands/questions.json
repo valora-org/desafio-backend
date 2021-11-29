@@ -185,7 +185,7 @@
                     },
                     {
                         "text": "pinheiro",
-                        "is_correct":false
+                        "is_correct":true
                     }
                 ]
             }
@@ -377,7 +377,7 @@
                     },
                     {
                         "text": "pinheiro",
-                        "is_correct":false
+                        "is_correct":true
                     }
                 ]
             }
