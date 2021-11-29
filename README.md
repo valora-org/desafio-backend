@@ -52,7 +52,7 @@ A seguir temos a descrição geral da aplicação , contendo as habilidades usad
 ![Alt text](https://github.com/williamelias/desafio-backend/blob/dev/class_diagram.png)
 
 
-## Execução
+### Execução
 
 **Para executar seu código devemos executar apenas os seguintes comandos**:
 
@@ -62,17 +62,9 @@ A seguir temos a descrição geral da aplicação , contendo as habilidades usad
 * comando para rodar os testes : **sh test.sh**
 * comando para executar a aplicação: **sh execute.sh**
 
-## Pendências
+***
+
+### Pendências
 
 * validação de única opção selecionada - Formulário de criação de questão (Admin) 
 * validação de existência da resposta na lista de options - Question answer serializers (send_answer)
-***
-
-## Critério de avaliação
-
-* **Clareza**: O README explica de forma resumida qual é o problema e como pode rodar a aplicação?
-* **Assertividade**: A aplicação está fazendo o que é esperado? Se tem algo faltando, o README explica o porquê?
-* **Legibilidade do código** (incluindo comentários)
-* **Segurança**: Existe alguma vulnerabilidade clara?
-* **Cobertura de testes** (Não esperamos cobertura completa mas é importante garantir o fluxo principal)
-* **UX**: A API é intuitiva?

@@ -1,0 +1,337 @@
+{
+	"info": {
+		"_postman_id": "4328f0e7-e147-4f11-b393-751714847278",
+		"name": "desafio_valora",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "profiles",
+			"item": [
+				{
+					"name": "player",
+					"item": [
+						{
+							"name": "retrieve",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjM4Mzk1MzcwLCJqdGkiOiI3ZDUzNWMyZjE3ODg0ZmQ1OTc1NmQ2ODY5NDc4YmJjNyIsInVzZXJfaWQiOjM0fQ.rlZM2BZxMRrUmIlqBUUE_eIPYO4BlPo9c-k1SWmYM88",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "http://localhost:8080/profiles/players/34/",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"profiles",
+										"players",
+										"34",
+										""
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "list",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjM4Mzk1MzcwLCJqdGkiOiI3ZDUzNWMyZjE3ODg0ZmQ1OTc1NmQ2ODY5NDc4YmJjNyIsInVzZXJfaWQiOjM0fQ.rlZM2BZxMRrUmIlqBUUE_eIPYO4BlPo9c-k1SWmYM88",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "http://localhost:8080/profiles/players/",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"profiles",
+										"players",
+										""
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "create",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "password",
+											"value": "will123#as",
+											"type": "text"
+										},
+										{
+											"key": "email",
+											"value": "will@valora.com",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "http://localhost:8080/profiles/players/",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"profiles",
+										"players",
+										""
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "auth-jwt",
+					"item": [
+						{
+							"name": "get_token",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "email",
+											"value": "will@valora.com",
+											"type": "text"
+										},
+										{
+											"key": "password",
+											"value": "will123#as",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "http://localhost:8080/api/token/",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"token",
+										""
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "refresh_token",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8080/api/token/refresh/",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"token",
+										"refresh",
+										""
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "quiz",
+			"item": [
+				{
+					"name": "questions_by_category",
+					"item": [
+						{
+							"name": "by category",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjM4Mzk1MzcwLCJqdGkiOiI3ZDUzNWMyZjE3ODg0ZmQ1OTc1NmQ2ODY5NDc4YmJjNyIsInVzZXJfaWQiOjM0fQ.rlZM2BZxMRrUmIlqBUUE_eIPYO4BlPo9c-k1SWmYM88",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "http://localhost:8080/game/quiz/2/questions/",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"game",
+										"quiz",
+										"2",
+										"questions",
+										""
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "rank",
+					"item": [
+						{
+							"name": "actual rank",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjM4Mzk4MDc0LCJqdGkiOiIzNGJhNGIzYzQzMjI0ZjM4YWFjZjEwMmM1MDQ4OWJmNiIsInVzZXJfaWQiOjY3fQ.egIwYaRdpH7U8nR5XneXIbb3iYMKNLnQcvgiZLEx3KE",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "http://localhost:8080/game/rank/",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"game",
+										"rank",
+										""
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "list",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjM4Mzk2NTYzLCJqdGkiOiJkOWFkNDIyMGI5MTk0YjIwODBkMzRiYmUxYzM4YzM4YiIsInVzZXJfaWQiOjY3fQ.bA3T7inK8BDXmx9aToFtem4_irQ56JttlBpZWMyQGXQ",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8080/game/quiz/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"game",
+								"quiz",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "retrieve",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjM4Mjg4NTAyLCJqdGkiOiJkMGYxOWQyYmY1YTY0NjdmYmZjZjVmOGMyNzZjMTNiNSIsInVzZXJfaWQiOjY5fQ.-QZCcMF4eRHYGFnxHM6SO72c12o0jAN99j1iwFGkl4c",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8080/game/quiz/1/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"game",
+								"quiz",
+								"1",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "send answers",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjM4Mzk1MzcwLCJqdGkiOiI3ZDUzNWMyZjE3ODg0ZmQ1OTc1NmQ2ODY5NDc4YmJjNyIsInVzZXJfaWQiOjM0fQ.rlZM2BZxMRrUmIlqBUUE_eIPYO4BlPo9c-k1SWmYM88",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"questions\" :[\n    {\n        \"id\": 3,\n        \"answer\": 9\n    },\n     {\n        \"id\": 7,\n        \"answer\": 20\n    },\n     {\n        \"id\": 2,\n        \"answer\": 5\n    },\n     {\n        \"id\": 1,\n        \"answer\": 3\n    },\n     {\n        \"id\": 6,\n        \"answer\": 18\n    },\n    {\n        \"id\": 3,\n        \"answer\": 9\n    },\n     {\n        \"id\": 3,\n        \"answer\": 9\n    },\n     {\n        \"id\": 3,\n        \"answer\": 10\n    },\n    {\n        \"id\": 3,\n        \"answer\": 10\n    },\n     {\n        \"id\": 4,\n        \"answer\": 10\n    }\n]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/game/quiz/1/send_answers/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"game",
+								"quiz",
+								"1",
+								"send_answers",
+								""
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
