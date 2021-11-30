@@ -27,18 +27,6 @@ A seguir temos a descrição geral da aplicação , contendo as habilidades usad
 * Ranking por categoria agrupa por categorias.
 * Este requisito é desejável mas não obrigatório.
 
-**Permissões**:
-
-* Todos os endpoints devem estar protegidos por autenticação.
-* Usuários do tipo **Admin** tem permissão para criar perguntas e respostas para os quizzes.
-* Usuários do tipo **Player** tem permissão para jogar e consultar o ranking.
-
-
-### Requisitos de SO
-
-* O projeto precisa estar configurado para rodar em um ambiente macOS ou Ubuntu (preferencialmente como container Docker).
-* Deve anexar ao seu projeto uma coleção do postman com todos os endpoints criados e exemplos de utilização.
-
 ### Diagrama de classes
 
 ![Alt text](https://github.com/williamelias/desafio-backend/blob/dev/class_diagram.png)
@@ -55,7 +43,7 @@ A seguir temos a descrição geral da aplicação , contendo as habilidades usad
 * executar a aplicação: **sh execute.sh**
 
 **accessso admin**: admin@valora.com / a#dM10]ddln
-
+**url do server**: localhost:8080
 ***
 
 ### Pendências
