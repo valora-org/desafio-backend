@@ -43,7 +43,9 @@ A seguir temos a descrição geral da aplicação , contendo as habilidades usad
 * executar a aplicação: **sh execute.sh**
 
 **accessso admin**: admin@valora.com / a#dM10]ddln
+
 **url do server**: localhost:8080
+
 ***
 
 ### Pendências
