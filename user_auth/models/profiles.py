@@ -10,7 +10,7 @@ USER_TYPE_CHOICES = (
 
 
 def UploadImage(instance, filename):
-    return os.path.join('players', instance.id, str(instance.id), f'{filename}')
+    return os.path.join('players', str(instance.id), f'{filename}')
  
 
 class CustomUser(AbstractUser):
@@ -25,6 +25,6 @@ class CustomUser(AbstractUser):
 
 class Player(CustomUser):
     picture = models.FileField(
-        _('foto'), blank=True, default='member-default.jpg', upload_to=UploadImage)
+        _('foto'), default='member-default.jpg', upload_to=UploadImage)
     user_type = models.CharField(default='Player',max_length=6,editable=False)
 

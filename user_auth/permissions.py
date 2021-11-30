@@ -16,9 +16,7 @@ class IsSameUser(BasePermission):
 class IsPlayer(BasePermission):
     def has_permission(self, request, view):
         auth = request.auth
-        print(auth)
         if auth is not None:
-            print(type(request.user))
             return isinstance(request.user,Player)
         else:
             return False

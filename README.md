@@ -3,14 +3,6 @@
 A seguir temos a descrição geral da aplicação , contendo as habilidades usadas e descrições de execução de código.
 
 
-### Habilidades Usadas
-
-* **Python**
-* **Django**
-* **Django REST Framework**
-* **Pytest** 
-* **Docker e compose** 
-
 ### Requisitos Funcionais
 
 **Cada quiz é composto por**:
@@ -58,9 +50,11 @@ A seguir temos a descrição geral da aplicação , contendo as habilidades usad
 
 * git clone $desafio-backend
 * cd $desafio-backend
-* comando para instalar dependências e popular base: **sh build.sh**
-* comando para rodar os testes : **sh test.sh**
-* comando para executar a aplicação: **sh execute.sh**
+* instalar dependências e popular base: **sh build.sh**
+* rodar os testes : **sh test.sh**
+* executar a aplicação: **sh execute.sh**
+
+**accessso admin**: admin@valora.com / a#dM10]ddln
 
 ***
 

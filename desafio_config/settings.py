@@ -176,7 +176,9 @@ REST_FRAMEWORK = {
         'desafio_config.utils.auth.PlayerAuth',
         'rest_framework.authentication.BasicAuthentication',
         'rest_framework.authentication.SessionAuthentication',
-    )
+    ),
+    'TEST_REQUEST_DEFAULT_FORMAT': 'json' # to helpe client apitest
+
 }
 
 # Internationalization

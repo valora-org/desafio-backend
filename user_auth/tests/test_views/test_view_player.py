@@ -1,76 +1,42 @@
 import random
-# from users.tests.utils import Base64Handler, EasyTestRefreshToken, RSAhandleTest
 from user_auth.models.profiles import Player
 from django.test import TestCase
 from rest_framework.test import APITestCase
+from user_auth.tests.utils import *
 
 class ProfileUnauthorizedTest(APITestCase):
-    @classmethod
-    def setUpTestData(cls):
-        # Create 13 authors for pagination tests
-        number_of_authors = 2
-
-        import random
-
-        
-        for id in range(number_of_authors):
-            email = f"{id}@email",
-            Player.objects.get_or_create(
-                email=email,username=email, first_name=f'william{id}',
-            )
-
-    def test_view_url_exists_at_Lessee(self):
-        response = self.client.get('/players/')
+ 
+    def test_view_list_player(self):
+        response = self.client.get('/profiles/players/')
         self.assertEqual(response.status_code, 401)
 
-    def test_view_url_exists_at_retrieve_player(self):
-        id = Player.objects.all().first().id
-        response = self.client.get(f'/players/{id}/')
+    def test_view_retrieve_player(self):
+        response = self.client.get(f'/profiles/players/{id}/')
         self.assertEqual(response.status_code, 401)
 
 
+class ProfileAuthTest(APITestCase):  
 
-class ProfileDoesNotExistsTest(APITestCase):
-   
-    def test_view_url_exists_at_retrieve_player(self):
-        id = 1
-        response = self.client.get(f'/players/{id}/')
-        self.assertEqual(response.status_code, 401)
-
-
-class ProfileAuthTest(APITestCase):
-   
-
-    @classmethod
-    def setUpTestData(cls):
-        # Create 13 authors for pagination tests
-        id = 2
-
-        import random
-
-        
-        email = f"{id}@email.com",
-        password = f"{id}pass#123"
-        Player.objects.get_or_create(
-            email=email,username=email,password=password, first_name=f'william{id}',
+    def setUp(self):
+        self.user = Player.objects.create(
+            email='will@will.com',
+            username ='will@will.com',
+            password="willPass"
         )
-    
 
-    def test_view_url_400(self):
+    def test_view_token_400(self):
 
         response = self.client.post('/api/token/')
         self.assertEqual(response.status_code, 400)
-
-    def test_view_url_200(self):
-        user = Player.objects.all().last()
-        email = f"{user.id}@email.com",
-        password = f"{user.id}pass#123"
+    
+    def test_view_token_unauthorized(self):
         data = {
-            'pasword': password,
-            'email':email
+            "password": "not_isValid",
+            "email":"pedro@email.com"
         }
         response = self.client.post('/api/token/',data,format='json')
-        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.status_code, 401)
+
 
 
 class ProfileAuthorizedTest(APITestCase):
@@ -85,89 +51,68 @@ class ProfileAuthorizedTest(APITestCase):
 
         
         for id in range(number_of_authors):
-            email = f"{id}@email",
-            Player.objects.get_or_create(
-                email=email,username=email, first_name=f'william{id}',
+            email = f"{id}@email"
+            Player.objects.create_user(
+                email=email,username=email, first_name=f'william{id}',password="defaultPass123"
             )
 
        
     
     def setUp(self):
         super().setUp()
-        user_one = Player.objects.get(pk=1)
-        token  = EasyTestRefreshToken.for_user(str(user_one.unique_id),'profile','lessee')
-        access = str(token.access_token)
+        user_one = Player.objects.all().last()
+        
+        response = self.client.post("/api/token/",{
+            "email":user_one.username,
+            "password": "defaultPass123"
+        })
 
+        self.assertEqual(response.status_code, 200)
+        access = response.data['access']
         self.client.credentials(HTTP_AUTHORIZATION='Bearer ' + access)
         self.access = access
-
-        phone = CompleteNumber.objects.create(country_code='55',ddd='61',phone_number=random.randint(11111111,99999999))
-        self.user = CustomUser.objects.create(complete_name='name of test',email=f'{id}@test.com',phonenumber=phone)
-
-
-        #security base
-        self.rsa_handler = RSAhandleTest()
-        self.base64_handler = Base64Handler()
 
 
 
     def test_view_url_exists_at_locator(self):
-        response = self.client.get('/api/v1/lessee/')
+        response = self.client.get('/profiles/players/')
         self.assertEqual(response.status_code, 200)
 
     def test_view_url_exists_at_retrieve_locator(self):
-        id = Player.objects.get(pk=1).id
-        response = self.client.get(f'/api/v1/lessee/{id}/')
+        id = Player.objects.last().id
+        response = self.client.get(f'/profiles/players/{id}/')
         self.assertEqual(response.status_code, 200)
 
 
     def test_pagination_is_two(self):
-        response = self.client.get('/api/v1/lessee/')
+        response = self.client.get('/profiles/players/',format='json')
         self.assertEqual(response.status_code, 200)
         self.assertTrue(hasattr(response.content,'count'))
         json_response = response.json()
-        self.assertTrue(json_response['count'] == Player.objects.all().count())
+
+        self.assertTrue(json_response['count'] == 1)
 
 
-    def test_create_lessee(self):
+    def test_create_player(self):
         import json
-        phonenumber = self.user.phonenumber
-        data = {"country_code": f"{phonenumber.country_code}", "ddd": f"{phonenumber.ddd}", "phone_number": f"{phonenumber.phone_number}"}
 
-        data = json.dumps(data)
-        easy_pass1 = self.rsa_handler.generate_RSA(message=data)
-
-        easy_pass = self.base64_handler.encode_base64(easy_pass1)
-
-        locator_data = {
-            "easy_pass": easy_pass,
-            "document": "name",
-            "document_type":"1"
+        player_data = {
+            "email": "name@name.com",
+            "password":"dfault12pass"
         }
 
         response = self.client.post(
-            "/api/v1/lessee/",
-            locator_data,
+            "/profiles/players/",
+            player_data,
             format='json'
         )
-        self.assertEquals(response.status_code, 200)
-
-
-        locator = Player.objects.last()
-        locator.refresh_from_db()
-        self.locator = locator
-
+        self.assertEquals(response.status_code, 201)
 
     def test_patch_lessee(self):
 
-        update_lessee = {
-            
-            "name": "marcos",
-            "accept_all": True
+        player_lessee = {            
+            "first_name": "marcos",
         }
-        lessee = Player.objects.last()
-        response = self.client.patch(f"/api/v1/lessee/{lessee.id}/", update_lessee, format="json")
-
-        print(response.content)
-        self.assertEquals(response.status_code, 200)
-        lessee.refresh_from_db()
+        player = Player.objects.last()
+        response = self.client.patch(f"/profiles/players/{player.id}/", player_lessee, format="json")
+        self.assertEquals(response.status_code, 403)

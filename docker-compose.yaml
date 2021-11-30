@@ -13,7 +13,7 @@ services:
 
   web:
     build: 
-      context: ./docker/api/ 
+      context: ./__docker/api/ 
     ports:
       - "8080:8080"
 
@@ -28,7 +28,7 @@ services:
   
   #_______optional service setup______
   # nginx: 
-  #   build: ./docker/nginx/
+  #   build: ./__docker/nginx/
   #   volumes:
   #     - .:/code
   #   ports:
