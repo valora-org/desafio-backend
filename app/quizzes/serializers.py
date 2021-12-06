@@ -9,6 +9,12 @@ class AnswerSerializer(serializers.ModelSerializer):
         fields = "__all__"
 
 
+class QuizAnswerSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Answer
+        fields = ("text",)
+
+
 class QuestionSerializer(serializers.ModelSerializer):
     class Meta:
         model = Question
@@ -16,9 +22,11 @@ class QuestionSerializer(serializers.ModelSerializer):
 
 
 class QuizQuestionSerializer(serializers.ModelSerializer):
+    answers = QuizAnswerSerializer(many=True)
+
     class Meta:
         model = Question
-        fields = ("text", "id")
+        fields = ("text", "id", "answers")
 
 
 class RankingSerializer(serializers.ModelSerializer):

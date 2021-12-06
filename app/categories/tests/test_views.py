@@ -25,7 +25,7 @@ class TestCategoryView(APITestCase):
             "/api/category/", data=data, format="json"
         )
 
-        assert response.status_code == 403
+        assert response.status_code == 401
 
         # Make request authenticating with user who has no permission to the endpoint
         self.client.force_authenticate(user=self.data["player"])

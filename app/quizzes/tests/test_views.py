@@ -36,7 +36,7 @@ class TestAnswerView(APITestCase):
             "/api/answer/", data=data, format="json"
         )
 
-        assert response.status_code == 403
+        assert response.status_code == 401
 
         # Make request with player who has no permission to the endpoint
         self.client.force_authenticate(user=self.data["player"])
@@ -143,7 +143,7 @@ class TestQuestionView(APITestCase):
             "/api/question/", data=data, format="json"
         )
 
-        assert response.status_code == 403
+        assert response.status_code == 401
 
         # Make request with player who has no permission to the endpoint
         self.client.force_authenticate(user=self.data["player"])
@@ -256,7 +256,7 @@ class TestGetQuizView(APITestCase):
         response = self.client.get(
             "/api/get-quiz/", data={}, format="json"
         )
-        assert response.status_code == 403
+        assert response.status_code == 401
 
         # Test missing data on list payload
         self.client.force_authenticate(user=self.data["admin"])
@@ -277,6 +277,8 @@ class TestGetQuizView(APITestCase):
         )
         assert response.status_code == 200
         assert len(response.data) == 10
+        assert 'answers' in response.data[0]
+        assert len(response.data[0]['answers']) == 3
 
         first_quiz = response.data
 
@@ -340,7 +342,7 @@ class TestRankingView(APITestCase):
             "/api/finish-quiz/", data=valid_data_1, format="json"
         )
 
-        assert response.status_code == 403
+        assert response.status_code == 401
 
         # Make request with player and admin to the endpoint
         self.client.force_authenticate(user=self.data["player"])
