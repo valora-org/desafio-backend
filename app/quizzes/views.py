@@ -31,6 +31,11 @@ class AnswerViewSet(viewsets.ModelViewSet):
         answers = request.data["answers"]
         return_payload = []
 
+        question_id = answers[0]["question"]
+
+        if not (Answer.objects.filter(question=question_id).count() + len(answers)) <= 3:
+            return Response(data="Too many answers for this question.", status=400)
+
         serialized_data = self.serializer_class(data=answers, many=True)
         if serialized_data.is_valid(raise_exception=True):
             serialized_data.save()
