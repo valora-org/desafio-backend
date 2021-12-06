@@ -6,6 +6,8 @@ from categories.models import Category
 from categories.serializers import CategorySerializer
 
 
+# Category View with support for create, update, delete and
+# list categories. Permission varies depending on the method.
 class CategoryViewSet(viewsets.ModelViewSet):
     permission_classes = (permissions.IsAuthenticated, IsAdmin,)
     serializer_class = CategorySerializer

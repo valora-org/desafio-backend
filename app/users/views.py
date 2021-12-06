@@ -9,11 +9,15 @@ from users.models import User
 from users.serializers import UserSerializer
 
 
+# Create User View. It's used to create a user. Does not
+# require permission to create a player, but requires
+# superuser status to create admins.
 class CreateUserViewSet(viewsets.ModelViewSet):
     serializer_class = UserSerializer
     queryset = User.objects.all()
 
     def create(self, request, *args, **kwargs):
+        # Check if user is trying to create an admin. If so, check for superuser status.
         if "is_admin" in request.data and request.data["is_admin"] == True:
             if request.user.is_superuser:
                 serialized_data = self.serializer_class(data=request.data)
@@ -32,7 +36,7 @@ class CreateUserViewSet(viewsets.ModelViewSet):
 
 
 # This endpoint is only used to create the first user
-# which is an admin and superuser in the db
+# which is an admin and superuser in the db.
 class CreateSuperUserViewSet(viewsets.ModelViewSet):
     serializer_class = UserSerializer
     queryset = User.objects.all()

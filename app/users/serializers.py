@@ -5,6 +5,7 @@ from rest_framework import serializers
 from users.models import User
 
 
+# USer Serialiazer used in User Views.
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
