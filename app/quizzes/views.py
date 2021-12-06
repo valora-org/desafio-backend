@@ -59,7 +59,10 @@ class QuestionViewSet(viewsets.ModelViewSet):
             question.text = request.data["text"]
 
         if "category" in request.data:
-            question.category = request.data["category"]
+            if not Category.objects.filter(id=request.data["category"]).exists():
+                return Response(data="Invalid category id.", status=400)
+            question.category = Category.objects.get(
+                id=request.data["category"])
 
         question.save()
 
@@ -82,6 +85,9 @@ class GetQuizViewSet(viewsets.ModelViewSet):
 
         questions = list(Question.objects.filter(
             category__name=category).values_list("id", flat=True))
+
+        if len(questions) < 10:
+            return Response(data="Not enought questions of given category. Aborting", status=400)
 
         random_questions = random.sample(questions, 10)
 

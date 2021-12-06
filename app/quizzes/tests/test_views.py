@@ -194,6 +194,13 @@ class TestQuestionView(APITestCase):
         assert response.status_code == 400
         assert response.data == "Missig field."
 
+        # Test invalid category on payload
+        response = self.client.put(
+            f"/api/question/{question.id}/", data={"category": 1000}, format="json"
+        )
+        assert response.status_code == 400
+        assert response.data == "Invalid category id."
+
         # Test player can't update question's text
         data = {"text": "Text"}
         self.client.force_authenticate(user=self.data["player"])
@@ -289,6 +296,13 @@ class TestGetQuizView(APITestCase):
         second_quiz = response.data
 
         assert first_quiz != second_quiz
+
+        # Test not enought questions from given category
+        response = self.client.get(
+            "/api/get-quiz/", data={"category": self.data["category_2"].name}, format="json"
+        )
+        assert response.status_code == 400
+        assert response.data == "Not enought questions of given category. Aborting"
 
 
 @pytest.mark.django_db
