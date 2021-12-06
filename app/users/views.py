@@ -29,3 +29,22 @@ class CreateUserViewSet(viewsets.ModelViewSet):
             if serialized_data.is_valid(raise_exception=True):
                 serialized_data.save()
                 return Response(data=serialized_data.data, status=201)
+
+
+# This endpoint is only used to create the first user
+# which is an admin and superuser in the db
+class CreateSuperUserViewSet(viewsets.ModelViewSet):
+    serializer_class = UserSerializer
+    queryset = User.objects.all()
+
+    def create(self, request, *args, **kwargs):
+        if User.objects.count() == 0:
+            data = request.data.copy()
+            data["is_admin"] = True
+            data["is_superuser"] = True
+            serialized_data = self.serializer_class(data=data)
+            if serialized_data.is_valid(raise_exception=True):
+                serialized_data.save()
+                return Response(data=serialized_data.data, status=201)
+        else:
+            return Response(status=400)
