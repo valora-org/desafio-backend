@@ -1,8 +1,6 @@
 import random
 
-from django.db.models import query
-
-from rest_framework import status, viewsets, permissions
+from rest_framework import viewsets, permissions
 from rest_framework.exceptions import ValidationError
 from rest_framework.response import Response
 
