@@ -7,7 +7,7 @@ from categories.serializers import CategorySerializer
 
 
 class CategoryViewSet(viewsets.ModelViewSet):
-    permission_classes = (permissions.IsAuthenticated, IsAdmin)
+    permission_classes = (permissions.IsAuthenticated, IsAdmin,)
     serializer_class = CategorySerializer
     queryset = Category.objects.all()
     permission_classes_by_action = {

@@ -1,4 +1,5 @@
 from django.db import models
+from django.utils.timezone import now
 
 
 class Answer(models.Model):
@@ -9,7 +10,7 @@ class Answer(models.Model):
 
 
 class Question(models.Model):
-    question_text = models.CharField(max_length=250, blank=True)
+    text = models.CharField(max_length=250, blank=True)
     category = models.ForeignKey(
         "categories.Category", on_delete=models.CASCADE)
 
@@ -19,3 +20,7 @@ class Ranking(models.Model):
     score = models.IntegerField(default=0, blank=True)
     category = models.ForeignKey(
         "categories.Category", on_delete=models.CASCADE)
+    created_at = models.DateTimeField(auto_now_add=True, null=now)
+
+    class Meta:
+        ordering = ["-score", "created_at"]
