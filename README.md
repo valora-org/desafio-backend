@@ -22,13 +22,13 @@ Você irá desenvolver a API de uma aplicação para a criação de um quiz de p
 **Cada quiz é composto por**:
 
 * 10 perguntas com 3 respostas onde apenas 1 é correta.
-* Cada resposta correta acumula a 1 ponto.
+* Cada resposta correta acumula 1 ponto.
 * Cada resposta errada perde 1 ponto. A menor pontuação possível é 0.
 * Possui uma categoria.
 
 **Ao iniciar o jogo**:
 
-* O player deve escolher uma categoria válida e receber um quiz com perguntas aleatórias referentes a categoria escolhida.
+* O player deve escolher uma categoria válida e receber um quiz com perguntas aleatórias referentes à categoria escolhida.
 
 **Ao finalizar o jogo**:
 
