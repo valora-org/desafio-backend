@@ -13,5 +13,5 @@ class Account(AbstractUser):
     USERNAME_FIELD = 'email'
 
     categories = models.ManyToManyField(
-        to='quizzes.Category', related_name='accounts'
+        to='categories.Category', related_name='accounts'
     )

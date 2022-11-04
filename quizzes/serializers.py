@@ -1,6 +1,8 @@
 from rest_framework import serializers
 
-from .models import Answer, Question, Quiz
+from answers.serializers import AnswerSerializer
+from questions.models import Question
+from quizzes.models import Quiz
 
 
 class QuizSerializer(serializers.ModelSerializer):
@@ -12,12 +14,13 @@ class QuizSerializer(serializers.ModelSerializer):
         )
 
 
-class AleatoryQuestionSerializer(serializers.ModelSerializer):
-    answers = serializers.StringRelatedField(many=True)
+class RandomQuizQuestionsSerializer(serializers.ModelSerializer):
+    # answers = serializers.StringRelatedField(many=True)
+    answers = AnswerSerializer(many=True)
+
     class Meta:
         model = Question
         fields = (
-            'id',
             'question',
             'answers',
         )
