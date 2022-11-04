@@ -42,6 +42,9 @@ DJANGO_APPS = [
 
 MY_APPS = [
     'accounts',
+    'answers',
+    'categories',
+    'questions',
     'quizzes',
 ]
 

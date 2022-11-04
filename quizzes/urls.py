@@ -1,14 +1,14 @@
 from django.urls import path
 
-from .views import AleatoryQuestion, QuizView
+from .views import QuizView, RandomQuizQuestionsView
 
 app_name = 'quiz'
 
 urlpatterns = [
-    path('', QuizView.as_view(), name='quiz'),
+    path('', QuizView.as_view(), name='list_quizzes'),
     path(
-        'aleatory/<str:quiz_id>/',
-        AleatoryQuestion.as_view(),
-        name='aleatory_question',
+        'random/<str:quiz_id>/',
+        RandomQuizQuestionsView.as_view(),
+        name='',
     ),
 ]

@@ -10,12 +10,12 @@ class Migration(migrations.Migration):
     initial = True
 
     dependencies = [
-        ('categories', '0001_initial'),
+        ('questions', '0001_initial'),
     ]
 
     operations = [
         migrations.CreateModel(
-            name='Quiz',
+            name='Answer',
             fields=[
                 (
                     'id',
@@ -26,19 +26,16 @@ class Migration(migrations.Migration):
                         serialize=False,
                     ),
                 ),
-                ('name', models.CharField(max_length=100)),
-                ('created_at', models.DateTimeField(auto_now_add=True)),
+                ('answer', models.CharField(max_length=200)),
+                ('is_correct', models.BooleanField(default=False)),
                 (
-                    'category',
+                    'question',
                     models.ForeignKey(
-                        on_delete=django.db.models.deletion.DO_NOTHING,
-                        related_name='quizzes',
-                        to='categories.category',
+                        on_delete=django.db.models.deletion.CASCADE,
+                        related_name='answers',
+                        to='questions.question',
                     ),
                 ),
             ],
-            options={
-                'verbose_name_plural': 'Quizzes',
-            },
         ),
     ]
