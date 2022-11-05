@@ -5,7 +5,7 @@ from uuid import uuid4
 class Answer(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid4, editable=False)
     answer = models.CharField(max_length=200)
-    is_correct = models.BooleanField(default=False)
+    is_correct = models.BooleanField()
 
     question = models.ForeignKey(
         to='questions.Question',

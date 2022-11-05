@@ -1,14 +1,14 @@
 from django.urls import path
 
-from categories.views import CategoryDetailView, CategoryView
+from categories import views
 
 app_name = 'category'
 
 urlpatterns = [
-    path('', CategoryView.as_view(), name='category'),
+    path('', views.CategoryView.as_view(), name='list-create-category'),
     path(
         '<str:category_id>/',
-        CategoryDetailView.as_view(),
-        name='category_detail',
+        views.CategoryDetailView.as_view(),
+        name='category-detail',
     ),
 ]
