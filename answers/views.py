@@ -1,7 +1,7 @@
 from django.shortcuts import get_object_or_404
 from rest_framework import generics
 
-from answers.mixins import SerializerByMethodMixin
+from utils.mixins import SerializerByMethodMixin
 from answers.models import Answer
 from questions.models import Question
 from questions.serializers import AnswerSerializer, DetailedAnswerSerializer

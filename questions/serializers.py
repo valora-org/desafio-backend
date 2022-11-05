@@ -39,6 +39,19 @@ class DetailedQuestionSerializer(serializers.ModelSerializer):
         )
 
 
+class LessDetailedQuestionSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Question
+        fields = (
+            'id',
+            'question',
+            'level',
+            'is_active',
+        )
+
+        read_only_fields = ('id',)
+
+
 class DetailedAnswerSerializer(serializers.ModelSerializer):
     class Meta:
         model = Answer
