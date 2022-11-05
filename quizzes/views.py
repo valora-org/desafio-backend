@@ -1,9 +1,12 @@
 from rest_framework import generics
 from django.shortcuts import get_object_or_404
 
+from categories.serializers import (
+    QuizSerializer,
+    RandomQuestionsQuizSerializer,
+)
 from questions.models import Question
-from .models import Quiz
-from .serializers import QuizSerializer, RandomQuizQuestionsSerializer
+from quizzes.models import Quiz
 
 
 class QuizView(generics.ListAPIView):
@@ -11,8 +14,8 @@ class QuizView(generics.ListAPIView):
     queryset = Quiz.objects.all()
 
 
-class RandomQuizQuestionsView(generics.ListAPIView):
-    serializer_class = RandomQuizQuestionsSerializer
+class RandomQuestionsQuizView(generics.ListAPIView):
+    serializer_class = RandomQuestionsQuizSerializer
 
     def get_queryset(self):
         quiz_id = self.kwargs['quiz_id']
