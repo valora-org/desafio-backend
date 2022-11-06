@@ -7,21 +7,13 @@ from questions.models import Question
 class QuestionAnswerSerializer(serializers.ModelSerializer):
     class Meta:
         model = Answer
-        fields = ('answer',)
-
-
-class QuestionSerializer(serializers.ModelSerializer):
-    answers = QuestionAnswerSerializer(many=True)
-
-    class Meta:
-        model = Question
         fields = (
-            'question',
-            'answers',
+            'answer',
+            'is_correct',
         )
 
 
-class DetailedQuestionSerializer(serializers.ModelSerializer):
+class QuestionSerializer(serializers.ModelSerializer):
     class Meta:
         model = Question
         fields = (
@@ -39,6 +31,28 @@ class DetailedQuestionSerializer(serializers.ModelSerializer):
         )
 
 
+class SmallestQuestionSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Question
+        fields = ('question',)
+
+
+class DetailedQuestionSerializer(serializers.ModelSerializer):
+    answers = QuestionAnswerSerializer(many=True)
+
+    class Meta:
+        model = Question
+        fields = (
+            'id',
+            'question',
+            'level',
+            'created_at',
+            'is_active',
+            'quiz',
+            'answers',
+        )
+
+
 class LessDetailedQuestionSerializer(serializers.ModelSerializer):
     class Meta:
         model = Question
@@ -52,18 +66,6 @@ class LessDetailedQuestionSerializer(serializers.ModelSerializer):
         read_only_fields = ('id',)
 
 
-class DetailedAnswerSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Answer
-        fields = (
-            'id',
-            'answer',
-            'is_correct',
-        )
-
-        read_only_fields = ('id',)
-
-
 class AnswerSerializer(serializers.ModelSerializer):
     class Meta:
         model = Answer
@@ -72,6 +74,18 @@ class AnswerSerializer(serializers.ModelSerializer):
             'answer',
             'is_correct',
             'question',
+        )
+
+        read_only_fields = ('id',)
+
+
+class DetailedAnswerSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Answer
+        fields = (
+            'id',
+            'answer',
+            'is_correct',
         )
 
         read_only_fields = ('id',)

@@ -3,7 +3,11 @@ from rest_framework import serializers
 from categories.models import Category
 from core.exceptions import UniqueException
 from questions.models import Question
-from questions.serializers import QuestionAnswerSerializer
+from questions.serializers import (
+    LessDetailedQuestionSerializer,
+    QuestionAnswerSerializer,
+    SmallestQuestionSerializer,
+)
 from quizzes.models import Quiz
 
 
@@ -11,20 +15,56 @@ class QuizSerializer(serializers.ModelSerializer):
     class Meta:
         model = Quiz
         fields = (
-            'id',
             'name',
+            'id',
+            'created_at',
+        )
+
+        read_only_fields = ('id',)
+
+    def validate_name(self, name: str):
+        return name.title()
+
+
+class LessDetailedQuizSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Quiz
+        fields = (
+            'name',
+            'id',
+            'created_at',
+            'category',
+        )
+
+        read_only_fields = (
+            'id',
+            'created_at',
+        )
+
+    def validate_name(self, name: str):
+        return name.title()
+
+
+class DetailedQuizSerializer(serializers.ModelSerializer):
+    questions = SmallestQuestionSerializer(many=True)
+
+    class Meta:
+        model = Quiz
+        fields = (
+            'name',
+            'id',
+            'created_at',
+            'category',
+            'questions',
         )
 
 
 class CategorySerializer(serializers.ModelSerializer):
-    quizzes = QuizSerializer(many=True)
-
     class Meta:
         model = Category
         fields = (
             'id',
             'name',
-            'quizzes',
         )
 
     read_only_fields = ('id',)
@@ -37,21 +77,15 @@ class CategorySerializer(serializers.ModelSerializer):
         return name.title()
 
 
-class DetailedQuizSerialized(serializers.ModelSerializer):
-    category = CategorySerializer(many=True)
+class DetailedCategorySerializer(serializers.ModelSerializer):
+    quizzes = QuizSerializer(many=True)
 
     class Meta:
-        model = Quiz
+        model = Category
         fields = (
             'id',
             'name',
-            'created_at',
-            'category',
-        )
-
-        read_only_fields = (
-            'id',
-            'created_at',
+            'quizzes',
         )
 
 

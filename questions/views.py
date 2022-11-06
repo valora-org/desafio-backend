@@ -5,18 +5,18 @@ from questions.models import Question
 from questions.serializers import (
     DetailedQuestionSerializer,
     LessDetailedQuestionSerializer,
+    QuestionSerializer,
 )
 from quizzes.models import Quiz
 from utils.mixins import SerializerByMethodMixin
 
 
 class QuestionView(SerializerByMethodMixin, generics.ListCreateAPIView):
-    serializer_class = DetailedQuestionSerializer
     queryset = Question.objects.all()
 
     serializer_map = {
         'GET': LessDetailedQuestionSerializer,
-        'POST': DetailedQuestionSerializer,
+        'POST': QuestionSerializer,
     }
 
     def perform_create(self, serializer):
@@ -25,8 +25,15 @@ class QuestionView(SerializerByMethodMixin, generics.ListCreateAPIView):
         serializer.save(quiz=quiz)
 
 
-class QuestionDetailView(generics.RetrieveUpdateDestroyAPIView):
-    serializer_class = LessDetailedQuestionSerializer
+class QuestionDetailView(
+    SerializerByMethodMixin, generics.RetrieveUpdateDestroyAPIView
+):
     queryset = Question.objects.all()
 
-    lookup_field = 'id'
+    serializer_map = {
+        'GET': DetailedQuestionSerializer,
+        'PATCH': LessDetailedQuestionSerializer,
+        'PUT': LessDetailedQuestionSerializer,
+    }
+
+    lookup_url_kwarg = 'question_id'

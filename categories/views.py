@@ -1,7 +1,11 @@
 from rest_framework import generics
 
 from categories.models import Category
-from categories.serializers import CategorySerializer
+from categories.serializers import (
+    CategorySerializer,
+    DetailedCategorySerializer,
+)
+from utils.mixins import SerializerByMethodMixin
 
 
 class CategoryView(generics.ListCreateAPIView):
@@ -9,8 +13,15 @@ class CategoryView(generics.ListCreateAPIView):
     queryset = Category.objects.all()
 
 
-class CategoryDetailView(generics.RetrieveUpdateDestroyAPIView):
-    serializer_class = CategorySerializer
+class CategoryDetailView(
+    SerializerByMethodMixin, generics.RetrieveUpdateDestroyAPIView
+):
     queryset = Category.objects.all()
+
+    serializer_map = {
+        'GET': DetailedCategorySerializer,
+        'PATCH': CategorySerializer,
+        'PUT': CategorySerializer,
+    }
 
     lookup_url_kwarg = 'category_id'

@@ -25,4 +25,4 @@ class AnswerDetailView(generics.RetrieveUpdateDestroyAPIView):
     serializer_class = DetailedAnswerSerializer
     queryset = Answer.objects.all()
 
-    lookup_field = 'id'
+    lookup_url_kwarg = 'answer_id'

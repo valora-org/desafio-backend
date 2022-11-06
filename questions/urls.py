@@ -7,6 +7,8 @@ app_name = 'question'
 urlpatterns = [
     path('', views.QuestionView.as_view(), name='list-create-question'),
     path(
-        '<str:id>/', views.QuestionDetailView.as_view(), name='question-detail'
+        '<str:question_id>/',
+        views.QuestionDetailView.as_view(),
+        name='question-detail',
     ),
 ]
