@@ -15,7 +15,7 @@ class Question(models.Model):
     level = models.CharField(
         max_length=16, choices=Levels.choices, default=Levels.MODERATE
     )
-    created_at = models.DateTimeField(auto_now_add=True)
+    created_at = models.DateTimeField(auto_now_add=True, editable=False)
     is_active = models.BooleanField()
 
     quiz = models.ForeignKey(

@@ -15,3 +15,6 @@ class Account(AbstractUser):
     categories = models.ManyToManyField(
         to='categories.Category', related_name='accounts'
     )
+
+    def __repr__(self) -> str:
+        return '<Account %s - %s>' % (self.id, self.email)

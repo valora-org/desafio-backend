@@ -25,11 +25,6 @@ class QuestionSerializer(serializers.ModelSerializer):
             'quiz',
         )
 
-        read_only_fields = (
-            'id',
-            'created_at',
-        )
-
 
 class SmallestQuestionSerializer(serializers.ModelSerializer):
     class Meta:
@@ -61,9 +56,8 @@ class LessDetailedQuestionSerializer(serializers.ModelSerializer):
             'question',
             'level',
             'is_active',
+            'created_at',
         )
-
-        read_only_fields = ('id',)
 
 
 class AnswerSerializer(serializers.ModelSerializer):
@@ -76,8 +70,6 @@ class AnswerSerializer(serializers.ModelSerializer):
             'question',
         )
 
-        read_only_fields = ('id',)
-
 
 class DetailedAnswerSerializer(serializers.ModelSerializer):
     class Meta:
@@ -87,5 +79,3 @@ class DetailedAnswerSerializer(serializers.ModelSerializer):
             'answer',
             'is_correct',
         )
-
-        read_only_fields = ('id',)

@@ -66,7 +66,7 @@ Você irá desenvolver a API de uma aplicação para a criação de um quiz de p
 * **Assertividade**: A aplicação está fazendo o que é esperado? Se tem algo faltando, o README explica o porquê?
 * **Legibilidade do código** (incluindo comentários)
 * **Segurança**: Existe alguma vulnerabilidade clara?
-* **Cobertura de testes** (Não esperamos cobertura completa mas é importante garantir o fluxo principal)
+* **Cobertura de testes** (Não esperamos cobertura completa, mas é importante garantir o fluxo principal)
 * **Histórico de commits** (estrutura e qualidade)
 * **UX**: A API é intuitiva?
 * **Escolhas técnicas**: A escolha das bibliotecas, banco de dados, arquitetura, etc, é a melhor escolha para a aplicação?
