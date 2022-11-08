@@ -25,12 +25,14 @@ SECRET_KEY = "django-insecure-luvio9n))6*4%95y70v^@0s3$t(rkm2w16)3=qx06p*)14_%jz
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["*"]
 
 
 # Application definition
 
-INSTALLED_APPS = [
+AUTH_USER_MODEL = "accounts.User"
+
+DEFAULT_APPS = [
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
@@ -38,6 +40,19 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
 ]
+
+REQUIRED_APPS = [
+    "rest_framework",
+    "rest_framework.authtoken",
+]
+
+MY_APPS = [
+    "users",
+    "quizzes",
+    "questions",
+]
+
+INSTALLED_APPS = DEFAULT_APPS + REQUIRED_APPS + MY_APPS
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
