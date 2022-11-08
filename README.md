@@ -122,7 +122,7 @@ List All
 Retrieve
 
 ```bash
-[POST]
+[GET]
 /api/users/$user_id/
 ```
 
@@ -140,6 +140,7 @@ List and Create
 Retrieve, Edit and Delete
 
 ```bash
+[GET, POST, PATCH, DELETE]
 /api/quizzes/$quiz_id/
 ```
 
@@ -157,6 +158,7 @@ List and Create
 Retrieve, Edit and Delete
 
 ```bash
+[GET, POST, PATCH, DELETE]
 /api/categories/$category_id/
 ```
 
@@ -174,6 +176,7 @@ List and Create
 Retrieve, Edit and Delete
 
 ```bash
+[GET, POST, PATCH, DELETE]
 /api/questions/$question_id/
 ```
 
@@ -195,5 +198,13 @@ Retrieve, Edit and Delete
   "password": "P4ssw0rD"
 }
 ```
+
+If you are not using docker, you need to run the `create_admin.py` before using the default admin:
+
+```bash
+./manage.py create_admin
+```
+
+---
 
 - The Postman collection is in the repository root folder, it is complete with all the available routes.
