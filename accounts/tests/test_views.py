@@ -20,6 +20,20 @@ class AccountViewTest(APITestCase):
             'password': fake.password(),
         }
 
+        [
+            Account.objects.create_user(
+                **{
+                    'first_name': fake.first_name(),
+                    'last_name': fake.last_name(),
+                    'email': fake.unique.email(),
+                    'is_superuser': False,
+                    'username': fake.user_name(),
+                    'password': fake.password(),
+                }
+            )
+            for _ in range(3)
+        ]
+
     def test_user_signup(self):
         response = self.client.post(self.url, self.account_data)
 
@@ -39,9 +53,69 @@ class AccountViewTest(APITestCase):
 
         self.assertIs(status.HTTP_201_CREATED, response.status_code)
         self.assertNotIn('password', response.json())
-        self.assertEqual(len(response.data.keys()), 7)
+        self.assertEqual(len(response.data.keys()), 8)
         for expected_field in expected_return_fields:
             self.assertIn(expected_field, response.data)
+
+    def test_list_accounts(self):
+        response = self.client.get(self.url)
+
+        self.assertIs(status.HTTP_200_OK, response.status_code)
+        self.assertEqual(len(response.data), 3)
+
+
+class AccountDetailViewTest(APITestCase):
+    @classmethod
+    def setUpTestData(cls) -> None:
+        fake = Faker()
+        cls.account_data = {
+            'first_name': fake.first_name(),
+            'last_name': fake.last_name(),
+            'email': fake.email(),
+            'is_superuser': False,
+            'username': fake.user_name(),
+            'password': fake.password(),
+        }
+
+        cls.account: Account = Account.objects.create_user(**cls.account_data)
+
+    def test_retrieve_account(self):
+        response = self.client.get(f'/accounts/{self.account.id}/')
+
+        self.assertIs(status.HTTP_200_OK, response.status_code)
+
+    def test_update_account(self):
+        response = self.client.patch(
+            f'/accounts/{self.account.id}/', {'username': 'austenkate'}
+        )
+
+        self.assertIs(status.HTTP_200_OK, response.status_code)
+
+    def test_delete_account(self):
+        response = self.client.delete(f'/accounts/{self.account.id}/')
+
+        self.assertEqual(status.HTTP_204_NO_CONTENT, response.status_code)
+
+    def test_retrieve_account_fails_not_found(self):
+        fake = Faker()
+        response = self.client.get(f'/accounts/{fake.uuid4()}/')
+
+        self.assertEqual(status.HTTP_404_NOT_FOUND, response.status_code)
+        self.assertDictEqual(response.json(), {'detail': 'Not found.'})
+
+    def test_update_account_fails_not_found(self):
+        fake = Faker()
+        response = self.client.patch(f'/accounts/{fake.uuid4()}/')
+
+        self.assertEqual(status.HTTP_404_NOT_FOUND, response.status_code)
+        self.assertDictEqual(response.json(), {'detail': 'Not found.'})
+
+    def test_delete_account_fails_not_found(self):
+        fake = Faker()
+        response = self.client.delete(f'/accounts/{fake.uuid4()}/')
+
+        self.assertEqual(status.HTTP_404_NOT_FOUND, response.status_code)
+        self.assertDictEqual(response.json(), {'detail': 'Not found.'})
 
 
 class SignInViewTest(APITestCase):
