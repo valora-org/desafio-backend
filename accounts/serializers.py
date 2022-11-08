@@ -137,8 +137,6 @@ class LessDetailedAccountSerializer(serializers.ModelSerializer):
             'is_superuser',
         )
 
-        read_only_fields = ('is_superuser',)
-
 
 class SignInSerializer(serializers.Serializer):
     email = serializers.EmailField()

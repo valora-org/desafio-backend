@@ -2,8 +2,6 @@ from django.urls import path
 
 from answers import views
 
-app_name = 'answer'
-
 urlpatterns = [
     path(
         '',
