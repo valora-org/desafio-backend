@@ -1,80 +1,199 @@
-## <img src="https://valora.cc/img/logo2.png" alt="Valora" width="24" /> Desafio Backend Python
+# Quiz API
 
-Parabéns! Se você chegou até aqui significa que você passou pelas etapas mais difíceis do nosso processo seletivo. Somos extremamente criteriosos com as pessoas que vão integrar nosso time porque só aceitamos pessoas incríveis!
+This is a restful API for a quiz game. The user must complete quizzes consisted of various questions to earn points and achieve the first place in the rank!
 
-Agora é a parte fácil. Chegou a hora de mostrar todas as suas habilidades de transformar café em código. Vamos lá?
+---
 
-Nesse desafio iremos avaliar suas habilidades em:
+## Installation
 
-* **Python**
-* **Django**
-* **Django REST Framework**
-* **Pytest** (desejável mas não obrigatório)
-* **Docker** (desejável mas não obrigatório)
+1. Clone this repository:
 
-Você irá desenvolver a API de uma aplicação para a criação de um quiz de perguntas e respostas!
+```bash
+git clone $repo_link
+```
 
-**A aplicação deverá prover o registro e autenticação de dois tipos de usuários**:
+2. Go to the repository folder:
 
-* Admin
-* Player
+```bash
+cd $repo_name
+```
 
-**Cada quiz é composto por**:
+3. Done!
 
-* 10 perguntas com 3 respostas onde apenas 1 é correta.
-* Cada resposta correta acumula a 1 ponto.
-* Cada resposta errada perde 1 ponto. A menor pontuação possível é 0.
-* Possui uma categoria.
+---
 
-**Ao iniciar o jogo**:
+## Usage
 
-* O player deve escolher uma categoria válida e receber um quiz com perguntas aleatórias referentes a categoria escolhida.
+**<details><summary>With Docker</summary>**
 
-**Ao finalizar o jogo**:
+1. Create a docker image
 
-* O player deve receber a contabilização dos seus pontos juntamente com a sua posição atual no ranking global. Não há limitação de quantos quizzes o player pode responder.
+```bash
+docker build -t quiz-docker -f Dockerfile .
+```
 
-**O ranking**:
+2. Run the image
 
-* É a contabilização dos pontos acumulados por cada player.
-* Ranking geral considera todas as categorias.
-* Ranking por categoria agrupa por categorias.
-* Este requisito é desejável mas não obrigatório.
+```bash
+docker run -it -p 8888:8888 quiz-docker
+```
 
-**Permissões**:
+3. Done!
 
-* Todos os endpoints devem estar protegidos por autenticação.
-* Usuários do tipo **Admin** tem permissão para criar perguntas e respostas para os quizzes.
-* Usuários do tipo **Player** tem permissão para jogar e consultar o ranking.
+</details>
 
-## Requisitos
+**<details><summary>Without Docker</summary>**
 
-* O projeto precisa estar configurado para rodar em um ambiente macOS ou Ubuntu (preferencialmente como container Docker).
-* Deve anexar ao seu projeto uma coleção do postman com todos os endpoints criados e exemplos de utilização.
+1. Create and initiate a local environment:
 
-**Para executar seu código devemos executar apenas os seguintes comandos**:
+```bash
+python -m venv venv
+source venv/bin/activate
+```
 
-* git clone $seu-fork
-* cd $seu-fork
-* comando para instalar dependências
-* comando para executar a aplicação
+2. Install the required dependencies (the next command uses [pip](https://pip.pypa.io/en/stable/). Use the one you like):
 
-## Critério de avaliação
+```bash
+pip install -r requirements.txt
+```
 
-* **Organização do código**: Separação de módulos, view e model
-* **Clareza**: O README explica de forma resumida qual é o problema e como pode rodar a aplicação?
-* **Assertividade**: A aplicação está fazendo o que é esperado? Se tem algo faltando, o README explica o porquê?
-* **Legibilidade do código** (incluindo comentários)
-* **Segurança**: Existe alguma vulnerabilidade clara?
-* **Cobertura de testes** (Não esperamos cobertura completa mas é importante garantir o fluxo principal)
-* **Histórico de commits** (estrutura e qualidade)
-* **UX**: A API é intuitiva?
-* **Escolhas técnicas**: A escolha das bibliotecas, banco de dados, arquitetura, etc, é a melhor escolha para a aplicação?
+3. Make migrations and migrate
 
-## Dúvidas
+```bash
+./manage.py makemigrations
+./manage.py migrate
+```
 
-Quaisquer dúvidas que você venha a ter, consulte as issues para ver se alguém já não a fez e caso você não ache sua resposta, abra você mesmo uma nova issue!
+3. Run the server
 
-Ao completar o desafio, submeta um pull-request a esse repositório com uma breve explicação das decisões tomadas e principalmente as instruções para execução do projeto.
+```bash
+gunicorn core.wsgi:application --bind 0.0.0.0:8888
+```
 
-**Boa sorte! ;)**
+4. Done!
+
+</details>
+
+---
+
+## Routes
+
+**<details><summary>Game</summary>**
+
+Play
+
+```bash
+[GET, POST]
+/api/play/$category_id/
+```
+
+Ranking
+
+```bash
+[GET]
+/api/ranking/
+```
+
+</details>
+
+**<details><summary>Users</summary>**
+
+Login
+
+```bash
+[POST]
+/api/login/
+```
+
+Register
+
+```bash
+[POST]
+/api/register/
+```
+
+List All
+
+```bash
+[GET]
+/api/users/
+```
+
+Retrieve
+
+```bash
+[POST]
+/api/users/$user_id/
+```
+
+</details>
+
+**<details><summary>Quiz</summary>**
+
+List and Create
+
+```bash
+[GET, POST]
+/api/quizzes/
+```
+
+Retrieve, Edit and Delete
+
+```bash
+/api/quizzes/$quiz_id/
+```
+
+</details>
+
+**<details><summary>Categories</summary>**
+
+List and Create
+
+```bash
+[GET, POST]
+/api/categories/
+```
+
+Retrieve, Edit and Delete
+
+```bash
+/api/categories/$category_id/
+```
+
+</details>
+
+**<details><summary>Questions</summary>**
+
+List and Create
+
+```bash
+[GET, POST]
+/api/questions/
+```
+
+Retrieve, Edit and Delete
+
+```bash
+/api/questions/$question_id/
+```
+
+</details>
+
+---
+
+## Notes
+
+**Entity–Relationship Model:**
+
+![Entity–relationship model](mer.png "Entity–relationship model")
+
+**default admin:**
+
+```json
+{
+  "email": "admin@admin.com",
+  "password": "P4ssw0rD"
+}
+```
+
+- The Postman collection is in the repository root folder, it is complete with all the available routes.
