@@ -50,6 +50,7 @@ MY_APPS = [
     "users",
     "quizzes",
     "questions",
+    "categories",
 ]
 
 INSTALLED_APPS = DEFAULT_APPS + REQUIRED_APPS + MY_APPS
