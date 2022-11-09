@@ -10,7 +10,7 @@ class AlternativeSerializer(serializers.Serializer):
 class QuestionSerializer(serializers.Serializer):
     id = serializers.IntegerField(read_only=True)
     description = serializers.CharField()
-    answer = serializers.IntegerField()
+    answer = serializers.IntegerField(write_only=True)
     alternatives = AlternativeSerializer(many=True)
 
     def create(self, validated_data):
