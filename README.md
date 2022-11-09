@@ -194,7 +194,7 @@ Retrieve, Edit and Delete
 
 ```json
 {
-  "email": "admin@admin.com",
+  "email": "admin@mail.com",
   "password": "P4ssw0rD"
 }
 ```
