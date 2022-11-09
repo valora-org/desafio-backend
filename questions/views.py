@@ -1,6 +1,9 @@
 from django.shortcuts import get_object_or_404
 from rest_framework import generics
+from rest_framework.authentication import TokenAuthentication
+from rest_framework.permissions import IsAuthenticated
 
+from core.permissions import IsAdminOrReadOnly
 from questions.models import Question
 from questions.serializers import (
     DetailedQuestionSerializer,
@@ -12,6 +15,9 @@ from utils.mixins import SerializerByMethodMixin
 
 
 class QuestionView(SerializerByMethodMixin, generics.ListCreateAPIView):
+    authentication_classes = [TokenAuthentication]
+    permission_classes = [IsAuthenticated, IsAdminOrReadOnly]
+
     queryset = Question.objects.all()
 
     serializer_map = {
@@ -28,6 +34,9 @@ class QuestionView(SerializerByMethodMixin, generics.ListCreateAPIView):
 class QuestionDetailView(
     SerializerByMethodMixin, generics.RetrieveUpdateDestroyAPIView
 ):
+    authentication_classes = [TokenAuthentication]
+    permission_classes = [IsAuthenticated, IsAdminOrReadOnly]
+
     queryset = Question.objects.all()
 
     serializer_map = {
@@ -36,4 +45,4 @@ class QuestionDetailView(
         'PUT': LessDetailedQuestionSerializer,
     }
 
-    lookup_url_kwarg = 'question_id'
+    lookup_field = 'id'

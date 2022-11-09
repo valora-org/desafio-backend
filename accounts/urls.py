@@ -6,7 +6,7 @@ urlpatterns = [
     path('', views.AccountView.as_view(), name='list-create-account'),
     path('signin/', views.SignInView.as_view(), name='signin'),
     path(
-        '<str:account_id>/',
+        '<str:id>/',
         views.AccountDetailView.as_view(),
         name='account-detail',
     ),

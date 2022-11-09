@@ -19,3 +19,6 @@ class Quiz(models.Model):
 
     def __repr__(self) -> str:
         return '<Quiz %s - %s>' % (self.id, self.name)
+
+    def __str__(self) -> str:
+        return self.name

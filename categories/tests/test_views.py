@@ -1,23 +1,36 @@
 from django.urls import reverse
 from faker import Faker
+from rest_framework.authtoken.models import Token
 from rest_framework.test import APITestCase
 from rest_framework.views import status
 
+from accounts.models import Account
 from categories.models import Category
 
 
 class CategoryViewTest(APITestCase):
-    @classmethod
-    def setUpTestData(cls) -> None:
+    def setUp(self) -> None:
         fake = Faker()
-        cls.url = reverse('list-create-category')
+        self.url = reverse('list-create-category')
 
-        cls.category_data = {'name': 'Programming'}
+        self.superuser_data = {
+            'first_name': fake.first_name(),
+            'last_name': fake.last_name(),
+            'email': fake.email(),
+            'is_superuser': True,
+            'password': fake.password(),
+        }
+
+        self.category_data = {'name': 'Programming'}
 
         [
             Category.objects.create(**{'name': fake.unique.last_name()})
             for _ in range(3)
         ]
+
+        superuser: Account = Account.objects.create(**self.superuser_data)
+        self.token = Token.objects.create(user=superuser)
+        self.client.credentials(HTTP_AUTHORIZATION=f'Token {self.token.key}')
 
     def test_category_creation(self):
         response = self.client.post(self.url, self.category_data)
@@ -45,14 +58,26 @@ class CategoryViewTest(APITestCase):
 
 
 class CategoryDetailViewTest(APITestCase):
-    @classmethod
-    def setUpTestData(cls) -> None:
+    def setUp(self) -> None:
         fake = Faker()
-        cls.category_data = {'name': 'Programming'}
 
-        cls.category = Category.objects.create(
+        self.superuser_data = {
+            'first_name': fake.first_name(),
+            'last_name': fake.last_name(),
+            'email': fake.email(),
+            'is_superuser': True,
+            'password': fake.password(),
+        }
+
+        self.category_data = {'name': 'Programming'}
+
+        self.category = Category.objects.create(
             **{'name': fake.unique.last_name()}
         )
+
+        superuser: Account = Account.objects.create(**self.superuser_data)
+        self.token = Token.objects.create(user=superuser)
+        self.client.credentials(HTTP_AUTHORIZATION=f'Token {self.token.key}')
 
     def test_retrieve_category(self):
         response = self.client.get(f'/categories/{self.category.id}/')

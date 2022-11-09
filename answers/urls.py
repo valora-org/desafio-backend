@@ -9,7 +9,7 @@ urlpatterns = [
         name='list-create-answer',
     ),
     path(
-        '<str:answer_id>/',
+        '<str:id>/',
         views.AnswerDetailView.as_view(),
         name='answer-detail',
     ),

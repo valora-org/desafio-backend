@@ -2,6 +2,7 @@ from rest_framework import serializers
 
 from answers.models import Answer
 from questions.models import Question
+from quizzes.models import Quiz
 
 
 class QuestionAnswerSerializer(serializers.ModelSerializer):
@@ -78,4 +79,17 @@ class DetailedAnswerSerializer(serializers.ModelSerializer):
             'id',
             'answer',
             'is_correct',
+        )
+
+
+class QuizQuestionSerializer(serializers.ModelSerializer):
+    answers = DetailedAnswerSerializer(many=True, read_only=True)
+    quiz = serializers.StringRelatedField()
+
+    class Meta:
+        model = Question
+        fields = (
+            'quiz',
+            'question',
+            'answers',
         )

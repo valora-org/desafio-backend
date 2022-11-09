@@ -1,31 +1,44 @@
 from django.urls import reverse
 from faker import Faker
+from rest_framework.authtoken.models import Token
 from rest_framework.test import APITestCase
 from rest_framework.views import status
 
+from accounts.models import Account
 from categories.models import Category
 from questions.models import Question
 from quizzes.models import Quiz
 
 
 class QuestionViewTest(APITestCase):
-    @classmethod
-    def setUpTestData(cls) -> None:
+    def setUp(self) -> None:
         fake = Faker('pt_BR')
-        cls.url = reverse('list-create-question')
+        self.url = reverse('list-create-question')
 
-        cls.category_data = {'name': fake.name()}
-        cls.category = Category.objects.create(**cls.category_data)
+        self.superuser_data = {
+            'first_name': fake.first_name(),
+            'last_name': fake.last_name(),
+            'email': fake.email(),
+            'is_superuser': True,
+            'password': fake.password(),
+        }
 
-        cls.quiz_data = {'name': fake.sentence(), 'category': cls.category}
-        cls.quiz = Quiz.objects.create(**cls.quiz_data)
+        self.category_data = {'name': fake.name()}
+        self.category = Category.objects.create(**self.category_data)
 
-        cls.question_data = {
+        self.quiz_data = {'name': fake.sentence(), 'category': self.category}
+        self.quiz = Quiz.objects.create(**self.quiz_data)
+
+        self.question_data = {
             'question': fake.sentence(),
             'level': 'Difícil',
             'is_active': True,
-            'quiz': cls.quiz.id,
+            'quiz': self.quiz.id,
         }
+
+        superuser: Account = Account.objects.create(**self.superuser_data)
+        self.token = Token.objects.create(user=superuser)
+        self.client.credentials(HTTP_AUTHORIZATION=f'Token {self.token.key}')
 
     def test_question_creation(self):
         response = self.client.post(self.url, self.question_data)
@@ -65,22 +78,34 @@ class QuestionViewTest(APITestCase):
 
 
 class QuestionDetailViewTest(APITestCase):
-    @classmethod
-    def setUpTestData(cls) -> None:
+    def setUp(self) -> None:
         fake = Faker('pt_BR')
-        cls.category_data = {'name': fake.name()}
-        cls.category = Category.objects.create(**cls.category_data)
 
-        cls.quiz_data = {'name': fake.sentence(), 'category': cls.category}
-        cls.quiz = Quiz.objects.create(**cls.quiz_data)
+        self.superuser_data = {
+            'first_name': fake.first_name(),
+            'last_name': fake.last_name(),
+            'email': fake.email(),
+            'is_superuser': True,
+            'password': fake.password(),
+        }
 
-        cls.question_data = {
+        self.category_data = {'name': fake.name()}
+        self.category = Category.objects.create(**self.category_data)
+
+        self.quiz_data = {'name': fake.sentence(), 'category': self.category}
+        self.quiz = Quiz.objects.create(**self.quiz_data)
+
+        self.question_data = {
             'question': fake.sentence(),
             'level': 'Difícil',
             'is_active': True,
-            'quiz': cls.quiz,
+            'quiz': self.quiz,
         }
-        cls.question = Question.objects.create(**cls.question_data)
+        self.question = Question.objects.create(**self.question_data)
+
+        superuser: Account = Account.objects.create(**self.superuser_data)
+        self.token = Token.objects.create(user=superuser)
+        self.client.credentials(HTTP_AUTHORIZATION=f'Token {self.token.key}')
 
     def test_retrieve_question(self):
         response = self.client.get(f'/questions/{self.question.id}/')

@@ -5,7 +5,7 @@ from categories import views
 urlpatterns = [
     path('', views.CategoryView.as_view(), name='list-create-category'),
     path(
-        '<str:category_id>/',
+        '<str:id>/',
         views.CategoryDetailView.as_view(),
         name='category-detail',
     ),

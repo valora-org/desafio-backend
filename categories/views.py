@@ -1,21 +1,30 @@
 from rest_framework import generics
+from rest_framework.authentication import TokenAuthentication
+from rest_framework.permissions import IsAuthenticated
 
 from categories.models import Category
 from categories.serializers import (
     CategorySerializer,
     DetailedCategorySerializer,
 )
+from core.permissions import IsAdminOrReadOnly
 from utils.mixins import SerializerByMethodMixin
 
 
 class CategoryView(generics.ListCreateAPIView):
-    serializer_class = CategorySerializer
+    authentication_classes = [TokenAuthentication]
+    permission_classes = [IsAuthenticated, IsAdminOrReadOnly]
+
     queryset = Category.objects.all()
+    serializer_class = CategorySerializer
 
 
 class CategoryDetailView(
     SerializerByMethodMixin, generics.RetrieveUpdateDestroyAPIView
 ):
+    authentication_classes = [TokenAuthentication]
+    permission_classes = [IsAuthenticated, IsAdminOrReadOnly]
+
     queryset = Category.objects.all()
 
     serializer_map = {
@@ -24,4 +33,4 @@ class CategoryDetailView(
         'PUT': CategorySerializer,
     }
 
-    lookup_url_kwarg = 'category_id'
+    lookup_field = 'id'

@@ -4,7 +4,7 @@ from categories.models import Category
 from core.exceptions import UniqueException
 from questions.models import Question
 from questions.serializers import (
-    QuestionAnswerSerializer,
+    DetailedAnswerSerializer,
     SmallestQuestionSerializer,
 )
 from quizzes.models import Quiz
@@ -80,7 +80,8 @@ class DetailedCategorySerializer(serializers.ModelSerializer):
 
 
 class RandomQuestionsQuizSerializer(serializers.ModelSerializer):
-    answers = QuestionAnswerSerializer(many=True)
+    answers = DetailedAnswerSerializer(many=True, read_only=True)
+    # answers = serializers.StringRelatedField(many=True)
 
     class Meta:
         model = Question

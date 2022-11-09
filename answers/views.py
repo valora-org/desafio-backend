@@ -1,13 +1,19 @@
 from django.shortcuts import get_object_or_404
 from rest_framework import generics
+from rest_framework.authentication import TokenAuthentication
+from rest_framework.permissions import IsAuthenticated
 
-from utils.mixins import SerializerByMethodMixin
 from answers.models import Answer
+from core.permissions import IsAdminOrReadOnly
 from questions.models import Question
 from questions.serializers import AnswerSerializer, DetailedAnswerSerializer
+from utils.mixins import SerializerByMethodMixin
 
 
 class AnswerView(SerializerByMethodMixin, generics.ListCreateAPIView):
+    authentication_classes = [TokenAuthentication]
+    permission_classes = [IsAuthenticated, IsAdminOrReadOnly]
+
     queryset = Answer.objects.all()
 
     serializer_map = {
@@ -22,7 +28,10 @@ class AnswerView(SerializerByMethodMixin, generics.ListCreateAPIView):
 
 
 class AnswerDetailView(generics.RetrieveUpdateDestroyAPIView):
-    serializer_class = DetailedAnswerSerializer
-    queryset = Answer.objects.all()
+    authentication_classes = [TokenAuthentication]
+    permission_classes = [IsAuthenticated, IsAdminOrReadOnly]
 
-    lookup_url_kwarg = 'answer_id'
+    queryset = Answer.objects.all()
+    serializer_class = DetailedAnswerSerializer
+
+    lookup_field = 'id'

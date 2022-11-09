@@ -13,7 +13,6 @@ class AccountSerializer(serializers.ModelSerializer):
             'id',
             'date_joined',
             'email',
-            'username',
             'password',
             'first_name',
             'last_name',
@@ -22,19 +21,13 @@ class AccountSerializer(serializers.ModelSerializer):
         )
 
         extra_kwargs = {'password': {'write_only': True}}
-        read_only_fields = (
-            'is_superuser',
-            'date_joined',
-        )
+        read_only_fields = ('date_joined',)
 
     def validate_first_name(self, first_name: str):
         return first_name.title()
 
     def validate_last_name(self, last_name: str):
         return last_name.title()
-
-    def validate_username(self, username: str):
-        return username.lower()
 
     def validate_email(self, email: str):
         email_exists = Account.objects.filter(email=email.lower()).exists()
@@ -55,7 +48,6 @@ class AccountUpdateSerializer(serializers.ModelSerializer):
             'id',
             'date_joined',
             'email',
-            'username',
             'password',
             'first_name',
             'last_name',
@@ -64,19 +56,13 @@ class AccountUpdateSerializer(serializers.ModelSerializer):
         )
 
         extra_kwargs = {'password': {'write_only': True}}
-        read_only_fields = (
-            'is_superuser',
-            'date_joined',
-        )
+        read_only_fields = ('date_joined',)
 
     def validate_first_name(self, first_name: str):
         return first_name.title()
 
     def validate_last_name(self, last_name: str):
         return last_name.title()
-
-    def validate_username(self, username: str):
-        return username.lower()
 
     def validate_email(self, email: str):
         email_exists = Account.objects.filter(email=email.lower()).exists()
@@ -116,7 +102,6 @@ class DetailedAccountSerializer(serializers.ModelSerializer):
             'id',
             'date_joined',
             'email',
-            'username',
             'first_name',
             'last_name',
             'is_staff',
@@ -130,7 +115,6 @@ class LessDetailedAccountSerializer(serializers.ModelSerializer):
     class Meta:
         model = Account
         fields = (
-            'username',
             'email',
             'date_joined',
             'id',

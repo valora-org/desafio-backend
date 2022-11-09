@@ -15,3 +15,6 @@ class Answer(models.Model):
 
     def __repr__(self) -> str:
         return '<Answer %s - %s>' % (self.id, self.answer)
+
+    def __str__(self) -> str:
+        return self.answer

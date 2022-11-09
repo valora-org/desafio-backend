@@ -1,6 +1,8 @@
 from django.contrib.auth import authenticate
 from rest_framework import generics
+from rest_framework.authentication import TokenAuthentication
 from rest_framework.authtoken.models import Token
+from rest_framework.permissions import IsAuthenticated
 from rest_framework.views import APIView, Request, Response, status
 
 from accounts.models import Account
@@ -11,10 +13,14 @@ from accounts.serializers import (
     LessDetailedAccountSerializer,
     SignInSerializer,
 )
+from core.permissions import IsAdminAccount, IsAdminOrReadOnlyAccount
 from utils.mixins import SerializerByMethodMixin
 
 
 class AccountView(SerializerByMethodMixin, generics.ListCreateAPIView):
+    authentication_classes = [TokenAuthentication]
+    permission_classes = [IsAdminOrReadOnlyAccount]
+
     serializer_map = {
         'GET': LessDetailedAccountSerializer,
         'POST': AccountSerializer,
@@ -25,15 +31,18 @@ class AccountView(SerializerByMethodMixin, generics.ListCreateAPIView):
 class AccountDetailView(
     SerializerByMethodMixin, generics.RetrieveUpdateDestroyAPIView
 ):
+    authentication_classes = [TokenAuthentication]
+    permission_classes = [IsAuthenticated, IsAdminAccount]
+
     queryset = Account.objects.all()
 
     serializer_map = {
         'GET': DetailedAccountSerializer,
         'PATCH': AccountUpdateSerializer,
-        'PUT': AccountSerializer,
+        'PUT': AccountUpdateSerializer,
     }
 
-    lookup_url_kwarg = 'account_id'
+    lookup_field = 'id'
 
 
 class SignInView(APIView):

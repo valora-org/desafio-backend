@@ -10,7 +10,11 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.1/ref/settings/
 """
 
+from os import getenv
 from pathlib import Path
+from dotenv import load_dotenv
+
+load_dotenv()
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -20,12 +24,10 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = (
-    'django-insecure-6-=-#5)190&=rd)u#a)x5v%5pghll481fx4$c=pjq+u)36=912'
-)
+SECRET_KEY = getenv('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = getenv('DEBUG', True)
 
 ALLOWED_HOSTS = []
 
@@ -49,6 +51,7 @@ MY_APPS = [
 ]
 
 THIRD_PARTY_APPS = [
+    'drf_spectacular',
     'rest_framework',
     'rest_framework.authtoken',
 ]
@@ -140,9 +143,14 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 AUTH_USER_MODEL = 'accounts.Account'
 
-from datetime import timedelta
+REST_FRAMEWORK = {
+    # 'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
+    # 'PAGE_SIZE': 5,
+    'DEFAULT_SCHEMA_CLASS': 'drf_spectacular.openapi.AutoSchema',
+}
 
-SIMPLE_JWT = {
-    'ACCESS_TOKEN_LIFETIME': timedelta(seconds=4500),
-    'REFRESH_TOKEN_LIFETIME': timedelta(seconds=86400),
+SPECTACULAR_SETTINGS = {
+    'TITLE': 'quiz_API',
+    'VERSION': '1.0.0',
+    'SWAGGER_UI_DIST': '//unpkg.com/swagger-ui-dist@3.35.1',
 }

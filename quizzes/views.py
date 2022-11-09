@@ -1,20 +1,28 @@
-from rest_framework import generics
 from django.shortcuts import get_object_or_404
+from rest_framework import generics
+from rest_framework.authentication import TokenAuthentication
+from rest_framework.permissions import IsAuthenticated
 
 from categories.models import Category
 from categories.serializers import (
-    QuizSerializer,
     DetailedQuizSerializer,
     LessDetailedQuizSerializer,
+    QuizSerializer,
     RandomQuestionsQuizSerializer,
 )
-from utils.mixins import SerializerByMethodMixin
+from core.permissions import IsAdminOrReadOnly
 from questions.models import Question
+from questions.serializers import QuizQuestionSerializer
 from quizzes.models import Quiz
+from utils.mixins import SerializerByMethodMixin
 
 
 class QuizView(SerializerByMethodMixin, generics.ListCreateAPIView):
+    authentication_classes = [TokenAuthentication]
+    permission_classes = [IsAuthenticated, IsAdminOrReadOnly]
+
     queryset = Quiz.objects.all()
+
     serializer_map = {
         'GET': QuizSerializer,
         'POST': LessDetailedQuizSerializer,
@@ -29,21 +37,41 @@ class QuizView(SerializerByMethodMixin, generics.ListCreateAPIView):
 class QuizDetailView(
     SerializerByMethodMixin, generics.RetrieveUpdateDestroyAPIView
 ):
+    authentication_classes = [TokenAuthentication]
+    permission_classes = [IsAuthenticated, IsAdminOrReadOnly]
+
     queryset = Quiz.objects.all()
+
     serializer_map = {
         'GET': DetailedQuizSerializer,
         'PATCH': QuizSerializer,
         'PUT': QuizSerializer,
     }
 
-    lookup_url_kwarg = 'quiz_id'
+    lookup_field = 'id'
 
 
 class RandomQuestionsQuizView(generics.ListAPIView):
+    authentication_classes = [TokenAuthentication]
+    permission_classes = [IsAuthenticated, IsAdminOrReadOnly]
+
     serializer_class = RandomQuestionsQuizSerializer
 
     def get_queryset(self):
-        quiz_id = self.kwargs['quiz_id']
+        quiz_id = self.kwargs['id']
         quiz = get_object_or_404(Quiz, pk=quiz_id)
 
         return Question.objects.filter(quiz=quiz).order_by('?')[:10]
+
+
+class QuizQuestion(generics.ListAPIView):
+    authentication_classes = [TokenAuthentication]
+    permission_classes = [IsAuthenticated, IsAdminOrReadOnly]
+
+    serializer_class = QuizQuestionSerializer
+
+    def get_queryset(self):
+        quiz_id = self.kwargs['id']
+        quiz = get_object_or_404(Quiz, pk=quiz_id)
+
+        return Question.objects.filter(quiz=quiz)
