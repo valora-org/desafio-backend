@@ -105,7 +105,7 @@ class QuizSoloView(APIView):
 
 class GameView(APIView):
     authentication_classes = [TokenAuthentication]
-    permission_classes = [IsAuthenticated, IsAdminUser]
+    permission_classes = [IsAuthenticated]
 
     def get(self, _, play_id):
 
@@ -132,33 +132,40 @@ class GameView(APIView):
 
             total_points = 0
 
-            # Check if the guess is correct for every guess sent
-            for chance in alternatives:
-                list = [(key, value) for key, value in chance.items()]
+            if alternatives:
+                # Check if the guess is correct for every guess sent
+                for chance in alternatives:
+                    list = [(key, value) for key, value in chance.items()]
 
-                _, question_id = list[0]
-                _, guess = list[1]
+                    _, question_id = list[0]
+                    _, guess = list[1]
 
-                question = Question.objects.filter(id=question_id).first()
+                    question = Question.objects.filter(id=question_id).first()
 
-                if question:
-                    if question.answer == guess:
-                        total_points += 1
+                    if question:
+                        if question.answer == guess:
+                            total_points += 1
 
-                user.points += total_points
-                user.save()
+                    user.points += total_points
+                    user.save()
 
-                return Response(
-                    {"quiz score": total_points, "user score": user.points},
-                    status=status.HTTP_200_OK,
-                )
+            return Response(
+                {"quiz score": total_points, "user score": user.points},
+                status=status.HTTP_200_OK,
+            )
 
         except Http404:
             return Response(
                 {"message": "question not found"}, status=status.HTTP_404_NOT_FOUND
             )
 
-        except IndexError:
+        except IndexError or KeyError:
             return Response(
                 {"message": "guess malformatted"}, status=status.HTTP_400_BAD_REQUEST
+            )
+
+        except KeyError:
+            return Response(
+                {"message": "'guesses' field is required"},
+                status=status.HTTP_400_BAD_REQUEST,
             )
