@@ -142,12 +142,11 @@ class GameView(APIView):
 
                     question = Question.objects.filter(id=question_id).first()
 
-                    if question:
-                        if question.answer == guess:
-                            total_points += 1
+                    if question and question.answer == guess:
+                        total_points += 1
 
-                    user.points += total_points
-                    user.save()
+                user.points += total_points
+                user.save()
 
             return Response(
                 {"quiz score": total_points, "user score": user.points},
