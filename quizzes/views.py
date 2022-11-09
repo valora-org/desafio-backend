@@ -13,8 +13,8 @@ import random
 
 
 class QuizView(APIView):
-    # authentication_classes = [TokenAuthentication]
-    # permission_classes = [IsAuthenticated, IsAdminUser]
+    authentication_classes = [TokenAuthentication]
+    permission_classes = [IsAuthenticated, IsAdminUser]
 
     def get(self, _):
 
@@ -47,8 +47,8 @@ class QuizView(APIView):
 
 
 class QuizSoloView(APIView):
-    # authentication_classes = [TokenAuthentication]
-    # permission_classes = [IsAuthenticated, IsAdminUser]
+    authentication_classes = [TokenAuthentication]
+    permission_classes = [IsAuthenticated, IsAdminUser]
 
     def get(self, _, quiz_id: int):
 
@@ -100,4 +100,65 @@ class QuizSoloView(APIView):
         except Http404:
             return Response(
                 {"message": "quiz not found"}, status=status.HTTP_404_NOT_FOUND
+            )
+
+
+class GameView(APIView):
+    authentication_classes = [TokenAuthentication]
+    permission_classes = [IsAuthenticated, IsAdminUser]
+
+    def get(self, _, play_id):
+
+        quizzes = list(Quiz.objects.filter(categories=play_id))
+
+        if quizzes:
+
+            # Gets a random quiz from the list of quizzes and returns it
+            random_quiz = random.sample(quizzes, 1)
+            quiz_serialized = QuizSerializer(random_quiz[0])
+
+            return Response({"quiz": quiz_serialized.data}, status=status.HTTP_200_OK)
+
+        return Response(
+            {"message": "no quizzes found"}, status=status.HTTP_404_NOT_FOUND
+        )
+
+    def post(self, request: Request, play_id: int):
+
+        try:
+            user = get_object_or_404(User, email=request.user)
+
+            alternatives = request.data.pop("guesses")
+
+            total_points = 0
+
+            # Check if the guess is correct for every guess sent
+            for chance in alternatives:
+                list = [(key, value) for key, value in chance.items()]
+
+                _, question_id = list[0]
+                _, guess = list[1]
+
+                question = Question.objects.filter(id=question_id).first()
+
+                if question:
+                    if question.answer == guess:
+                        total_points += 1
+
+                user.points += total_points
+                user.save()
+
+                return Response(
+                    {"quiz score": total_points, "user score": user.points},
+                    status=status.HTTP_200_OK,
+                )
+
+        except Http404:
+            return Response(
+                {"message": "question not found"}, status=status.HTTP_404_NOT_FOUND
+            )
+
+        except IndexError:
+            return Response(
+                {"message": "guess malformatted"}, status=status.HTTP_400_BAD_REQUEST
             )

@@ -44,18 +44,21 @@ class QuizSerializer(serializers.Serializer):
 
     def update(self, instance: Quiz, validated_data):
 
+        # Creates/gets and adds all categories in the quiz
         for key, item in validated_data.items():
             if key == "categories":
                 for category in item:
                     category, _ = Category.objects.get_or_create(**category)
                     instance.categories.add(category)
 
+            # Creates/gets and adds all questions in the quiz
             elif key == "questions":
                 for question in item:
                     alternatives = question.pop("alternatives")
 
                     question, _ = Question.objects.get_or_create(**question)
 
+                    # Creates/gets and adds all alternatives for every question in the quiz
                     for alternative in alternatives:
                         description = alternative.pop("description")
                         alternative, _ = Alternative.objects.get_or_create(
