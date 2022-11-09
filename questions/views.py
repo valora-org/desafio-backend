@@ -9,8 +9,8 @@ from .models import Question
 
 
 class QuestionView(APIView):
-    # authentication_classes = [TokenAuthentication]
-    # permission_classes = [IsAuthenticated, IsAdminUser]
+    authentication_classes = [TokenAuthentication]
+    permission_classes = [IsAuthenticated, IsAdminUser]
 
     def get(self, _):
 
@@ -31,8 +31,8 @@ class QuestionView(APIView):
 
 
 class QuestionSoloView(APIView):
-    # authentication_classes = [TokenAuthentication]
-    # permission_classes = [IsAuthenticated, IsAdminUser]
+    authentication_classes = [TokenAuthentication]
+    permission_classes = [IsAuthenticated, IsAdminUser]
 
     def get(self, _, question_id: int):
 
