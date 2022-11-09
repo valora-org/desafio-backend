@@ -41,4 +41,4 @@ class Is_admin_or_read(permissions.BasePermission):
         if request.method in permissions.SAFE_METHODS:
             return True
 
-        return request.is_staff or request.user.is_superuser
+        return request.user.is_staff or request.user.is_superuser
