@@ -85,8 +85,8 @@ class LoginView(APIView):
 
 
 class RankingView(APIView):
-    # authentication_classes = [TokenAuthentication]
-    # permission_classes = [IsAuthenticated]
+    authentication_classes = [TokenAuthentication]
+    permission_classes = [IsAuthenticated]
 
     def get(self, _):
         ranking = User.objects.all().order_by("-points")
