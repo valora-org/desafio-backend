@@ -1,20 +1,3 @@
-Uma breve explicação sobre o desafio:
-
-Olá, Cleiton e Caio. 
-
-Desenvolvi um DER que ajuda a mapear melhor o projeto. 
-Há também a documentação em Swagger e Redoc, cujas URL's encontram-se em core/urls.py. 
-Criei 49 testes de integração, os quais cobrem 87% da aplicação. Podem ser vistos inclusive no repositório remoto em função do uso do GitHub Actions. 
-
-Surgiram algumas dúvidas, especialmente nos 2 últimos dias. Procurei nas issues, mas não achei. Considerando que algumas levaram um certo tempo para serem respondidas, optei por não abrir uma nova porque queria implementar algumas funcionalidades que ainda restavam. Acredito não ter faltado muito para implementar totalmente o que fora solicitado neste README. 
-
-Sobre o workspace do Postman, peço desculpas por não fazê-lo necessariamente com ele, e sim com o Insomnia, por não estar familiarizado com aquele. Também porque priorizei a realização dos testes no curto espaço de tempo que faltava. Além do fato da própria documentação em Swagger permitir realizar as operações que Insomnia e Postman executam. Tenham certeza de que procurei fazer o meu melhor, o que, ainda assim, certamente está bem aquém daquilo que desenvolvedores seniores como vocês conseguem desenvolver.
-
-Muito obrigado pela atenção dispensada em nossa conversa há 1 semana e pela oportunidade de realizar este teste!  
-
-Atenciosamente,  
-Leandro Medeiros
-
 # Desafio Backend Python  
 
 Parabéns! Se você chegou até aqui significa que você passou pelas etapas mais difíceis do nosso processo seletivo. Somos extremamente criteriosos com as pessoas que vão integrar nosso time porque só aceitamos pessoas incríveis!
