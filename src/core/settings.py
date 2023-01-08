@@ -35,7 +35,8 @@ THIRD_PARTY_APPS = [
 ]
 
 LOCAL_APPS = [
-    'quizzes'
+    'quizzes',
+    'accounts',
 ]
 
 DEFAULT_APPS = [
@@ -123,6 +124,8 @@ USE_L10N = True
 
 USE_TZ = True
 
+# User
+AUTH_USER_MODEL = "accounts.User"
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
