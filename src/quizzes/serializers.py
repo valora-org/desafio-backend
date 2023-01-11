@@ -17,7 +17,7 @@ class PlayQuizSerializer(serializers.Serializer):
 class QuestionSerializer(serializers.ModelSerializer):
     class Meta:
         model = models.Question
-        fields = '__all__'
+        fields = '__all__'        
 
 
 class CategorySerializer(serializers.ModelSerializer):
