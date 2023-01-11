@@ -42,6 +42,6 @@ Baixe o projeto localmente e siga os passos seguintes
 - Crie as questões ( o campo 'category' é o nome da categoria e o campo 'correct_choice' é a alternativa certa da questão, podendo variar entre as 3 ) você tem que criar no minimo 10 da categoria criada para começar a jogar!
 
 #### Tendo criado as perguntas, é hora de jogar! 
-- obtenha o token de acesso com o email valoraPlayer@mail.com, vá na request Get Quiz e passe o campo 'category' para obter um quiz para seu usuário ( o endpoint irá retornar uma pergunta aleatória do mesmo )
+- obtenha o token de acesso com o email valoraPlayer@mail.com, vá na request Get Quiz depois de configurar o Bearer token na aba de autenticação do Postman e passe o campo 'category' para obter um quiz para seu usuário ( o endpoint irá retornar uma pergunta aleatória do mesmo )
 - Para responder a pergunta que você recebeu no endpoint anterior vá para a request Play Quiz e passe o campo 'answer_choice' com a escolha que você acha correta ( first , second ou third | choice) 
 - Vale ressaltar que você consultar o ranking da categoria que você jogou acessando o endpoint consult_category_ranking e passando o campo 'category' para ele, ou se preferir pode acessar o ranking global apenas acessando o endpoint consult_global_ranking
