@@ -1,6 +1,47 @@
 
 # Valora Challenge - Dev Backend Python - Marcelo
 
-Olá, não consegui terminar o desafio por problemas pessoais... durante a semana fiquei ocupado por demandas do trabalho e no final de semana meu Ubuntu simplesmente travou até me obrigar a instalar a versão 22.04 que tinha alguns problemas com placas de video AMD que me deixou agarrado até a noite de domingo. Consegui fazer algumas partes do desafio como o sistema de usuários e comecei a criar o sistema do game... porém boa parte dos requisitos não foram cumpridos pela falta de tempo. Após finalizar os requisitos como a mecânica e o ranking do jogo, iria configurar o Dockerfile juntamente com o docker-compose.yml, fazer a coleção do postman, o modelo de dados e modelo de entidade relacionamento para por aqui no repositório. Devido a estes imprevistos o projeto está inacabado.
+Olá, antes de tudo listarei oque está faltando:
 
-Obrigado pela atenção, att Marcelo.
+- Arquivos do docker
+- Testes unitários
+
+Bom, não consegui fazer tudo que eu queria pela falta de tempo ( durante a semana trabalho ) e no 
+final de semana que estava separando para me aprofundar mais nesses detalhes descritos acima e em
+algumas partes especificas do codigo ( ranking / autenticação via token ) minha instalação do
+Ubuntu deu problema me fazendo perder boa parte do tempo do fim de semana.
+
+Dado o exposto aqui vai um resumo das minhas escolhas técnicas ( + peculiares no código ):
+
+- Decidi fazer as choices / escolhas no modelo de perguntas como um campo ChoiceField por motivos de economizar quantidades de acessos no banco
+
+- A escolha do Quizz ser um JSONField no usuário foi feita tanto para agilizar o desenvolvimento ( Facilitar no enquadramento das regras exigidas )
+
+Vale ressaltar que por padrão a aplicação cria 2 usuários para motivo de facilitar o teste na migration, valoraPlayer@mail.com e valoraAdmin@mail.com
+ambos com senha 123 e com as permissões de cada grupo.
+
+## Passos para rodar a aplicação!
+
+Baixe o projeto localmente e siga os passos seguintes
+
+```bash
+  git pull https://github.com/MarceloJDCB/desafio-backend.git
+  
+  cd desafio-backend/src
+  python3 -m venv venv && source venv/bin/activate
+  python3 -m pip install -r requirements.txt
+  
+  python3 -m manage.py migrate
+  python3 -m manage.py runserver
+
+```
+    
+## Tutorial
+
+- Obtenha o access_token na parte de login do postman, use o email valoraAdmin@mail.com para obter um usuário com permissão para criar categorias e questões. 
+- Crie as questões ( o campo 'category' é o nome da categoria e o campo 'correct_choice' é a alternativa certa da questão, podendo variar entre as 3 ) você tem que criar no minimo 10 da categoria criada para começar a jogar!
+
+#### Tendo criado as perguntas, é hora de jogar! 
+- obtenha o token de acesso com o email valoraPlayer@mail.com, vá na request Get Quiz e passe o campo 'category' para obter um quiz para seu usuário ( o endpoint irá retornar uma pergunta aleatória do mesmo )
+- Para responder a pergunta que você recebeu no endpoint anterior vá para a request Play Quiz e passe o campo 'answer_choice' com a escolha que você acha correta ( first , second ou third | choice) 
+- Vale ressaltar que você consultar o ranking da categoria que você jogou acessando o endpoint consult_category_ranking e passando o campo 'category' para ele, ou se preferir pode acessar o ranking global apenas acessando o endpoint consult_global_ranking
