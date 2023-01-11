@@ -15,9 +15,9 @@ class Category(models.Model):
         return self.type_text
 
 
-class Answer(models.Model):
+class Question(models.Model):
     
-    answer_choices = (
+    question_choices = (
         ("first_choice", "Primeira escolha"),
         ("second_choice", "Segunda escolha"),
         ("third_choice", "Terceira escolha")
@@ -27,10 +27,10 @@ class Answer(models.Model):
         Category,
         verbose_name="Categoria",
         on_delete=models.CASCADE,
-        related_name="anwser"
+        related_name="question"
     )
     
-    answer_text = models.CharField(
+    question_text = models.CharField(
         verbose_name="Texto da Pergunta",
         max_length=200
     )
@@ -53,7 +53,7 @@ class Answer(models.Model):
     correct_choice = models.CharField(
         verbose_name="Escolha correta",
         max_length=100,
-        choices=answer_choices
+        choices=question_choices
     )
     
     class Meta:
@@ -62,5 +62,5 @@ class Answer(models.Model):
         verbose_name_plural = _("Perguntas")
     
     def __str__(self) -> str:
-        return self.answer_text
+        return self.question_text
 

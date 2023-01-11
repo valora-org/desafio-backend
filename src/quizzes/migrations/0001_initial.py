@@ -25,15 +25,15 @@ class Migration(migrations.Migration):
             },
         ),
         migrations.CreateModel(
-            name='Answer',
+            name='Question',
             fields=[
                 ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('answer_text', models.CharField(max_length=200, verbose_name='Texto da Pergunta')),
+                ('question_text', models.CharField(max_length=200, verbose_name='Texto da Pergunta')),
                 ('first_choice', models.CharField(max_length=100, verbose_name='Primeira Escolha')),
                 ('second_choice', models.CharField(max_length=100, verbose_name='Segunda Escolha')),
                 ('third_choice', models.CharField(max_length=100, verbose_name='Terceira Escolha')),
                 ('correct_choice', models.CharField(choices=[('first_choice', 'Primeira escolha'), ('second_choice', 'Segunda escolha'), ('third_choice', 'Terceira escolha')], max_length=100, verbose_name='Escolha correta')),
-                ('category', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='anwser', to='quizzes.category', verbose_name='Categoria')),
+                ('category', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='question', to='quizzes.category', verbose_name='Categoria')),
             ],
             options={
                 'verbose_name': 'Pergunta',
