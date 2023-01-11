@@ -1,24 +1,21 @@
 from django.contrib.auth.mixins import PermissionRequiredMixin
 from rest_framework.response import Response
 from rest_framework import status
-
-from rest_framework.permissions import IsAuthenticated
+from rest_framework.generics import CreateAPIView
 from rest_framework.views import APIView
 
-class QuizViewMixin(PermissionRequiredMixin, APIView):
-    
-    permission_classes = [IsAuthenticated]
+class QuizViewMixin(APIView, PermissionRequiredMixin):
     
     def dispatch(self, request, *args, **kwargs):
-        
-        if not self.has_permission():
-            return self.handle_no_permission()
         
         self.args = args
         self.kwargs = kwargs
         request = self.initialize_request(request, *args, **kwargs)
         self.request = request
         self.headers = self.default_response_headers  # deprecate?
+        
+        if not self.has_permission():
+            return self.handle_no_permission()
 
         try:
             self.initial(request, *args, **kwargs)
@@ -44,13 +41,13 @@ class QuizViewMixin(PermissionRequiredMixin, APIView):
         return self.response
 
 
-class QuizPlayViewMixin(QuizViewMixin):
+class QuizPlayViewMixin(QuizViewMixin, CreateAPIView):
     
     permission_required = ["accounts.can_play"]
     permission_denied_message = 'Usuário sem permissão para jogar um Quiz'
     serializer_class = None
     
-class QuizCreationViewMixin(QuizViewMixin):
+class QuizCreationViewMixin(QuizViewMixin, CreateAPIView):
     
     permission_required = ["quizzes.can_create_category", "quizzes.can_create_question"]
     permission_denied_message = 'Usuário sem permissão para criar um Quiz'
