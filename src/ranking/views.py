@@ -6,9 +6,10 @@ from ranking.serializers import UserRankingSerializer, RankingSerializer
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework.permissions import IsAuthenticated
+from ranking.mixins import RankingViewMixin
 
 
-class GlobalRanking(PermissionRequiredMixin, APIView):
+class GlobalRanking(RankingViewMixin):
     permission_classes = [IsAuthenticated]
     permission_required = ['accounts.can_consult_ranking']
     def get(self, request):
@@ -16,7 +17,7 @@ class GlobalRanking(PermissionRequiredMixin, APIView):
         all_users.is_valid()
         return Response(all_users.data)
 
-class CategoryRanking(PermissionRequiredMixin, APIView):
+class CategoryRanking(RankingViewMixin):
     permission_classes = [IsAuthenticated]
     permission_required = ['accounts.can_consult_ranking']
     def post(self, request):
