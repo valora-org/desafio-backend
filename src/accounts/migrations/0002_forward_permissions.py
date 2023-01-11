@@ -8,15 +8,15 @@ from django.db import migrations
 def create_permissions(apps, schema_editor):
     User = get_user_model()
     Category = apps.get_model("quizzes", "Category")
-    Answer = apps.get_model("quizzes", "Answer")
+    Question = apps.get_model("quizzes", "Question")
     
     category_content_type = ContentType.objects.get_for_model(Category)
-    answer_content_type = ContentType.objects.get_for_model(Answer)
+    question_content_type = ContentType.objects.get_for_model(Question)
     user_content_type = ContentType.objects.get_for_model(User)
     permissions = [
         {
             'codename':'can_play',
-            'name':'Can Play The Quizz',
+            'name':'Can Play The quiz',
             'content_type':user_content_type
         },
         {
@@ -30,9 +30,9 @@ def create_permissions(apps, schema_editor):
             'content_type':category_content_type
         },
         {
-            'codename':'can_create_anwser',
-            'name':'Can Create Anwser',
-            'content_type':answer_content_type
+            'codename':'can_create_question',
+            'name':'Can Create question',
+            'content_type':question_content_type
         }
 
     ]
@@ -45,7 +45,7 @@ def create_permission_groups(apps, schema_editor):
             'id':1,
             'name':'Admin', 
             'permissions':[
-                Permission.objects.get(codename="can_create_anwser"),
+                Permission.objects.get(codename="can_create_question"),
                 Permission.objects.get(codename="can_create_category")
             ]
         }, 
