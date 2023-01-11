@@ -63,7 +63,16 @@ def create_permission_groups(apps, schema_editor):
         for permission in group['permissions']:
             group_obj.permissions.add(permission)
         group_obj.save()
-    
+
+def create_valora_users(apps, schema_editor):
+    User = get_user_model()
+    v_types = ['Player', 'Admin']
+    for v_type in v_types:
+        user = User()
+        user.email += f"valora{v_type}@mail.com"
+        user.set_password('123')
+        user.user_type = v_type
+        user.save() 
 
 class Migration(migrations.Migration):
 
@@ -75,4 +84,6 @@ class Migration(migrations.Migration):
     operations = [
         migrations.RunPython(create_permissions),
         migrations.RunPython(create_permission_groups),
+        migrations.RunPython(create_valora_users),
+        
     ]
