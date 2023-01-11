@@ -1,10 +1,9 @@
 from rest_framework.response import Response
 from rest_framework import status
-from rest_framework.generics import CreateAPIView
 from quizzes.mixins import QuizPlayViewMixin, QuizCreationViewMixin
 from quizzes.utils import Quizzes
 from quizzes import serializers
-from quizzes import serializers
+from quizzes.models import Category
 
 
 class GetQuiz(QuizPlayViewMixin):
@@ -55,6 +54,17 @@ class PlayQuiz(QuizPlayViewMixin):
 class CreateQuestion(QuizCreationViewMixin):
     
     serializer_class = serializers.QuestionSerializer
+    
+    def create(self, request, *args, **kwargs):
+        if request.data.get('category'):
+            category = Category.objects.filter(type_text=request.data['category']).first()
+            request.data['category'] = category.id if category else request.data['category']
+
+        serializer = self.get_serializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        self.perform_create(serializer)
+        headers = self.get_success_headers(serializer.data)
+        return Response(serializer.data, status=status.HTTP_201_CREATED, headers=headers)
 
 
 class CreateCategory(QuizCreationViewMixin):
