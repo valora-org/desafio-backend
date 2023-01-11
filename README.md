@@ -15,7 +15,7 @@ Dado o exposto aqui vai um resumo das minhas escolhas técnicas ( + peculiares n
 
 - Decidi fazer as choices / escolhas no modelo de perguntas como um campo ChoiceField por motivos de economizar quantidades de acessos no banco
 
-- A escolha do Quizz ser um JSONField no usuário foi feita tanto para agilizar o desenvolvimento ( Facilitar no enquadramento das regras exigidas )
+- A escolha do Quizz ser um JSONField no usuário foi feita tanto para agilizar o desenvolvimento ( Facilitar no enquadramento das regras exigidas ) quanto para reduzir numero de acessos no banco.
 
 Vale ressaltar que por padrão a aplicação cria 2 usuários para motivo de facilitar o teste na migration, valoraPlayer@mail.com e valoraAdmin@mail.com
 ambos com senha 123 e com as permissões de cada grupo.
