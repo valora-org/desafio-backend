@@ -30,9 +30,9 @@ Baixe o projeto localmente e siga os passos seguintes
   cd desafio-backend/src
   python3 -m venv venv && source venv/bin/activate
   python3 -m pip install -r requirements.txt
-  
-  python3 -m manage.py migrate
-  python3 -m manage.py runserver
+  cd src
+  python3 -m manage migrate
+  python3 -m manage runserver
 
 ```
     
