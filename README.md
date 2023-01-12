@@ -39,6 +39,7 @@ Baixe o projeto localmente e siga os passos seguintes
 ## Tutorial
 
 - Obtenha o access_token na parte de login do postman, use o email valoraAdmin@mail.com para obter um usuário com permissão para criar categorias e questões. 
+- Crie as categorias para poder atrelar as questões antes de tudo! - Aba Create Category no postman
 - Crie as questões ( o campo 'category' é o nome da categoria e o campo 'correct_choice' é a alternativa certa da questão, podendo variar entre as 3 ) você tem que criar no minimo 10 da categoria criada para começar a jogar!
 
 #### Tendo criado as perguntas, é hora de jogar! 
