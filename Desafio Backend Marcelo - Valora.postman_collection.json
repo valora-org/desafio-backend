@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "8e11443e-8bc6-4e0e-bf29-ccde9125507f",
+		"_postman_id": "48715304-e8af-4924-a4bf-d0bdbd9437b8",
 		"name": "Desafio Backend Marcelo - Valora",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -30,7 +30,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n    \"email\": \"valoraPlayer@mail.com\",\n    \"password\": \"123\"\n}",
+					"raw": "{\n    \"email\": \"valoraAdmin@mail.com\",\n    \"password\": \"123\"\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -237,6 +237,43 @@
 					"path": [
 						"ranking",
 						"consult_category_ranking"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create Category",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjczNTIyMTEzLCJpYXQiOjE2NzM1MjE4MTMsImp0aSI6IjFkYjJiNDdmZGI3NDRjNWFhNTQxOTc4ZTgyN2NlNjcyIiwidXNlcl9pZCI6Mn0.8PZze1f6y557LQRRIIOXs9fStXtaqBvO0KwHhojMm6Q",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"type_text\":\"vsfx\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{host}}/quizzes/create_category",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"quizzes",
+						"create_category"
 					]
 				}
 			},
