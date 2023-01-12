@@ -25,7 +25,7 @@ ambos com senha 123 e com as permissões de cada grupo.
 Baixe o projeto localmente e siga os passos seguintes
 
 ```bash
-  git pull https://github.com/MarceloJDCB/desafio-backend.git
+  git clone https://github.com/MarceloJDCB/desafio-backend.git
   
   cd desafio-backend/src
   python3 -m venv venv && source venv/bin/activate
