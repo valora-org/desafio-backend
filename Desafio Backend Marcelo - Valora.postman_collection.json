@@ -1,0 +1,310 @@
+{
+	"info": {
+		"_postman_id": "48715304-e8af-4924-a4bf-d0bdbd9437b8",
+		"name": "Desafio Backend Marcelo - Valora",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Login",
+			"protocolProfileBehavior": {
+				"followAuthorizationHeader": true
+			},
+			"request": {
+				"auth": {
+					"type": "apikey",
+					"apikey": [
+						{
+							"key": "value",
+							"value": "34be087cf0af21cfd6340dda36609236a6d12052",
+							"type": "string"
+						},
+						{
+							"key": "key",
+							"value": "Token",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"email\": \"valoraAdmin@mail.com\",\n    \"password\": \"123\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{host}}/accounts/api/token",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"accounts",
+						"api",
+						"token"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Play Quiz",
+			"protocolProfileBehavior": {
+				"followAuthorizationHeader": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjczNDM3NTQzLCJpYXQiOjE2NzM0MzcyNDMsImp0aSI6ImQwM2ZkMDA5MDg1YjQ3NTQ5NjE4ODU5ODNlYTg1MGZmIiwidXNlcl9pZCI6MX0.5bN9oTlTnz1ySN46YG74DkeH6-e_lD1jFnu8ny3OB1c",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"answer_choice\":\"first_choice\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{host}}/quizzes/play_quiz",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"quizzes",
+						"play_quiz"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Quiz",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjczNDM3NTQzLCJpYXQiOjE2NzM0MzcyNDMsImp0aSI6ImQwM2ZkMDA5MDg1YjQ3NTQ5NjE4ODU5ODNlYTg1MGZmIiwidXNlcl9pZCI6MX0.5bN9oTlTnz1ySN46YG74DkeH6-e_lD1jFnu8ny3OB1c",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"category\":\"teste\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{host}}/quizzes/get_quiz",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"quizzes",
+						"get_quiz"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create Question",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjczNDM4NDY2LCJpYXQiOjE2NzM0MzgxNjYsImp0aSI6IjUxYjJlZmY1MDNlZDRmYThhMWJmYjlkYmIwZDkyYTEzIiwidXNlcl9pZCI6Mn0.endsss_tX0d-0K4MSdu59ms4nAiI5yHDVrhsLAC3crU",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"question_text\": \"Um exemplo de questão\",\n    \"first_choice\": \"Primeira alternativa\",\n    \"second_choice\": \"Segunda alternativa\",\n    \"third_choice\": \"Terceira alternativa\",\n    \"correct_choice\": \"third_choice\",\n    \"category\": \"teste\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{host}}/quizzes/create_question",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"quizzes",
+						"create_question"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Consult Global Ranking",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjczNDM3MTY2LCJpYXQiOjE2NzM0MzY4NjYsImp0aSI6Ijg5YzlkZDlmZDIwYTQ3NjQ4ZTIyNWUyNjVhNjIzYjAxIiwidXNlcl9pZCI6MX0.fFgYKlDPQuNTj_Stnfv3NUhbsRoCcEu4DZWmo5clYzA",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{host}}/ranking/consult_global_ranking",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"ranking",
+						"consult_global_ranking"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Consult Category Ranking",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjczNDM5NTU4LCJpYXQiOjE2NzM0MzkyNTgsImp0aSI6IjIzMjIyZmFhNTQ5ZTQ2NTlhOTI3NjdkMGU3YWE4NDk1IiwidXNlcl9pZCI6MX0.INOkCiiWl_QKhLPq16FHQfjOthi_9HQhiNaiO0f07ng",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"category\":\"teste\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{host}}/ranking/consult_category_ranking",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"ranking",
+						"consult_category_ranking"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create Category",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjczNTIyMTEzLCJpYXQiOjE2NzM1MjE4MTMsImp0aSI6IjFkYjJiNDdmZGI3NDRjNWFhNTQxOTc4ZTgyN2NlNjcyIiwidXNlcl9pZCI6Mn0.8PZze1f6y557LQRRIIOXs9fStXtaqBvO0KwHhojMm6Q",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"type_text\":\"vsfx\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{host}}/quizzes/create_category",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"quizzes",
+						"create_category"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "host",
+			"value": "http://localhost:8000",
+			"type": "default"
+		}
+	]
+}

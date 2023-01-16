@@ -1,80 +1,48 @@
-## <img src="https://valora.cc/img/logo2.png" alt="Valora" width="24" /> Desafio Backend Python
 
-Parabéns! Se você chegou até aqui significa que você passou pelas etapas mais difíceis do nosso processo seletivo. Somos extremamente criteriosos com as pessoas que vão integrar nosso time porque só aceitamos pessoas incríveis!
+# Valora Challenge - Dev Backend Python - Marcelo
 
-Agora é a parte fácil. Chegou a hora de mostrar todas as suas habilidades de transformar café em código. Vamos lá?
+Olá, antes de tudo listarei oque está faltando:
 
-Nesse desafio iremos avaliar suas habilidades em:
+- Arquivos do docker
+- Testes unitários
 
-* **Python**
-* **Django**
-* **Django REST Framework**
-* **Pytest** (desejável mas não obrigatório)
-* **Docker** (desejável mas não obrigatório)
+Bom, não consegui fazer tudo que eu queria pela falta de tempo ( durante a semana trabalho ) e no 
+final de semana que estava separando para me aprofundar mais nesses detalhes descritos acima e em
+algumas partes especificas do codigo ( ranking / autenticação via token ) minha instalação do
+Ubuntu deu problema me fazendo perder boa parte do tempo do fim de semana.
 
-Você irá desenvolver a API de uma aplicação para a criação de um quiz de perguntas e respostas!
+Dado o exposto aqui vai um resumo das minhas escolhas técnicas ( + peculiares no código ):
 
-**A aplicação deverá prover o registro e autenticação de dois tipos de usuários**:
+- Decidi fazer as choices / escolhas no modelo de perguntas como um campo ChoiceField por motivos de economizar quantidades de acessos no banco
 
-* Admin
-* Player
+- A escolha do Quizz ser um JSONField no usuário foi feita tanto para agilizar o desenvolvimento ( Facilitar no enquadramento das regras exigidas ) quanto para reduzir numero de acessos no banco.
 
-**Cada quiz é composto por**:
+Vale ressaltar que por padrão a aplicação cria 2 usuários para motivo de facilitar o teste na migration, valoraPlayer@mail.com e valoraAdmin@mail.com
+ambos com senha 123 e com as permissões de cada grupo.
 
-* 10 perguntas com 3 respostas onde apenas 1 é correta.
-* Cada resposta correta acumula a 1 ponto.
-* Cada resposta errada perde 1 ponto. A menor pontuação possível é 0.
-* Possui uma categoria.
+## Passos para rodar a aplicação!
 
-**Ao iniciar o jogo**:
+Baixe o projeto localmente e siga os passos seguintes
 
-* O player deve escolher uma categoria válida e receber um quiz com perguntas aleatórias referentes a categoria escolhida.
+```bash
+  git clone https://github.com/MarceloJDCB/desafio-backend.git
+  
+  cd desafio-backend/src
+  python3 -m venv venv && source venv/bin/activate
+  python3 -m pip install -r requirements.txt
+  cd src
+  python3 -m manage migrate
+  python3 -m manage runserver
 
-**Ao finalizar o jogo**:
+```
+    
+## Tutorial
 
-* O player deve receber a contabilização dos seus pontos juntamente com a sua posição atual no ranking global. Não há limitação de quantos quizzes o player pode responder.
+- Obtenha o access_token na parte de login do postman, use o email valoraAdmin@mail.com para obter um usuário com permissão para criar categorias e questões. 
+- Crie as categorias para poder atrelar as questões antes de tudo! - Aba Create Category no postman
+- Crie as questões ( o campo 'category' é o nome da categoria e o campo 'correct_choice' é a alternativa certa da questão, podendo variar entre as 3 ) você tem que criar no minimo 10 da categoria criada para começar a jogar!
 
-**O ranking**:
-
-* É a contabilização dos pontos acumulados por cada player.
-* Ranking geral considera todas as categorias.
-* Ranking por categoria agrupa por categorias.
-* Este requisito é desejável mas não obrigatório.
-
-**Permissões**:
-
-* Todos os endpoints devem estar protegidos por autenticação.
-* Usuários do tipo **Admin** tem permissão para criar perguntas e respostas para os quizzes.
-* Usuários do tipo **Player** tem permissão para jogar e consultar o ranking.
-
-## Requisitos
-
-* O projeto precisa estar configurado para rodar em um ambiente macOS ou Ubuntu (preferencialmente como container Docker).
-* Deve anexar ao seu projeto uma coleção do postman com todos os endpoints criados e exemplos de utilização.
-
-**Para executar seu código devemos executar apenas os seguintes comandos**:
-
-* git clone $seu-fork
-* cd $seu-fork
-* comando para instalar dependências
-* comando para executar a aplicação
-
-## Critério de avaliação
-
-* **Organização do código**: Separação de módulos, view e model
-* **Clareza**: O README explica de forma resumida qual é o problema e como pode rodar a aplicação?
-* **Assertividade**: A aplicação está fazendo o que é esperado? Se tem algo faltando, o README explica o porquê?
-* **Legibilidade do código** (incluindo comentários)
-* **Segurança**: Existe alguma vulnerabilidade clara?
-* **Cobertura de testes** (Não esperamos cobertura completa mas é importante garantir o fluxo principal)
-* **Histórico de commits** (estrutura e qualidade)
-* **UX**: A API é intuitiva?
-* **Escolhas técnicas**: A escolha das bibliotecas, banco de dados, arquitetura, etc, é a melhor escolha para a aplicação?
-
-## Dúvidas
-
-Quaisquer dúvidas que você venha a ter, consulte as issues para ver se alguém já não a fez e caso você não ache sua resposta, abra você mesmo uma nova issue!
-
-Ao completar o desafio, submeta um pull-request a esse repositório com uma breve explicação das decisões tomadas e principalmente as instruções para execução do projeto.
-
-**Boa sorte! ;)**
+#### Tendo criado as perguntas, é hora de jogar! 
+- Obtenha o token de acesso com o email valoraPlayer@mail.com, vá na request Get Quiz depois de configurar o Bearer token na aba de autenticação do Postman e passe o campo 'category' para obter um quiz para seu usuário ( o endpoint irá retornar uma pergunta aleatória do mesmo )
+- Para responder a pergunta que você recebeu no endpoint anterior vá para a request Play Quiz e passe o campo 'answer_choice' com a escolha que você acha correta ( first , second ou third | choice) 
+- Vale ressaltar que você consultar o ranking da categoria que você jogou acessando o endpoint consult_category_ranking e passando o campo 'category' para ele, ou se preferir pode acessar o ranking global apenas acessando o endpoint consult_global_ranking
