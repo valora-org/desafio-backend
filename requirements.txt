@@ -1,0 +1,4 @@
+Django==4.2.2
+djangorestframework==3.14.0
+httpie==3.2.2
+psycopg2==2.9.6
