@@ -1,4 +1,4 @@
-## <img src="https://valora.cc/img/logo2.png" alt="Valora" width="24" /> Desafio Backend Python
+## <img src="https://valora.cc/assets/logo.svg" alt="Valora" width="24" /> Desafio Backend Python
 
 Parabéns! Se você chegou até aqui significa que você passou pelas etapas mais difíceis do nosso processo seletivo. Somos extremamente criteriosos com as pessoas que vão integrar nosso time porque só aceitamos pessoas incríveis!
 
