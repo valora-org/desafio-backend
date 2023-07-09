@@ -38,7 +38,15 @@ class Question(models.Model):
         max_length = 50
         return f"{self.text[:max_length]}"
 
+
 class Answer(models.Model):
     text = models.CharField(_("answer"), max_length=255)
     question = models.ForeignKey(Question, on_delete=models.DO_NOTHING)
     is_correct = models.BooleanField(_("correct answer"), default=False)
+
+    class Meta:
+        verbose_name = 'answer'
+        verbose_name_plural = 'answers'
+
+    def __str__(self):
+        return f"{self.text}"
