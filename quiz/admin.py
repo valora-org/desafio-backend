@@ -7,23 +7,30 @@ from quiz.models import Category, Answer, Quiz, Question
 class CategoryAdmin(admin.ModelAdmin):
     list_display = ['id', 'name']
 
-@admin.register(Quiz)
-class QuizAdmin(admin.ModelAdmin):
-    list_display = ['name', 'category', 'created_at']
-
 
 class AnswerAdmin(admin.TabularInline):
     """
-    TabularInline enable register model to be edited in other
+    Enable answer model to be edited in other
     """
     model = Answer
     min_num = 3
     max_num = 3
 
+
 @admin.register(Question)
 class QuestionAdmin(admin.ModelAdmin):
+    
     fields = ['text', 'quiz', 'is_active']
     list_display = ['text', 'quiz', 'is_active']
     inlines = [
         AnswerAdmin,
     ]
+
+@admin.register(Quiz)
+class QuizAdmin(admin.ModelAdmin):
+    list_display = ['name', 'category', 'created_at']
+    
+
+@admin.register(Answer)
+class AnswerAdmin(admin.ModelAdmin):
+    list_display = ['text', 'is_correct', 'question_id' ]
