@@ -1,11 +1,11 @@
 from rest_framework import serializers
 from quiz.models import Question, Answer, Quiz
+from accounts.models import CustomUser as User
 
 
 class QuizSerializer(serializers.ModelSerializer):
 
     
-    category = serializers.StringRelatedField(read_only=True)
     
     class Meta:
         model = Quiz
@@ -18,34 +18,52 @@ class QuizSerializer(serializers.ModelSerializer):
 
 
 class AnswerSerializer(serializers.ModelSerializer):
+
+    
+   
     
     class Meta:
-        
         model = Answer
         fields = [
             'id',
-            'question',
-            'text',
+            'text', 
             'is_correct',
+            
         ]
 
 
 class QuestionSerializer(serializers.ModelSerializer):
 
     quiz = QuizSerializer(read_only=True)
-    answer = AnswerSerializer(read_only=True)
+    answer = AnswerSerializer(read_only=True, many=True)
 
     class Meta:
     
         model = Question
         fields = [
             'quiz',
+            'id',
             'text',
             'answer',       
         ]
 
-    def hit_correct_answer(self):
+    def increase_score(self):
+        user_score = User.score
+        if user_score >= 0:
+            user_score = user_score + 1
+        return user_score
+    
+    def decrease_score(self):
+        user_score = User.score
+        if user_score >= 0:
+            user_score = user_score - 1
+        else:
+            user_score = user_score
+        return user_score
+    
+    def validate_correct_answer(self, request):
         """
         Used to check with the player hit the correct answer
         """
-        pass
+        
+    
