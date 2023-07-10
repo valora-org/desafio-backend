@@ -151,7 +151,7 @@ docker-compose exec web python manage.py test
 <!-- CONTACT -->
 ## Contact
 
-Pedro Augusto - [@linkedin_handle](https://www.linkedin.com/in/pedro-augusto-b445b019b/)
+Pedro Augusto - [Pedro Augusto](https://www.linkedin.com/in/pedro-augusto-b445b019b/)
 
 Project Link: [https://github.com/iamkamui/desafio-backend](https://github.com/iamkamui/desafio-backend)
 
