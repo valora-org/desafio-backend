@@ -41,7 +41,7 @@ class Question(models.Model):
 
 class Answer(models.Model):
     text = models.CharField(_("answer"), max_length=255)
-    question = models.ForeignKey(Question, on_delete=models.DO_NOTHING)
+    question = models.ForeignKey(Question, related_name='answer', on_delete=models.DO_NOTHING)
     is_correct = models.BooleanField(_("correct answer"), default=False)
 
     class Meta:
