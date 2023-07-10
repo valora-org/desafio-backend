@@ -43,9 +43,15 @@
 
 
 <!-- ABOUT THE PROJECT -->
-## About The Project
+## Sobre o Projeto
+API Root
+![Desafio Backend][product-screenshot]
 
-[![Product Name Screen Shot][product-screenshot]]
+Visualização dos Quiz's
+![Quiz List][product-quiz-list]
+
+Respostas do Quiz '1'
+![Quiz Answers][product-quiz-answers]
 
 API de uma aplicação para a criação de um quiz de perguntas e respostas, onde que a api disponibiliza a visualização de questões, usuários, ranking baseado em pontuação.
 
@@ -54,7 +60,7 @@ API de uma aplicação para a criação de um quiz de perguntas e respostas, ond
 
 
 
-### Built With
+### Desenvolvido com
 
 * [![DRF][Django REST framework]][DRF-url]
 * [![Python][Python.py]][Python-url]
@@ -66,15 +72,15 @@ API de uma aplicação para a criação de um quiz de perguntas e respostas, ond
 
 
 <!-- GETTING STARTED -->
-## Getting Started
+## Começando
 
 Para visualizar este projeto você precisa de uma cópia local do mesmo e certificar que possui Docker/Pyhon/Git instalado:
 
-### Prerequisites
+### Pre requisitos
 
-Certifique-se de editar o '.env_example' antes de prosseguir.
+Certifique-se de editar o `.env_example` antes de prosseguir.
 
-### Installation
+### Instalação
 
 1. Faça um clone do repositório
    ```sh
@@ -86,11 +92,11 @@ Certifique-se de editar o '.env_example' antes de prosseguir.
    ```
 3. Faça a migração do banco de dados:
 
-  ```sh
-  docker-compose exec web python manage.py migrate
-  ```
+   ```sh
+   docker-compose exec web python manage.py migrate
+   ```
 4. Acesse a API root
-   ```http
+   ```sh
    127.0.0.1:8000/api/
    ```
 
@@ -99,7 +105,7 @@ Certifique-se de editar o '.env_example' antes de prosseguir.
 
 
 <!-- USAGE EXAMPLES -->
-## Usage
+## Uso
 
 Para vizualizar o funcionamento da API, crie um super usuário através do comando:
 
@@ -108,6 +114,12 @@ docker-compose exec web python manage.py createsuperuser
 ```
 
 Acesse o painel de login administrador:
+
+```
+127.0.0.1:8000/admin/
+```
+
+A:
 
 ```
 127.0.0.1:8000/admin/
@@ -161,6 +173,10 @@ Project Link: [https://github.com/iamkamui/desafio-backend](https://github.com/i
 [linkedin-url]: https://www.linkedin.com/in/pedro-augusto-b445b019b/
 
 [product-screenshot]: /templates/static/assets/img/apiroot.png
+
+[product-quiz-answers]: /templates/static/assets/img/quizanswers.png
+
+[product-quiz-list]: /templates/static/assets/img/quizlist.png
 
 [Django REST framework]: https://img.shields.io/badge/DJANGO-REST-ff1709?style=for-the-badge&logo=django&logoColor=white&color=ff1709&labelColor=gray
 [DRF-url]: https://www.django-rest-framework.org/
