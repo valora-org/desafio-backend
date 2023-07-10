@@ -119,10 +119,13 @@ Acesse o painel de login administrador:
 127.0.0.1:8000/admin/
 ```
 
-A:
+links API:
 
 ```
-127.0.0.1:8000/admin/
+127.0.0.1:8000/api/quizzes/{pk} #Retorna uma questão especifica registrada dentro do quiz com as respostas
+```
+```
+127.0.0.1:8000/api/quizzes/ #Retorna a lista de todos os quiz's existentes
 ```
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
