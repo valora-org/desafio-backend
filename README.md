@@ -1,80 +1,172 @@
-## <img src="https://valora.cc/assets/logo.svg" alt="Valora" width="24" /> Desafio Backend Python
+<!-- Improved compatibility of back to top link: See: https://github.com/othneildrew/Best-README-Template/pull/73 -->
+<a name="readme-top"></a>
+<!--
+*** Thanks for checking out the Best-README-Template. If you have a suggestion
+*** that would make this better, please fork the repo and create a pull request
+*** or simply open an issue with the tag "enhancement".
+*** Don't forget to give the project a star!
+*** Thanks again! Now go create something AMAZING! :D
+-->
 
-Parabéns! Se você chegou até aqui significa que você passou pelas etapas mais difíceis do nosso processo seletivo. Somos extremamente criteriosos com as pessoas que vão integrar nosso time porque só aceitamos pessoas incríveis!
 
-Agora é a parte fácil. Chegou a hora de mostrar todas as suas habilidades de transformar café em código. Vamos lá?
 
-Nesse desafio iremos avaliar suas habilidades em:
+<!-- PROJECT SHIELDS -->
+<!--
+*** I'm using markdown "reference style" links for readability.
+*** Reference links are enclosed in brackets [ ] instead of parentheses ( ).
+*** See the bottom of this document for the declaration of the reference variables
+*** for contributors-url, forks-url, etc. This is an optional, concise syntax you may use.
+*** https://www.markdownguide.org/basic-syntax/#reference-style-links
+-->
 
-* **Python**
-* **Django**
-* **Django REST Framework**
-* **Pytest** (desejável mas não obrigatório)
-* **Docker** (desejável mas não obrigatório)
+[![LinkedIn][linkedin-shield]][linkedin-url]
 
-Você irá desenvolver a API de uma aplicação para a criação de um quiz de perguntas e respostas!
 
-**A aplicação deverá prover o registro e autenticação de dois tipos de usuários**:
 
-* Admin
-* Player
+<!-- PROJECT LOGO -->
+<br />
+<div align="center">
+  <a href="https://github.com/iamkamui/desafio-backend">
+    <img src="/templates/static/assets/img/valoralogo.svg" alt="Logo" height="80">
+  </a>
 
-**Cada quiz é composto por**:
+<h3 align="center">Valora Desafio Backend</h3>
 
-* 10 perguntas com 3 respostas onde apenas 1 é correta.
-* Cada resposta correta acumula a 1 ponto.
-* Cada resposta errada perde 1 ponto. A menor pontuação possível é 0.
-* Possui uma categoria.
+  <p align="center">
+    project_description
+    <br />
+    <a href="https://github.com/iamkamui/desafio-backend"><strong>Explore the docs »</strong></a>
+    <br />
+    <br />
+  </p>
+</div>
 
-**Ao iniciar o jogo**:
 
-* O player deve escolher uma categoria válida e receber um quiz com perguntas aleatórias referentes a categoria escolhida.
+<!-- ABOUT THE PROJECT -->
+## About The Project
 
-**Ao finalizar o jogo**:
+[![Product Name Screen Shot][product-screenshot]]
 
-* O player deve receber a contabilização dos seus pontos juntamente com a sua posição atual no ranking global. Não há limitação de quantos quizzes o player pode responder.
+API de uma aplicação para a criação de um quiz de perguntas e respostas, onde que a api disponibiliza a visualização de questões, usuários, ranking baseado em pontuação.
 
-**O ranking**:
 
-* É a contabilização dos pontos acumulados por cada player.
-* Ranking geral considera todas as categorias.
-* Ranking por categoria agrupa por categorias.
-* Este requisito é desejável mas não obrigatório.
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
-**Permissões**:
 
-* Todos os endpoints devem estar protegidos por autenticação.
-* Usuários do tipo **Admin** tem permissão para criar perguntas e respostas para os quizzes.
-* Usuários do tipo **Player** tem permissão para jogar e consultar o ranking.
 
-## Requisitos
+### Built With
 
-* O projeto precisa estar configurado para rodar em um ambiente macOS ou Ubuntu (preferencialmente como container Docker).
-* Deve anexar ao seu projeto uma coleção do postman com todos os endpoints criados e exemplos de utilização.
+* [![DRF][Django REST framework]][DRF-url]
+* [![Python][Python.py]][Python-url]
+* [![Django][Django]][Django-url]
 
-**Para executar seu código devemos executar apenas os seguintes comandos**:
 
-* git clone $seu-fork
-* cd $seu-fork
-* comando para instalar dependências
-* comando para executar a aplicação
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
-## Critério de avaliação
 
-* **Organização do código**: Separação de módulos, view e model
-* **Clareza**: O README explica de forma resumida qual é o problema e como pode rodar a aplicação?
-* **Assertividade**: A aplicação está fazendo o que é esperado? Se tem algo faltando, o README explica o porquê?
-* **Legibilidade do código** (incluindo comentários)
-* **Segurança**: Existe alguma vulnerabilidade clara?
-* **Cobertura de testes** (Não esperamos cobertura completa mas é importante garantir o fluxo principal)
-* **Histórico de commits** (estrutura e qualidade)
-* **UX**: A API é intuitiva?
-* **Escolhas técnicas**: A escolha das bibliotecas, banco de dados, arquitetura, etc, é a melhor escolha para a aplicação?
 
-## Dúvidas
+<!-- GETTING STARTED -->
+## Getting Started
 
-Quaisquer dúvidas que você venha a ter, consulte as issues para ver se alguém já não a fez e caso você não ache sua resposta, abra você mesmo uma nova issue!
+Para visualizar este projeto você precisa de uma cópia local do mesmo e certificar que possui Docker/Pyhon/Git instalado:
 
-Ao completar o desafio, submeta um pull-request a esse repositório com uma breve explicação das decisões tomadas e principalmente as instruções para execução do projeto.
+### Prerequisites
 
-**Boa sorte! ;)**
+Certifique-se de editar o '.env_example' antes de prosseguir.
+
+### Installation
+
+1. Faça um clone do repositório
+   ```sh
+   git clone https://github.com/iamkamui/desafio-backend.git
+   ```
+2. Crie a imagem docker
+   ```sh
+   docker-compose up
+   ```
+3. Faça a migração do banco de dados:
+
+  ```sh
+  docker-compose exec web python manage.py migrate
+  ```
+4. Acesse a API root
+   ```http
+   127.0.0.1:8000/api/
+   ```
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+
+
+<!-- USAGE EXAMPLES -->
+## Usage
+
+Para vizualizar o funcionamento da API, crie um super usuário através do comando:
+
+```sh
+docker-compose exec web python manage.py createsuperuser
+```
+
+Acesse o painel de login administrador:
+
+```
+127.0.0.1:8000/admin/
+```
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+
+
+<!-- ROADMAP -->
+## Testes
+
+Os testes unitários foram desenvolvidos pelo APITestCase do Rest Framework.
+para executar os testes utilizar o comando:
+
+```sh
+
+docker-compose exec web python manage.py test
+
+```
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+
+
+<!-- CONTACT -->
+## Contact
+
+Pedro Augusto - [@linkedin_handle](https://www.linkedin.com/in/pedro-augusto-b445b019b/)
+
+Project Link: [https://github.com/iamkamui/desafio-backend](https://github.com/iamkamui/desafio-backend)
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+
+
+<!-- IMPROVEMENTS -->
+## Improvement points
+
+* Lógica para detectar quando um player acerta a resposta e fazer a soma ou subtração dos pontos
+* Ranking por categoria de quiz
+
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+
+
+<!-- MARKDOWN LINKS & IMAGES -->
+<!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
+[linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555
+[linkedin-url]: https://www.linkedin.com/in/pedro-augusto-b445b019b/
+
+[product-screenshot]: /templates/static/assets/img/apiroot.png
+
+[Django REST framework]: https://img.shields.io/badge/DJANGO-REST-ff1709?style=for-the-badge&logo=django&logoColor=white&color=ff1709&labelColor=gray
+[DRF-url]: https://www.django-rest-framework.org/
+
+[Python.py]: https://img.shields.io/badge/python-3670A0?style=for-the-badge&logo=python&logoColor=white&color=4FC08D&labelColor=gray
+[Python-url]: https://www.python.org/
+
+[Django]: https://img.shields.io/badge/django-%23092E20.svg?style=for-the-badge&logo=django&logoColor=white&labelColor=gray
+[Django-url]: https://www.djangoproject.com/
