@@ -29,7 +29,6 @@ router.register(r'quizzes', QuizView, basename='quiz')
 
 
 urlpatterns = [
-    #path("api/", include('quiz.urls', namespace='quiz')),
     path("accounts/", include('accounts.urls', namespace='accounts',)),
     path("api/", include(router.urls)),
     path('api-auth/',  include('rest_framework.urls', namespace='rest_framework',)),
