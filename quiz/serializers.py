@@ -3,6 +3,7 @@ from quiz.models import Question, Answer, Quiz
 from accounts.models import CustomUser as User
 
 
+
 class QuizSerializer(serializers.ModelSerializer):
 
     
@@ -20,11 +21,10 @@ class QuizSerializer(serializers.ModelSerializer):
 class AnswerSerializer(serializers.ModelSerializer):
 
     
-   
-    
     class Meta:
         model = Answer
         fields = [
+            'question',
             'id',
             'text', 
             'is_correct',
@@ -34,36 +34,28 @@ class AnswerSerializer(serializers.ModelSerializer):
 
 class QuestionSerializer(serializers.ModelSerializer):
 
-    quiz = QuizSerializer(read_only=True)
+    
     answer = AnswerSerializer(read_only=True, many=True)
 
     class Meta:
     
         model = Question
         fields = [
-            'quiz',
+            'url',
             'id',
+            'quiz',
             'text',
             'answer',       
         ]
 
-    def increase_score(self):
-        user_score = User.score
-        if user_score >= 0:
-            user_score = user_score + 1
-        return user_score
-    
-    def decrease_score(self):
-        user_score = User.score
-        if user_score >= 0:
-            user_score = user_score - 1
-        else:
-            user_score = user_score
-        return user_score
-    
-    def validate_correct_answer(self, request):
-        """
-        Used to check with the player hit the correct answer
-        """
+
+class RankingSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = User
+        fields = [
+            'username',
+            'score'
+        ]
         
     
