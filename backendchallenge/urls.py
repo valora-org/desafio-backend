@@ -18,14 +18,16 @@ from django.contrib import admin
 from django.urls import path, include
 from rest_framework import routers
 from accounts.views import UserViewSet
-from quiz.views import QuizView
+from quiz.views import QuizView, QuestionView, AnswerView, RankingView
 from rest_framework.authtoken.views import obtain_auth_token
 
 
 router = routers.DefaultRouter()
 router.register(r'users', UserViewSet)
 router.register(r'quizzes', QuizView, basename='quiz')
-
+router.register(r'questions', QuestionView, basename='question')
+router.register(r'answers', AnswerView, basename='answer')
+router.register(r'rankings', RankingView, basename='ranking')
 
 
 urlpatterns = [
