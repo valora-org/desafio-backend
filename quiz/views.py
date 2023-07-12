@@ -60,9 +60,9 @@ class QuizView(AdminPermission):
     
     def retrieve(self, request, format=None, **kwargs):
         """
-        Return list of questions of specific quiz
+        Return list of 10 questions of specific quiz
         """
-        question = Question.objects.filter(quiz__pk=kwargs["pk"])
+        question = Question.objects.filter(category_id=kwargs["pk"]).order_by("?")[:10]
         serializer = QuestionSerializer(question, context={'request': request}, many=True)
         return Response(serializer.data)
     
@@ -72,22 +72,10 @@ class QuizView(AdminPermission):
     
 
 class QuestionView(AdminPermission):
-    
+    queryset = Question.objects.all()
     serializer_class = QuestionSerializer
-    max_num = 10
     
-    def get_queryset(self):
-        """
-        This should return a list of questions with the same quiz id and validate max num
-        """
-        all_questions = Question.objects.all()
-        questions = all_questions.filter(quiz__pk=None)
-        count_questions = questions.count()
-        if count_questions == self.max_num:
-            queryset = questions
-        else:
-            queryset = all_questions
-        return queryset
+    
     
             
     

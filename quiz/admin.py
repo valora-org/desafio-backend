@@ -8,7 +8,7 @@ class CategoryAdmin(admin.ModelAdmin):
     list_display = ['id', 'name']
 
 
-class AnswerAdmin(admin.TabularInline):
+class AnswerInline(admin.TabularInline):
     """
     Enable answer model to be edited in other
     """
@@ -20,15 +20,15 @@ class AnswerAdmin(admin.TabularInline):
 @admin.register(Question)
 class QuestionAdmin(admin.ModelAdmin):
     
-    fields = ['text', 'quiz', 'is_active']
-    list_display = ['text', 'quiz', 'is_active']
+    fields = ['text', 'category', 'is_active']
+    list_display = ['text', 'is_active']
     inlines = [
-        AnswerAdmin,
+        AnswerInline,
     ]
 
 @admin.register(Quiz)
 class QuizAdmin(admin.ModelAdmin):
-    list_display = ['name', 'category', 'created_at']
+    list_display = ['name', 'created_at']
     
 
 @admin.register(Answer)
