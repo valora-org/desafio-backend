@@ -20,7 +20,7 @@ class AdminPermission(viewsets.ModelViewSet):
                     queryset = self.get_queryset()
                     existed_object = queryset.count()
 
-                    if existed_object == self.max_num:
+                    if existed_object >= self.max_num:
                         raise ValidationError("Maximum amount reached")
                     else:
                         return super().create(request, *args, **kwargs)
@@ -33,7 +33,7 @@ class AdminPermission(viewsets.ModelViewSet):
         
     def update(self, request, *args, **kwargs):
         if request.user.is_staff:
-            return super().update(request, *args, **kwargs)
+            return super().update(request, *args, **kwargs)  
         else:
             raise PermissionDenied()
         
@@ -81,8 +81,19 @@ class QuestionView(AdminPermission):
     
 
 class AnswerView(AdminPermission):
-    queryset = Answer.objects.all()
+    
     serializer_class = AnswerSerializer
+    max_num = 3
+
+    def get_queryset(self):
+        
+        question_id = self.request.query_params.get('question_id')
+        instance = Answer.objects.all()
+        if question_id is not None:
+            queryset = instance.filter(question__id=question_id)
+        else:
+            queryset = Answer.objects.all()
+        return queryset
 
     def increase_score(self):
         user_score = User.score
