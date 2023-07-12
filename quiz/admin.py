@@ -8,7 +8,7 @@ class CategoryAdmin(admin.ModelAdmin):
     list_display = ['id', 'name']
 
 
-class AnswerInline(admin.TabularInline):
+class AnswerInline(admin.StackedInline):
     """
     Enable answer model to be edited in other
     """
@@ -21,7 +21,7 @@ class AnswerInline(admin.TabularInline):
 class QuestionAdmin(admin.ModelAdmin):
     
     fields = ['text', 'category', 'is_active']
-    list_display = ['text', 'is_active']
+    list_display = ['text', 'category', 'is_active']
     inlines = [
         AnswerInline,
     ]
