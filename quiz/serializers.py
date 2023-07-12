@@ -24,6 +24,7 @@ class AnswerSerializer(serializers.ModelSerializer):
         fields = [
             
             'id',
+            'url',
             'question',
             'text', 
             'is_correct',
