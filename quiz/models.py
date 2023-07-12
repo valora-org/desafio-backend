@@ -10,25 +10,11 @@ class Category(models.Model):
         return f"{self.name}"
 
 
-
-class Quiz(models.Model):
-    name = models.CharField(_("quiz name"), default=_("New Quiz"), max_length=150, unique=True)
-    category = models.ForeignKey(Category, on_delete=models.DO_NOTHING)
-    created_at = models.DateTimeField(_("created at"), auto_now_add=True)
-
-    class Meta:
-        verbose_name = 'quiz'
-        verbose_name_plural = 'quizzes'
-
-    def __str__(self):
-        return f"{self.name}"
-
 class Question(models.Model):
     text = models.CharField(_("question"), max_length=255)
-    quiz = models.ForeignKey(Quiz, on_delete=models.DO_NOTHING)
+    category = models.ForeignKey(Category, on_delete=models.DO_NOTHING)
     is_active = models.BooleanField(_("active"), default=True)
     created_at = models.DateTimeField(_("created at"), auto_now_add=True)
-
 
     class Meta:
         verbose_name = 'question'
@@ -37,7 +23,18 @@ class Question(models.Model):
     def __str__(self):
         max_length = 50
         return f"{self.text[:max_length]}"
+    
+class Quiz(models.Model):
+    name = models.CharField(_("quiz name"), default=_("New Quiz"), max_length=150, unique=True)
+    question = models.ManyToManyField(Question, verbose_name=_("questions"), blank=True)
+    created_at = models.DateTimeField(_("created at"), auto_now_add=True)
 
+    class Meta:
+        verbose_name = 'quiz'
+        verbose_name_plural = 'quizzes'
+
+    def __str__(self):
+        return f"{self.name}"
 
 class Answer(models.Model):
     text = models.CharField(_("answer"), max_length=255)
