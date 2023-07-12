@@ -53,6 +53,13 @@ Visualização dos Quiz's
 Respostas do Quiz '1'
 ![Quiz Answers][product-quiz-answers]
 
+Lista de todas as respostas
+![Answers List][product-answer-list]
+
+Ranking geral
+![Ranking][product-ranking-list]
+
+
 API de uma aplicação para a criação de um quiz de perguntas e respostas, onde que a api disponibiliza a visualização de questões, usuários, ranking baseado em pontuação.
 
 
@@ -162,8 +169,12 @@ Project Link: [https://github.com/iamkamui/desafio-backend](https://github.com/i
 <!-- IMPROVEMENTS -->
 ## Improvement points
 
-* Lógica para detectar quando um player acerta a resposta e fazer a soma ou subtração dos pontos
+* Arrumar número maximo de objetos, fazer identificar quando um(a) quiz/questão especifico(a) atinge o número máximo de questões/respostas
 * Ranking por categoria de quiz
+
+## Bugs
+
+* função número maximo, atingindo todos objetos e não filtrando por id
 
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
@@ -180,6 +191,10 @@ Project Link: [https://github.com/iamkamui/desafio-backend](https://github.com/i
 [product-quiz-answers]: /templates/static/assets/img/quizanswers.png
 
 [product-quiz-list]: /templates/static/assets/img/quizlist.png
+
+[product-ranking-list]: /templates/static/assets/img/rankinglist.png
+
+[product-answer-list]: /templates/static/assets/img/answerlist.png
 
 [Django REST framework]: https://img.shields.io/badge/DJANGO-REST-ff1709?style=for-the-badge&logo=django&logoColor=white&color=ff1709&labelColor=gray
 [DRF-url]: https://www.django-rest-framework.org/
